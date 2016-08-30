@@ -9,6 +9,14 @@ var mongoose = require('mongoose');
 
 var model = require('./models/db');
 
+var acl = require('acl');
+
+var client = require('redis').createClient(6379, process.env.REDIS_HOST_URI, {no_ready_check: true});
+
+var redisBackend = new acl.redisBackend(client);
+
+acl = new acl(redisBackend);
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
