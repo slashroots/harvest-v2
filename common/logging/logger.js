@@ -1,3 +1,8 @@
+/**
+* @desc implementation of winston.js
+* @author Christopher Lee Murray lee.christopher.murray@gmail.com
+**/
+
 var winston = require('winston');
 winston.emitErrs = true;
 const moment = require('moment');
