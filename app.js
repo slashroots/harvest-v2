@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -17,10 +18,38 @@ var redisBackend = new acl.redisBackend(client);
 
 acl = new acl(redisBackend);
 
+acl.allow('aggregate', '/crops', 'get')
+
+acl.addUserRoles('Alesha', 'aggregate')
+
+acl.allowedPermissions('Alesha', ['crops','units'], function(err, permissions){
+  console.log(permissions)
+})
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+app.use(session({secret: 'ssshhhhh'}));
+
+app.use(function (req, res, next) {
+
+  req.session.userId = process.env.USERNAME;//sets the session user name to whatever is set in the USERNAME environment variable
+
+  console.log('Requested Type:', req.method);
+
+  next();
+
+});
+
+app.get('/crops', acl.middleware(), function(req, res, next){
+
+  console.log('Request Type:', req.session.userId);
+
+  next();
+
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
