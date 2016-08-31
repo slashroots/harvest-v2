@@ -38,7 +38,7 @@ var logger = new (winston.Logger)({
 });
 
 
-//test log messages
+//test log messages 
 logger.log('info', 'Hello log files!');
 logger.info('Hello again log files!');
 
