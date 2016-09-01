@@ -10,9 +10,12 @@ const moment = require('moment');
 
 function formatter(args) {
     var date = moment().format("YYYY/MM/DD.HH:mm:ss");
-    var msg = date         + ' - '   + 
-        args.level   + ' - '   + 
-        args.message + ' - \n' + JSON.stringify(args.meta, null, 4);
+    
+    var msg = '\n\n==============\n---ACTIVITY---\n==============\n'        +
+              '\tdate: '    + date         + '\n'                           + 
+              '\tlevel: '   + args.level   + '\n'                           + 
+              '\tmessage: ' + args.message + '\n\t' + JSON.stringify(args.meta, null, 4);
+        
     return msg;
 }
 
@@ -41,7 +44,6 @@ var logger = new (winston.Logger)({
     ],
     exitOnError: false
 });
-
 
 //test log messages 
 logger.log('info', 'Hello log files!');

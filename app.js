@@ -2,11 +2,12 @@ var express = require('express');
 var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var moment = require('moment');
 
+var moment = require('moment');
+var fs = require('fs');
+var morgan = require('morgan');
 var logger = require('./common/logging/logger.js');
 
 var mongoose = require('mongoose');
@@ -60,9 +61,22 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
+
+//using Morgan to monitor requests and winston to log them and everything else 
+var accessLogStream = fs.createWriteStream(__dirname + '/requests.log', {flags: 'a'});
+
+//overriding morgan's token ... ... ... breaking De'Morgan's Law lol
+morgan.token('remote-user', function getId (req) {
+    return req.session.userId
+})
+
+app.use(morgan('{"remote_addr": ":remote-addr", "remote_user": ":remote-user", "date": ":date[clf]", "method": ":method", "url": ":url", "http_version": ":http-version", "status": ":status", "result_length": ":res[content-length]", "referrer": ":referrer", "user_agent": ":user-agent", "response_time": ":response-time"}', {stream: accessLogStream}));
+app.use(morgan('dev'));
 logger.debug("Overriding 'Express' logger");
-app.use(require('morgan')({ "stream": logger.stream }));
+app.use(require('morgan')('combined',{ "stream": logger.stream }));
 //app.use(logger('dev'));
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
