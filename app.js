@@ -70,6 +70,7 @@ morgan.token('remote-user', function getId (req) {
     return req.session.userId
 })
 
+//formatting Morgan's token output
 app.use(morgan('{"remote_addr": ":remote-addr", "remote_user": ":remote-user", "date": ":date[clf]", "method": ":method", "url": ":url", "http_version": ":http-version", "status": ":status", "result_length": ":res[content-length]", "referrer": ":referrer", "user_agent": ":user-agent", "response_time": ":response-time"}', {stream: accessLogStream}));
 app.use(morgan('dev'));
 logger.debug("Overriding 'Express' logger");

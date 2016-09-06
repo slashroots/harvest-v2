@@ -6,6 +6,7 @@
 var winston = require('winston');
 winston.emitErrs = true;
 const moment = require('moment');
+var MongoDB = require('winston-mongo').Mongo;
 
 
 function formatter(args) {
@@ -19,10 +20,23 @@ function formatter(args) {
     return msg;
 }
 
+var ConfigLevels = {
+    levels: {
+        emerg: 0,
+        alert: 1,
+        crit: 2,
+        error: 3,
+        warning: 4,
+        notice: 5,
+        info: 6,
+        debug: 7 
+    }
+};
+
 var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.Console)({
-            level: 'info',
+            level: 'debug',
             json: false,
             eol: '\n',
             colorize: true,
@@ -33,18 +47,24 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({
             name: 'logs',
             filename: 'logs.log',
-            level: 'info',
+            level: 'debug',
             json: false,
             eol: '\n', // FOR WINDOWS, OR `EOL: ‘N’,` FOR *NIX OSS
             timestamp: true,
             handleExceptions: true,
             prettyPrint: true,
             formatter: formatter
+        }),
+        new(winston.transports.MongoDB)({
+            db : 'mongodb://localhost:27017/mongodb',
+            collection: 'logs'
         })
     ],
     exitOnError: false
 });
 
+
+logger.setLevels(ConfigLevels.levels)
 //test log messages 
 logger.log('info', 'Hello log files!');
 logger.info('Hello again log files!');
