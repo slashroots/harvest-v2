@@ -20,6 +20,8 @@ acl = new acl(redisBackend);
 
 acl.allow('aggregate', '/crops', 'get')
 
+acl.allow('aggregate', '/crops', 'get@cr_crop_name,cr_crop_variety')
+
 acl.addUserRoles('Alesha', 'aggregate')
 
 acl.allowedPermissions('Alesha', ['crops','units'], function(err, permissions){
@@ -45,9 +47,23 @@ app.use(function (req, res, next) {
 
 app.get('/crops', acl.middleware(), function(req, res, next){
 
-  console.log('Request Type:', req.session.userId);
+  acl.allowedPermissions(req.session.userId, '/crops', function(err, obj){
 
-  next();
+    for (var i = 0; i < obj[req.url].length; i++) {
+
+      var attributesCSV = obj[req.url][i];
+
+      if (attributesCSV.split("@")[1] != undefined) {
+
+        req.data_attributes = String(attributesCSV.split("@")[1]).split(",");
+
+      }
+
+    }
+
+    next();
+
+  });
 
 });
 

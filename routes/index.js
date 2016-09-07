@@ -13,6 +13,8 @@ router.get('/crops', function(req, res, next) {
   Crop.find(function(err, crops){
     if(err){ return next(err); }
 
+    for (var j = 0; j < req.data_attributes.length; j++) console.log(req.data_attributes[j]);
+
     res.json(crops);
   });
 });
