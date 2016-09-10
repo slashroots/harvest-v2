@@ -11,6 +11,9 @@ var app_manager = require('./routes/app/router-app-manager'),
 
 var app = express();
 
+var test_resources = require('./models/resources-db');
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
