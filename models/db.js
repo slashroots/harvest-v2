@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGOLAB_URI);
 var AppSchema = new Schema({
     ap_app_name: {type: String, required: true, unique: false},
     ap_app_desc: {type: String},
-    ap_app_token: {type: String, required: false},
+    ap_app_token: {type: String, required: true},
     us_app_user: {type: Schema.Types.ObjectId, required: true, ref: "User"},
     ap_app_creation_date: {type: Date, default: Date.now()},
     ap_app_status: {type: String,required: true, default: 'pending'} //allows administrator to deactivate access

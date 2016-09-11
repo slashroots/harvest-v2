@@ -2,8 +2,9 @@
  * Created by matjames007 on 9/10/16.
  */
 
-var model = require('../../models/db');
-var App = model.App;
+var model = require('../../models/db'),
+    Common = require('../../util/common-util');
+var App = model.App
 
 /**
  * Find all applications on the platform, should be accessible by only
@@ -32,6 +33,8 @@ exports.getApplications = function(req, res, next) {
  */
 exports.createApplication = function(req, res, next) {
     var app = new App(req.body);
+    app.ap_app_token = Common.getRandomToken();
+    app.ap_app_status = 'active';
     app.save(function(err) {
         if(err) {
             next(err);

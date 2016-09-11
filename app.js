@@ -7,10 +7,15 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var app_manager = require('./routes/app/router-app-manager'),
-    user = require('./routes/user/router-user');
+    user = require('./routes/user/router-user'),
+    farmer = require('./routes/resources/farmer/router-farmer');
 
 var app = express();
 
+/**
+ * This is probably not necessary - but it establishes a connection
+ * with the DB on first startup and prints out the tables
+ */
 var test_resources = require('./models/resources-db');
 
 
@@ -29,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/', app_manager);
 app.use('/', user);
+app.use('/api', farmer);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
