@@ -31,3 +31,6 @@ npm-debug.log
 
 #IDE
 .idea
+
+# bower
+public/bower_components
