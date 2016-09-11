@@ -3,13 +3,15 @@
  *
  * This file contains all the database connection information necessary
  * for the viewing of resources by the application.  The connection is
- * configured from the environment variable (MSSQL_URI) in the format:
- * mssql://username:password@localhost/database
+ * configured from the environment variables (see common-util.js)
 **/
 
 var sql = require('mssql');
 
-sql.connect(process.env.MSSQL_URI).then(function() {
+var MSSQL_URI = "mssql://" + process.env.MSSQL_USER + ":"+ process.env.MSSQL_PASS +"@"
+    +process.env.MSSQL_SERVER + "/" + process.env.MSSQL_DB;
+
+sql.connect(MSSQL_URI).then(function() {
 
     console.log("Resources DB connection established!")
 
