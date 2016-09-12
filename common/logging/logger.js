@@ -48,7 +48,7 @@ var logger = new (winston.Logger)({
             name: 'logs',
             filename: 'logs.log',
             level: 'debug',
-            json: false,
+            json: true,
             eol: '\n', // FOR WINDOWS, OR `EOL: ‘N’,` FOR *NIX OSS
             timestamp: true,
             handleExceptions: true,
