@@ -6,18 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var app_manager = require('./routes/app/router-app-manager'),
-    user = require('./routes/user/router-user'),
-    farmer = require('./routes/resources/farmer/router-farmer');
+var users = require('./routes/users');
 
 var app = express();
-
-/**
- * This is probably not necessary - but it establishes a connection
- * with the DB on first startup and prints out the tables
- */
-var test_resources = require('./models/resources-db');
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,9 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/', app_manager);
-app.use('/', user);
-app.use('/api', farmer);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,7 +39,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.send({
+    res.render('error', {
       message: err.message,
       error: err
     });
@@ -61,7 +50,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.send({
+  res.render('error', {
     message: err.message,
     error: {}
   });
