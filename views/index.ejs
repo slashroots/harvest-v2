@@ -26,23 +26,27 @@
   <script src="/bower_components/respond/dest/respond.min.js"></script>
   <![endif]-->
 
+  <base href="/">
+
 </head>
 
 <body ng-app="harvestv2" layout="column" layout-fill>
 
-<!--
-    Really should use the ui-view and swap these out with a proper
-    router and controller logic.
--->
-<ng-include src="'/partials/homepage.html'"></ng-include>
+<ng-view>
 
+
+
+
+</ng-view>
 
 <!-- jQuery Version 1.11.1 -->
 <script src="/bower_components/jquery/dist/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
 <script src="/javascript/app.js"></script>
+<script src="/javascript/controllers/homepage-ctrl.js"></script>
 
 </body>
 
