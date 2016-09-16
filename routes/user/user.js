@@ -6,7 +6,7 @@ var model = require('../../models/db');
 var common = require('../../util/common-util');
 var User = model.User,
     Role = model.Role;
-
+var sha1 = require('sha1');
 
 /**
  * Only accessible by platform administrator
@@ -87,6 +87,7 @@ exports.getUser = function(req, res, next) {
 exports.createUser = function(req, res, next) {
     var user = new User(req.body);
     user.us_activation_token = common.getRandomToken();
+    user.us_password = sha1(user.us_password);
     //TODO: must ensure the state is set to pending
     user.save(function(err) {
         if(err) {

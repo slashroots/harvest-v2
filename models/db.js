@@ -3,7 +3,6 @@
  * Created by matjames007 on 9/10/16.
  */
 
-var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

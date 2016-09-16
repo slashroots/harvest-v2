@@ -29,6 +29,7 @@
     "font-awesome": "^4.6.3",
     "html5shiv": "^3.7.3",
     "respond": "^1.4.2",
-    "angular-resource": "~1.5.8"
+    "angular-resource": "~1.5.8",
+    "angular-route": "~1.5.8"
   }
 }
