@@ -15,6 +15,7 @@ angular.module('harvestv2')
         $scope.selectedRole = {};
         $scope.passwordConfirm = "";
         $scope.agreeChecked = false;
+        $scope.confirmation = false;
 
         $scope.validatePasswordMatch = function (pass1, pass2) {
             console.log((pass1 == pass2));
@@ -24,7 +25,7 @@ angular.module('harvestv2')
         $scope.createUser = function () {
             if (!$scope.signupForm.$invalid && $scope.validatePasswordMatch($scope.user.us_password, $scope.passwordConfirm) && $scope.agreeChecked)
                 UserFactory.create($scope.user, function(user) {
-                $location.url('confirmation');
+                $scope.confirmation = true;
             }, function(error) {
                 console.log(error);
             })

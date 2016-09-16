@@ -2,7 +2,8 @@
 
 <!-- Page Content -->
 <section id="sign-up" class="bg-light-grey">
-    <div class="container">
+    <div ng-include="'/partials/confirmation.html'" ng-show="confirmation" class="container"></div>
+    <div ng-show="!confirmation" class="container">
         <div class="row">
             <div class="col-md-7">
                 <h1>Big Heading About Harvest API</h1>
