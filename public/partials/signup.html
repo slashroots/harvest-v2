@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label for="input8">Role Requested</label>
-                            <select ng-model="selectedRole" ng-options="r._id as r.ro_role_name for r in roles">
+                            <select ng-model="selectedRole" ng-change="user.us_user_role = selectedRole" ng-options="r._id as r.ro_role_name for r in roles">
                             </select>
                         </div>
                         <div class="form-group">

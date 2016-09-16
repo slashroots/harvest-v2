@@ -14,9 +14,9 @@ angular.module('harvestv2')
 
         $scope.user = {};
 
-        $scope.createUser = function () {
+        $scope.selectedRole = {};
 
-            console.log($scope.user);
+        $scope.createUser = function () {
 
             UserFactory.create($scope.user, function(user) {
                 $location.url('confirmation');

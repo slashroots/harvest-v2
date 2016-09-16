@@ -42,7 +42,7 @@ var UserSchema = new Schema({
     us_address: {type: String, default: 'pending'},
     us_company: {type: String, default: 'pending'},
     us_intended_use: {type: String, default: 'pending'},
-    /*us_user_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"},*/
+    us_user_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"},
     us_activation_token: {type: String, required: true}
 });
 
