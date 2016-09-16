@@ -11,3 +11,9 @@ services.factory('UserFactory', function($resource) {
         create: { method: 'POST'}
     });
 });
+
+services.factory('RolesFactory', function($resource) {
+    return $resource('/roles', {}, {
+        query: { method: 'GET', isArray: true}
+    });
+});

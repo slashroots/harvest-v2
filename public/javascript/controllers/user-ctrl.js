@@ -4,7 +4,13 @@
 
 angular.module('harvestv2')
 
-    .controller("UserCtrl", ['$scope', '$location', 'UserFactory', function($scope, $location, UserFactory) {
+    .controller("UserCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'RolesFactory', function($scope, $location, $routeParams, UserFactory, RolesFactory) {
+
+        RolesFactory.query($routeParams, function(roles) {
+            $scope.roles = roles;
+        }, function(error) {
+            console.log(error);
+        });
 
         $scope.user = {};
 

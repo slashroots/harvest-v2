@@ -55,6 +55,11 @@
                             <input ng-model="user.us_address" type="text" class="form-control" id="input7" placeholder="Address">
                         </div>
                         <div class="form-group">
+                            <label for="input8">Role Requested</label>
+                            <select ng-model="selectedRole" ng-options="r._id as r.ro_role_name for r in roles">
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="input8">Company</label>
                             <input ng-model="user.us_company" type="text" class="form-control" id="input8" placeholder="Company">
                         </div>
