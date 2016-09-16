@@ -3,7 +3,7 @@
  * Created by matjames007 on 9/10/16.
  */
 
-
+var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -39,7 +39,10 @@ var UserSchema = new Schema({
     us_contact: {type: String, required: true},
     us_user_creation_date: {type: Date, default: Date.now()},
     us_state: {type: String, default: 'pending'},
-    us_user_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"},
+    us_address: {type: String, default: 'pending'},
+    us_company: {type: String, default: 'pending'},
+    us_intended_use: {type: String, default: 'pending'},
+    /*us_user_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"},*/
     us_activation_token: {type: String, required: true}
 });
 

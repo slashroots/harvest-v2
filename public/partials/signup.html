@@ -20,44 +20,48 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="input1">First Name</label>
-                                    <input type="email" class="form-control" id="input1" placeholder="First Name">
+                                    <input ng-model="user.us_user_first_name" type="text" class="form-control" id="input1" placeholder="First Name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="input2">Last Name</label>
-                                    <input type="email" class="form-control" id="input2" placeholder="Last Name">
+                                    <input ng-model="user.us_user_last_name" type="text" class="form-control" id="input2" placeholder="Last Name">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="input3">Username</label>
+                            <input ng-model="user.us_username" type="text" class="form-control" id="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
                             <label for="input3">Email Address</label>
-                            <input type="email" class="form-control" id="input3" placeholder="Email Address">
+                            <input ng-model="user.us_email_address" type="text" class="form-control" id="input3" placeholder="Email Address">
                         </div>
                         <div class="form-group">
                             <label for="input4">Password</label>
-                            <input type="password" class="form-control" id="input4" placeholder="Password">
+                            <input ng-model="user.us_password" type="password" class="form-control" id="input4" placeholder="Password">
                         </div>
                         <div class="form-group">
                             <label for="input5">Confirm Password</label>
-                            <input type="email" class="form-control" id="input5" placeholder="Confirm Password">
+                            <input type="password" class="form-control" id="input5" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">
                             <label for="input6">Phone Number</label>
-                            <input type="password" class="form-control" id="input6" placeholder="Phone Number">
+                            <input ng-model="user.us_contact" type="text" class="form-control" id="input6" placeholder="Phone Number">
                         </div>
                         <div class="form-group">
                             <label for="input7">Address</label>
-                            <input type="email" class="form-control" id="input7" placeholder="Address">
+                            <input ng-model="user.us_address" type="text" class="form-control" id="input7" placeholder="Address">
                         </div>
                         <div class="form-group">
                             <label for="input8">Company</label>
-                            <input type="password" class="form-control" id="input8" placeholder="Company">
+                            <input ng-model="user.us_company" type="text" class="form-control" id="input8" placeholder="Company">
                         </div>
                         <div class="form-group">
                             <label>Intended Use of APIs</label>
                             <!--<input type="email" class="form-control" id="input9" placeholder="Intended Use of APIs">-->
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea ng-model="user.us_intended_use" class="form-control" rows="3"></textarea>
                         </div>
                         <div class="checkbox">
                             <label>
@@ -66,7 +70,7 @@
                             </label>
                         </div>
                         <!--<button type="submit" class="btn btn-default btn-lg drk-grey-btn">Submit</button>-->
-                        <a href="confirmation" class="btn btn-default btn-lg drk-grey-btn">Submit</a>
+                        <a href="#" ng-click="createUser()" class="btn btn-default btn-lg drk-grey-btn">Submit</a>
                     </form>
 
                 </div>
