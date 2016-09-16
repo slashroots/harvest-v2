@@ -15,53 +15,64 @@
             <div class="col-md-5">
                 <div class="form-wrap">
                     <h2 class="form-head text-center">Create Your Harvest API Account</h2>
-                    <form name="signupForm" novalidate>
+                    <form id="signupForm" data-toggle="validator" role="form" name="signupForm" method="post" action="none" novalidate>
                         <div id="name-field" class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="input1">First Name</label>
-                                    <input ng-model="user.us_user_first_name" type="text" class="form-control" id="input1" placeholder="First Name" required>
+                                    <input data-error="Please enter your first name!" ng-model="user.us_user_first_name" type="text" class="form-control" id="input1" placeholder="First Name" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="input2">Last Name</label>
-                                    <input ng-model="user.us_user_last_name" type="text" class="form-control" id="input2" placeholder="Last Name" required>
+                                    <input data-error="Please enter your last name!" ng-model="user.us_user_last_name" type="text" class="form-control" id="input2" placeholder="Last Name" required>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="input3">Username</label>
-                            <input ng-model="user.us_username" type="text" class="form-control" id="username" placeholder="Username" required>
+                            <input data-error="Please enter your username!" ng-model="user.us_username" type="text" class="form-control" id="username" placeholder="Username" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label for="input3">Email Address</label>
-                            <input type="email" ng-model="user.us_email_address" type="text" class="form-control" id="input3" placeholder="Email Address" required>
+                            <input data-error="Please enter a valid email address!" type="email" ng-model="user.us_email_address" type="text" class="form-control" id="input3" placeholder="Email Address" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="input4">Password</label>
-                            <input ng-model="user.us_password" type="password" class="form-control" id="input4" placeholder="Password" required>
+                            <label for="passwordField">Password</label>
+                            <input data-error="Please enter your chosen password!" ng-model="user.us_password" type="password" class="form-control" id="passwordField" placeholder="Password" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label for="input5">Confirm Password</label>
-                            <input ng-model="passwordConfirm" type="password" class="form-control" id="input5" placeholder="Confirm Password" required>
+                            <input data-match="#passwordField" data-error="Your passwords need to match!" ng-model="passwordConfirm" type="password" class="form-control" id="input5" placeholder="Confirm Password" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label for="input6">Phone Number</label>
-                            <input ng-model="user.us_contact" type="text" class="form-control" id="input6" placeholder="Phone Number" required>
+                            <input data-error="Please enter your phone number!" ng-model="user.us_contact" type="text" class="form-control" id="input6" placeholder="Phone Number" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label for="input7">Address</label>
-                            <input ng-model="user.us_address" type="text" class="form-control" id="input7" placeholder="Address">
+                            <input data-error="Please enter your address!" ng-model="user.us_address" type="text" class="form-control" id="input7" placeholder="Address">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label for="input8">Role Requested</label>
-                            <select class="form-control" ng-model="selectedRole" ng-change="user.us_user_role = selectedRole" ng-options="r._id as r.ro_role_name for r in roles" required>
+                            <select ng-init="selectedRole=roles[0]" data-error="Please select a role!" class="form-control" ng-model="selectedRole" ng-change="user.us_user_role = selectedRole" ng-options="r._id as r.ro_role_name for r in roles" required>
+                                <option value="" selected="selected">Please select the role you want : </option>
                             </select>
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label for="input8">Company</label>
                             <input ng-model="user.us_company" type="text" class="form-control" id="input8" placeholder="Company">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label>Intended Use of APIs</label>

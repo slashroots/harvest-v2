@@ -29,4 +29,13 @@ angular.module('harvestv2')
                 console.log(error);
             })
         }
+
+        $scope.setupVisualValidationCues = function () {
+
+            jQuery('#signupForm').validator();
+
+        }
+
+        $scope.setupVisualValidationCues();
+
     }]);
