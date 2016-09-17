@@ -17,6 +17,7 @@
     "morgan": "~1.5.1",
     "mssql": "^3.3.0",
     "passport-localapikey": "0.0.3",
+    "sendgrid": "^4.3.0",
     "serve-favicon": "~2.2.0"
   }
 }
