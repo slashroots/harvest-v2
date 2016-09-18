@@ -2,10 +2,11 @@
  * Created by matjames007 on 9/10/16.
  */
 
-var express = require('express');
-var User = require('./user');
-var App = require('../app/app-manager');
-var router = express.Router();
+var express = require('express'),
+    User = require('./user'),
+    App = require('../app/app-manager'),
+    passport = require('passport'),
+    router = express.Router();
 
 /**
  * End Points relevant to Application Management
@@ -19,5 +20,9 @@ router.post('/role', User.createRole);
 router.get('/roles', User.getRoles);
 
 router.get('/activate/:token', User.activateUser);
+
+router.post('/login',
+    passport.authenticate('local'),
+    User.authenticate);
 
 module.exports = router;
