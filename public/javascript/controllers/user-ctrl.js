@@ -69,10 +69,11 @@ angular.module('harvestv2')
             var credentials = {};
 
             $scope.login = function() {
-                AuthenticationFactory.login(credentials, function(response) {
-                    console.log(response);
+                $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);
+                AuthenticationFactory.login($scope.credentials, function(response) {
+                    $location.url('/dashboard');
                 }, function(error) {
-                    console.log(error);
+                    alert("incorrect credentials!");
                 });
             };
         }
