@@ -20,4 +20,6 @@ router.get('/roles', User.getRoles);
 
 router.get('/activate/:token', User.activateUser);
 
+
+
 module.exports = router;
