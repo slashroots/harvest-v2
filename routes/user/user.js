@@ -2,11 +2,66 @@
  * Created by matjames007 on 9/10/16.
  */
 
-var model = require('../../models/db');
-var common = require('../../util/common-util');
+var model = require('../../models/db'),
+    common = require('../../util/common-util'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
+
 var User = model.User,
     Role = model.Role;
-var sha1 = require('sha1');
+
+/**
+ * Function used to send the user details back the application
+ * only after successfully authenticating.  This is intended
+ * for logging into the API using the local strategy.
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.authenticate = function(req, res, next) {
+    res.send(req.user);
+};
+
+/**
+ * Setup the local strategy required for login and establish checks
+ * for credentials provided during login.
+ */
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ us_username: username }, 'us_username ' +
+            'us_user_first_name us_user_last_name us_email_address us_contact' +
+            'us_user_role us_state us_password' ,
+            function (err, user) {
+                console.log(err, user);
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    return done(null, false, {message: 'Incorrect credentials.'});
+                }
+                if (user.us_password != password) {
+                    return done(null, false, {message: 'Incorrect credentials.'});
+                }
+                if (user.us_state != 'active') {
+                    return done(null, false, {message: 'User Activation Required.'});
+                }
+                return done(null, user);
+            }
+        );
+    }
+));
+
+/**
+ * Removing confidential items from the user before transmission
+ * over the wire.
+ */
+passport.serializeUser(function(user, done) {
+    user.us_password = undefined;
+    done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
 
 /**
  * Only accessible by platform administrator
