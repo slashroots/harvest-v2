@@ -64,13 +64,6 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="input8">Role Requested</label>
-                            <select ng-init="selectedRole=roles[0]" data-error="Please select a role!" class="form-control" ng-model="selectedRole" ng-change="user.us_user_role = selectedRole" ng-options="r._id as r.ro_role_name for r in roles" required>
-                                <option value="" selected="selected">Please select the role you want : </option>
-                            </select>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
                             <label for="input8">Company</label>
                             <input ng-model="user.us_company" type="text" class="form-control" id="input8" placeholder="Company">
                             <div class="help-block with-errors"></div>
@@ -87,7 +80,7 @@
                             </label>
                         </div>
                         <!--<button type="submit" class="btn btn-default btn-lg drk-grey-btn">Submit</button>-->
-                        <a href="#" ng-disabled="signupForm.$invalid || !validatePasswordMatch(user.us_password, passwordConfirm) || !agreeChecked" ng-click="createUser()" class="btn btn-default btn-lg drk-grey-btn">Submit</a>
+                        <a href="" ng-disabled="signupForm.$invalid || !validatePasswordMatch(user.us_password, passwordConfirm) || !agreeChecked" ng-click="createUser()" class="btn btn-default btn-lg drk-grey-btn">Submit</a>
                     </form>
 
                 </div>

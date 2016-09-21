@@ -17,15 +17,15 @@
                     <h2 class="form-head text-center">Sign In to Your Account</h2>
                     <form>
                         <div class="form-group">
-                            <label for="inputEmail1">Email Address</label>
-                            <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+                            <label for="username">Username</label>
+                            <input type="text" ng-model="credentials.us_username" class="form-control" id="username" placeholder="Username">
                         </div>
                         <div class="form-group">
                             <label for="inputPassword1">Password</label>
-                            <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+                            <input type="password" ng-model="credentials.us_password" class="form-control" id="inputPassword1" placeholder="Password">
                         </div>
                         <!--<button type="submit" class="btn btn-default btn-lg drk-grey-btn">Sign In</button>-->
-                        <a href="dashboard" class="btn btn-default btn-lg drk-grey-btn">Sign In</a>
+                        <a href="" class="btn btn-default btn-lg drk-grey-btn" ng-click="login()">Sign In</a>
                     </form>
                     <div class="form-links-wrap">
                         <ul class="form-links text-center">

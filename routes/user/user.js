@@ -87,16 +87,30 @@ exports.getUser = function(req, res, next) {
 exports.createUser = function(req, res, next) {
     var user = new User(req.body);
     user.us_activation_token = common.getRandomToken();
-    user.us_password = sha1(user.us_password);
     //TODO: must ensure the state is set to pending
     user.save(function(err) {
         if(err) {
             next(err);
         } else {
-            //removing the token and password from the response (security)
-            user.us_activation_token = undefined;
-            user.us_password = undefined;
-            res.send(user);
+            common.sendEmail(
+                user.us_email_address,
+                "Activation Link",
+                "Hi " + user.us_user_first_name + ",\n" +
+                "You have successfully created an Harvest account. " +
+                "To complete the process, activate your account by clicking on the link below: " +
+                "http://localhost:3000/activate/" + user.us_activation_token + "\n" +
+                "If you have any questions about this email, contact RADA.",
+                function(error, info) {
+                    if(error) {
+                        next(error);
+                    } else {
+                        //removing the token and password from the response (security)
+                        user.us_activation_token = undefined;
+                        user.us_password = undefined;
+                        res.send(user);
+                    }
+                });
+
         }
     });
 };
