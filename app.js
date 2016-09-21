@@ -1,3 +1,5 @@
+var setupApp = require('./setup').setupApplication();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,6 +9,11 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var routes = require('./routes/index');
+
+var app_manager = require('./routes/app/router-app-manager'),
+    user = require('./routes/user/router-user'),
+    farmer = require('./routes/resources/farmer/router-farmer'),
+    platform = require('./routes/platform/router-platform');
 
 var app = express();
 
@@ -43,6 +50,7 @@ var app_manager = require('./routes/app/router-app-manager'),
 app.use('/', routes);
 app.use('/', app_manager);
 app.use('/', user);
+app.use('/', platform);
 app.use('/api', farmer);
 
 // catch 404 and forward to error handler
