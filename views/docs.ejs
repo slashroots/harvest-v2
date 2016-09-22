@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+    <link rel='stylesheet' href='/stylesheets/redoc/main.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  </head>
+    <body>
+        <nav>
+            <header>
+                <a href="/HarvestAPI"> <%= title %> </a> 
+            </header>
+            
+            <template is="dom-bind" id="specs">
+                <form id="schema-url-form" is="iron-form">
+                    <vaadin-combo-box-light id="spec-input" items="[[specs]]" allow-custom-value>
+                        <input placeholder="URL to a spec to try" id="schema-url-input" type="text" is="iron-input" value="public/js/redoc-script.js">
+                    </vaadin-combo-box-light>
+                    
+                    <button type="submit">
+                        Explore
+                    </button>
+                </form>
+            </template>
+            
+            <iframe src="https://ghbtns.com/github-btn.html?user=Rebilly&repo=ReDoc&type=star&count=true&size=large"
+            frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
+        </nav> 
+
+        <redoc scroll-y-offset="body > nav" spec-url='../public/docs/swagger.yaml'></redoc>
+        <script src="../routes/docs/router-docs.js"> </script>
+    </body>
+</html>
