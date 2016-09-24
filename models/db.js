@@ -7,7 +7,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-mongoose.connect(process.env.MONGOLAB_URI);
+//mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect("172.0.0.1:27017/mongodb");
 
 /**
  * Intended to be used for the Application Manager.  Tokens are not given to the users
