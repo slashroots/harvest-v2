@@ -15,135 +15,122 @@ basePath: /v1
 produces:
   - application/json
 paths:
-  /crops:
+  /docs:
     get:
-      summary: Product Types
+      summary: Documentation of endpoints in HarvestAPI
       description: |
-        The Products endpoint returns information about the *Uber* products
-        offered at a given location. The response includes the display name
-        and other details about each product, and lists the products in the
-        proper display order.
-      parameters:
-        - name: latitude
-          in: query
-          description: Latitude component of location.
-          required: true
-          type: number
-          format: double
-        - name: longitude
-          in: query
-          description: Longitude component of location.
-          required: true
-          type: number
-          format: double
+        Built using Swagger Docs and ReDoc.
       tags:
-        - Products
+        - Documentation
       responses:
         200:
-          description: An array of products
+          description: swagger generated documentation
           schema:
-            type: array
+            type: json
             items:
-              $ref: '#/definitions/Product'
+              $ref: #'#/definitions/docs'
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /units:
+  /platform:
     get:
-      summary: Price Estimates
+      summary: Platform
       description: |
-        The Price Estimates endpoint returns an estimated price range
-        for each product offered at a given location. The price estimate is
-        provided as a formatted string with the full price range and the localized
-        currency symbol.<br><br>The response also includes low and high estimates,
-        and the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
-        situations requiring currency conversion. When surge is active for a particular
-        product, its surge_multiplier will be greater than 1, but the price estimate
-        already factors in this multiplier.
+         This function sends all default application parameters.
       parameters:
-        - name: start_latitude
+        - name: req
           in: query
-          description: Latitude component of start location.
+          description: requests object
           required: true
-          type: number
-          format: double
-        - name: start_longitude
+          type: byte
+          format: object
+        - name: res
           in: query
-          description: Longitude component of start location.
+          description: response object
           required: true
-          type: number
-          format: double
-        - name: end_latitude
+          type: byte
+          format: object
+        - name: next
           in: query
-          description: Latitude component of end location.
+          description: next middleware function in the application’s request-response cycle
           required: true
-          type: number
-          format: double
-        - name: end_longitude
-          in: query
-          description: Longitude component of end location.
-          required: true
-          type: number
-          format: double
+          type: object
+          format: function
       tags:
-        - Estimates
+        - Development
       responses:
         200:
-          description: An array of price estimates by product
+          description: description of response goes here
           schema:
             type: array
             items:
-              $ref: '#/definitions/PriceEstimate'
+              $ref: #'#/definitions/platform'
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /estimates/time:
+  /resources/farmer:
     get:
-      summary: Time Estimates
-      description: The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.
+      summary: Farmer
+      description: Retrieves all farmers.
       parameters:
-        - name: start_latitude
+        - name: req
           in: query
-          description: Latitude component of start location.
+          description: requests object
           required: true
-          type: number
-          format: double
-        - name: start_longitude
+          type: byte
+          format: object
+        - name: res
           in: query
-          description: Longitude component of start location.
+          description: response object
           required: true
-          type: number
-          format: double
-        - name: customer_uuid
+          type: byte
+          format: object
+        - name: next
           in: query
-          type: string
-          format: uuid
-          description: Unique customer identifier to be used for experience customization.
-        - name: product_id
-          in: query
-          type: string
-          description: Unique identifier representing a specific product for a given latitude & longitude.
+          description: next middleware function in the application’s request-response cycle
+          required: true
+          type: object
+          format: function
       tags:
-        - Estimates
+        - Agriculture
       responses:
         200:
-          description: An array of products
+          description: An array of farmers
           schema:
             type: array
             items:
-              $ref: '#/definitions/Product'
+              $ref: #'#/definitions/Farmers'
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /me:
+  /user:
     get:
-      summary: User Profile
-      description: The User Profile endpoint returns information about the Uber user that has authorized with the application.
+      summary: User
+      description: Function used to send the user details back the application only after successfully authenticating.  This is intended for logging into the API using the local strategy. ** needs to be more granular re. user functions
+      parameters:
+        - name: req
+          in: query
+          description: requests object
+          required: true
+          type: byte
+          format: object
+        - name: res
+          in: query
+          description: response object
+          required: true
+          type: byte
+          format: object
+        - name: next
+          in: query
+          description: next middleware function in the application’s request-response cycle
+          required: true
+          type: object
+          format: function
       tags:
-        - User
+        - Development
       responses:
         200:
           description: Profile information for a user
@@ -153,28 +140,36 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /history:
+  /app:
     get:
-      summary: User Activity
-      description: The User Activity endpoint returns data about a user's lifetime activity with Uber. The response will include pickup locations and times, dropoff locations and times, the distance of past requests, and information about which products were requested.<br><br>The history array in the response will have a maximum length based on the limit parameter. The response value count may exceed limit, therefore subsequent API requests may be necessary.
+      summary: app-manager
+      description: find, create, get relevant application ojects.
       parameters:
-        - name: offset
+        - name: req
           in: query
-          type: integer
-          format: int32
-          description: Offset the list of returned results by this amount. Default is zero.
-        - name: limit
+          description: requests object
+          required: true
+          type: byte
+          format: object
+        - name: res
           in: query
-          type: integer
-          format: int32
-          description: Number of items to retrieve. Default is 5, maximum is 100.
+          description: response object
+          required: true
+          type: byte
+          format: object
+        - name: next
+          in: query
+          description: next middleware function in the application’s request-response cycle
+          required: true
+          type: object
+          format: function
       tags:
-        - User
+        - Development
       responses:
         200:
-          description: History information for the given user
+          description: description of response goes here.
           schema:
-            $ref: '#/definitions/Activities'
+            $ref: #'#/definitions/Activities'
         default:
           description: Unexpected error
           schema:

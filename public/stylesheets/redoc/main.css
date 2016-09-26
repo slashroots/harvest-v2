@@ -39,7 +39,7 @@ nav header {
     float: left;
     margin-left: 20px;
     font-size: 25px;
-    color: #00329F;
+    color: #333333;
     font-weight: bold;
 }
 
@@ -130,4 +130,10 @@ header a {
     nav iframe {
       display: none;
     }
+}
+.method-samples {
+	color: #fafbfc;
+	width: 40%;
+	padding: 40px;
+	background: ##F5F5F5;
 }
