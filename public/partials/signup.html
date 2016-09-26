@@ -1,0 +1,94 @@
+<ng-include src="'/partials/common/navigation.html'"></ng-include>
+
+<!-- Page Content -->
+<section id="sign-up" class="bg-light-grey">
+    <div ng-include="'/partials/confirmation.html'" ng-show="confirmation" class="container"></div>
+    <div ng-show="!confirmation" class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>Big Heading About Harvest API</h1>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vivamus sed mauris non dolor vehicula semper a ornare
+                    erat. Suspendisse laoreet fermentum sapien, vel suscipit leo
+                    pharetra nec.</p>
+                <img id="signup-pic" src="http://www.placehold.it/500x400">
+            </div>
+            <div class="col-md-5">
+                <div class="form-wrap">
+                    <h2 class="form-head text-center">Create Your Harvest API Account</h2>
+                    <form id="signupForm" data-toggle="validator" role="form" name="signupForm" method="post" action="none" novalidate>
+                        <div id="name-field" class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="input1">First Name</label>
+                                    <input data-error="Please enter your first name!" ng-model="user.us_user_first_name" type="text" class="form-control" id="input1" placeholder="First Name" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="input2">Last Name</label>
+                                    <input data-error="Please enter your last name!" ng-model="user.us_user_last_name" type="text" class="form-control" id="input2" placeholder="Last Name" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input3">Username</label>
+                            <input data-error="Please enter your username!" ng-model="user.us_username" type="text" class="form-control" id="username" placeholder="Username" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input3">Email Address</label>
+                            <input data-error="Please enter a valid email address!" type="email" ng-model="user.us_email_address" type="text" class="form-control" id="input3" placeholder="Email Address" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordField">Password</label>
+                            <input data-error="Please enter your chosen password!" ng-model="user.us_password" type="password" class="form-control" id="passwordField" placeholder="Password" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input5">Confirm Password</label>
+                            <input data-match="#passwordField" data-error="Your passwords need to match!" ng-model="passwordConfirm" type="password" class="form-control" id="input5" placeholder="Confirm Password" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input6">Phone Number</label>
+                            <input data-error="Please enter your phone number!" ng-model="user.us_contact" type="text" class="form-control" id="input6" placeholder="Phone Number" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input7">Address</label>
+                            <input data-error="Please enter your address!" ng-model="user.us_address" type="text" class="form-control" id="input7" placeholder="Address">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input8">Company</label>
+                            <input ng-model="user.us_company" type="text" class="form-control" id="input8" placeholder="Company">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Intended Use of APIs</label>
+                            <!--<input type="email" class="form-control" id="input9" placeholder="Intended Use of APIs">-->
+                            <textarea ng-model="user.us_intended_use" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input ng-model="agreeChecked" required type="checkbox"> I agree to Harvest API’s <a href="#">Terms of Service</a> and
+                                <a href="#">Privacy Policy</a>.
+                            </label>
+                        </div>
+                        <!--<button type="submit" class="btn btn-default btn-lg drk-grey-btn">Submit</button>-->
+                        <a href="" ng-disabled="signupForm.$invalid || !validatePasswordMatch(user.us_password, passwordConfirm) || !agreeChecked" ng-click="createUser()" class="btn btn-default btn-lg drk-grey-btn">Submit</a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+</section>
+
+<ng-include src="'/partials/common/footer.html'"></ng-include>

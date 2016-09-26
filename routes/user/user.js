@@ -28,6 +28,7 @@ exports.authenticate = function(req, res, next) {
  */
 passport.use(new LocalStrategy(
     function(username, password, done) {
+        console.log(username, password);
         User.findOne({ us_username: username }, 'us_username ' +
             'us_user_first_name us_user_last_name us_email_address us_contact' +
             'us_user_role us_state us_password' ,
@@ -62,7 +63,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
-
 
 /**
  * Only accessible by platform administrator

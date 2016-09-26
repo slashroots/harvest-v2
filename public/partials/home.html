@@ -1,22 +1,4 @@
-<!-- Header -->
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-12 intro-pic">
-                <img class="img-responsive" src="http://www.placehold.it/500x450"/>
-            </div>
-            <div class="col-md-6 col-sm-12 intro-text">
-                <h1 class=" intro-heading">Lorem Ipsum Dolor Set Amit</h1>
-                <p class="lead"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus sed mauris non dolor vehicula semper a ornare erat. </p>
-                <div class="btn-wrap">
-                    <a href="signup" class="link-btn">Sign Up</a>
-                    <a href="#" class="link-btn drk-grey-btn">View Documentation</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<ng-include src="'/partials/common/navigation.html'"></ng-include>
 
 <!-- Page Content -->
 <section class="bg-light-grey">
@@ -70,10 +52,12 @@
             <h1 class="text-center title">Lorem Ipsum Dolor Set Amit</h1>
             <div class="btn-wrap">
                 <p class="text-center">
-                    <a href="signup" class="link-btn">Sign Up</a>
+                    <a href="signup.html" class="link-btn">Sign Up</a>
                     <a href="#" class="link-btn drk-grey-btn">View Documentation</a>
                 </p>
             </div>
         </div>
     </div>
 </section>
+
+<ng-include src="'/partials/common/footer.html'"></ng-include>
