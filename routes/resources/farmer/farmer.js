@@ -3,7 +3,8 @@
  */
 var Common = require('../../../util/common-util');
 var sql = require('mssql');
-
+var farmersAcl = require('../../../acl/farmers.acl.js');
+var Fakeblock = require('fakeblock');
 
 /**
  * Retrieves all farmers.  TODO: Pagination necessary
@@ -13,6 +14,14 @@ var sql = require('mssql');
  */
 exports.getAllFarmers = function(req, res, next) {
     //TODO: implement this endpoint
+
+    // a fakeblock instance created for each user and each ACL
+    var fakeblock = new Fakeblock({
+        name: 'farmers',
+        acl: farmersAcl,
+        userId: "Nick",
+        userRole: "aggregate"
+    });
 
     var connection1 = new sql.Connection(Common.getResourceDBConfig(), function(err) {
         if(err) {
@@ -26,6 +35,10 @@ exports.getAllFarmers = function(req, res, next) {
             if(err) {
                 return next(err);
             } else {
+
+                for (i = 0; i < recordset.length; i++) {
+                    recordset[i] = fakeblock.applyAcl(recordset[i], 'get');
+                }
                 res.send(recordset);
             }
         });
