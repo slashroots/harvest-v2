@@ -15,6 +15,7 @@ var App = model.App
  */
 exports.getApplications = function(req, res, next) {
     App.find()
+        .where('us_app_user', req.user._id)
         .exec(function(err, docs) {
             if(err) {
                 next(err);
@@ -35,6 +36,8 @@ exports.createApplication = function(req, res, next) {
     var app = new App(req.body);
     app.ap_app_token = Common.getRandomToken();
     app.ap_app_status = 'active';
+    app.us_app_user = req.user._id;
+    console.log(app);
     app.save(function(err) {
         if(err) {
             next(err);

@@ -78,5 +78,27 @@ angular.module('harvestv2')
             };
         }
     ]
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'AppsFactory', 'AppFactory',
+        function($scope, $location, $routeParams, UserFactory, AppsFactory, AppFactory) {
+
+            $scope.app = {};
+
+            AppsFactory.query($routeParams, function(apps) {
+                $scope.apps = apps;
+            }, function(error) {
+                console.log(error);
+            });
+
+            $scope.createApp = function () {
+                    AppFactory.create($scope.app, function(app) {
+                        $scope.apps.push(app);
+                        $scope.app = {};
+                    }, function(error) {
+                        console.log(error);
+                    });
+            };
+
+        }
+    ]
 );
 

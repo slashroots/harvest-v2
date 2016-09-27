@@ -45,3 +45,22 @@ services.factory('AuthenticationFactory', function($resource) {
         login: { method: 'POST'}
     });
 });
+
+
+/**
+ * Get all applications for user
+ */
+services.factory('AppsFactory', function($resource) {
+    return $resource('/apps', {}, {
+        query: { method: 'GET', isArray: true}
+    });
+});
+
+/**
+ * Create an application
+ */
+services.factory('AppFactory', function($resource) {
+    return $resource('/app', {}, {
+        create: { method: 'POST'}
+    });
+});
