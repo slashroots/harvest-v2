@@ -189,7 +189,8 @@ exports.activateUser = function(req, res, next) {
                 //removing the token and password from the response (security)
                 docs.us_activation_token = undefined;
                 docs.us_password = undefined;
-                res.send(docs);
+                console.log(docs);
+                res.redirect("/#/signin");
             }
         });
 };
