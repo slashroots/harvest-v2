@@ -17,6 +17,12 @@ var app_manager = require('./routes/app/router-app-manager'),
 
 var app = express();
 
+var model = require('./models/db');
+
+var User = model.User,
+    App = model.App,
+    Role = model.Role;//these are used in the new ACL middleware I have defined in this file to be used before API endpoints
+
 /**
  * This is probably not necessary - but it establishes a connection
  * with the DB on first startup and prints out the tables
@@ -46,6 +52,27 @@ app.use(passport.session());
 var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer');
+
+var aclMiddleware = function (req, res, next) {//this function gets the role name of the application whose access token was used in the API request
+        App.findOne({ap_app_token: req.query.access_token}, function (err, app) {
+            if (err) {
+                next(err);
+            } else {
+                if (app !== null) Role.findOne({_id: app.ap_app_role}).exec(function (err, role) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        //fakeblock
+                        req.app_role_name = role.ro_role_name;//adds the role name to the request object
+                        next();
+                    }
+                })
+                else res.send("Invalid token or no token supplied.");
+            }
+        })
+}
+
+app.use('/api', aclMiddleware);
 
 app.use('/', routes);
 app.use('/', app_manager);
