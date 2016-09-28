@@ -5,270 +5,299 @@ info:
   title: HarvestAPI
   description: Open Data + Agriculture 
   version: "0.0.0"
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 # the domain of the service
-host: api.rada-harvest.com
+host: localhost:3000
 # array of all schemes that your API supports
 schemes:
   - https
 # will be prefixed to all paths
-basePath: /v1
-produces:
-  - application/json
+basePath: /api/
+tags:
+  - name: Farmer
+    description: Farmer information
+  - name: Property
+    description: Property information
+  - name: Livestock
+    description: Livestock information
+  - name: Crop
+    description: Crop information
 paths:
-  /docs:
-    get:
-      summary: Documentation of endpoints in HarvestAPI
+  /farmers:
+    get: 
+      summary: Get All Farmers
       description: |
-        Built using Swagger Docs and ReDoc.
+       Retrieve information on all farmers
+      operationId: getAllFarmers
       tags:
-        - Documentation
+        - Farmer
+      produces:
+        - application/json
       responses:
-        200:
-          description: swagger generated documentation
-          schema:
-            type: json
-            items:
-              $ref: #'#/definitions/docs'
         default:
-          description: Unexpected error
+          description: Bad request
+        200:
+          description: Successful response
           schema:
-            $ref: '#/definitions/Error'
-  /platform:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getFarmerByID x 50!'
+  /farmers/{id}:
     get:
-      summary: Platform
+      summary: Get Farmer By ID
       description: |
-         This function sends all default application parameters.
-      parameters:
-        - name: req
-          in: query
-          description: requests object
-          required: true
-          type: byte
-          format: object
-        - name: res
-          in: query
-          description: response object
-          required: true
-          type: byte
-          format: object
-        - name: next
-          in: query
-          description: next middleware function in the application’s request-response cycle
-          required: true
-          type: object
-          format: function
+       Retrieve information on a farmer, provided an ID
+      operationId: getFarmerByID
       tags:
-        - Development
-      responses:
-        200:
-          description: description of response goes here
-          schema:
-            type: array
-            items:
-              $ref: #'#/definitions/platform'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /resources/farmer:
-    get:
-      summary: Farmer
-      description: Retrieves all farmers.
+        - Farmer
+        - Resource
+      produces:
+        - application/json
       parameters:
-        - name: req
-          in: query
+        - name: id
+          in: path
           description: requests object
+          type: string
           required: true
-          type: byte
-          format: object
-        - name: res
-          in: query
-          description: response object
-          required: true
-          type: byte
-          format: object
-        - name: next
-          in: query
-          description: next middleware function in the application’s request-response cycle
-          required: true
-          type: object
-          format: function
-      tags:
-        - Agriculture
       responses:
-        200:
-          description: An array of farmers
-          schema:
-            type: array
-            items:
-              $ref: #'#/definitions/Farmers'
         default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /user:
-    get:
-      summary: User
-      description: Function used to send the user details back the application only after successfully authenticating.  This is intended for logging into the API using the local strategy. ** needs to be more granular re. user functions
-      parameters:
-        - name: req
-          in: query
-          description: requests object
-          required: true
-          type: byte
-          format: object
-        - name: res
-          in: query
-          description: response object
-          required: true
-          type: byte
-          format: object
-        - name: next
-          in: query
-          description: next middleware function in the application’s request-response cycle
-          required: true
-          type: object
-          format: function
-      tags:
-        - Development
-      responses:
+          description: Bad request
         200:
-          description: Profile information for a user
+          description: Successful response
           schema:
-            $ref: '#/definitions/Profile'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /app:
-    get:
-      summary: app-manager
-      description: find, create, get relevant application ojects.
-      parameters:
-        - name: req
-          in: query
-          description: requests object
-          required: true
-          type: byte
-          format: object
-        - name: res
-          in: query
-          description: response object
-          required: true
-          type: byte
-          format: object
-        - name: next
-          in: query
-          description: next middleware function in the application’s request-response cycle
-          required: true
-          type: object
-          format: function
-      tags:
-        - Development
-      responses:
-        200:
-          description: description of response goes here.
-          schema:
-            $ref: #'#/definitions/Activities'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+                IDX_StakeHolder:
+                    type: array
+                    message: [952520,952520]
+                StakeHolder_Num:
+                    type: string
+                    message: '081117655'
+                Stakeholder_Type_Code:
+                    type: integer
+                    message: 1
+                Company_Name:
+                    type: string
+                    message: 
+                First_Name:
+                    type: string
+                    message: 'ERROL'
+                Middle_Name:
+                    type: string
+                    message: 'CHARLES'
+                Last_Name:
+                    type: string
+                    message: 'LENNOX'
+                Alias:
+                    type: string
+                    message: 
+                DOB:
+                    type: string
+                    message: '1975-11-30T00:00:00.000Z'
+                Gender:
+                    type: integer
+                    message: 1
+                Jas_Receipt:
+                    type: string
+                    message: '0'
+                Res_Street_Address:
+                    type: string
+                    message: 'MERTON PEN'
+                Res_District_Name:
+                    type: string
+                    message: 'GRANGE HILL'
+                Res_Post_Office:
+                    type: string
+                    message: 'Grange Hill P.A.'
+                Res_Parish_Code:
+                    type: integer
+                    message: 4
+                Res_Tele_Num:
+                    type: string
+                    message: '457-8027'
+                Bus_Street_Address:
+                    type: string
+                    message: 
+                Bus_District_Name:
+                    type: string
+                    message: 'GRANGE HILL'
+                Bus_Post_Office:
+                    type: string
+                    message: 
+                Bus_Parish_Code:
+                    type: integer
+                    message: 4
+                Bus_Tele_Num:
+                    type: integer
+                    message: 
+                Cell_Num:
+                    type: string
+                    message: 
+                Email_Address:
+                    type: string
+                    message: 
+                Fax_Num:
+                    type: string
+                    message: 
+                Identification_Num:
+                    type: string
+                    message: '106699920'
+                ID_Type_Code:
+                    type: integer
+                    message: 3
+                TRN:
+                    type: string
+                    message: '106699920'
+                Interviewer:
+                    type: string
+                    message: null
+                Stakeholder_Status_Code:
+                    type: integer
+                    message: 1
+                Verified_Status:
+                    type: integer
+                    message: 1
+                Verified_Date:
+                    type: string
+                    message: '2009-01-09T00:00:00.000Z'
+                Registration_Date:
+                    type: string
+                    message: '2008-10-17T00:00:00.000Z'
+                Have_Photo_YN:
+                    type: integer
+                    message: 0
+                Want_Photo_ID_YN:
+                    type: integer
+                    message: 1
+                Photo_Path:
+                    type: string
+                    message: '081117655.jpg'
+                Photo_ID_Upload_Date:
+                    type: string
+                    message: null
+                Photo_Found_YN:
+                    type: string
+                    message: null
+                IDX_EOJ_Photo_Batch:
+                    type: string
+                    message: null
+                Photo_Status:
+                    type: integer
+                    message: 1
+                Old_Photo_ID_Printed_YN:
+                    type: string
+                    message: null
+                Old_Photo_Path:
+                    type: string
+                    message: null
+                Old_Photo_Print_Date:
+                    type: string
+                    message: null
+                Old_Have_Photo_YN:
+                    type: string
+                    message: null
+                Create_Date:
+                    type: array
+                    message: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
+                Update_Date:
+                    type: array
+                    message: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
+                ReVerified_Date:
+                    type: string
+                    message: null
+                ReVerified_Status:
+                    type: string
+                    message: null
+                tracker_farmer_yn:
+                    type: integer
+                    message: 0
+                Title:
+                    type: string
+                    message: null
+                Stakeholder_Status_Date:
+                    type: string
+                    message: null
+                primary_parish:
+                    type: integer
+                    message: 4
+                primary_extension_area:
+                    type: integer
+                    message: 9
+                primary_district:
+                    type: integer
+                    message: 994
+                Update_By:
+                    type: integer
+                    message: null
+                tracker_group:
+                    type: string
+                    message: null
+                tracker_start_date:
+                    type: string
+                    message: null
+                IDX_Farmer_Profile:
+                    type: integer
+                    message: 523402
+                Respondent_Code:
+                    type: integer
+                    message: 1
+                Manager_Code:
+                    type: integer
+                    message: 1
+                Live_On_Farm_YN:
+                    type: integer
+                    message: 1
+                Income_Source_Code:
+                    type: integer
+                    message: 1
+                Education_Level_Code:
+                    type: integer
+                    message: 5
+                Occupation_Code:
+                    type: integer
+                    message: 7
+                Agri_Training_YN:
+                    type: integer
+                    message: 2
+                Farmer_Type_Code:
+                    type: integer
+                    message: 1
+                Training_Method_Code:
+                    type: integer
+                    message: null
+                Agri_Institution_Code:
+                    type: integer
+                    message: null
+                Qualification_Code:
+                    type: integer
+                    message: 3
+                Holding_Start:
+                    type: string
+                    message: '1994'
+                Main_Agri_Activity_Code:
+                    type: integer
+                    message: 2
+                Nearest_Police_Station:
+                    type: string
+                    message: 'Manchioneal'
+                Farmer_Profile_Remarks:
+                    type: string
+                    message: null
+                Jas_Farmer_Group:
+                    type: string
+                    message: 
+                House_Hold_No:
+                    type: string
+                    message: null
 definitions:
-  Product:
-    type: object
+  Message:
+    required:
+      - message
     properties:
-      product_id:
-        type: string
-        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-      description:
-        type: string
-        description: Description of product.
-      display_name:
-        type: string
-        description: Display name of product.
-      capacity:
-        type: string
-        description: Capacity of product. For example, 4 people.
-      image:
-        type: string
-        description: Image URL representing the product.
-  PriceEstimate:
-    type: object
-    properties:
-      product_id:
-        type: string
-        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles
-      currency_code:
-        type: string
-        description: "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
-      display_name:
-        type: string
-        description: Display name of product.
-      estimate:
-        type: string
-        description: Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or "Metered" for TAXI.
-      low_estimate:
-        type: number
-        description: Lower bound of the estimated price.
-      high_estimate:
-        type: number
-        description: Upper bound of the estimated price.
-      surge_multiplier:
-        type: number
-        description: Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier.
-  Profile:
-    type: object
-    properties:
-      first_name:
-        type: string
-        description: First name of the Uber user.
-      last_name:
-        type: string
-        description: Last name of the Uber user.
-      email:
-        type: string
-        description: Email address of the Uber user
-      picture:
-        type: string
-        description: Image URL of the Uber user.
-      promo_code:
-        type: string
-        description: Promo code of the Uber user.
-  Activity:
-    type: object
-    properties:
-      uuid:
-        type: string
-        description: Unique identifier for the activity
-  Activities:
-    type: object
-    properties:
-      offset:
-        type: integer
-        format: int32
-        description: Position in pagination.
-      limit:
-        type: integer
-        format: int32
-        description: Number of items to retrieve (100 max).
-      count:
-        type: integer
-        format: int32
-        description: Total number of items available.
-      history:
-        type: array
-        items:
-          $ref: '#/definitions/Activity'
-  Error:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
       message:
         type: string
-      fields:
-        type: string
-
-
+        default: 'Hello, Adam!'
