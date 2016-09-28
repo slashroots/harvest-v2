@@ -53,7 +53,7 @@ var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer');
 
-var aclMiddleware = function (req, res, next) {//this function gets the role name of the application whose access token was used in the API request
+var roleMiddleware = function (req, res, next) {//this function gets the role name of the application whose access token was used in the API request
         App.findOne({ap_app_token: req.query.access_token}, function (err, app) {
             if (err) {
                 next(err);
@@ -72,7 +72,7 @@ var aclMiddleware = function (req, res, next) {//this function gets the role nam
         })
 }
 
-app.use('/api', aclMiddleware);
+app.use('/api', roleMiddleware);
 
 app.use('/', routes);
 app.use('/', app_manager);
