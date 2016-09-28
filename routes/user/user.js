@@ -134,6 +134,16 @@ exports.getUser = function(req, res, next) {
 };
 
 /**
+ * Get the current logged in user
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.getCurrentUser = function(req, res, next) {
+    res.send(req.user);
+};
+
+/**
  * Can be accessed by the public, however state value cannot be set.
  * Must first default to 'pending'.
  * @param req

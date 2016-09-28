@@ -99,6 +99,23 @@ angular.module('harvestv2')
             };
 
         }
+    ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
+        'AuthenticationFactory', 'CurrentUserFactory',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory) {
+            var credentials = {};
+
+            $scope.userLoggedIn = false;
+
+            CurrentUserFactory.query($routeParams, function(user) {
+                $scope.user = user;
+                if ($scope.user._id !== undefined) $scope.userLoggedIn = true;
+                console.log(user);
+            }, function(error) {
+                console.log(error);
+            });
+
+
+        }
     ]
 );
 
