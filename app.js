@@ -53,26 +53,28 @@ var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer');
 
-var roleMiddleware = function (req, res, next) {//this function gets the role name of the application whose access token was used in the API request
-        App.findOne({ap_app_token: req.query.access_token}, function (err, app) {
-            if (err) {
-                next(err);
-            } else {
-                if (app !== null) Role.findOne({_id: app.ap_app_role}).exec(function (err, role) {
-                    if (err) {
-                        next(err);
-                    } else {
-                        //fakeblock
-                        req.app_role_name = role.ro_role_name;//adds the role name to the request object
-                        next();
-                    }
-                })
-                else res.send("Invalid token or no token supplied.");
-            }
-        })
-}
+var TokenStrategy = require('passport-token-auth').Strategy;
 
-app.use('/api', roleMiddleware);
+passport.use(new TokenStrategy(
+    function(token, done) {
+        App.findOne({ ap_app_token: token }, function (err, app) {
+            if (err) { return done(err); }
+            if (!app) { return done(null, false); }
+            return done(null, app, { scope: 'all' });
+        });
+    }
+));
+
+app.use('/api', passport.authenticate('token', { session: false }), function (req, res, next) {
+    Role.findOne({_id: req.user.ap_app_role}).exec(function (err, role) {
+        if (err) {
+            next(err);
+        } else {
+            req.app_role_name = role.ro_role_name;//adds the role name to the request object
+            next();
+        }
+    })
+});
 
 app.use('/', routes);
 app.use('/', app_manager);
