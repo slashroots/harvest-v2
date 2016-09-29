@@ -69,7 +69,7 @@ services.factory('AppFactory', function($resource) {
  * Gets current logged in user
  */
 services.factory('CurrentUserFactory', function($resource) {
-    return $resource('/currentuser', {}, {
+    return $resource('/user', {}, {
         query: { method: 'GET'}
     });
 });

@@ -14,7 +14,7 @@ var express = require('express'),
 router.get('/user/:id', User.getUser);
 router.get('/users', User.getAllUsers);
 router.post('/user', User.createUser);
-router.get('/currentuser', User.getCurrentUser);
+router.get('/user', User.getCurrentUser);
 
 router.get('/user/:id/apps', App.getAppsByUserID);
 

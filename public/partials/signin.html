@@ -1,4 +1,12 @@
-<ng-include src="'/partials/common/navigation.html'"></ng-include>
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
+    <div ng-controller="NavigationCtrl" class="container">
+        <div ng-include src="'/partials/common/navigation-loggedin.html'" ng-if="userLoggedIn"></div>
+
+        <div ng-include src="'/partials/common/navigation-loggedout.html'" ng-if="!userLoggedIn"></div>
+
+    </div>
+    <!-- /.container -->
+</nav>
 
 <!-- Page Content -->
 <section id="" class="bg-light-grey">
