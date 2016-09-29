@@ -21,8 +21,6 @@ exports.getAllFarmers = function(req, res, next) {
         userRole: req.app_role_name
     });
 
-    console.log(req.app_role_name);
-
     var connection1 = new sql.Connection(Common.getResourceDBConfig(), function(err) {
         if(err) {
             return next(err);
