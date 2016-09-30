@@ -16,7 +16,6 @@ services.factory('UserFactory', function($resource) {
     });
 });
 
-
 /**
  * Factory used to get the Platform defaults
  */
@@ -62,5 +61,14 @@ services.factory('AppsFactory', function($resource) {
 services.factory('AppFactory', function($resource) {
     return $resource('/app', {}, {
         create: { method: 'POST'}
+    });
+});
+
+/**
+ * Activates a user account via the token
+ */
+services.factory('UserActivationFactory', function($resource) {
+    return $resource('/activate/:token', {}, {
+        activate: {method: 'GET',params: {token: '@token'}}
     });
 });

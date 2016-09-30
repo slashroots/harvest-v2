@@ -63,10 +63,18 @@ angular.module('harvestv2')
 
         }
     ]
-).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory',
+).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
         'AuthenticationFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, AuthenticationFactory, PlatformFactory) {
+        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory) {
             var credentials = {};
+
+            if($routeParams.token){
+                UserActivationFactory.activate($routeParams, function(response) {
+                    $scope.userActivationMessage = "Your account has been activated successfully!";
+                }, function(error) {
+                    $scope.userActivationMessage = "The activation token you provided was invalid!";
+                });
+            }
 
             $scope.login = function() {
                 $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);

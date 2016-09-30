@@ -154,7 +154,7 @@ exports.createUser = function(req, res, next) {
                 "Hi " + user.us_user_first_name + ",\n" +
                 "You have successfully created an Harvest account. " +
                 "To complete the process, activate your account by clicking on the link below: " +
-                "http://localhost:3000/activate/" + user.us_activation_token + "\n" +
+                "http://localhost:3000/#/activate/" + user.us_activation_token + "\n" +
                 "If you have any questions about this email, contact RADA.",
                 function(error, info) {
                     if(error) {
@@ -189,8 +189,7 @@ exports.activateUser = function(req, res, next) {
                 //removing the token and password from the response (security)
                 docs.us_activation_token = undefined;
                 docs.us_password = undefined;
-                console.log(docs);
-                res.redirect("/#/signin");
+                res.send(docs);
             }
         });
 };
