@@ -173,7 +173,7 @@
   color: #888888;
 }
 .swagger-section .hljs-meta {
-  color: #333333;
+  color: #2B6EA1;
 }
 .swagger-section .hljs-emphasis {
   font-style: italic;
@@ -239,7 +239,7 @@
   border-bottom: none;
 }
 .swagger-section .swagger-ui-wrap table tbody tr.offset {
-  background-color: #FFFFFF;
+  background-color: #f0f0f0;
 }
 .swagger-section .swagger-ui-wrap table tbody tr td {
   padding: 6px;

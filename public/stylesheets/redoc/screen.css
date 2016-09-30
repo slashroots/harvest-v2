@@ -82,7 +82,7 @@
 .swagger-section pre .vhdl .attribute,
 .swagger-section pre .clojure .attribute,
 .swagger-section pre .coffeescript .property {
-  color: #333333;
+  color: #88F;
 }
 .swagger-section pre .keyword,
 .swagger-section pre .id,
@@ -124,7 +124,7 @@
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #FFF;
+  background: #F0F0F0;
 }
 .swagger-section .hljs,
 .swagger-section .hljs-subst {
@@ -173,7 +173,7 @@
   color: #888888;
 }
 .swagger-section .hljs-meta {
-  color: #333333;
+  color: #2B6EA1;
 }
 .swagger-section .hljs-emphasis {
   font-style: italic;
@@ -202,7 +202,7 @@
 .swagger-section .swagger-ui-wrap p {
   line-height: 1.4em;
   padding: 0 0 10px;
-  color: ##F5F5F5;
+  color: #333333;
 }
 .swagger-section .swagger-ui-wrap q:before,
 .swagger-section .swagger-ui-wrap q:after,
