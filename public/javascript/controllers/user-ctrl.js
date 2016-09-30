@@ -70,9 +70,11 @@ angular.module('harvestv2')
 
             if($routeParams.token){
                 UserActivationFactory.activate($routeParams, function(response) {
-                    $scope.userActivationMessage = "Your account has been activated successfully!";
+                    $scope.success = true;
+                    $scope.loginScreenNotification = "Your account has been activated successfully!";
                 }, function(error) {
-                    $scope.userActivationMessage = "The activation token you provided was invalid!";
+                    $scope.success = false;
+                    $scope.loginScreenNotification = "The activation token you provided was invalid!";
                 });
             }
 
@@ -81,7 +83,8 @@ angular.module('harvestv2')
                 AuthenticationFactory.login($scope.credentials, function(response) {
                     $location.url('/dashboard');
                 }, function(error) {
-                    alert("incorrect credentials!");
+                    $scope.success = false;
+                    $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
                 });
             };
         }
