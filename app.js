@@ -53,28 +53,12 @@ var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer');
 
-var TokenStrategy = require('passport-token-auth').Strategy;
 
-passport.use(new TokenStrategy(
-    function(token, done) {
-        App.findOne({ ap_app_token: token }, function (err, app) {
-            if (err) { return done(err); }
-            if (!app) { return done(null, false); }
-            return done(null, app, { scope: 'all' });
-        });
+app.use('/api', passport.authenticate('token', { session: false }),
+    function (req, res, next) {
+        next();
     }
-));
-
-app.use('/api', passport.authenticate('token', { session: false }), function (req, res, next) {
-    Role.findOne({_id: req.user.ap_app_role}).exec(function (err, role) {
-        if (err) {
-            next(err);
-        } else {
-            req.app_role_name = role.ro_role_name;//adds the role name to the request object
-            next();
-        }
-    })
-});
+);
 
 app.use('/', routes);
 app.use('/', app_manager);

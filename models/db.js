@@ -18,12 +18,13 @@ var AppSchema = new Schema({
     ap_app_token: {type: String, required: true},
     us_app_user: {type: Schema.Types.ObjectId, required: true, ref: "User"},
     ap_app_creation_date: {type: Date, default: Date.now()},
-    ap_app_status: {type: String,required: true, default: 'pending'}, //allows administrator to deactivate access
+    ap_app_status: {type: String,required: true, default: 'active'}, //allows administrator to deactivate access
     ap_app_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"}
     /*
     TODO: we had issues the last time on the servers with Date.now();  Need to test this and make sure it is functional
      */
 });
+
 /**
  * Users are capable of being tracked throughout the system.  Each user has an assigned role,
  * and state.  The state of a user changes based on the registration with the system and if

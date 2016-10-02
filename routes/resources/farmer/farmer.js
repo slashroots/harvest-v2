@@ -18,7 +18,7 @@ exports.getAllFarmers = function(req, res, next) {
     // a fakeblock instance created for each user and each ACL
     var fakeblock = new Fakeblock({
         acl: farmersAcl,
-        userRole: req.app_role_name
+        userRole: req.user.ap_app_role.ro_role_name
     });
 
     var connection1 = new sql.Connection(Common.getResourceDBConfig(), function(err) {
