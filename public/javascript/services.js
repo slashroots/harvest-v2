@@ -72,3 +72,12 @@ services.factory('UserActivationFactory', function($resource) {
         activate: {method: 'GET',params: {token: '@token'}}
     });
 });
+
+/*
+ * Gets current logged in user
+ */
+services.factory('CurrentUserFactory', function($resource) {
+    return $resource('/user', {}, {
+        query: { method: 'GET'}
+    });
+});
