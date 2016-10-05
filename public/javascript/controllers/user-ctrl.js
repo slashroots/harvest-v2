@@ -69,8 +69,8 @@ angular.module('harvestv2')
             var credentials = {};
 
             if($routeParams.token){
-                UserActivationFactory.activate($routeParams, function(response) {
-                    $scope.success = true;
+                UserActivationFactory.activate($routeParams, function(response) {//this function calls the factory that activates the user via the route implemented for the purpose on the expressJS side
+                    $scope.success = true;//this flag determines the color of the notification of the login screen - green is successful and red if there was an error
                     $scope.loginScreenNotification = "Your account has been activated successfully!";
                 }, function(error) {
                     $scope.success = false;
