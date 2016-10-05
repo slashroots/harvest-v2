@@ -64,3 +64,12 @@ services.factory('AppFactory', function($resource) {
         create: { method: 'POST'}
     });
 });
+
+/**
+ * Gets current logged in user
+ */
+services.factory('CurrentUserFactory', function($resource) {
+    return $resource('/user', {}, {
+        query: { method: 'GET'}
+    });
+});
