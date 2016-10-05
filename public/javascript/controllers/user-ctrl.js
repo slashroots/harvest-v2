@@ -78,8 +78,8 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'AppsFactory', 'AppFactory',
-        function($scope, $location, $routeParams, UserFactory, AppsFactory, AppFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'AppsFactory', 'AppFactory','PlatformFactory',
+        function($scope, $location, $routeParams, UserFactory, AppsFactory, AppFactory, PlatformFactory) {
 
             $scope.app = {};
 
@@ -90,12 +90,17 @@ angular.module('harvestv2')
             });
 
             $scope.createApp = function () {
+                PlatformFactory.show(function(info) {
+                    $scope.app.ap_app_role = info._id;//acquires the default role for the app before creating it
                     AppFactory.create($scope.app, function(app) {
                         $scope.apps.push(app);
                         $scope.app = {};
                     }, function(error) {
                         console.log(error);
                     });
+                }, function(error) {
+                    console.log(error);
+                });
             };
 
         }

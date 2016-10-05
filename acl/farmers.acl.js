@@ -1,9 +1,9 @@
 module.exports = {
     get: {
-        access: ['aggregate'],
+        access: ['aggregate_user'],
         fields: {
             allowed: {
-                aggregate: ['First_Name', 'Middle_Name', 'Last_Name', "DOB"]
+                aggregate_user: ['First_Name', 'Middle_Name', 'Last_Name', "DOB"]
             }
         }
     }

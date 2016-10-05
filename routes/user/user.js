@@ -5,10 +5,12 @@
 var model = require('../../models/db'),
     common = require('../../util/common-util'),
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    TokenStrategy = require('passport-token-auth').Strategy;
 
 var User = model.User,
-    Role = model.Role;
+    Role = model.Role,
+    App = model.App;
 
 /**
  * Function used to send the user details back the application
@@ -23,12 +25,35 @@ exports.authenticate = function(req, res, next) {
 };
 
 /**
+ * Setup the token Strategy for the resources endpoint.
+ * This will be used during web-service calls to any RADA
+ * specific resources.
+ */
+passport.use(new TokenStrategy(
+    function(token, done) {
+        App.findOne({ ap_app_token: token })
+            .populate('ap_app_role')
+            .exec(function (err, app) {
+                if (err) {
+                    return done(err);
+                }
+                if (!app) {
+                    return done(null, false);
+                }
+                if(app.ap_app_status != 'active') {
+                    return done(null, false);
+                }
+                return done(null, app, { scope: 'all' });
+            });
+    }
+));
+
+/**
  * Setup the local strategy required for login and establish checks
  * for credentials provided during login.
  */
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        console.log(username, password);
         User.findOne({ us_username: username }, 'us_username ' +
             'us_user_first_name us_user_last_name us_email_address us_contact' +
             'us_user_role us_state us_password' ,
