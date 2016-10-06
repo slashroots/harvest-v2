@@ -16,7 +16,6 @@ services.factory('UserFactory', function($resource) {
     });
 });
 
-
 /**
  * Factory used to get the Platform defaults
  */
@@ -48,10 +47,19 @@ services.factory('AuthenticationFactory', function($resource) {
 
 
 /**
- * Get all applications for user
+ * Get all applications
  */
 services.factory('AppsFactory', function($resource) {
     return $resource('/apps', {}, {
+        query: { method: 'GET', isArray: true}
+    });
+});
+
+/**
+ * Get all applications for a specific user
+ */
+services.factory('UserAppsFactory', function($resource) {
+    return $resource('/user/:id/apps', {}, {
         query: { method: 'GET', isArray: true}
     });
 });
@@ -62,5 +70,23 @@ services.factory('AppsFactory', function($resource) {
 services.factory('AppFactory', function($resource) {
     return $resource('/app', {}, {
         create: { method: 'POST'}
+    });
+});
+
+/**
+ * Activates a user account via the token
+ */
+services.factory('UserActivationFactory', function($resource) {
+    return $resource('/activate/:token', {}, {
+        activate: {method: 'GET',params: {token: '@token'}}
+    });
+});
+
+/*
+ * Gets current logged in user
+ */
+services.factory('CurrentUserFactory', function($resource) {
+    return $resource('/user', {}, {
+        query: { method: 'GET'}
     });
 });

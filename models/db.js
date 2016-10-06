@@ -18,7 +18,8 @@ var AppSchema = new Schema({
     ap_app_token: {type: String, required: true},
     us_app_user: {type: Schema.Types.ObjectId, required: true, ref: "User"},
     ap_app_creation_date: {type: Date, default: Date.now()},
-    ap_app_status: {type: String,required: true, default: 'pending'} //allows administrator to deactivate access
+    ap_app_status: {type: String,required: true, default: 'active'}, //allows administrator to deactivate access
+    ap_app_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"}
     /*
     TODO: we had issues the last time on the servers with Date.now();  Need to test this and make sure it is functional
      */

@@ -8,6 +8,7 @@ angular.module('harvestv2', ["ngRoute", "harvestv2.services"]).config(['$routePr
     $routeProvider.when('/signup', {templateUrl: '../partials/signup.html', controller: 'UserCtrl'});
     $routeProvider.when('/confirmation', {templateUrl: '../partials/confirmation.html', controller: 'UserCtrl'});
     $routeProvider.when('/dashboard', {templateUrl: '../partials/dashboard.html', controller: 'UserDashboardCtrl'});
+    $routeProvider.when('/activate/:token', {templateUrl: '../partials/signin.html', controller: 'UserLoginCtrl'});
     $routeProvider.otherwise({redirectTo: '/'});
 
     //$locationProvider.html5Mode(true);

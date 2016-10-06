@@ -63,40 +63,82 @@ angular.module('harvestv2')
 
         }
     ]
-).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory',
+).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
         'AuthenticationFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, AuthenticationFactory, PlatformFactory) {
+        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory) {
             var credentials = {};
+
+            if($routeParams.token){
+                UserActivationFactory.activate($routeParams, function(response) {//this function calls the factory that activates the user via the route implemented for the purpose on the expressJS side
+                    $scope.success = true;//this flag determines the color of the notification of the login screen - green is successful and red if there was an error
+                    $scope.loginScreenNotification = "Your account has been activated successfully!";
+                }, function(error) {
+                    $scope.success = false;
+                    $scope.loginScreenNotification = "The activation token you provided was invalid!";
+                });
+            }
 
             $scope.login = function() {
                 $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);
                 AuthenticationFactory.login($scope.credentials, function(response) {
                     $location.url('/dashboard');
                 }, function(error) {
-                    alert("incorrect credentials!");
+                    $scope.success = false;
+                    $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
                 });
             };
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'AppsFactory', 'AppFactory',
-        function($scope, $location, $routeParams, UserFactory, AppsFactory, AppFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
 
             $scope.app = {};
 
-            AppsFactory.query($routeParams, function(apps) {
-                $scope.apps = apps;
+            /*
+             Gets the current user so we can pass the id to get all their apps - we could also have grabbed their id from the req.user.id instead of doing this but the endpoint was already created to expect an ID being passed to it
+             */
+            CurrentUserFactory.query($routeParams, function(user) {
+                $routeParams.id = user._id;
+                UserAppsFactory.query($routeParams, function(apps) {//gets all applications for this specific user
+                    $scope.apps = apps;
+                }, function(error) {
+                    console.log(error);
+                });
             }, function(error) {
                 console.log(error);
             });
 
             $scope.createApp = function () {
+                PlatformFactory.show(function(info) {
+                    $scope.app.ap_app_role = info._id;//acquires the default role for the app before creating it
                     AppFactory.create($scope.app, function(app) {
                         $scope.apps.push(app);
                         $scope.app = {};
                     }, function(error) {
                         console.log(error);
                     });
+                }, function(error) {
+                    console.log(error);
+                });
             };
+
+        }
+    ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
+        'AuthenticationFactory', 'CurrentUserFactory',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory) {
+
+            $scope.userLoggedIn = false;
+
+            CurrentUserFactory.query($routeParams, function(user) {
+                $scope.user = user;
+                if ($scope.user._id !== undefined) {
+                    $scope.userLoggedIn = true;
+                }
+                console.log(user);
+            }, function(error) {
+                console.log(error);
+            });
+
 
         }
     ]
