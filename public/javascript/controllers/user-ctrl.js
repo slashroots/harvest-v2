@@ -89,8 +89,8 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
-        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory', 'AppDisableFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory, AppDisableFactory) {
 
             $scope.app = {};
 
@@ -120,6 +120,15 @@ angular.module('harvestv2')
                 }, function(error) {
                     console.log(error);
                 });
+            };
+
+            $scope.toggleApp = function (index) {//enable or disable the app - index is the index of the app in $scope.apps;
+                    $routeParams.id = $scope.apps[index]._id;//set the app id for the request to be the one associated with the app we are toggling.
+                    AppDisableFactory.toggle({id:$routeParams.id}, function(app) {
+                        $scope.apps[index].ap_app_status = app.ap_app_status;
+                    }, function(error) {
+                        console.log(error);
+                    });
             };
 
         }

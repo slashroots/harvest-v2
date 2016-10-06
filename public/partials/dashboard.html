@@ -21,10 +21,11 @@
             </div>
 
             <div class="col-md-12">
-                                <div ng-repeat="app in apps" class="app-wrap col-md-4">
+                                <div ng-repeat="app in apps track by $index" class="app-wrap col-md-4">
                                     <img src="http://placehold.it/100x100" class="pull-left" style="margin-right:10px"/>
                                     <h4>{{app.ap_app_name}}</h4>
                                     <small><p class="text-muted">{{app.ap_app_desc}}</p></small>
+                                    <p>Status : <span ng-bind="apps[$index].ap_app_status"></span> (<a href="" ng-click="toggleApp($index)">Toggle</a>)</p>
                                     <p style="word-wrap: break-word;"><span> API Key: {{app.ap_app_token}}</span></p>
                                 </div>
                 </div>
