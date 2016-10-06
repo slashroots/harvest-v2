@@ -78,13 +78,21 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'AppsFactory', 'AppFactory','PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, AppsFactory, AppFactory, PlatformFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
 
             $scope.app = {};
 
-            AppsFactory.query($routeParams, function(apps) {
-                $scope.apps = apps;
+            /*
+             Gets the current user so we can pass the id to get all their apps - we could also have grabbed their id from the req.user.id instead of doing this but the endpoint was already created to expect an ID being passed to it
+             */
+            CurrentUserFactory.query($routeParams, function(user) {
+                $routeParams.id = user._id;
+                UserAppsFactory.query($routeParams, function(apps) {//gets all applications for this specific user
+                    $scope.apps = apps;
+                }, function(error) {
+                    console.log(error);
+                });
             }, function(error) {
                 console.log(error);
             });
