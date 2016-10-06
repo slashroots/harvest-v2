@@ -189,7 +189,7 @@ exports.createUser = function(req, res, next) {
                 "Hi " + user.us_user_first_name + ",\n" +
                 "You have successfully created an Harvest account. " +
                 "To complete the process, activate your account by clicking on the link below: " +
-                "http://localhost:3000/#/activate/" + user.us_activation_token + "\n" +
+                req.protocol + '://' + req.get('host') + "/#/activate/" + user.us_activation_token + "\n" +//this gives us the full url of the server and appends the 'activate' and the token
                 "If you have any questions about this email, contact RADA.",
                 function(error, info) {
                     if(error) {
