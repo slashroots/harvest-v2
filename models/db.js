@@ -3,7 +3,6 @@
  * Created by matjames007 on 9/10/16.
  */
 
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -20,7 +19,8 @@ var AppSchema = new Schema({
     ap_app_token: {type: String, required: true},
     us_app_user: {type: Schema.Types.ObjectId, required: true, ref: "User"},
     ap_app_creation_date: {type: Date, default: Date.now()},
-    ap_app_status: {type: String,required: true, default: 'pending'} //allows administrator to deactivate access
+    ap_app_status: {type: String,required: true, default: 'active'}, //allows administrator to deactivate access
+    ap_app_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"}
     /*
     TODO: we had issues the last time on the servers with Date.now();  Need to test this and make sure it is functional
      */
@@ -40,6 +40,9 @@ var UserSchema = new Schema({
     us_contact: {type: String, required: true},
     us_user_creation_date: {type: Date, default: Date.now()},
     us_state: {type: String, default: 'pending'},
+    us_address: {type: String, required: true},
+    us_company: {type: String, required: false},
+    us_intended_use: {type: String, required: false},
     us_user_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"},
     us_activation_token: {type: String, required: true}
 });

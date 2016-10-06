@@ -1,6 +1,5 @@
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
+    <div ng-controller="NavigationCtrl" class="container"><!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -8,27 +7,40 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Harvest API</a>
+            <a class="navbar-brand" href="">Harvest API</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="#">ABIS Home Page <i class="fa fa-external-link fa-fw"></i></a>
+                    <a href="">ABIS Home Page <i class="fa fa-external-link fa-fw"></i></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">Documentation</a>
+                    <a href="">Documentation</a>
                 </li>
-                <li>
-                    <a href="/signin">Sign In</a>
+                <li ng-if="userLoggedIn" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                        <i class="fa fa-user fa-fw"></i> <strong>{{user.us_user_first_name}} {{user.us_user_last_name}}</strong> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="/#/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="/#/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
                 </li>
-                <li>
-                    <a href="/signup" class="link-btn">Sign Up</a>
+                <li ng-if="!userLoggedIn">
+                    <a href="#/signin">Sign In</a>
                 </li>
-
+                <li ng-if="!userLoggedIn">
+                    <a href="#/signup" class="link-btn">Sign Up</a>
+                </li>
             </ul>
+
         </div>
         <!-- /.navbar-collapse -->
     </div>

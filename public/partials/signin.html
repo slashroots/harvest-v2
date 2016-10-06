@@ -1,0 +1,53 @@
+<div ng-include src="'/partials/common/navigation.html'"></div>
+
+<!-- Page Content -->
+<section id="" class="bg-light-grey">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Big Heading About Harvest API</h1>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                    Vivamus sed mauris non dolor ornare.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="sign-in form-wrap">
+                    <h2 class="form-head text-center">Sign In to Your Account</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" ng-model="credentials.username" class="form-control" id="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1">Password</label>
+                            <input type="password" ng-model="credentials.password" class="form-control" id="inputPassword1" placeholder="Password">
+                        </div>
+                        <!--<button type="submit" class="btn btn-default btn-lg drk-grey-btn">Sign In</button>-->
+                        <a href="" class="btn btn-default btn-lg drk-grey-btn" ng-click="login()">Sign In</a>
+                    </form>
+                    <div class="form-links-wrap">
+                        <ul class="form-links text-center">
+                            <li>
+                                <a href="#">Reset Password</a>
+                            </li>
+                            <li>
+                                <span id="bullet">&#8226;</span>
+                            </li>
+                            <li>
+                                <a href="signup.html">
+                                    Sign Up for Harvest API
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+</section>
+
+<ng-include src="'/partials/common/footer.html'"></ng-include>
