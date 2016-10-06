@@ -48,10 +48,19 @@ services.factory('AuthenticationFactory', function($resource) {
 
 
 /**
- * Get all applications for user
+ * Get all applications
  */
 services.factory('AppsFactory', function($resource) {
     return $resource('/apps', {}, {
+        query: { method: 'GET', isArray: true}
+    });
+});
+
+/**
+ * Get all applications for a specific user
+ */
+services.factory('UserAppsFactory', function($resource) {
+    return $resource('/user/:id/apps', {}, {
         query: { method: 'GET', isArray: true}
     });
 });
