@@ -63,17 +63,28 @@ angular.module('harvestv2')
 
         }
     ]
-).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory',
+).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
         'AuthenticationFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, AuthenticationFactory, PlatformFactory) {
+        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory) {
             var credentials = {};
+
+            if($routeParams.token){
+                UserActivationFactory.activate($routeParams, function(response) {//this function calls the factory that activates the user via the route implemented for the purpose on the expressJS side
+                    $scope.success = true;//this flag determines the color of the notification of the login screen - green is successful and red if there was an error
+                    $scope.loginScreenNotification = "Your account has been activated successfully!";
+                }, function(error) {
+                    $scope.success = false;
+                    $scope.loginScreenNotification = "The activation token you provided was invalid!";
+                });
+            }
 
             $scope.login = function() {
                 $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);
                 AuthenticationFactory.login($scope.credentials, function(response) {
                     $location.url('/dashboard');
                 }, function(error) {
-                    alert("incorrect credentials!");
+                    $scope.success = false;
+                    $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
                 });
             };
         }
