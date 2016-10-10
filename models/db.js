@@ -57,6 +57,16 @@ var RoleSchema = new Schema({
     ro_role_state: {type: String, default: 'active'}
 });
 
+/**
+ * Log schema to keep records of all interactions with Harvest
+ */
+var LogSchema = new Schema({
+    lo_log_app: {type: Schema.Types.ObjectId, required: true, ref: "Application"},
+    lo_log_resource: {type: String},
+    lo_log_access_time: {type: Date, default: Date.now()}
+});
+
 exports.Role = mongoose.model('Role', RoleSchema);
 exports.User = mongoose.model('User', UserSchema);
 exports.App = mongoose.model('Application', AppSchema);
+exports.Log = mongoose.model('Log', LogSchema);

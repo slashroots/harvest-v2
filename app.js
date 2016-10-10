@@ -21,6 +21,7 @@ var model = require('./models/db');
 
 var User = model.User,
     App = model.App,
+    Log = model.Log,
     Role = model.Role;//these are used in the new ACL middleware I have defined in this file to be used before API endpoints
 
 /**
@@ -51,17 +52,31 @@ app.use(passport.session());
 
 var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
+    log = require('./routes/log/router-log'),
     farmer = require('./routes/resources/farmer/router-farmer');
 
 
 app.use('/api', passport.authenticate('token', { session: false }),
     function (req, res, next) {
+        console.log(req.user);
+        var log = new Log({
+            lo_log_app: req.user._id,
+            lo_log_resource: req.url
+        });
+        log.save(function(err) {
+            if(err) {
+                next(err);
+            } else {
+                console.log(log);
+            }
+        });
         next();
     }
 );
 
 app.use('/', routes);
 app.use('/', app_manager);
+app.use('/', log);
 app.use('/', user);
 app.use('/', platform);
 app.use('/api', farmer);

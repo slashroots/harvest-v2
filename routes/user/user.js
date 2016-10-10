@@ -10,6 +10,7 @@ var model = require('../../models/db'),
 
 var User = model.User,
     Role = model.Role,
+    Log = model.Log,
     App = model.App;
 
 /**
