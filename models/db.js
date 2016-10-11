@@ -57,6 +57,31 @@ var RoleSchema = new Schema({
     ro_role_state: {type: String, default: 'active'}
 });
 
+/**
+ * This is intended to assist with the development of Logging Feature on the
+ * platform that allows for auditing activities done by users.
+ *
+ * user:        this can be an actual user or application that has triggered an action or change
+ * level:       this is to be used to track the type of activity (probably needs a better name)
+ *              An example of this could be Login Activity, User Activity etc
+ * entity:      This is directed to the specific item or group of items being taken action on
+ *              An example is Farmer, Crop, User etc (the specific item)
+ * end_result:  If the user modified the entity, what is the end result?
+ * date:        When did this occur?
+ * requested:   If this was done through an endpoint what is the endpoint?
+ * description: A more verbose description of activity taken.
+ */
+var LogSchema = new Schema({
+    lo_log_user: {type: Schema.Types.Mixed, required: true},  //do not use any reference capture user/app
+    lo_log_level: {type: String, required: true},
+    lo_log_entity: {type: String, required: true}, //capture actual object being changed or viewed
+    lo_log_end_result: {type: Schema.Types.Mixed}, //capture actual changes to object
+    lo_log_date: {type: Date, default: Date.now(), required: true},
+    lo_log_requested: {type: Schema.Types.Mixed},
+    lo_log_description: {type: String}
+});
+
 exports.Role = mongoose.model('Role', RoleSchema);
 exports.User = mongoose.model('User', UserSchema);
 exports.App = mongoose.model('Application', AppSchema);
+exports.Log = mongoose.model('Log', LogSchema);
