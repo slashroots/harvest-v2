@@ -14,7 +14,7 @@ var Log = model.Log;
  */
 exports.getApplicationAccessLogs = function(req, res, next) {
     Log.find()
-        .populate('lo_log_actor', null, "Application")
+        .populate('lo_log_user', null, "Application")
         .exec(function(err, logs) {
             if(err) {
                 next(err);

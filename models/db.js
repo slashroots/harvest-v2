@@ -61,10 +61,13 @@ var RoleSchema = new Schema({
  * Log schema to keep records of all interactions with Harvest
  */
 var LogSchema = new Schema({
-    lo_log_actor: {type: Schema.Types.Mixed, required: true},
-    lo_log_resource: {type: String},
-    lo_log_access_time: {type: Date, default: Date.now()},
-    lo_log_level: {type:String, required: true}//user_activity, app_activity
+    lo_log_user: {type: Schema.Types.Mixed, required: true},
+    lo_log_level: {type:String, required: true},//user_activity, app_activity
+    lo_log_entity: {type: String, required: true},
+    lo_log_end_result: {type: Schema.Types.Mixed},
+    lo_log_date: {type: Date, default: Date.now()},
+    lo_log_requested: {type: Schema.Types.Mixed},
+    lo_log_description: {type:String}
 });
 
 exports.Role = mongoose.model('Role', RoleSchema);
