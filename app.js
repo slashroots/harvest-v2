@@ -10,6 +10,8 @@ var session = require('express-session');
 var passport = require('passport');
 var routes = require('./routes/index');
 
+var logging = require('./util/logging-util');
+
 var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer'),
@@ -58,18 +60,8 @@ var app_manager = require('./routes/app/router-app-manager'),
 
 app.use('/api', passport.authenticate('token', { session: false }),
     function (req, res, next) {
-        console.log(req.user);
-        var log = new Log({
-            lo_log_app: req.user._id,
-            lo_log_resource: req.url
-        });
-        log.save(function(err) {
-            if(err) {
-                next(err);
-            } else {
-                console.log(log);
-            }
-        });
+        var app_id = req.user._id, resource = req.url;
+        logging.accessLogger(app_id,resource,"app_activity");
         next();
     }
 );

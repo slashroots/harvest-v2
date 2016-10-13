@@ -12,9 +12,9 @@ var Log = model.Log;
  * @param res
  * @param next
  */
-exports.getLogs = function(req, res, next) {
+exports.getApplicationAccessLogs = function(req, res, next) {
     Log.find()
-        .populate('lo_log_app')
+        .populate('lo_log_actor', null, "Application")
         .exec(function(err, logs) {
             if(err) {
                 next(err);
