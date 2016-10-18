@@ -8,10 +8,13 @@ var model = require('../../models/db'),
     LocalStrategy = require('passport-local').Strategy,
     TokenStrategy = require('passport-token-auth').Strategy;
 
+var logging = require('../../util/logging-util');
+
 var User = model.User,
     Role = model.Role,
     Log = model.Log,
     App = model.App;
+
 
 /**
  * Function used to send the user details back the application
@@ -36,12 +39,17 @@ passport.use(new TokenStrategy(
             .populate('ap_app_role')
             .exec(function (err, app) {
                 if (err) {
+                    console.log("A database error occurred while authenticating.");
+                    logging.accessLogger(null,"","app_activity", "A database error occurred while authenticating.",false);
                     return done(err);
                 }
                 if (!app) {
+                    console.log("No application exists with the token supplied.");
+                    logging.accessLogger(null,"","app_activity", "No application exists with the token supplied.",false);
                     return done(null, false);
                 }
                 if(app.ap_app_status != 'active') {
+                    logging.accessLogger(app._id,"","app_activity","The application whose token was submitted is not active.",false);
                     return done(null, false);
                 }
                 return done(null, app, { scope: 'all' });

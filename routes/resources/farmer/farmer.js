@@ -5,6 +5,7 @@ var Common = require('../../../util/common-util');
 var sql = require('mssql');
 var farmersAcl = require('../../../acl/farmers.acl.js');
 var Fakeblock = require('fakeblock');
+var logging = require('../../../util/logging-util');
 
 /**
  * Retrieves all farmers.  TODO: Pagination necessary
@@ -14,6 +15,8 @@ var Fakeblock = require('fakeblock');
  */
 exports.getAllFarmers = function(req, res, next) {
     //TODO: implement this endpoint
+
+    var rowCounter = 0;
 
     // a fakeblock instance created for each user and each ACL
     var fakeblock = new Fakeblock({
@@ -33,10 +36,12 @@ exports.getAllFarmers = function(req, res, next) {
             if(err) {
                 return next(err);
             } else {
-
                 for (i = 0; i < recordset.length; i++) {
                     recordset[i] = fakeblock.applyAcl(recordset[i], 'get');
+                    rowCounter++;
                 }
+                var app_id = req.user._id, resource = req.url;
+                req.log_id = logging.accessLogger(app_id,resource,"app_activity",rowCounter + " farmer records were returned for this request.",true);
                 res.send(recordset);
             }
         });
