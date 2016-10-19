@@ -39,12 +39,10 @@ passport.use(new TokenStrategy({passReqToCallback:true},
             .populate('ap_app_role')
             .exec(function (err, app) {
                 if (err) {
-                    console.log("A database error occurred while authenticating.");
                     logging.accessLogger(null,req.url,"app_activity", "A database error occurred while authenticating.",false);
                     return done(err);
                 }
                 if (!app) {
-                    console.log("No application exists with the token supplied.");
                     logging.accessLogger(null,req.url,"app_activity", "No application exists with the token supplied.",false);
                     return done(null, false);
                 }
@@ -61,25 +59,30 @@ passport.use(new TokenStrategy({passReqToCallback:true},
  * Setup the local strategy required for login and establish checks
  * for credentials provided during login.
  */
-passport.use(new LocalStrategy(
-    function(username, password, done) {
+passport.use(new LocalStrategy({passReqToCallback:true},
+    function(req, username, password, done) {
         User.findOne({ us_username: username }, 'us_username ' +
             'us_user_first_name us_user_last_name us_email_address us_contact' +
             'us_user_role us_state us_password' ,
             function (err, user) {
                 console.log(err, user);
                 if (err) {
+                    logging.accessLogger(null,req.url,"user_activity", "A database error occurred while authenticating.",false);
                     return done(err);
                 }
                 if (!user) {
+                    logging.accessLogger(null,req.url,"user_activity", "Incorrect user credentials supplied.",false);
                     return done(null, false, {message: 'Incorrect credentials.'});
                 }
                 if (user.us_password != password) {
+                    logging.accessLogger(null,req.url,"user_activity", "Incorrect user credentials supplied.",false);
                     return done(null, false, {message: 'Incorrect credentials.'});
                 }
                 if (user.us_state != 'active') {
+                    logging.accessLogger(user._id, req.url,"user_activity", "User account requires activation",false);
                     return done(null, false, {message: 'User Activation Required.'});
                 }
+                else logging.accessLogger(user._id, req.url,"user_activity", "User Login Successful",true);
                 return done(null, user);
             }
         );
@@ -202,9 +205,13 @@ exports.createUser = function(req, res, next) {
                 "If you have any questions about this email, contact RADA.",
                 function(error, info) {
                     if(error) {
+                        user.us_activation_token = undefined;
+                        user.us_password = undefined;
+                        logging.accessLogger(user._id,req.url,"user_activity", "A new user account was created but an error occurred when trying to send the activation email.",true, user);
                         next(error);
                     } else {
                         //removing the token and password from the response (security)
+                        logging.accessLogger(user._id,req.url,"user_activity", "A new user account was created and the activation email was sent.",true, user);
                         user.us_activation_token = undefined;
                         user.us_password = undefined;
                         res.send(user);
@@ -228,11 +235,13 @@ exports.activateUser = function(req, res, next) {
         {$set: {us_state: 'active'}})
         .exec(function(err, docs) {
             if(err) {
+                logging.accessLogger(null,req.url,"user_activity", "User activation failed with an invalid link.",false, err);
                 next(err);
             } else {
                 //removing the token and password from the response (security)
                 docs.us_activation_token = undefined;
                 docs.us_password = undefined;
+                logging.accessLogger(docs._id,req.url,"user_activity", "The user's account was successfully activated.",true, docs);
                 res.send(docs);
             }
         });
