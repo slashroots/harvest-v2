@@ -47,7 +47,7 @@ passport.use(new TokenStrategy({passReqToCallback:true},
                     return done(null, false);
                 }
                 if(app.ap_app_status != 'active') {
-                    logging.accessLogger(app._id,req.url,"app_activity","The application whose token was submitted is not active.",false);
+                    logging.accessLogger(app,req.url,"app_activity","The application whose token was submitted is not active.",false);
                     return done(null, false);
                 }
                 return done(null, app, { scope: 'all' });
@@ -67,22 +67,22 @@ passport.use(new LocalStrategy({passReqToCallback:true},
             function (err, user) {
                 console.log(err, user);
                 if (err) {
-                    logging.accessLogger(null,req.url,"user_activity", "A database error occurred while authenticating.",false);
+                    logging.accessLogger(null,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "A database error occurred while authenticating.",false);
                     return done(err);
                 }
                 if (!user) {
-                    logging.accessLogger(null,req.url,"user_activity", "Incorrect user credentials supplied.",false);
+                    logging.accessLogger(null,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "Incorrect user credentials supplied.",false);
                     return done(null, false, {message: 'Incorrect credentials.'});
                 }
                 if (user.us_password != password) {
-                    logging.accessLogger(null,req.url,"user_activity", "Incorrect user credentials supplied.",false);
+                    logging.accessLogger(null,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "Incorrect user credentials supplied.",false);
                     return done(null, false, {message: 'Incorrect credentials.'});
                 }
                 if (user.us_state != 'active') {
-                    logging.accessLogger(user._id, req.url,"user_activity", "User account requires activation",false);
+                    logging.accessLogger(user, req.url,logging.LOG_LEVEL_USER_ACTIVITY, "User account requires activation",false);
                     return done(null, false, {message: 'User Activation Required.'});
                 }
-                else logging.accessLogger(user._id, req.url,"user_activity", "User Login Successful",true);
+                else logging.accessLogger(user, req.url,logging.LOG_LEVEL_USER_ACTIVITY, "User Login Successful",true);
                 return done(null, user);
             }
         );
@@ -207,11 +207,11 @@ exports.createUser = function(req, res, next) {
                     if(error) {
                         user.us_activation_token = undefined;
                         user.us_password = undefined;
-                        logging.accessLogger(user._id,req.url,"user_activity", "A new user account was created but an error occurred when trying to send the activation email.",true, user);
+                        logging.accessLogger(user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "A new user account was created but an error occurred when trying to send the activation email.",true, user);
                         next(error);
                     } else {
                         //removing the token and password from the response (security)
-                        logging.accessLogger(user._id,req.url,"user_activity", "A new user account was created and the activation email was sent.",true, user);
+                        logging.accessLogger(user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "A new user account was created and the activation email was sent.",true, user);
                         user.us_activation_token = undefined;
                         user.us_password = undefined;
                         res.send(user);
@@ -235,13 +235,13 @@ exports.activateUser = function(req, res, next) {
         {$set: {us_state: 'active'}})
         .exec(function(err, docs) {
             if(err) {
-                logging.accessLogger(null,req.url,"user_activity", "User activation failed with an invalid link.",false, err);
+                logging.accessLogger(null,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "User activation failed with an invalid link.",false, err);
                 next(err);
             } else {
                 //removing the token and password from the response (security)
                 docs.us_activation_token = undefined;
                 docs.us_password = undefined;
-                logging.accessLogger(docs._id,req.url,"user_activity", "The user's account was successfully activated.",true, docs);
+                logging.accessLogger(docs,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "The user's account was successfully activated.",true, docs);
                 res.send(docs);
             }
         });

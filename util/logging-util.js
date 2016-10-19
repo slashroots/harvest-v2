@@ -6,9 +6,11 @@ var model = require('../models/db');
 
 var Log = model.Log;
 
-exports.accessLogger = function(user_id, resource_url, log_level, description, result_flag, entity, end_result) {//did the request succeed or fail?
+exports.LOG_LEVEL_USER_ACTIVITY = 'user_activity', exports.LOG_LEVEL_APP_ACTIVITY = 'app_activity';
+
+exports.accessLogger = function(user, resource_url, log_level, description, result_flag, entity, end_result) {//did the request succeed or fail?
     var log = new Log({
-        lo_log_user: user_id,
+        lo_log_user: user,
         lo_log_requested: resource_url,
         lo_log_level : log_level,
         lo_log_success : result_flag,

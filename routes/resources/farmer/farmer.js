@@ -39,9 +39,8 @@ exports.getAllFarmers = function(req, res, next) {
                 for (i = 0; i < recordset.length; i++) {
                     recordset[i] = fakeblock.applyAcl(recordset[i], 'get');
                     rowCounter++;
-                }
-                var app_id = req.user._id, resource = req.url;
-                req.log_id = logging.accessLogger(app_id,resource,"app_activity",rowCounter + " farmer records were returned for this request.",true);
+                }resource = req.url;
+                req.log_id = logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_APP_ACTIVITY,rowCounter + " farmer records were returned for this request.",true);
                 res.send(recordset);
             }
         });

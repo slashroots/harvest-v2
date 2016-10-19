@@ -42,10 +42,10 @@ exports.createApplication = function(req, res, next) {
     console.log(app);
     app.save(function(err) {
         if(err) {
-            logging.accessLogger(req.user._id,req.url,"user_activity", "The application could not be saved.",false, app);
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "The application could not be saved.",false, app);
             next(err);
         } else {
-            logging.accessLogger(req.user._id,req.url,"user_activity", "An application was successfully created.",true, app);
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "An application was successfully created.",true, null, app);
             res.send(app);
         }
     });
