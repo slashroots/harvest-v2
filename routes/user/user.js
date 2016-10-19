@@ -33,23 +33,23 @@ exports.authenticate = function(req, res, next) {
  * This will be used during web-service calls to any RADA
  * specific resources.
  */
-passport.use(new TokenStrategy(
-    function(token, done) {
+passport.use(new TokenStrategy({passReqToCallback:true},
+    function(req, token, done) {
         App.findOne({ ap_app_token: token })
             .populate('ap_app_role')
             .exec(function (err, app) {
                 if (err) {
                     console.log("A database error occurred while authenticating.");
-                    logging.accessLogger(null,"","app_activity", "A database error occurred while authenticating.",false);
+                    logging.accessLogger(null,req.url,"app_activity", "A database error occurred while authenticating.",false);
                     return done(err);
                 }
                 if (!app) {
                     console.log("No application exists with the token supplied.");
-                    logging.accessLogger(null,"","app_activity", "No application exists with the token supplied.",false);
+                    logging.accessLogger(null,req.url,"app_activity", "No application exists with the token supplied.",false);
                     return done(null, false);
                 }
                 if(app.ap_app_status != 'active') {
-                    logging.accessLogger(app._id,"","app_activity","The application whose token was submitted is not active.",false);
+                    logging.accessLogger(app._id,req.url,"app_activity","The application whose token was submitted is not active.",false);
                     return done(null, false);
                 }
                 return done(null, app, { scope: 'all' });
