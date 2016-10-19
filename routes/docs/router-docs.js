@@ -10,7 +10,7 @@ var router = express.Router();
  */
 
 router.get('/docs', function(req, res, next) {
-  res.render('docs', { title: 'HarvestAPI' });
+  res.render('docs', { title: 'Harvest API Documentation' });
 });
 
 module.exports = router;
