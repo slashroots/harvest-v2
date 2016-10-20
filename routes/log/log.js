@@ -12,8 +12,8 @@ var Log = model.Log;
  * @param res
  * @param next
  */
-exports.getAccessLogs = function(req, res, next) {
-    Log.find()
+exports.searchAccessLogs = function(req, res, next) {
+    Log.find(req.body)
         .exec(function(err, logs) {
             if(err) {
                 next(err);
