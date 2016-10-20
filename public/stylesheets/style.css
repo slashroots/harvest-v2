@@ -545,3 +545,51 @@ footer{
   padding: 25px 25px 25px;
   margin: 15px auto;
 }
+
+/* Admin Nav Panel */
+#sidebar-menu {
+    background-color: #333333;
+    height: 100%; /* Full height */
+    position: fixed;
+    overflow: none; /* Enable scrolling if the sidenav has too much content */
+}
+
+#sidebar-menu .panel {
+  margin-bottom: 0;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  border-color: #333333;
+  background: #333333;
+}
+
+#sidebar-menu a {
+  color: #FFFFFF !important;
+}
+
+#sidebar-menu .nav:not(:first-child)>li>a {
+  padding: 5px 15px;
+}
+
+#sidebar-menu #nav>.panel {
+  border-bottom: 1px solid #3E3E3E !important;
+}
+
+#sidebar-menu a.selected{
+  font-weight: bold;
+  background-color: #333333 !important;
+
+}
+
+#sidebar-menu ul>li>ul>li>a {
+  text-indent: 20px;
+}
+
+#sidebar-menu ul>li>ul>li>ul>li>a {
+  text-indent: 40px;
+}
+
+#sidebar-menu ul>li>ul>li>ul>li>ul>li>a {
+  text-indent: 30px;
+}
+/* Admin Nav Panel */
