@@ -51,6 +51,15 @@ ul {
   border: none;
 }
 
+#dev-nav > nav{
+	height: auto;
+}
+
+body > redoc{
+	position: relative;
+	padding-top: 5px;
+}
+
 .nav-tabs li a:hover{
   background: transparent;
   border-color: transparent;
