@@ -554,7 +554,7 @@ footer{
     overflow: none; /* Enable scrolling if the sidenav has too much content */
 }
 
-#sidebar-menu .panel {
+#sidebar-menu .panel, #apps-sub > li, #users-sub > li{
   margin-bottom: 0;
   box-shadow: none;
   border: 0;
@@ -563,15 +563,24 @@ footer{
   background: #333333;
 }
 
+#nav>li.panel.panel-heading:hover, #nav>li.panel.panel-heading:active, #sidebar-menu>ul>li>a:hover, #sidebar-menu>ul>li>a:hover:active, #users-sub >li:hover, #users-sub >li:hover:active, #apps-sub >li:hover, #apps-sub >li:active{
+  background: #5C5C5C !important;
+
+}
+
 #sidebar-menu a {
-  color: #FFFFFF !important;
+  color: #B7B7B7 !important;
 }
 
 #sidebar-menu .nav:not(:first-child)>li>a {
-  padding: 5px 15px;
+  padding: 5px 5px;
 }
 
-#sidebar-menu #nav>.panel {
+#sidebar-menu .nav>li>a {
+  padding: 30px 30px;
+}
+
+#sidebar-menu #nav>.panel, #nav>.panel-group {
   border-bottom: 1px solid #3E3E3E !important;
 }
 
@@ -581,15 +590,12 @@ footer{
 
 }
 
-#sidebar-menu ul>li>ul>li>a {
-  text-indent: 20px;
+#nav > li > a > span{
+  color: #B7B7B7;
 }
 
-#sidebar-menu ul>li>ul>li>ul>li>a {
-  text-indent: 40px;
-}
-
-#sidebar-menu ul>li>ul>li>ul>li>ul>li>a {
-  text-indent: 30px;
+#users-sub > li, #apps-sub > li{
+  margin-left: -50px;
+  padding-left: 50px;
 }
 /* Admin Nav Panel */

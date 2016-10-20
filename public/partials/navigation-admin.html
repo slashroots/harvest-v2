@@ -1,49 +1,33 @@
 <div id="sidebar-menu" style="width: 263px;">
-  <ul id="nav" class="nav collapse in">
-    <li class="panel">
-      <a href="#" class="selected">Home</a>
+  <ul id="nav" class="panel-group nav">
+    <li class="panel panel-heading">
+      <a href="#" class="panel-heading">Home</a>
     </li>
-    <li class="panel">
-      <a href="#products-sub" data-toggle="collapse" data-parent="#nav">Users<span class="pull-right glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
-      <ul id="products-sub" class="collapse in nav">
+    <li class="panel panel-group">
+      <a href="#users-sub" data-toggle="collapse" class="panel panel-heading">Users<span class="pull-right glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+      <ul id="users-sub" class="panel-collapse collapse">
         <li class="panel">
-          <a href="#billeder-sub" data-toggle="collapse" data-parent="#products-sub">User Acounts <span class="caret"></span></a>
-          <ul id="billeder-sub" class="collapse nav">
-            <li><a href="#">Sub 1</a></li>
-            <li><a href="#">Sub 2</a></li>
-            <li><a href="#">Sub 3</a></li>
-          </ul>
+          <a href="#" class="panel-body">User Acounts </a>
         </li>
         <li class="panel">
-          <a href="#bolig-sub" data-toggle="collapse" data-parent="#products-sub">User Activities <span class="caret"></span></a>
-          <ul id="bolig-sub" class="collapse nav">
-            <li><a href="#">Sub 1</a></li>
-            <li><a href="#">Sub 2</a></li>
-            <li><a href="#">Sub 3</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Just another Option</a>
+          <a href="#" class="panel-body">User Activities </a>
         </li>
       </ul>
     </li>
 
-    <li class="panel">
-      <a href="#brands-sub" data-toggle="collapse" data-parent="#nav">Apps<span class="pull-right glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
-      <ul id="brands-sub" class="collapse nav">
-        <li>
-          <a href="#">Developer Apps</a>
+    <li class="panel panel-group">
+      <a href="#apps-sub" data-toggle="collapse" class="panel panel-heading">Apps<span class="pull-right glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+     <ul id="apps-sub" class="panel-collapse collapse">
+        <li class="panel">
+          <a href="#" class="panel-body">Developer Apps</a>
         </li>
-        <li>
-          <a href="#">App Activities</a>
-        </li>
-        <li>
-          <a href="#">App Logs</a>
+        <li class="panel">
+          <a href="#" class="panel-body">App Activities</a>
         </li>
       </ul>
     </li>
     <li class="panel">
-      <a href="#" data-toggle="collapse" data-parent="#nav">Roles<span class="pull-right" aria-hidden="true"></span></a>
+      <a href="#" data-toggle="collapse">Roles</a>
     </li>
   </ul>
 </div>
