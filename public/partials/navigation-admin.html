@@ -47,15 +47,3 @@
     </li>
   </ul>
 </div>
-
-<script>
-  $(document).ready(function () {
-  $('#sidebar-menu .collapse').on('show.bs.collapse', function(event){
-  	$(this).prev("a").children(".glyphicon-menu-down").removeClass("glyphicon-menu-left").addClass("glyphicon-menu-down");
-  	event.stopPropagation();
-  }).on('hide.bs.collapse', function(event){
-  	$(this).prev("a").children(".glyphicon-menu-down").removeClass("glyphicon-menu-down").addClass("glyphicon-menu-down");
-    event.stopPropagation();
-  });
-});
-</script>
