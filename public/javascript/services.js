@@ -90,3 +90,12 @@ services.factory('CurrentUserFactory', function($resource) {
         query: { method: 'GET'}
     });
 });
+
+/*
+ * Log the user out
+ */
+services.factory('UserLogoutFactory', function($resource) {
+    return $resource('/logout', {}, {
+        query: { method: 'GET'}
+    });
+});

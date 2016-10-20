@@ -64,8 +64,8 @@ angular.module('harvestv2')
         }
     ]
 ).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
-        'AuthenticationFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory) {
+        'AuthenticationFactory', 'PlatformFactory', 'UserLogoutFactory',
+        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory, UserLogoutFactory) {
             var credentials = {};
 
             if($routeParams.token){
@@ -87,6 +87,14 @@ angular.module('harvestv2')
                     $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
                 });
             };
+
+            $scope.logout = function() {
+                UserLogoutFactory.logout(function(response) {
+                    $location.url('/');
+                }, function(error) {
+                });
+            };
+
         }
     ]
 ).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
