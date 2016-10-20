@@ -96,6 +96,6 @@ services.factory('CurrentUserFactory', function($resource) {
  */
 services.factory('UserLogoutFactory', function($resource) {
     return $resource('/logout', {}, {
-        query: { method: 'GET'}
+        logout: { method: 'GET'}
     });
 });

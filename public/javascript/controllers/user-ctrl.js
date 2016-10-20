@@ -64,8 +64,8 @@ angular.module('harvestv2')
         }
     ]
 ).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
-        'AuthenticationFactory', 'PlatformFactory', 'UserLogoutFactory',
-        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory, UserLogoutFactory) {
+        'AuthenticationFactory', 'PlatformFactory',
+        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory) {
             var credentials = {};
 
             if($routeParams.token){
@@ -85,13 +85,6 @@ angular.module('harvestv2')
                 }, function(error) {
                     $scope.success = false;
                     $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
-                });
-            };
-
-            $scope.logout = function() {
-                UserLogoutFactory.logout(function(response) {
-                    $location.url('/');
-                }, function(error) {
                 });
             };
 
@@ -132,10 +125,17 @@ angular.module('harvestv2')
 
         }
     ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
-        'AuthenticationFactory', 'CurrentUserFactory',
-        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory) {
+        'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory, UserLogoutFactory) {
 
             $scope.userLoggedIn = false;
+
+            $scope.logout = function() {
+                UserLogoutFactory.logout(function(response) {
+                    $location.url('/');
+                }, function(error) {
+                });
+            };
 
             CurrentUserFactory.query($routeParams, function(user) {
                 $scope.user = user;
