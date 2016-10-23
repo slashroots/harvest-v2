@@ -38,7 +38,7 @@
                 <div style="display: table-cell;" ng-repeat="app in apps | filter:{ ap_app_name: searchText } track by $index" class="col-md-6 app-wrap" ng-class="!isEven($index) ? 'col-md-offset-1' : 'dummy'">
                     <div ng-mouseleave="app.showCaret = false" ng-mouseover="app.showCaret = true" id="{{app._id}}" class="col-md-12 app">
                         <div class="col-md-12 app-header">
-                            <h4 class="text-center text-uppercase app-title">
+                            <h4 class="text-center text-uppercase app-title" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
                                 {{app.ap_app_name}}
                             </h4>
                              <span class="dropdown">
@@ -57,7 +57,7 @@
                                      <!-- /.dropdown-app-options-->
                              </span>
                         </div>
-                        <div class="col-md-12 app-description">
+                        <div class="col-md-12 app-description" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
                             <div class="col-md-4">
                                 <p class="text-left">Brief Description :</p>
                             </div>
@@ -66,7 +66,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-12 app-key">
+                        <div class="col-md-12 app-key" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
                             <div class="col-md-4">
                                 <p class="text-left">API Key :</p>
                             </div>
