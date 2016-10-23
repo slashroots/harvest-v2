@@ -47,11 +47,11 @@
                                      </a>
                                       <!-- dropdown-app-options -->
                                      <ul class="dropdown-menu dropdown-app-options">
-                                         <li><a href=""><i class="fa fa-check fa-fw"></i> Enabled</a>
+                                         <li><a href=""><i ng-if="app.ap_app_status=='active'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Enabled' : 'Enable' }}</a>
                                          </li>
-                                         <li><a href="">Disable</a>
+                                         <li><a href=""><i ng-if="app.ap_app_status=='disabled'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Disable' : 'Disabled' }}</a>
                                          </li>
-                                         <li><a href="#" data-toggle="modal" data-target="#deleteAppModal">Delete app</a>
+                                         <li><a href="" data-toggle="modal" data-target="#deleteAppModal">Delete app</a>
                                          </li>
                                      </ul>
                                      <!-- /.dropdown-app-options-->
