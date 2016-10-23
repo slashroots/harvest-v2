@@ -31,7 +31,7 @@ exports.authenticate = function(req, res, next) {
  */
 passport.use(new TokenStrategy(
     function(token, done) {
-        App.findOne({ ap_app_token: token })
+        App.findOne({ ap_app_token: token, ap_app_status: "active" })
             .populate('ap_app_role')
             .exec(function (err, app) {
                 if (err) {

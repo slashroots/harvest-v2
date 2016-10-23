@@ -66,6 +66,22 @@ exports.getAppByID = function(req, res, next) {
         });
 };
 
+/**
+ * Enable an app if it is disabled and vice versa.
+ */
+exports.toggleAppByID = function(req, res, next) {
+    App.findById(req.params.id)
+        .exec(function(err, docs) {
+            if(err) {
+                next(err);
+            } else {
+                if (docs.ap_app_status == "active") docs.ap_app_status = "disabled";
+                else if (docs.ap_app_status == "disabled") docs.ap_app_status = "active";
+                docs.save();
+                res.send(docs);
+            }
+        });
+};
 
 /**
  * Get applications owned by the authenticated user.
