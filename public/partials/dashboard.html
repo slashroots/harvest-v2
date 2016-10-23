@@ -21,7 +21,7 @@
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                            <input ng-change="$scope.$apply();" type="text" class="form-control search"  ng-model="searchText" placeholder="Search by Name...">
+                            <input ng-change="" type="text" class="form-control search"  ng-model="searchText" placeholder="Search by Name...">
                         </div>
                     </div>
                     <div class="col-md-3 col-md-offset-3">
@@ -36,20 +36,20 @@
             <div class="col-md-12" style="display: table;">
 
                 <div style="display: table-cell;" ng-repeat="app in apps | filter:{ ap_app_name: searchText } track by $index" class="col-md-6 app-wrap" ng-class="!isEven($index) ? 'col-md-offset-1' : 'dummy'">
-                    <div id="{{app._id}}" class="col-md-12 app">
+                    <div ng-mouseleave="app.showCaret = false" ng-mouseover="app.showCaret = true" id="{{app._id}}" class="col-md-12 app">
                         <div class="col-md-12 app-header">
                             <h4 class="text-center text-uppercase app-title">
                                 {{app.ap_app_name}}
                             </h4>
                              <span class="dropdown">
-                                     <a class="dropdown-toggle inactive" data-toggle="dropdown" href="#">
+                                     <a ng-show="app.showCaret" class="dropdown-toggle show inactive" data-toggle="dropdown" href="">
                                          <i class="fa fa-caret-down"></i>
                                      </a>
                                       <!-- dropdown-app-options -->
                                      <ul class="dropdown-menu dropdown-app-options">
-                                         <li><a href="dashboard-apps.html"><i class="fa fa-check fa-fw"></i> Enabled</a>
+                                         <li><a href=""><i class="fa fa-check fa-fw"></i> Enabled</a>
                                          </li>
-                                         <li><a href="disabled-app.html">Disable</a>
+                                         <li><a href="">Disable</a>
                                          </li>
                                          <li><a href="#" data-toggle="modal" data-target="#deleteAppModal">Delete app</a>
                                          </li>
