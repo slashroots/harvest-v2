@@ -5,6 +5,6 @@ var router = express.Router();
 /**
  * Endpoints related to logging
  */
-router.post('/logs', Log.searchAccessLogs);
+router.get('/logs', Log.searchAccessLogs);
 
 module.exports = router;

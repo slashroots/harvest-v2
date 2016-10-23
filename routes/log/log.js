@@ -13,7 +13,7 @@ var Log = model.Log;
  * @param next
  */
 exports.searchAccessLogs = function(req, res, next) {
-    Log.find(req.body)
+    Log.find(req.query)
         .exec(function(err, logs) {
             if(err) {
                 next(err);
