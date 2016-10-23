@@ -47,9 +47,9 @@
                                      </a>
                                       <!-- dropdown-app-options -->
                                      <ul class="dropdown-menu dropdown-app-options">
-                                         <li><a href=""><i ng-if="app.ap_app_status=='active'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Enabled' : 'Enable' }}</a>
+                                         <li><a ng-click="setAppState($index, 'active')" href=""><i ng-if="app.ap_app_status=='active'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Enabled' : 'Enable' }}</a>
                                          </li>
-                                         <li><a href=""><i ng-if="app.ap_app_status=='disabled'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Disable' : 'Disabled' }}</a>
+                                         <li><a ng-click="setAppState($index, 'disabled')" href=""><i ng-if="app.ap_app_status=='disabled'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Disable' : 'Disabled' }}</a>
                                          </li>
                                          <li><a href="" data-toggle="modal" data-target="#deleteAppModal">Delete app</a>
                                          </li>

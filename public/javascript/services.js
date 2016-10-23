@@ -77,8 +77,8 @@ services.factory('AppFactory', function($resource) {
  * Enable or disable application
  */
 services.factory('AppDisableFactory', function($resource) {
-    return $resource('/app/:id/toggle', {}, {
-        toggle: { method: 'GET', params: {id: '@id'}}//this will either 'enable' or 'disable' the app depending on the app's current state - it will return the new state of the app
+    return $resource('/app/:id', {}, {
+        setState: { method: 'PUT', params: {id: '@id'}}//this will either 'enable' or 'disable' the app depending on the app status parameter
     });
 });
 

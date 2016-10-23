@@ -58,3 +58,4 @@ exports.sendEmail = function(to_email, subject, email_body, callback){
     sendgrid.API(request, callback);
 };
 
+exports.APP_ACTIVE = "active", exports.APP_DISABLED="disabled";

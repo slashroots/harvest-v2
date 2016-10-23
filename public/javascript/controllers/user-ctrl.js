@@ -132,9 +132,11 @@ angular.module('harvestv2')
                 return app_status == 'active';
             }
 
-            $scope.toggleApp = function (index) {//enable or disable the app - index is the index of the app in $scope.apps;
+            $scope.setAppState = function (index, state) {//index is the index of the app in $scope.apps;
+                console.log("Nick");
+                $routeParams.app_status = state;
                 $routeParams.id = $scope.apps[index]._id;//set the app id for the request to be the one associated with the app we are toggling.
-                AppDisableFactory.toggle({id:$routeParams.id}, function(app) {
+                AppDisableFactory.setState($routeParams, {id:$routeParams.id, app_status:$routeParams.app_status}, function(app) {
                     $scope.apps[index].ap_app_status = app.ap_app_status;
                 }, function(error) {
                     console.log(error);

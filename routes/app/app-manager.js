@@ -35,7 +35,7 @@ exports.getApplications = function(req, res, next) {
 exports.createApplication = function(req, res, next) {
     var app = new App(req.body);
     app.ap_app_token = Common.getRandomToken();
-    app.ap_app_status = 'active';
+    app.ap_app_status = Common.APP_ACTIVE;
     app.us_app_user = req.user._id;
     console.log(app);
     app.save(function(err) {
@@ -67,21 +67,28 @@ exports.getAppByID = function(req, res, next) {
 };
 
 /**
- * Enable an app if it is disabled and vice versa.
+ * Modify an app
  */
-exports.toggleAppByID = function(req, res, next) {
-    App.findById(req.params.id)
-        .exec(function(err, docs) {
-            if(err) {
-                next(err);
-            } else {
-                if (docs.ap_app_status == "active") docs.ap_app_status = "disabled";
-                else if (docs.ap_app_status == "disabled") docs.ap_app_status = "active";
-                docs.save();
-                res.send(docs);
-            }
-        });
+exports.modifyApp = function(req, res, next) {
+    if (req.query.app_status != undefined) {
+        App.findById(req.params.id)
+            .exec(function(err, app) {
+                if(err) {
+                    next(err);
+                } else {
+                    if (req.query.app_status == Common.APP_ACTIVE || req.query.app_status == Common.APP_DISABLED) {//if the state can be set by a user
+                        if (app.us_app_user == req.user._id) res.send(setState(app, req.query.app_status));//check if the app belongs to the currently signed in user before setting it
+                    }
+                }
+            });
+    }
 };
+
+function setState (app, state) {
+    app.ap_app_status = state;
+    app.save();
+    return app;
+}
 
 /**
  * Get applications owned by the authenticated user.
