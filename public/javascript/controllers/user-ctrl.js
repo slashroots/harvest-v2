@@ -89,10 +89,12 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','AppDisableFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, AppDisableFactory, PlatformFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', '$filter', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','AppDisableFactory', 'PlatformFactory',
+        function($scope, $location, $routeParams, $filter, CurrentUserFactory, UserAppsFactory, AppFactory, AppDisableFactory, PlatformFactory) {
 
             $scope.app = {};
+
+            $scope.searchText = "";
 
             /*
              Gets the current user so we can pass the id to get all their apps - we could also have grabbed their id from the req.user.id instead of doing this but the endpoint was already created to expect an ID being passed to it
@@ -101,6 +103,7 @@ angular.module('harvestv2')
                 $routeParams.id = user._id;
                 UserAppsFactory.query($routeParams, function(apps) {//gets all applications for this specific user
                     $scope.apps = apps;
+                    $scope.appCount = apps.length;
                 }, function(error) {
                     console.log(error);
                 });
@@ -125,8 +128,6 @@ angular.module('harvestv2')
             $scope.isEven = function (num) {//for applying CSS classes appropriately in iterating through apps in ng-repeat
                 return ((num % 2) == 0);
             }
-
-            $scope.searchText = "";
 
             $scope.isAppActive = function (app_status) {
                 return app_status == 'active';

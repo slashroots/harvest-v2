@@ -7,21 +7,21 @@
             <div class="col-md-12">
 
                 <div class="search form-wrap">
-                    <div ng-if="apps.length < 1" class="col-md-6">
+                    <div ng-show="apps.length < 1" class="col-md-6">
                         <div class="input-group custom-search-form-text">
                             <p class="lead">You currently have no apps.</p>
                             <span class="sub-lead text-muted">To get started, click the button and create a new app.
                             </span>
                         </div>
                     </div>
-                    <div ng-if="apps.length > 0" class="col-md-6">
+                    <div ng-show="apps.length > 0" class="col-md-6">
                         <div class="input-group custom-search-form">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                            <input ng-change="" type="text" class="form-control search"  ng-model="searchText" placeholder="Search by Name...">
+                            <input type="text" class="form-control search" ng-model="searchText" placeholder="Search by Name...">
                         </div>
                     </div>
                     <div class="col-md-3 col-md-offset-3">
@@ -35,7 +35,7 @@
 
             <div class="col-md-12" style="display: table;">
 
-                <div style="display: table-cell;" ng-repeat="app in apps | filter:{ ap_app_name: searchText } track by $index" class="col-md-6 app-wrap" ng-class="!isEven($index) ? 'col-md-offset-1' : 'dummy'">
+                <div style="display: table-cell;" ng-repeat="app in apps | filter:searchText" class="col-md-6 app-wrap" ng-class="!isEven($index) ? 'col-md-offset-1' : 'dummy'">
                     <div ng-mouseleave="app.showCaret = false" ng-mouseover="app.showCaret = true" id="{{app._id}}" class="col-md-12 app">
                         <div class="col-md-12 app-header">
                             <h4 class="text-center text-uppercase app-title" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
