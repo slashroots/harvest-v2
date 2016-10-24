@@ -90,3 +90,21 @@ services.factory('CurrentUserFactory', function($resource) {
         query: { method: 'GET'}
     });
 });
+
+/*
+ * Get all user activities
+ */
+services.factory('UserLogsFactory', function($resource) {
+    return $resource('/logs', {}, {
+        query: { method: 'GET', params: {lo_log_level: 'user_activity'}}
+    });
+});
+
+/*
+ * Get all application activities
+ */
+services.factory('ApplicationLogsFactory', function($resource) {
+    return $resource('/logs', {}, {
+        query: { method: 'GET', params: {lo_log_level: 'app_activity'}}
+    });
+});

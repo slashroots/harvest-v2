@@ -39,7 +39,7 @@ exports.getAllFarmers = function(req, res, next) {
                 for (i = 0; i < recordset.length; i++) {
                     recordset[i] = fakeblock.applyAcl(recordset[i], 'get');
                     rowCounter++;
-                }resource = req.url;
+                }
                 req.log_id = logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_APP_ACTIVITY,rowCounter + " farmer records were returned for this request.",true);
                 res.send(recordset);
             }
