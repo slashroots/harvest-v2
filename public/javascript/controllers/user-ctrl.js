@@ -123,6 +123,14 @@ angular.module('harvestv2')
             };
 
         }
+    ]).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
+
+            $scope.app = {};
+
+
+
+        }
     ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
         'AuthenticationFactory', 'CurrentUserFactory',
         function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory) {

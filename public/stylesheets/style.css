@@ -548,19 +548,19 @@ footer{
 
 /* Admin Nav Panel */
 #sidebar-menu {
-    background-color: #333333;
-    height: 100%; /* Full height */
-    position: fixed;
-    overflow: none; /* Enable scrolling if the sidenav has too much content */
+    background-color: #333333 !important;
+    height: 100% !important; /* Full height */
+    position: fixed !important;
+    overflow: none !important; /* Enable scrolling if the sidenav has too much content */
 }
 
-#sidebar-menu .panel, #apps-sub > li, #users-sub > li{
-  margin-bottom: 0;
-  box-shadow: none;
-  border: 0;
-  border-radius: 0;
-  border-color: #333333;
-  background: #333333;
+#sidebar-menu .panel, #admin-apps > li, #admin-users > li{
+  margin-bottom: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-color: #333333 !important;
+  background: #333333 !important;
 }
 
 #nav>li.panel.panel-heading:hover, #nav>li.panel.panel-heading:active, #sidebar-menu>ul>li>a:hover, #sidebar-menu>ul>li>a:hover:active, #users-sub >li:hover, #users-sub >li:hover:active, #apps-sub >li:hover, #apps-sub >li:active{
@@ -573,11 +573,11 @@ footer{
 }
 
 #sidebar-menu .nav:not(:first-child)>li>a {
-  padding: 5px 5px;
+  padding: 5px 5px !important;
 }
 
 #sidebar-menu .nav>li>a {
-  padding: 30px 30px;
+  padding: 30px 30px !important;
 }
 
 #sidebar-menu #nav>.panel, #nav>.panel-group {
@@ -585,17 +585,17 @@ footer{
 }
 
 #sidebar-menu a.selected{
-  font-weight: bold;
+  font-weight: bold !important;
   background-color: #333333 !important;
 
 }
 
 #nav > li > a > span{
-  color: #B7B7B7;
+  color: #B7B7B7 !important;
 }
 
 #users-sub > li, #apps-sub > li{
-  margin-left: -50px;
-  padding-left: 50px;
+  margin-left: -50px !important;
+  padding-left: 50px !important;
 }
 /* Admin Nav Panel */
