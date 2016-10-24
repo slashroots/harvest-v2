@@ -13,6 +13,9 @@ var routes = require('./routes/index');
 var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer'),
+    property = require('./routes/resources/property/router-property'),
+    crop = require('./routes/resources/crop/router-crop'),
+    livestock = require('./routes/resources/livestock/router-livestock'),
     platform = require('./routes/platform/router-platform'),
     docs = require('./routes/docs/router-docs');
 
@@ -66,6 +69,9 @@ app.use('/', app_manager);
 app.use('/', user);
 app.use('/', platform);
 app.use('/api', farmer);
+app.use('/api', property);
+app.use('/api', crop);
+app.use('/api', livestock);
 app.use('/', docs);
 
 // catch 404 and forward to error handler
