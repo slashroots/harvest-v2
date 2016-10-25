@@ -1,0 +1,51 @@
+<div ng-include src="'/partials/common/navigation.html'"></div>
+<div ng-include src="'/partials/navigation-admin.html'"></div>
+<!-- Page Content -->
+
+
+<!-- Modal -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog" style="margin: 110px auto">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add a New App</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="inputAppName">App Name</label>
+                                                <input ng-model="app.ap_app_name" type="text" class="form-control" id="inputAppName" placeholder="Type the name of your new app">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea ng-model="app.ap_app_desc" class="form-control" rows="3" placeholder="Briefly describe your new app"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="createApp()" class="btn btn-default" data-dismiss="modal">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<ng-include src="'/partials/common/footer.html'"></ng-include>
