@@ -28,7 +28,7 @@ exports.getAllLivestock = function(req, res, next) {
 
         // Query
         var request = new sql.Request(connection1); // or: var request = connection1.request();
-        request.query('select * from Reg_LIVESTOCK', function(err, recordset) {
+        request.query('select top 5 * from std_reg_farmer_property_livestock', function(err, recordset) {
             // ... error checks
             if(err) {
                 return next(err);
