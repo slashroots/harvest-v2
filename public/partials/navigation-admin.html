@@ -1,34 +1,36 @@
-<div id="sidebar-menu" style="width: 263px;">
-  <ul id="nav" class="panel panel-default nav">
-    <li class="panel panel-heading">
-      <a href="#/">Home</a>
-    </li>
-    <li class="panel panel-group">
-      <a href="#panel-users" data-toggle="collapse" class="panel panel-heading">Users<span class="pull-right glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
-      <ul id="panel-users" class="panel-collapse collapse">
-	<li class="panel-body">
-	  <a href="#/dashboard-admin-users-accounts" class="panel-body">User Accounts </a>
-	</li>
-	<li class="panel-body">
-	  <a href="#/dashboard-admin-users-activities" class="panel-body">User Activities </a>
-	</li>
-      </ul>
-    </li>
-
-    <li class="panel panel-group">
-     <a href="#panel-apps" data-toggle="collapse" class="panel panel-heading">Apps<span class="pull-right glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
-     <ul id="panel-apps" class="panel-collapse collapse">
-	<li class="panel-body">
-	  <a href="#/dashboard-admin-apps-devapps" class="panel-body">Developer Apps</a>
-	</li>
-	<li class="panel-body">
-	  <a href="#/dashboard-admin-apps-activities" class="panel-body">App Activities</a>
-	</li>
-      </ul>
-
-    </li>
-    <li class="panel">
-      <a href="#/dashboard-admin-roles" data-toggle="collapse">Roles</a>
-    </li>
-  </ul>
-</div>
+<!-- sidebar -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="#/dashboard-admin" class="active">Home</a>
+                </li>
+                <li>
+                    <a href="#">Users <span class="fa arrow pull-right"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#/dashboard-admin-user-accounts">User Accounts</a>
+                        </li>
+                        <li>
+                            <a href="#/dashboard-admin-user-activities">User Activities</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Apps <span class="fa arrow pull-right"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#/dashboard-admin-developer-apps">Developer Apps</a>
+                        </li>
+                        <li>
+                            <a href="#/dashboard-admin-app-activities">App Activities</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#/dashboard-admin-user-roles">Roles</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.sidebar -->
