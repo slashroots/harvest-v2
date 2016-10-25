@@ -15,17 +15,134 @@ schemes:
 # will be prefixed to all paths
 basePath: /api/
 tags:
-  - name: Farmer
-    description: Farmer information
-  - name: Property
-    description: Property information
-  - name: Livestock
-    description: Livestock information
   - name: Crop
     description: Crop information
+  - name: Farmer
+    description: Farmer information
+  - name: Livestock
+    description: Livestock information
+  - name: Property
+    description: Property information
 paths:
+  /crop:
+    get:
+      summary: Get All Crops
+      description: |
+       Retrieve information on all grops
+      operationId: getAllCrops
+      tags:
+        - Crop
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getCropByID x 50!'
+  /crop/{id}:
+    get:
+      summary: Get Crop By ID
+      description: |
+       Retrieve information on a crop, provided an ID
+      operationId: getCropByID
+      tags:
+        - Crop
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: requests object
+          type: string
+          required: true
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              IDX_Crop:
+                  type: integer
+                  message: 2322356
+              IDX_Property:
+                  type: integer
+                  message: 1971349
+              Crop_Variety:
+                  type: string
+                  message: "Not Stated"
+              Crop_Name:
+                  type: string
+                  message: "Ackee"
+              Crop_Total_Area:
+                  type: number
+                  message: 0.61
+              Crop_Count:
+                  type: integer
+                  message: 0
+              Plant_Date:
+                  type: string
+                  message: "2004-08-11T00:00:00.000Z"
+              Major_Market_Percentage:
+                  type: integer
+                  message: 0
+              Minor_Market_Percentage:
+                  type: integer
+                  message: 0
+              Crop_Remarks:
+                  type: string
+                  message: ""
+              Create_Date:
+                  type: string
+                  message: "2008-11-04T12:44:55.846Z"
+              Update_Date:
+                  type: string
+                  message: "2008-11-04T12:44:55.846Z"
+              Code_Area_Unit:
+                  type: string
+                  message: "Hectare"
+              Major_Market:
+                  type: string
+                  message: null
+              Minor_Market:
+                  type: string
+                  message: null
+              IDX_StakeHolder:
+                  type: null
+                  message: 952790
+              Property_Address:
+                  type: string
+                  message: "inverness inverness p.o. st ann"
+              District:
+                  type: string
+                  message: "INVERNESS"
+              Parish:
+                  type: string
+                  message: "ST.ANN"
+              Parish_Extension_Name:
+                  type: string
+                  message: "ALEXANDRIA"
+              Crop_Variety_IDX:
+                  type: integer
+                  message: 87
+              Location_IDX:
+                  type: integer
+                  message: 2326
+              Crop_Total_Area_Ha:
+                  type: number
+                  message: 0.61
+              Crop_Type_Code:
+                  type: integer
+                  message: 21
   /farmers:
-    get: 
+    get:
       summary: Get All Farmers
       description: |
        Retrieve information on all farmers
@@ -52,7 +169,6 @@ paths:
       operationId: getFarmerByID
       tags:
         - Farmer
-        - Resource
       produces:
         - application/json
       parameters:
@@ -81,7 +197,7 @@ paths:
                     message: 1
                 Company_Name:
                     type: string
-                    message: 
+                    message:
                 First_Name:
                     type: string
                     message: 'ERROL'
@@ -93,7 +209,7 @@ paths:
                     message: 'LENNOX'
                 Alias:
                     type: string
-                    message: 
+                    message:
                 DOB:
                     type: string
                     message: '1975-11-30T00:00:00.000Z'
@@ -120,28 +236,28 @@ paths:
                     message: '457-8027'
                 Bus_Street_Address:
                     type: string
-                    message: 
+                    message:
                 Bus_District_Name:
                     type: string
                     message: 'GRANGE HILL'
                 Bus_Post_Office:
                     type: string
-                    message: 
+                    message:
                 Bus_Parish_Code:
                     type: integer
                     message: 4
                 Bus_Tele_Num:
                     type: integer
-                    message: 
+                    message:
                 Cell_Num:
                     type: string
-                    message: 
+                    message:
                 Email_Address:
                     type: string
-                    message: 
+                    message:
                 Fax_Num:
                     type: string
-                    message: 
+                    message:
                 Identification_Num:
                     type: string
                     message: '106699920'
@@ -288,10 +404,280 @@ paths:
                     message: null
                 Jas_Farmer_Group:
                     type: string
-                    message: 
+                    message:
                 House_Hold_No:
                     type: string
                     message: null
+  /livestock:
+    get:
+      summary: Get All Farmers
+      description: |
+       Retrieve information on all livestock
+      operationId: getAllLivestock
+      tags:
+        - Livestock
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getLivestockByID x 50!'
+  /livestock/{id}:
+    get:
+      summary: Get Livestock By ID
+      description: |
+       Retrieve information on a livestock, provided an ID
+      operationId: getLivestockByID
+      tags:
+        - Livestock
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: requests object
+          type: string
+          required: true
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              IDX_Livestock:
+                  type: integer
+                  message: 340798
+              Livestock_Type_Code:
+                  type: integer
+                  message: 3
+              IDX_Property:
+                  type: integer
+                  message: 1971353
+              Livestock_Stage_Code:
+                  type: integer
+                  message: 201000
+              Livestock_Count:
+                  type: integer
+                  message: 14
+              Livestock_Capacity:
+                  type: integer
+                  message: 20
+              Livestock_Remarks:
+                  type: string
+                  message: ""
+              Major_Market_Code:
+                  type: integer
+                  message: 2
+              Minor_Market_Code:
+                  type: integer
+                  message: 15
+              Major_Market_Percentage:
+                  type: integer
+                  message: 0
+              Minor_Market_Percentage:
+                  type: integer
+                  message: 0
+              Create_Date:
+                  type: string
+                  message: "2008-11-04T13:12:32.990Z"
+              Update_Date:
+                  type: string
+                  message: "2008-11-04T13:12:32.990Z"
+              Livestock_Name:
+                  type: string
+                  message: "Pig"
+              Major_Market:
+                  type: string
+                  message: "Hotel"
+              Minor_Market:
+                  type: string
+                  message: "Householder"
+              District:
+                  type: string
+                  message: "INVERNESS"
+              Parish_Extension_Name:
+                  type: string
+                  message: "ALEXANDRIA"
+              Parish:
+                  type: string
+                  message: "ST.ANN"
+              Property_Address:
+                  type: string
+                  message: "inverness inverness p.o. st. ann"
+              Location_Code:
+                  type: integer
+                  message: 2326
+              IDX_StakeHolder:
+                  type: integer
+                  message: 952798
+              Livestock_Stage:
+                  type: string
+                  message: "Not Stated"
+  /property:
+    get:
+      summary: Get All Farmers
+      description: |
+       Retrieve information on all properties
+      operationId: getAllProperties
+      tags:
+        - Property
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getPropertyByID x 50!'
+  /property/{id}:
+    get:
+      summary: Get Property By ID
+      description: |
+       Retrieve information on a property, provided an ID
+      operationId: getPropertyByID
+      tags:
+        - Property
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: requests object
+          type: string
+          required: true
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+                IDX_Property:
+                  type: integer
+                  message: 1971350
+                IDX_StakeHolder:
+                  type: integer
+                  message: 952792
+                Location_Code:
+                  type: integer
+                  message: 4107
+                District:
+                  type: string
+                  message: 'GREENLAND'
+                Parish:
+                  type: string
+                  message: 'MANCHESTER'
+                Parish_Extension_Name:
+                  type: string
+                  message: 'MILE GULLY'
+                Extension_Officer:
+                  type: string
+                  message: '47'
+                Property_Address:
+                  type: string
+                  message: 'Greenland'
+                Property_Size:
+                  type: number
+                  message: 1.62
+                Property_Size_Unit_Code:
+                  type: integer
+                  message: 3
+                Property_Usage:
+                  type: float
+                  message: 0.01
+                Tenure_Code:
+                  type: integer
+                  message: 4
+                Property_Usage_Unit_Code:
+                  type: integer
+                  message: 3
+                Property_Remarks:
+                  type: string
+                  message: ''
+                Property_Status_Code:
+                  type: integer
+                  message: 1
+                Volume_Num:
+                  type: string
+                  message: ''
+                Folio_Num:
+                  type: string
+                  message: ''
+                Distance_From_Road:
+                  type: integer
+                  message: 0
+                Distance_From_Road_Unit_Code:
+                  type: string
+                  message: null
+                Primary_Property_YN:
+                  type: integer
+                  message: 2
+                Ownership_Code:
+                  type: string
+                  message: null
+                Latitude:
+                  type: number
+                  message: null
+                Longitude:
+                  type: number
+                  message: null
+                Create_Date:
+                  type: string
+                  message: '2008-11-04T12:46:47.926Z'
+                Update_Date:
+                  type: string
+                  message: '2008-11-04T12:46:47.926Z'
+                Description:
+                  type: string
+                  message: 'Leased'
+                Property_Status:
+                  type: string
+                  message: 'Active'
+                Ownership:
+                  type: string
+                  message: null
+                Distance_Units:
+                  type: number
+                  message: null
+                Property_Usage_Units:
+                  type: string
+                  message: 'Hectare'
+                Property_Size_Units:
+                  type: string
+                  message: 'Hectare'
+                Property_Size_Ha:
+                  type: number
+                  message: 1.62
+                Parish_Extension_Code:
+                  type: integer
+                  message: 44
+                irrigation_source_code:
+                  type: integer
+                  message: null
+                Irrigation_Source:
+                  type: string
+                  message: null
+                irrigation_yn:
+                  type: string
+                  message: null
+                irrigation_access_yn:
+                  type: string
+                  message: null
 definitions:
   Message:
     required:
