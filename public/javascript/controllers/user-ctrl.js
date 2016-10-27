@@ -89,6 +89,16 @@ angular.module('harvestv2')
             };
         }
     ]
+).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory',
+        function($scope, $location, $routeParams) {
+            UsersFactory.query($routeParams, function(users) {
+               $scope.userCount = users.length;
+               console.log(users.length);
+           }, function(error) {
+               console.log(error);
+           });
+        }
+    ]
 ).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
         function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
 
