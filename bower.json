@@ -33,6 +33,7 @@
     "swagger-ui": "^2.2.4",
     "angular-resource": "~1.5.8",
     "angular-route": "~1.5.8",
-    "bootstrap-validator": "~0.11.5"
+    "bootstrap-validator": "~0.11.5",
+    "datatables.net": "^1.10.12"
   }
 }
