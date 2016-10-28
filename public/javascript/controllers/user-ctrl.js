@@ -89,8 +89,8 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory',
-        function($scope, $location, $routeParams, UsersFactory, AppsFactory) {
+).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory','UserLogsFactory', 'ApplicationLogsFactory',
+        function($scope, $location, $routeParams, UsersFactory, AppsFactory, UserLogsFactory, ApplicationLogsFactory) {
             UsersFactory.query($routeParams, function(users) {
                $scope.userCount = users.length;
                console.log(users.length);
@@ -105,6 +105,20 @@ angular.module('harvestv2')
                 console.log(error);
             });
 
+            UserLogsFactory.query($routeParams, function(userlogs) {
+                $scope.userLogs = userlogs;
+                $scope.userLogsSearch = userlogs;//this variable will store our search results
+            }, function(error) {
+                console.log(error);
+            });
+
+            ApplicationLogsFactory.query($routeParams, function(applogs) {
+                $scope.appLogs = applogs;
+                $scope.appLogsSearch = applogs;//this variable will store our search results
+            }, function(error) {
+                console.log(error);
+            });
+
             $scope.searchText = "";
 
             $scope.filterAppsByName = function () {
@@ -113,6 +127,14 @@ angular.module('harvestv2')
                     if ($scope.apps[i].ap_app_name.includes($scope.searchText)) $scope.appsSearch.push($scope.apps[i]);
                 }
             }
+
+            $scope.filterUserLogsByDescription = function () {
+                $scope.userLogsSearch = [];
+                for (var i = 0; i < $scope.userLogs.length; i++) {
+                    if ($scope.userLogs[i].lo_log_description.includes($scope.searchText)) $scope.userLogsSearch.push($scope.userLogs[i]);
+                }
+            }
+
 
             $scope.config = {
                 itemsPerPage: 5,
