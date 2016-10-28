@@ -90,7 +90,7 @@ angular.module('harvestv2')
         }
     ]
 ).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory',
-        function($scope, $location, $routeParams) {
+        function($scope, $location, $routeParams, UsersFactory) {
             UsersFactory.query($routeParams, function(users) {
                $scope.userCount = users.length;
                console.log(users.length);
