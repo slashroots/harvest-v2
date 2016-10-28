@@ -115,7 +115,7 @@ angular.module('harvestv2')
             }
 
             $scope.config = {
-                itemsPerPage: 2,
+                itemsPerPage: 5,
                 fillLastPage: true
             }
 
