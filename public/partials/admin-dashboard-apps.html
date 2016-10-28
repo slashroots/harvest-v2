@@ -1,0 +1,170 @@
+
+
+<body id="admin-dashboard">
+
+<div ng-include src="'../partials/common/navigation.html'"></div>
+
+    <!-- navbar-header -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Harvest API</a>
+    </div>
+    <!-- /.navbar-header -->
+
+<div ng-include src="'../partials/common/admin-sidebar.html'"></div>
+
+<!-- Page Content -->
+<div id="dashboard" class="bg-light-grey">
+    <div class="bg-off-black">
+        <div id="page-wrapper">
+
+            <!-- Breadcrumb -->
+            <div class="dashboard-head">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="breadcrumb">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Home</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.Breadcrumb -->
+
+            <!-- Right Panel Content -->
+            <div class="right-panel-content">
+                <h4 class="title text-uppercase"><strong>Developer Apps</strong></h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- panel -->
+                        <div class="panel panel-default">
+
+                            <!-- /.panel-heading -->
+                            <div class="panel-heading">
+                                <h5>Developer Apps</h5>
+                            </div>
+                            <!-- /.panel-heading -->
+
+                            <!-- /.panel-body -->
+                            <div class="panel-body">
+                                <p>Search : <input class="form-control" type="text" id="searchText"/></p>
+                                <table width="100%" class="table table-striped table-responsive table-bordered table-hover" id="dataTables-example1">
+                                    <thead>
+                                    <tr>
+                                        <th>App Name</th>
+                                        <th>Description</th>
+                                        <th style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">API Key</th>
+                                        <th>Role</th>
+                                        <th>Owner</th>
+                                        <th><span style="visibility: hidden">Actions</span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="app in apps" class="gradeA" style="cursor: pointer">
+                                        <td>
+                                            {{app.ap_app_name}}
+                                        </td>
+                                        <td>{{app.ap_app_desc}}</td>
+                                        <td style=""><p style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">{{app.ap_app_token}}</p></td>
+                                        <td>{{app.ap_app_role.ro_role_name}}</td>
+                                        <td>{{app.us_app_user.us_user_first_name}} {{app.us_app_user.us_user_last_name}}</td>
+                                        <td>
+                                            <div class="manage-link text-center">
+                                                          <span>
+                                                              <a href="#" data-toggle="modal" data-target="#disableAppModal">Disable App</a>
+                                                          </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.panel-body -->
+
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disable App Modal -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="modal fade" id="disableAppModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times; <span>Close</span></button>
+                                        <h4 class="modal-title">Disable [APP'S NAME]?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="">
+
+                                                    <p>Disabling <strong>[APP'S NAME]</strong> will:</p>
+                                                    <ul id="admin-delete-user-txt">
+                                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales libero ut tempor vehicula. Mauris malesuada, lorem nec congue pharetra.</li>
+                                                        <br/>
+                                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales libero ut tempor vehicula. Mauris malesuada, lorem nec congue pharetra.</li>
+                                                        <br/>
+                                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales libero ut tempor vehicula. Mauris malesuada, lorem nec congue pharetra.</li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <a href="dashboard-apps.html" class="btn btn-default drk-grey-btn">Submit</a>
+                                    </div>
+                                </div>
+                                <!-- ./Modal content-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.Disable App Modal -->
+
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="footer-links text-left">
+                            <li>
+                                <a href="#">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Terms & Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <span>Copyright © Your Website 2016</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+            <!-- ./Footer -->
+
+        </div>
+    </div>
+</div>
+<!-- ./Page Content -->
+
+</body>
