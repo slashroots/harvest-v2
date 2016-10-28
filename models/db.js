@@ -57,6 +57,21 @@ var RoleSchema = new Schema({
     ro_role_state: {type: String, default: 'active'}
 });
 
+/**
+ * Log schema to keep records of all interactions with Harvest
+ */
+var LogSchema = new Schema({
+    lo_log_user: {type: Schema.Types.Mixed},//the user or application that carried out the action or nothing if they failed authentication
+    lo_log_level: {type:String, required: true},//user_activity, app_activity
+    lo_log_entity: {type: Schema.Types.Mixed},//target entity before any changes were applied
+    lo_log_end_result: {type: Schema.Types.Mixed},//target entity after any changes were applied - if any
+    lo_log_date: {type: Date, default: Date.now()},//timestamp
+    lo_log_requested: {type: String, required: true},//the resource that was requested
+    lo_log_description: {type:String},//generic description field for more detailed information
+    lo_log_success: {type: Boolean}
+});
+
 exports.Role = mongoose.model('Role', RoleSchema);
 exports.User = mongoose.model('User', UserSchema);
 exports.App = mongoose.model('Application', AppSchema);
+exports.Log = mongoose.model('Log', LogSchema);
