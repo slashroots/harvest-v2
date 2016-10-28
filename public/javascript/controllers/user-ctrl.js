@@ -100,9 +100,24 @@ angular.module('harvestv2')
 
             AppsFactory.query($routeParams, function(apps) {
                 $scope.apps = apps;
+                $scope.appsSearch = apps;//this variable will store our search results
             }, function(error) {
                 console.log(error);
             });
+
+            $scope.searchText = "";
+
+            $scope.filterAppsByName = function () {
+                $scope.appsSearch = [];
+                for (var i = 0; i < $scope.apps.length; i++) {
+                    if ($scope.apps[i].ap_app_name.includes($scope.searchText)) $scope.appsSearch.push($scope.apps[i]);
+                }
+            }
+
+            $scope.config = {
+                itemsPerPage: 2,
+                fillLastPage: true
+            }
 
         }
     ]
