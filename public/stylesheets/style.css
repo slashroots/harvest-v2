@@ -1183,3 +1183,21 @@ td.role-name{
 .right-panel-content{
   padding: 0 30px;
 }
+
+span.fa-chevron-right:before {
+  font-family: Consolas, monaco, monospace;
+  font-weight: bold;
+  font-size: 15px;
+  content: "+";
+  vertical-align: text-top;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #fff;
+  border-radius:20px;
+  padding: 2px 5px;
+}
+
+.collapsed span.fa-chevron-right:before{
+  content: "-";
+}
