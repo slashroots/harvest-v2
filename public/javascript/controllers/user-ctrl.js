@@ -91,6 +91,9 @@ angular.module('harvestv2')
     ]
 ).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory','UserLogsFactory', 'ApplicationLogsFactory', 'RolesFactory',
         function($scope, $location, $routeParams, UsersFactory, AppsFactory, UserLogsFactory, ApplicationLogsFactory, RolesFactory) {
+
+            $scope.usersSearch = $scope.roles = $scope.appsSearch = $scope.userLogsSearch = $scope.appLogsSearch = [];//declaring these here prevents Javascript errors from the Angular library we are using for the tables
+
             UsersFactory.query($routeParams, function(users) {
                $scope.users = users;
                $scope.usersSearch = users;
@@ -128,6 +131,8 @@ angular.module('harvestv2')
             });
 
             $scope.searchText = "";
+
+            //the following functions filter results for each of the tables on the Admin Dashboard because we are not using ng-repeat due to the pagination library
 
             $scope.filterAppsByName = function () {
                 $scope.appsSearch = [];
@@ -221,4 +226,3 @@ angular.module('harvestv2')
         }
     ]
 );
-
