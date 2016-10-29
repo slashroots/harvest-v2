@@ -130,10 +130,10 @@ angular.module('harvestv2')
                 }
             }
 
-            $scope.filterUserLogsByDescription = function () {
+            $scope.filterUserLogs = function () {
                 $scope.userLogsSearch = [];
                 for (var i = 0; i < $scope.userLogs.length; i++) {
-                    if ($scope.userLogs[i].lo_log_description.includes($scope.searchText)) $scope.userLogsSearch.push($scope.userLogs[i]);
+                    if ($scope.userLogs[i].lo_log_description.includes($scope.searchText) || $scope.userLogs[i].lo_log_user.us_user_first_name.includes($scope.searchText) || $scope.userLogs[i].lo_log_user.us_username.includes($scope.searchText)) $scope.userLogsSearch.push($scope.userLogs[i]);
                 }
             }
 
