@@ -92,6 +92,8 @@ angular.module('harvestv2')
 ).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory','UserLogsFactory', 'ApplicationLogsFactory',
         function($scope, $location, $routeParams, UsersFactory, AppsFactory, UserLogsFactory, ApplicationLogsFactory) {
             UsersFactory.query($routeParams, function(users) {
+               $scope.users = users;
+               $scope.usersSearch = users;
                $scope.userCount = users.length;
                console.log(users.length);
            }, function(error) {
@@ -135,6 +137,12 @@ angular.module('harvestv2')
                 }
             }
 
+            $scope.filterUsersByName = function () {
+                $scope.usersSearch = [];
+                for (var i = 0; i < $scope.users.length; i++) {
+                    if ($scope.users[i].us_user_first_name.includes($scope.searchText) || $scope.users[i].us_user_last_name.includes($scope.searchText) || $scope.users[i].us_username.includes($scope.searchText)) $scope.usersSearch.push($scope.users[i]);
+                }
+            }
 
             $scope.config = {
                 itemsPerPage: 5,
