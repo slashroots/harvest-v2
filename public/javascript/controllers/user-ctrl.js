@@ -89,8 +89,8 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory','UserLogsFactory', 'ApplicationLogsFactory',
-        function($scope, $location, $routeParams, UsersFactory, AppsFactory, UserLogsFactory, ApplicationLogsFactory) {
+).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory','UserLogsFactory', 'ApplicationLogsFactory', 'RolesFactory',
+        function($scope, $location, $routeParams, UsersFactory, AppsFactory, UserLogsFactory, ApplicationLogsFactory, RolesFactory) {
             UsersFactory.query($routeParams, function(users) {
                $scope.users = users;
                $scope.usersSearch = users;
@@ -99,6 +99,12 @@ angular.module('harvestv2')
            }, function(error) {
                console.log(error);
            });
+
+            RolesFactory.query($routeParams, function(roles) {
+                $scope.roles = roles;
+            }, function(error) {
+                console.log(error);
+            });
 
             AppsFactory.query($routeParams, function(apps) {
                 $scope.apps = apps;
