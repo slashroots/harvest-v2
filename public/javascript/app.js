@@ -13,6 +13,7 @@ angular.module('harvestv2', ["ngRoute", "harvestv2.services", "angular-table"]).
     $routeProvider.when('/admin/apps', {templateUrl: '../partials/admin-dashboard-apps.html', controller: 'AdminDashboardCtrl'});
     $routeProvider.when('/admin/users', {templateUrl: '../partials/admin-dashboard-user-accounts.html', controller: 'AdminDashboardCtrl'});
     $routeProvider.when('/admin/userlogs', {templateUrl: '../partials/admin-dashboard-user-activities.html', controller: 'AdminDashboardCtrl'});
+    $routeProvider.when('/admin/applogs', {templateUrl: '../partials/admin-dashboard-app-activities.html', controller: 'AdminDashboardCtrl'});
     $routeProvider.otherwise({redirectTo: '/'});
 
     //$locationProvider.html5Mode(true);

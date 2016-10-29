@@ -137,6 +137,16 @@ angular.module('harvestv2')
                 }
             }
 
+            $scope.filterAppLogs = function () {
+                $scope.appLogsSearch = [];
+                for (var i = 0; i < $scope.appLogs.length; i++) {
+                    if ($scope.appLogs[i].lo_log_user !== null) {
+                        if ($scope.appLogs[i].lo_log_description.includes($scope.searchText) || $scope.appLogs[i].lo_log_user.ap_app_name.includes($scope.searchText) || $scope.appLogs[i].lo_log_user.ap_app_desc.includes($scope.searchText) || $scope.appLogs[i].lo_log_requested.includes($scope.searchText)) $scope.appLogsSearch.push($scope.appLogs[i]);
+                    }
+                    else if ($scope.appLogs[i].lo_log_description.includes($scope.searchText) || $scope.appLogs[i].lo_log_requested.includes($scope.searchText)) $scope.appLogsSearch.push($scope.appLogs[i]);
+                }
+            }
+
             $scope.filterUsersByName = function () {
                 $scope.usersSearch = [];
                 for (var i = 0; i < $scope.users.length; i++) {
