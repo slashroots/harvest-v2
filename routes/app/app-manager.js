@@ -86,3 +86,37 @@ exports.getAppsByUserID = function(req, res) {
         }
     })
 };
+
+/*
+Disables the application
+ */
+
+exports.disableAppByID = function(req, res, next) {
+    App.findById(req.params.id)
+        .exec(function(err, app) {
+            if(err) {
+                next(err);
+            } else {
+                app.ap_app_status = "disabled";
+                app.save();
+                res.send(app);
+            }
+        });
+};
+
+/*
+ Enables the application
+ */
+
+exports.enableAppByID = function(req, res, next) {
+    App.findById(req.params.id)
+        .exec(function(err, app) {
+            if(err) {
+                next(err);
+            } else {
+                app.ap_app_status = "active";
+                app.save();
+                res.send(app);
+            }
+        });
+};

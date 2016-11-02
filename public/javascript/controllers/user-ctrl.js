@@ -89,8 +89,8 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory','UserLogsFactory', 'ApplicationLogsFactory', 'RolesFactory',
-        function($scope, $location, $routeParams, UsersFactory, AppsFactory, UserLogsFactory, ApplicationLogsFactory, RolesFactory) {
+).controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory','UserLogsFactory', 'ApplicationLogsFactory', 'RolesFactory', 'AppDisableFactory', 'AppEnableFactory',
+        function($scope, $location, $routeParams, UsersFactory, AppsFactory, UserLogsFactory, ApplicationLogsFactory, RolesFactory, AppDisableFactory, AppEnableFactory) {
 
             $scope.usersSearch = $scope.roles = $scope.appsSearch = $scope.userLogsSearch = $scope.appLogsSearch = [];//declaring these here prevents Javascript errors from the Angular library we are using for the tables
 
@@ -163,6 +163,20 @@ angular.module('harvestv2')
                 for (var i = 0; i < $scope.users.length; i++) {
                     if ($scope.users[i].us_user_first_name.includes($scope.searchText) || $scope.users[i].us_user_last_name.includes($scope.searchText) || $scope.users[i].us_username.includes($scope.searchText)) $scope.usersSearch.push($scope.users[i]);
                 }
+            }
+
+            $scope.disableApp = function () {
+                AppDisableFactory.query($routeParams, function(app) {
+                }, function(error) {
+                    console.log(error);
+                });
+            }
+
+            $scope.disableApp = function () {
+                AppEnableFactory.query($routeParams, function(app) {
+                }, function(error) {
+                    console.log(error);
+                });
             }
 
             $scope.config = {

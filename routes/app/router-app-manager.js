@@ -8,5 +8,7 @@ var router = express.Router();
 router.get('/apps', App.getApplications);
 router.post('/app', App.createApplication);
 router.get('/app/:id', App.getAppByID);
+router.get('/enableApp/:id', App.enableAppByID);
+router.get('/disableApp/:id', App.disableAppByID);
 
 module.exports = router;

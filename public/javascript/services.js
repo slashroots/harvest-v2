@@ -114,3 +114,21 @@ services.factory('ApplicationLogsFactory', function($resource) {
         query: { method: 'GET', isArray: true, params: {lo_log_level: 'app_activity'}}
     });
 });
+
+/*
+ * Disables an application
+ */
+services.factory('AppDisableFactory', function($resource) {
+    return $resource('/disableApp/:id', {}, {
+        query: { method: 'GET',params: {id: '@id'}}
+    });
+});
+
+/*
+ * Enables an application
+ */
+services.factory('AppEnableFactory', function($resource) {
+    return $resource('/enableApp/:id', {}, {
+        query: { method: 'GET',params: {id: '@id'}}
+    });
+});
