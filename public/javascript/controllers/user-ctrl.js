@@ -169,7 +169,24 @@ angular.module('harvestv2')
                 itemsPerPage: 5,
                 fillLastPage: true
             }
-
+            $scope.x2csv = function() {
+                 /*
+                 created by: Christopher Lee Murray: @thinkking on 2016/11/02
+		   purpose: dynamically exporting  resources provided by "AdminDashboardCtrl" to downloadable .csv, using "papaparse" bower component
+		   */
+		var elmnt = document.getElementsByTagName("TABLE")[0];
+  		var attri = elmnt.getAttributeNode("at-list").value;
+		if (attri.length>5){
+			var attri = (attri.slice(0,-6));
+		}
+		var toCSV = this[attri];
+		var csv = Papa.unparse(JSON.stringify(toCSV));
+		var hiddenElement = document.createElement('a');
+		hiddenElement.href = 'data:attachment/text,' + encodeURI(csv);
+		hiddenElement.target = '_blank';
+		hiddenElement.download = (attri + '.csv');
+		hiddenElement.click();
+            };
         }
     ]
 ).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
