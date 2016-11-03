@@ -125,10 +125,6 @@ angular.module('harvestv2')
                 });
             };
 
-            $scope.isEven = function (num) {//for applying CSS classes appropriately in iterating through apps in ng-repeat
-                return ((num % 2) == 0);
-            }
-
             $scope.isAppActive = function (app_status) {
                 return app_status == 'active';
             }

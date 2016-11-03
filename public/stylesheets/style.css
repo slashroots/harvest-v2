@@ -210,10 +210,11 @@ h2.section-heading{
   /* margin-left: 3%; */
   width: 48%;
   margin-top:4%;
+  display: table-cell;
 }
 
-.app-wrap.col-md-offset-1 {
-  margin-left: 4%
+.app-wrap:nth-child(2n) {
+  margin-left: 4%;
 }
 
 .app{

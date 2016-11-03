@@ -35,7 +35,7 @@
 
             <div class="col-md-12" style="display: table;">
 
-                <div style="display: table-cell;" ng-repeat="app in apps | filter:searchText" class="col-md-6 app-wrap" ng-class="!isEven($index) ? 'col-md-offset-1' : 'dummy'">
+                <div ng-repeat="app in apps | filter:searchText" class="col-md-6 app-wrap">
                     <div ng-mouseleave="app.showCaret = false" ng-mouseover="app.showCaret = true" id="{{app._id}}" class="col-md-12 app">
                         <div class="col-md-12 app-header">
                             <h4 class="text-center text-uppercase app-title" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
