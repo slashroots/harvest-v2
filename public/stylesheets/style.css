@@ -1342,3 +1342,7 @@ input#currentPassword{
 .app-description {
   word-wrap:normal;
 }
+
+.display-as-table {
+  display: table;
+}
