@@ -89,8 +89,8 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', '$filter', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','AppDisableFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, $filter, CurrentUserFactory, UserAppsFactory, AppFactory, AppDisableFactory, PlatformFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','AppDisableFactory', 'PlatformFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, AppDisableFactory, PlatformFactory) {
 
             $scope.app = {};
 
@@ -130,7 +130,6 @@ angular.module('harvestv2')
             }
 
             $scope.setAppState = function (index, state) {//index is the index of the app in $scope.apps;
-                console.log("Nick");
                 $routeParams.app_status = state;
                 $routeParams.id = $scope.apps[index]._id;//set the app id for the request to be the one associated with the app we are toggling.
                 AppDisableFactory.setState($routeParams, {id:$routeParams.id, app_status:$routeParams.app_status}, function(app) {
