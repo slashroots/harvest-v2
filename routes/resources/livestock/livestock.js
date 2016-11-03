@@ -13,8 +13,6 @@ var Fakeblock = require('fakeblock');
  * @param next
  */
 exports.getAllLivestock = function(req, res, next) {
-    //TODO: implement this endpoint
-
     // a fakeblock instance created for each user and each ACL
     var fakeblock = new Fakeblock({
         acl: livestockAcl,
@@ -28,7 +26,44 @@ exports.getAllLivestock = function(req, res, next) {
 
         // Query
         var request = new sql.Request(connection1); // or: var request = connection1.request();
-        request.query('select top 5 * from std_reg_farmer_property_livestock', function(err, recordset) {
+        request.query('select top 100 * from std_reg_farmer_property_livestock_table', function(err, recordset) {
+            // ... error checks
+            if(err) {
+                return next(err);
+            } else {
+
+                for (i = 0; i < recordset.length; i++) {
+                    recordset[i] = fakeblock.applyAcl(recordset[i], 'get');
+                }
+                res.send(recordset);
+            }
+        });
+
+    });
+
+    connection1.on('error', function(err) {
+        if(err) {
+            return next(err);
+        }
+    });
+};
+
+
+exports.getLivestockByID = function(req, res, next) {
+    // a fakeblock instance created for each user and each ACL
+    var fakeblock = new Fakeblock({
+        acl: livestockAcl,
+        userRole: req.user.ap_app_role.ro_role_name
+    });
+
+    var connection1 = new sql.Connection(Common.getResourceDBConfig(), function(err) {
+        if(err) {
+            return next(err);
+        }
+
+        // Query
+        var request = new sql.Request(connection1); // or: var request = connection1.request();
+        request.query('select * from std_reg_farmer_property_livestock_table where IDX_Livestock=' + req.params.id, function(err, recordset) {
             // ... error checks
             if(err) {
                 return next(err);
@@ -49,10 +84,4 @@ exports.getAllLivestock = function(req, res, next) {
         }
     });
 
-};
-
-
-exports.getLivestockByID = function(req, res, next) {
-    //TODO: implement this endpoint
-    res.send([]);
 };
