@@ -4,8 +4,8 @@
 
 angular.module('harvestv2')
     .controller("UserCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'RolesFactory',
-        'PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory) {
+        'PlatformFactory', 'CurrentUserFactory',
+        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory) {
 
             /**
              * Registration Page defaults
@@ -32,6 +32,20 @@ angular.module('harvestv2')
             $scope.validatePasswordMatch = function (pass1, pass2) {
                 return (pass1 == pass2);
             };
+
+
+		CurrentUserFactory.query($routeParams, function(currentuser) {
+   			$routeParams.id = currentuser._id;
+			UserFactory.show($routeParams, function(user) {
+                        	$scope.user = user;
+                        	var tempdate = new Date($scope.user.us_user_creation_date );
+                        	$scope.user.us_user_creation_date  = tempdate.getFullYear()+'-' + (tempdate.getMonth()+1) + '-'+tempdate.getDate();
+        		}, function(error) {
+                        	console.log(error);
+                    	});
+		}, function(error) {
+                console.log(error);
+           	 });
 
             /**
              * Function creates user if all checks have passed
