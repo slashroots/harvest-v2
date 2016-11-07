@@ -95,7 +95,7 @@
                                             <div class="col-md-9">
                                                 <input type="password" class="form-control disabled " id="currentPassword" value="Password" disabled="">
                                             </div>
-                                            <span class="col-md-1 col-md-offset-2"><a href="#" class="btn btn-default btn-lg field-btn drk-grey-btn" data-toggle="modal" data-target="#changePasswordModal">Edit</a></span>
+                                            <span class="col-md-1 col-md-offset-2"><a href="" class="btn btn-default btn-lg field-btn drk-grey-btn" data-toggle="modal" data-target="#changePasswordModal">Edit</a></span>
                                         </div>
                                     </div>
                                 </form>
@@ -125,14 +125,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="">
-                                        <form>
+                                        <form id="chpassForm" name="chpassForm">
                                             <div class="form-group">
                                                 <label for="inputOldPassword">Old Password</label>
                                                 <input type="password" class="form-control" id="inputOldPassword">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputNewPassword">New Password</label>
-                                                <input type="password" class="form-control" id="inputNewPassword">
+                                                <input ng-model="user.us_password" type="password" class="form-control" id="inputNewPassword">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputConfirmPassword">Confirm New Password</label>
@@ -145,7 +145,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <a href="dashboard-apps.html" class="btn btn-default drk-grey-btn">Submit</a>
+                            <a href="/#/dashboard" ng-click="createUser()" class="btn btn-default drk-grey-btn">Submit</a>
                         </div>
                     </div>
                 </div>
