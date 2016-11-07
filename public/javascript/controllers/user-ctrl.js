@@ -23,7 +23,7 @@ angular.module('harvestv2')
             PlatformFactory.show(function(info) {
                 $scope.user.us_user_role = info._id;
             }, function(error) {
-                    console.log(error);
+                console.log(error);
             });
 
             /**
@@ -34,16 +34,16 @@ angular.module('harvestv2')
             };
 
 
-		CurrentUserFactory.query($routeParams, function(currentuser) {
-   			$routeParams.id = currentuser._id;
-			UserFactory.show($routeParams, function(user) {
-                        	$scope.user = user;
-        		}, function(error) {
-                        	console.log(error);
-                    	});
-		}, function(error) {
+            CurrentUserFactory.query($routeParams, function(currentuser) {
+                $routeParams.id = currentuser._id;
+                UserFactory.show($routeParams, function(user) {
+                    $scope.user = user;
+                }, function(error) {
+                    console.log(error);
+                });
+            }, function(error) {
                 console.log(error);
-           	 });
+            });
 
             /**
              * Function creates user if all checks have passed
