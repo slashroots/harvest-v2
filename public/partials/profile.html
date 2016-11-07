@@ -1,27 +1,8 @@
-<div ng-include src="'/partials/common/navigation.html'"></div>
 
 <!-- Page Content -->
 <section id="apps" class="bg-light-grey">
     <div class="container">
         <div class="row">
-
-            <!--- Success Notification --->
-            <!--<div class="col-md-12">-->
-                <!--<div class="alert alert-success alert-dismissable">-->
-                    <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>-->
-                    <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a href="#" class="alert-link">Alert Link</a>.-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--- /.Success Notification --->
-
-            <!--- Error Notification --->
-                <!--<div class="col-md-12">-->
-                    <!--<div class="alert alert-success alert-dismissable">-->
-                        <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>-->
-                        <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a href="#" class="alert-link">Alert Link</a>.-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--- /.Error Notification --->
 
             <div class="col-md-12">
                 <h4 class="title"><strong>Account Settings</strong></h4>
@@ -30,7 +11,7 @@
                         <div class="panel-lg-heading">
                             <h3 class="panel-lg-title text-center">{{user.us_user_first_name}} {{user.us_user_last_name}}</h3>
                             <h5 class="text-center">{{user.us_user_role}}</h5>
-                            <p class="text-center">Active member since {{user.us_user_creation_date}}</p>
+                            <p class="text-center">Active member since {{user.us_user_creation_date | date:'medium'}}</p>
                         </div>
                         <div class="panel-body">
                             <div class="col-md-12">
@@ -117,7 +98,6 @@
                                         <span class="col-md-1 col-md-offset-2"><a href="#" class="btn btn-default btn-lg field-btn drk-grey-btn" data-toggle="modal" data-target="#changePasswordModal">Edit</a></span>
                                     </div>
                                 </div>
-                                <!--<button type="submit" class="btn btn-default btn-lg drk-grey-btn">Sign In</button>-->
                             </form>
                             </div>
                         </div>
@@ -173,6 +153,3 @@
         </div>
     </div>
 </div>
-<!-- /.Modal -->
-
-<ng-include src="'/partials/common/footer.html'"></ng-include>

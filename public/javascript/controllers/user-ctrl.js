@@ -38,8 +38,6 @@ angular.module('harvestv2')
    			$routeParams.id = currentuser._id;
 			UserFactory.show($routeParams, function(user) {
                         	$scope.user = user;
-                        	var tempdate = new Date($scope.user.us_user_creation_date );
-                        	$scope.user.us_user_creation_date  = tempdate.getFullYear()+'-' + (tempdate.getMonth()+1) + '-'+tempdate.getDate();
         		}, function(error) {
                         	console.log(error);
                     	});
