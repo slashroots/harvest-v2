@@ -97,7 +97,7 @@ services.factory('CurrentUserFactory', function($resource) {
     });
 });
 
-/*
+/**
  * Get all user activities
  */
 services.factory('UserLogsFactory', function($resource) {
@@ -106,11 +106,20 @@ services.factory('UserLogsFactory', function($resource) {
     });
 });
 
-/*
+/**
  * Get all application activities
  */
 services.factory('ApplicationLogsFactory', function($resource) {
     return $resource('/logs', {}, {
-        query: { method: 'GET', isArray: true, params: {lo_log_level: 'app_activity'}}
+        query: {method: 'GET', isArray: true, params: {lo_log_level: 'app_activity'}}
+    });
+});
+
+/**
+ * Terminate user session
+ */
+services.factory('UserLogoutFactory', function($resource) {
+    return $resource('/logout', {}, {
+        logout: { method: 'GET'}
     });
 });

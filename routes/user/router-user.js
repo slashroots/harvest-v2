@@ -27,4 +27,9 @@ router.post('/login',
     passport.authenticate('local'),
     User.authenticate);
 
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.send({info: "Complete!"});
+});
+
 module.exports = router;
