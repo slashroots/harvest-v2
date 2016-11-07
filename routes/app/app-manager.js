@@ -6,6 +6,8 @@ var model = require('../../models/db'),
     Common = require('../../util/common-util');
 var App = model.App
 
+var logging = require('../../util/logging-util');
+
 /**
  * Find all applications on the platform, should be accessible by only
  * platform administrators
@@ -40,8 +42,10 @@ exports.createApplication = function(req, res, next) {
     console.log(app);
     app.save(function(err) {
         if(err) {
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "The application could not be saved.",false, app);
             next(err);
         } else {
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "An application was successfully created.",true, null, app);
             res.send(app);
         }
     });
