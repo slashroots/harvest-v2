@@ -107,7 +107,7 @@ services.factory('UserLogsFactory', function($resource) {
     });
 });
 
-/*
+/**
  * Get all application activities
  */
 services.factory('ApplicationLogsFactory', function($resource) {
@@ -117,7 +117,16 @@ services.factory('ApplicationLogsFactory', function($resource) {
 });
 
 /**
- * Kills the user's session.
+ * Get user's app activities
+ */
+services.factory('UserLogsFactory', function($resource) {
+    return $resource('/user/:id/logs', {}, {
+        query: {method: 'GET', params: {lo_log_level: 'app_activity'}}
+    });
+});
+
+/**
+ * Terminate user's session
  */
 services.factory('UserLogoutFactory', function($resource) {
     return $resource('/logout', {}, {
