@@ -228,3 +228,19 @@ exports.activateUser = function(req, res, next) {
             }
         });
 };
+
+exports.updateUser = function(req, res, next) {
+   User.findOneAndUpdate(
+       {us_activation_token: req.params.token},
+       {$set: {us_password: req.params.password}})
+       .exec(function(err, docs) {
+           if(err) {
+               next(err);
+           } else {
+               //removing the token and password from the response (security)
+               docs.us_activation_token = undefined;
+               docs.us_password = undefined;
+               res.send(docs);
+           }
+       });
+};

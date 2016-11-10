@@ -6,7 +6,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-mongoose.connect("mongodb://localhost/mongodb");
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/mongodb");
 
 /**
  * Intended to be used for the Application Manager.  Tokens are not given to the users
