@@ -92,7 +92,44 @@ services.factory('CurrentUserFactory', function($resource) {
 });
 
 /*
- * Log the user out
+<<<<<<< HEAD
+ * Get all user activities
+ */
+services.factory('UserLogsFactory', function($resource) {
+    return $resource('/logs', {}, {
+        query: { method: 'GET', params: {lo_log_level: 'user_activity'}}
+    });
+});
+
+/*
+ * Get all application activities
+ */
+services.factory('ApplicationLogsFactory', function($resource) {
+    return $resource('/logs', {}, {
+        query: { method: 'GET', params: {lo_log_level: 'app_activity'}}
+    });
+});
+
+/*
+ * Get user's activities
+ */
+services.factory('UserLogsFactory', function($resource) {
+    return $resource('/user/:id/logs', {}, {
+        query: { method: 'GET', params: {lo_log_level: 'user_activity'}}
+    });
+});
+
+/**
+ * Get user's app activities
+ */
+services.factory('UserLogsFactory', function($resource) {
+    return $resource('/user/:id/logs', {}, {
+        query: {method: 'GET', params: {lo_log_level: 'app_activity'}}
+    });
+});
+
+/**
+ * Terminate user's session
  */
 services.factory('UserLogoutFactory', function($resource) {
     return $resource('/logout', {}, {
