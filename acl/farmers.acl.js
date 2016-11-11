@@ -3,7 +3,7 @@ module.exports = {
         access: ['aggregate_user'],
         fields: {
             allowed: {
-                aggregate_user: ['First_Name', 'Middle_Name', 'Last_Name', "DOB"]
+                aggregate_user: ['Education_Level', 'Farmer_Type', 'Main_Agri_Activity']
             }
         }
     }
