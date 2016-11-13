@@ -145,6 +145,23 @@ angular.module('harvestv2')
                 });
             };
 
+            opposite = function(status) {
+                return (status == 'active') ? 'inactive' : 'active';
+            };
+
+            /**
+             * enable or disable the app - index is the index of the app in $scope.apps;
+             * @param index
+             */
+            $scope.toggleApp = function (index) {
+                AppFactory.update({id: $scope.apps[index]._id},
+                    {ap_app_status: opposite($scope.apps[index].ap_app_status)}, function(app) {
+                    $scope.apps[index].ap_app_status = app.ap_app_status;
+                }, function(error) {
+                    console.log(error);
+                });
+            };
+
         }
     ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
         'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory',

@@ -6,8 +6,10 @@ var Common = require('../common/auth-rules')
 /**
  * End Points relevant to Application Management
  */
+
 router.get('/apps', Common.isAuthenticated, App.getApplications);
 router.post('/app', Common.isAuthenticated, App.createApplication);
 router.get('/app/:id', Common.isAuthenticated, App.getAppByID);
+router.put('/app/:id', Common.isAuthenticated, App.modifyApp);
 
 module.exports = router;

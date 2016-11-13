@@ -24,7 +24,7 @@ exports.getApplications = function(req, res, next) {
             } else {
                 res.send(docs);
             }
-    });
+        });
 };
 
 /**
@@ -69,6 +69,19 @@ exports.getAppByID = function(req, res, next) {
         });
 };
 
+/**
+ * Modify application identified by id.
+ * TODO: implement rules on how the status field is changed
+ */
+exports.modifyApp = function(req, res, next) {
+    App.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, function(err, doc) {
+        if(err) {
+            next(err);
+        } else {
+            res.send(doc);
+        }
+    });
+};
 
 /**
  * Get applications owned by the authenticated user.
@@ -78,7 +91,7 @@ exports.getAppByID = function(req, res, next) {
 exports.getAppsByUserID = function(req, res) {
     App.find({us_app_user: req.params.id}).exec(function(err, docs) {
         if(err) {
-           next(err);
+            next(err);
         } else {
             res.send(docs);
         }

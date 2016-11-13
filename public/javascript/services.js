@@ -81,13 +81,15 @@ services.factory('UserAppsFactory', function($resource) {
 });
 
 /**
- * Create an application
+ * Create/Modify an application
  */
 services.factory('AppFactory', function($resource) {
-    return $resource('/app', {}, {
-        create: { method: 'POST'}
+    return $resource('/app/:id', {}, {
+        create: { method: 'POST'},
+        update: { method: 'PUT', params: {id: '@id'}}
     });
 });
+
 
 /**
  * Activates a user account via the token
