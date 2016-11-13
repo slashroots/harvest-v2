@@ -1,0 +1,688 @@
+# this is documentation represented in YAML for Harvest API
+swagger: '2.0'
+info:
+  title: HarvestAPI
+  description: Open Data + Agriculture 
+  version: "0.0.0"
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+# the domain of the service
+host: localhost:3000
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /api/
+tags:
+  - name: Crop
+    description: Crop information
+  - name: Farmer
+    description: Farmer information
+  - name: Livestock
+    description: Livestock information
+  - name: Property
+    description: Property information
+paths:
+  /crop:
+    get:
+      summary: Get All Crops
+      description: |
+       Retrieve information on all grops
+      operationId: getAllCrops
+      tags:
+        - Crop
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getCropByID x 50!'
+  /crop/{id}:
+    get:
+      summary: Get Crop By ID
+      description: |
+       Retrieve information on a crop, provided an ID
+      operationId: getCropByID
+      tags:
+        - Crop
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: requests object
+          type: string
+          required: true
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              IDX_Crop:
+                  type: integer
+                  message: 2322356
+              IDX_Property:
+                  type: integer
+                  message: 1971349
+              Crop_Variety:
+                  type: string
+                  message: "Not Stated"
+              Crop_Name:
+                  type: string
+                  message: "Ackee"
+              Crop_Total_Area:
+                  type: number
+                  message: 0.61
+              Crop_Count:
+                  type: integer
+                  message: 0
+              Plant_Date:
+                  type: string
+                  message: "2004-08-11T00:00:00.000Z"
+              Major_Market_Percentage:
+                  type: integer
+                  message: 0
+              Minor_Market_Percentage:
+                  type: integer
+                  message: 0
+              Crop_Remarks:
+                  type: string
+                  message: ""
+              Create_Date:
+                  type: string
+                  message: "2008-11-04T12:44:55.846Z"
+              Update_Date:
+                  type: string
+                  message: "2008-11-04T12:44:55.846Z"
+              Code_Area_Unit:
+                  type: string
+                  message: "Hectare"
+              Major_Market:
+                  type: string
+                  message: null
+              Minor_Market:
+                  type: string
+                  message: null
+              IDX_StakeHolder:
+                  type: null
+                  message: 952790
+              Property_Address:
+                  type: string
+                  message: "inverness inverness p.o. st ann"
+              District:
+                  type: string
+                  message: "INVERNESS"
+              Parish:
+                  type: string
+                  message: "ST.ANN"
+              Parish_Extension_Name:
+                  type: string
+                  message: "ALEXANDRIA"
+              Crop_Variety_IDX:
+                  type: integer
+                  message: 87
+              Location_IDX:
+                  type: integer
+                  message: 2326
+              Crop_Total_Area_Ha:
+                  type: number
+                  message: 0.61
+              Crop_Type_Code:
+                  type: integer
+                  message: 21
+  /farmers:
+    get:
+      summary: Get All Farmers
+      description: |
+       Retrieve information on all farmers
+      operationId: getAllFarmers
+      tags:
+        - Farmer
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getFarmerByID x 50!'
+  /farmers/{id}:
+    get:
+      summary: Get Farmer By ID
+      description: |
+       Retrieve information on a farmer, provided an ID
+      operationId: getFarmerByID
+      tags:
+        - Farmer
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: requests object
+          type: string
+          required: true
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+                IDX_StakeHolder:
+                    type: array
+                    message: [952520,952520]
+                StakeHolder_Num:
+                    type: string
+                    message: '081117655'
+                Stakeholder_Type_Code:
+                    type: integer
+                    message: 1
+                Company_Name:
+                    type: string
+                    message:
+                First_Name:
+                    type: string
+                    message: 'ERROL'
+                Middle_Name:
+                    type: string
+                    message: 'CHARLES'
+                Last_Name:
+                    type: string
+                    message: 'LENNOX'
+                Alias:
+                    type: string
+                    message:
+                DOB:
+                    type: string
+                    message: '1975-11-30T00:00:00.000Z'
+                Gender:
+                    type: integer
+                    message: 1
+                Jas_Receipt:
+                    type: string
+                    message: '0'
+                Res_Street_Address:
+                    type: string
+                    message: 'MERTON PEN'
+                Res_District_Name:
+                    type: string
+                    message: 'GRANGE HILL'
+                Res_Post_Office:
+                    type: string
+                    message: 'Grange Hill P.A.'
+                Res_Parish_Code:
+                    type: integer
+                    message: 4
+                Res_Tele_Num:
+                    type: string
+                    message: '457-8027'
+                Bus_Street_Address:
+                    type: string
+                    message:
+                Bus_District_Name:
+                    type: string
+                    message: 'GRANGE HILL'
+                Bus_Post_Office:
+                    type: string
+                    message:
+                Bus_Parish_Code:
+                    type: integer
+                    message: 4
+                Bus_Tele_Num:
+                    type: integer
+                    message:
+                Cell_Num:
+                    type: string
+                    message:
+                Email_Address:
+                    type: string
+                    message:
+                Fax_Num:
+                    type: string
+                    message:
+                Identification_Num:
+                    type: string
+                    message: '106699920'
+                ID_Type_Code:
+                    type: integer
+                    message: 3
+                TRN:
+                    type: string
+                    message: '106699920'
+                Interviewer:
+                    type: string
+                    message: null
+                Stakeholder_Status_Code:
+                    type: integer
+                    message: 1
+                Verified_Status:
+                    type: integer
+                    message: 1
+                Verified_Date:
+                    type: string
+                    message: '2009-01-09T00:00:00.000Z'
+                Registration_Date:
+                    type: string
+                    message: '2008-10-17T00:00:00.000Z'
+                Have_Photo_YN:
+                    type: integer
+                    message: 0
+                Want_Photo_ID_YN:
+                    type: integer
+                    message: 1
+                Photo_Path:
+                    type: string
+                    message: '081117655.jpg'
+                Photo_ID_Upload_Date:
+                    type: string
+                    message: null
+                Photo_Found_YN:
+                    type: string
+                    message: null
+                IDX_EOJ_Photo_Batch:
+                    type: string
+                    message: null
+                Photo_Status:
+                    type: integer
+                    message: 1
+                Old_Photo_ID_Printed_YN:
+                    type: string
+                    message: null
+                Old_Photo_Path:
+                    type: string
+                    message: null
+                Old_Photo_Print_Date:
+                    type: string
+                    message: null
+                Old_Have_Photo_YN:
+                    type: string
+                    message: null
+                Create_Date:
+                    type: array
+                    message: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
+                Update_Date:
+                    type: array
+                    message: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
+                ReVerified_Date:
+                    type: string
+                    message: null
+                ReVerified_Status:
+                    type: string
+                    message: null
+                tracker_farmer_yn:
+                    type: integer
+                    message: 0
+                Title:
+                    type: string
+                    message: null
+                Stakeholder_Status_Date:
+                    type: string
+                    message: null
+                primary_parish:
+                    type: integer
+                    message: 4
+                primary_extension_area:
+                    type: integer
+                    message: 9
+                primary_district:
+                    type: integer
+                    message: 994
+                Update_By:
+                    type: integer
+                    message: null
+                tracker_group:
+                    type: string
+                    message: null
+                tracker_start_date:
+                    type: string
+                    message: null
+                IDX_Farmer_Profile:
+                    type: integer
+                    message: 523402
+                Respondent_Code:
+                    type: integer
+                    message: 1
+                Manager_Code:
+                    type: integer
+                    message: 1
+                Live_On_Farm_YN:
+                    type: integer
+                    message: 1
+                Income_Source_Code:
+                    type: integer
+                    message: 1
+                Education_Level_Code:
+                    type: integer
+                    message: 5
+                Occupation_Code:
+                    type: integer
+                    message: 7
+                Agri_Training_YN:
+                    type: integer
+                    message: 2
+                Farmer_Type_Code:
+                    type: integer
+                    message: 1
+                Training_Method_Code:
+                    type: integer
+                    message: null
+                Agri_Institution_Code:
+                    type: integer
+                    message: null
+                Qualification_Code:
+                    type: integer
+                    message: 3
+                Holding_Start:
+                    type: string
+                    message: '1994'
+                Main_Agri_Activity_Code:
+                    type: integer
+                    message: 2
+                Nearest_Police_Station:
+                    type: string
+                    message: 'Manchioneal'
+                Farmer_Profile_Remarks:
+                    type: string
+                    message: null
+                Jas_Farmer_Group:
+                    type: string
+                    message:
+                House_Hold_No:
+                    type: string
+                    message: null
+  /livestock:
+    get:
+      summary: Get All Livestock
+      description: |
+       Retrieve information on all livestock
+      operationId: getAllLivestock
+      tags:
+        - Livestock
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getLivestockByID x 50!'
+  /livestock/{id}:
+    get:
+      summary: Get Livestock By ID
+      description: |
+       Retrieve information on a livestock, provided an ID
+      operationId: getLivestockByID
+      tags:
+        - Livestock
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: requests object
+          type: string
+          required: true
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              IDX_Livestock:
+                  type: integer
+                  message: 340798
+              Livestock_Type_Code:
+                  type: integer
+                  message: 3
+              IDX_Property:
+                  type: integer
+                  message: 1971353
+              Livestock_Stage_Code:
+                  type: integer
+                  message: 201000
+              Livestock_Count:
+                  type: integer
+                  message: 14
+              Livestock_Capacity:
+                  type: integer
+                  message: 20
+              Livestock_Remarks:
+                  type: string
+                  message: ""
+              Major_Market_Code:
+                  type: integer
+                  message: 2
+              Minor_Market_Code:
+                  type: integer
+                  message: 15
+              Major_Market_Percentage:
+                  type: integer
+                  message: 0
+              Minor_Market_Percentage:
+                  type: integer
+                  message: 0
+              Create_Date:
+                  type: string
+                  message: "2008-11-04T13:12:32.990Z"
+              Update_Date:
+                  type: string
+                  message: "2008-11-04T13:12:32.990Z"
+              Livestock_Name:
+                  type: string
+                  message: "Pig"
+              Major_Market:
+                  type: string
+                  message: "Hotel"
+              Minor_Market:
+                  type: string
+                  message: "Householder"
+              District:
+                  type: string
+                  message: "INVERNESS"
+              Parish_Extension_Name:
+                  type: string
+                  message: "ALEXANDRIA"
+              Parish:
+                  type: string
+                  message: "ST.ANN"
+              Property_Address:
+                  type: string
+                  message: "inverness inverness p.o. st. ann"
+              Location_Code:
+                  type: integer
+                  message: 2326
+              IDX_StakeHolder:
+                  type: integer
+                  message: 952798
+              Livestock_Stage:
+                  type: string
+                  message: "Not Stated"
+  /property:
+    get:
+      summary: Get All Property
+      description: |
+       Retrieve information on all properties
+      operationId: getAllProperties
+      tags:
+        - Property
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'imagine getPropertyByID x 50!'
+  /property/{id}:
+    get:
+      summary: Get Property By ID
+      description: |
+       Retrieve information on a property, provided an ID
+      operationId: getPropertyByID
+      tags:
+        - Property
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: requests object
+          type: string
+          required: true
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+                IDX_Property:
+                  type: integer
+                  message: 1971350
+                IDX_StakeHolder:
+                  type: integer
+                  message: 952792
+                Location_Code:
+                  type: integer
+                  message: 4107
+                District:
+                  type: string
+                  message: 'GREENLAND'
+                Parish:
+                  type: string
+                  message: 'MANCHESTER'
+                Parish_Extension_Name:
+                  type: string
+                  message: 'MILE GULLY'
+                Extension_Officer:
+                  type: string
+                  message: '47'
+                Property_Address:
+                  type: string
+                  message: 'Greenland'
+                Property_Size:
+                  type: number
+                  message: 1.62
+                Property_Size_Unit_Code:
+                  type: integer
+                  message: 3
+                Property_Usage:
+                  type: float
+                  message: 0.01
+                Tenure_Code:
+                  type: integer
+                  message: 4
+                Property_Usage_Unit_Code:
+                  type: integer
+                  message: 3
+                Property_Remarks:
+                  type: string
+                  message: ''
+                Property_Status_Code:
+                  type: integer
+                  message: 1
+                Volume_Num:
+                  type: string
+                  message: ''
+                Folio_Num:
+                  type: string
+                  message: ''
+                Distance_From_Road:
+                  type: integer
+                  message: 0
+                Distance_From_Road_Unit_Code:
+                  type: string
+                  message: null
+                Primary_Property_YN:
+                  type: integer
+                  message: 2
+                Ownership_Code:
+                  type: string
+                  message: null
+                Latitude:
+                  type: number
+                  message: null
+                Longitude:
+                  type: number
+                  message: null
+                Create_Date:
+                  type: string
+                  message: '2008-11-04T12:46:47.926Z'
+                Update_Date:
+                  type: string
+                  message: '2008-11-04T12:46:47.926Z'
+                Description:
+                  type: string
+                  message: 'Leased'
+                Property_Status:
+                  type: string
+                  message: 'Active'
+                Ownership:
+                  type: string
+                  message: null
+                Distance_Units:
+                  type: number
+                  message: null
+                Property_Usage_Units:
+                  type: string
+                  message: 'Hectare'
+                Property_Size_Units:
+                  type: string
+                  message: 'Hectare'
+                Property_Size_Ha:
+                  type: number
+                  message: 1.62
+                Parish_Extension_Code:
+                  type: integer
+                  message: 44
+                irrigation_source_code:
+                  type: integer
+                  message: null
+                Irrigation_Source:
+                  type: string
+                  message: null
+                irrigation_yn:
+                  type: string
+                  message: null
+                irrigation_access_yn:
+                  type: string
+                  message: null
+definitions:
+  Message:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+        default: 'Hello, Adam!'
