@@ -111,22 +111,22 @@ angular.module('harvestv2')
     ]
 ).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
         function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
-
             $scope.app = {};
             $scope.user = {};
+            $scope.searchText = "";
 
             /**
              * Gets the current user so we can pass the id to get all their apps - we could also have grabbed their id from the req.user.id instead of doing this but the endpoint was already created to expect an ID being passed to it
-             */
-            CurrentUserFactory.query(function(user) {
-                if(user) {
-                    $routeParams.id = user._id;
-                    UserAppsFactory.query($routeParams, function(apps) {//gets all applications for this specific user
-                        $scope.apps = apps;
-                    }, function(error) {
-                        console.log(error);
-                    });
-                }
+             **/
+            CurrentUserFactory.query($routeParams, function(user) {
+                $routeParams.id = user._id;
+                UserAppsFactory.query($routeParams, function(apps) {//gets all applications for this specific user
+                    $scope.apps = apps;
+                    $scope.appCount = apps.length;
+                }, function(error) {
+                    console.log(error);
+                });
+
             }, function(error) {
                 console.log(error);
             });
@@ -145,23 +145,27 @@ angular.module('harvestv2')
                 });
             };
 
-            opposite = function(status) {
-                return (status == 'active') ? 'inactive' : 'active';
+            /**
+             * Is Application Active?
+             * @param app_status
+             * @returns {boolean}
+             */
+            $scope.isAppActive = function (app_status) {
+                return app_status == 'active';
             };
 
             /**
              * enable or disable the app - index is the index of the app in $scope.apps;
              * @param index
              */
-            $scope.toggleApp = function (index) {
+            $scope.setAppState = function (index, state) {
                 AppFactory.update({id: $scope.apps[index]._id},
-                    {ap_app_status: opposite($scope.apps[index].ap_app_status)}, function(app) {
+                    {ap_app_status: state}, function(app) {
                     $scope.apps[index].ap_app_status = app.ap_app_status;
                 }, function(error) {
                     console.log(error);
                 });
             };
-
         }
     ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
         'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory',

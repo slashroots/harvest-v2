@@ -37,7 +37,7 @@ exports.getApplications = function(req, res, next) {
 exports.createApplication = function(req, res, next) {
     var app = new App(req.body);
     app.ap_app_token = Common.getRandomToken();
-    app.ap_app_status = 'active';
+    app.ap_app_status = Common.APP_ACTIVE;
     app.us_app_user = req.user._id;
     app.save(function(err) {
         if(err) {
@@ -70,8 +70,8 @@ exports.getAppByID = function(req, res, next) {
 };
 
 /**
- * Modify application identified by id.
- * TODO: implement rules on how the status field is changed
+ * Modify an application
+ * TODO:  Need to implement rules based on application status
  */
 exports.modifyApp = function(req, res, next) {
     App.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, function(err, doc) {
@@ -82,6 +82,7 @@ exports.modifyApp = function(req, res, next) {
         }
     });
 };
+
 
 /**
  * Get applications owned by the authenticated user.

@@ -5,29 +5,78 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+
                 <div class="search form-wrap">
-                    <div class="col-md-6">
+                    <div ng-show="apps.length < 1" class="col-md-6">
+                        <div class="input-group custom-search-form-text">
+                            <p class="lead">You currently have no apps.</p>
+                            <span class="sub-lead text-muted">To get started, click the button and create a new app.
+                            </span>
+                        </div>
+                    </div>
+                    <div ng-show="apps.length > 0" class="col-md-6">
                         <div class="input-group custom-search-form">
-                            <p>You currently have no apps.</p>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                            <input type="text" class="form-control search" ng-model="searchText" placeholder="Search by Name...">
                         </div>
                     </div>
                     <div class="col-md-3 col-md-offset-3">
-                        <!--<button type="submit" class="btn btn-default btn-md drk-grey-btn">Add</button>-->
-                        <a href=""  class="btn btn-default btn-lg drk-grey-btn" data-toggle="modal" data-target="#myModal">
+                        <a href="" class="btn btn-default btn-lg drk-grey-btn" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-plus fa-fw"></i> Add a New App
                         </a>
                     </div>
                 </div>
+
             </div>
 
-            <div class="col-md-12">
-                                <div ng-repeat="app in apps track by $index" class="app-wrap col-md-4">
-                                    <img src="http://placehold.it/100x100" class="pull-left" style="margin-right:10px"/>
-                                    <h4>{{app.ap_app_name}}</h4>
-                                    <small><p class="text-muted">{{app.ap_app_desc}}</p></small>
-                                    <p>Status : <span ng-bind="apps[$index].ap_app_status"></span> (<a href="" ng-click="toggleApp($index)">Toggle</a>)</p>
-                                    <p style="word-wrap: break-word;"><span> API Key: {{app.ap_app_token}}</span></p>
-                                </div>
+            <div class="col-md-12 display-as-table">
+
+                <div ng-repeat="app in apps | filter:searchText" class="col-md-6 app-wrap">
+                    <div ng-mouseleave="app.showCaret = false" ng-mouseover="app.showCaret = true" id="{{app._id}}" class="col-md-12 app">
+                        <div class="col-md-12 app-header">
+                            <h4 class="text-center text-uppercase app-title" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
+                                {{app.ap_app_name}}
+                            </h4>
+                             <span class="dropdown">
+                                     <a ng-show="app.showCaret" class="dropdown-toggle show inactive" data-toggle="dropdown" href="">
+                                         <i class="fa fa-caret-down"></i>
+                                     </a>
+                                      <!-- dropdown-app-options -->
+                                     <ul class="dropdown-menu dropdown-app-options">
+                                         <li><a ng-click="setAppState($index, 'active')" href=""><i ng-if="app.ap_app_status=='active'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Enabled' : 'Enable' }}</a>
+                                         </li>
+                                         <li><a ng-click="setAppState($index, 'disabled')" href=""><i ng-if="app.ap_app_status=='disabled'" class="fa fa-check fa-fw"></i> {{isAppActive(app.ap_app_status) ? 'Disable' : 'Disabled' }}</a>
+                                         </li>
+                                         <!--<li><a href="" data-toggle="modal" data-target="#deleteAppModal">Delete app</a>
+                                         </li> TODO: Implement Application deleting functionality-->
+                                     </ul>
+                                     <!-- /.dropdown-app-options-->
+                             </span>
+                        </div>
+                        <div class="col-md-12 app-description" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
+                            <div class="col-md-4">
+                                <p class="text-left">Brief Description :</p>
+                            </div>
+                            <div class="col-md-8">
+                                <p>{{app.ap_app_desc}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 app-key" ng-class="!isAppActive(app.ap_app_status) ? 'disabled-app' : ''">
+                            <div class="col-md-4">
+                                <p class="text-left">API Key :</p>
+                            </div>
+                            <div class="col-md-8">
+                                <p class="app-token">{{app.ap_app_token}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
 
