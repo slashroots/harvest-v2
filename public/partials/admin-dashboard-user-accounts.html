@@ -1,0 +1,169 @@
+
+
+<body id="admin-dashboard">
+
+<div ng-include src="'../partials/common/navigation.html'"></div>
+
+    <!-- navbar-header -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Harvest API</a>
+    </div>
+    <!-- /.navbar-header -->
+
+<div ng-include src="'../partials/common/admin-sidebar.html'"></div>
+
+<!-- Page Content -->
+<div id="dashboard" class="bg-light-grey">
+    <div class="bg-off-black">
+        <div id="page-wrapper">
+
+            <!-- Breadcrumb -->
+            <div class="dashboard-head">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="breadcrumb">
+                            <li><a href="/#/admin/">Dashboard</a></li>
+                            <li class="active">User Accounts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.Breadcrumb -->
+
+            <!-- Right Panel Content -->
+            <div class="right-panel-content">
+                <h4 class="title text-uppercase"><strong>User Accounts</strong></h4>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- panel -->
+                        <div class="panel panel-default">
+
+                            <!-- panel-heading -->
+                            <div class="panel-heading">
+                                <h5>Users</h5>
+                            </div>
+                            <!-- /.panel-heading -->
+
+                            <!-- panel-body -->
+                            <div class="panel-body">
+                                <!-- table-responsive -->
+                                <p>Search : <input ng-change="filterUsersByName()" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
+                                <table width="100%" class="table table-striped table-responsive table-bordered table-hover"  at-table at-paginated at-list="usersSearch" at-config="config">
+                                    <thead>
+                                    <tr>
+                                        <th>App Name</th>
+                                        <th>Description</th>
+                                        <th style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">API Key</th>
+                                        <th>Role</th>
+                                        <th>Owner</th>
+                                        <th><span style="visibility: hidden">Actions</span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td at-title="Name" at-attribute="us_user_first_name + us_user_last_name" width="300">{{item.us_user_first_name + ' ' + item.us_user_last_name}}</td>
+                                        <td at-title="Email" at-implicit at-attribute="us_email_address" width="300"></td>
+                                        <td at-title="Username" at-implicit at-attribute="us_username" width="300"></td>
+                                        <td at-title="Status" at-implicit at-attribute="us_state" width="300"></td>
+                                        <td at-title="Phone #" at-implicit="" at-attribute="us_contact" width="300"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- /.table-responsive -->
+                                <at-pagination at-list="usersSearch" at-config="config"></at-pagination>
+
+                                <!-- /.table-responsive -->
+                            </div>
+                          <a href="" class="btn btn-default btn-lg drk-grey-btn" ng-click="x2csv()">Export to CSV</a>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                </div>
+            </div>
+            <!-- ./Right Panel Content -->
+
+            <!-- Delete App Modal -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="modal fade" id="disableUserModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times; <span>Close</span></button>
+                                        <h4 class="modal-title">Disable [USER'S NAME]?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="">
+
+                                                    <p>Disabling <strong>[USER'S NAME]</strong> will:</p>
+                                                    <ul id="admin-delete-user-txt">
+                                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales libero ut tempor vehicula. Mauris malesuada, lorem nec congue pharetra.</li>
+                                                        <br/>
+                                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales libero ut tempor vehicula. Mauris malesuada, lorem nec congue pharetra.</li>
+                                                        <br/>
+                                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales libero ut tempor vehicula. Mauris malesuada, lorem nec congue pharetra.</li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <a href="dashboard-apps.html" class="btn btn-default drk-grey-btn">Submit</a>
+                                    </div>
+                                </div>
+                                <!-- ./Modal content-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.Delete App Modal -->
+
+
+
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="footer-links text-left">
+                            <li>
+                                <a href="#">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Terms & Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <span>Copyright © Your Website 2016</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+            <!-- ./Footer -->
+
+        </div>
+    </div>
+</div>
+<!-- ./Page Content -->
+
+</body>

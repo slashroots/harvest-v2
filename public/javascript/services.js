@@ -16,6 +16,12 @@ services.factory('UserFactory', function($resource) {
     });
 });
 
+services.factory('UsersFactory', function($resource) {
+   return $resource('/users', {}, {
+       query: { method: 'GET', isArray: true},
+   });
+});
+
 /**
  * Factory used to get the Platform defaults
  */
@@ -97,25 +103,16 @@ services.factory('CurrentUserFactory', function($resource) {
  */
 services.factory('UserLogsFactory', function($resource) {
     return $resource('/logs', {}, {
-        query: { method: 'GET', params: {lo_log_level: 'user_activity'}}
+        query: { method: 'GET', isArray: true, params: {lo_log_level: 'user_activity'}}
     });
 });
 
-/*
+/**
  * Get all application activities
  */
 services.factory('ApplicationLogsFactory', function($resource) {
     return $resource('/logs', {}, {
-        query: { method: 'GET', params: {lo_log_level: 'app_activity'}}
-    });
-});
-
-/*
- * Get user's activities
- */
-services.factory('UserLogsFactory', function($resource) {
-    return $resource('/user/:id/logs', {}, {
-        query: { method: 'GET', params: {lo_log_level: 'user_activity'}}
+        query: {method: 'GET', isArray: true, params: {lo_log_level: 'app_activity'}}
     });
 });
 
