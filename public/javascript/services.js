@@ -65,24 +65,17 @@ services.factory('UserAppsFactory', function($resource) {
 });
 
 /**
- * Create an application
+ * Create/Modify an application
  */
 services.factory('AppFactory', function($resource) {
-    return $resource('/app', {}, {
-        create: { method: 'POST'}
+    return $resource('/app/:id', {}, {
+        create: { method: 'POST'},
+        update: { method: 'PUT', params: {id: '@id'}}
     });
 });
+
 
 /**
- * Enable or disable application
- */
-services.factory('AppDisableFactory', function($resource) {
-    return $resource('/app/:id/toggle', {}, {
-        toggle: { method: 'GET', params: {id: '@id'}}//this will either 'enable' or 'disable' the app depending on the app's current state - it will return the new state of the app
-    });
-});
-
-/*
  * Activates a user account via the token
  */
 services.factory('UserActivationFactory', function($resource) {

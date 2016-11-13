@@ -8,6 +8,6 @@ var router = express.Router();
 router.get('/apps', App.getApplications);
 router.post('/app', App.createApplication);
 router.get('/app/:id', App.getAppByID);
-router.get('/app/:id/toggle', App.toggleAppByID);
+router.put('/app/:id', App.modifyApp);
 
 module.exports = router;

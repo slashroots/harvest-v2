@@ -22,7 +22,7 @@ exports.getApplications = function(req, res, next) {
             } else {
                 res.send(docs);
             }
-    });
+        });
 };
 
 /**
@@ -67,20 +67,17 @@ exports.getAppByID = function(req, res, next) {
 };
 
 /**
- * Enable an app if it is disabled and vice versa.
+ * Modify application identified by id.
+ * TODO: implement rules on how the status field is changed
  */
-exports.toggleAppByID = function(req, res, next) {
-    App.findById(req.params.id)
-        .exec(function(err, docs) {
-            if(err) {
-                next(err);
-            } else {
-                if (docs.ap_app_status == "active") docs.ap_app_status = "disabled";
-                else if (docs.ap_app_status == "disabled") docs.ap_app_status = "active";
-                docs.save();
-                res.send(docs);
-            }
-        });
+exports.modifyApp = function(req, res, next) {
+    App.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, function(err, doc) {
+        if(err) {
+            next(err);
+        } else {
+            res.send(doc);
+        }
+    });
 };
 
 /**
@@ -91,7 +88,7 @@ exports.toggleAppByID = function(req, res, next) {
 exports.getAppsByUserID = function(req, res) {
     App.find({us_app_user: req.params.id}).exec(function(err, docs) {
         if(err) {
-           next(err);
+            next(err);
         } else {
             res.send(docs);
         }

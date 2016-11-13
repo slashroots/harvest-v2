@@ -23,7 +23,7 @@ angular.module('harvestv2')
             PlatformFactory.show(function(info) {
                 $scope.user.us_user_role = info._id;
             }, function(error) {
-                    console.log(error);
+                console.log(error);
             });
 
             /**
@@ -89,8 +89,8 @@ angular.module('harvestv2')
             };
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory', 'AppDisableFactory',
-        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory, AppDisableFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
 
             $scope.app = {};
 
@@ -122,13 +122,21 @@ angular.module('harvestv2')
                 });
             };
 
-            $scope.toggleApp = function (index) {//enable or disable the app - index is the index of the app in $scope.apps;
-                    $routeParams.id = $scope.apps[index]._id;//set the app id for the request to be the one associated with the app we are toggling.
-                    AppDisableFactory.toggle({id:$routeParams.id}, function(app) {
-                        $scope.apps[index].ap_app_status = app.ap_app_status;
-                    }, function(error) {
-                        console.log(error);
-                    });
+            opposite = function(status) {
+                return (status == 'active') ? 'inactive' : 'active';
+            };
+
+            /**
+             * enable or disable the app - index is the index of the app in $scope.apps;
+             * @param index
+             */
+            $scope.toggleApp = function (index) {
+                AppFactory.update({id: $scope.apps[index]._id},
+                    {ap_app_status: opposite($scope.apps[index].ap_app_status)}, function(app) {
+                    $scope.apps[index].ap_app_status = app.ap_app_status;
+                }, function(error) {
+                    console.log(error);
+                });
             };
 
         }
