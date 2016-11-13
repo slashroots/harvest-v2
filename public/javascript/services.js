@@ -4,7 +4,23 @@
 
 var services = angular.module('harvestv2.services', ['ngResource']);
 
-//creates a user
+/**
+ *
+ * Factory to be used intercept all 401 error messages
+ * and direct user to login page.
+ *
+ **/
+services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
+    return {
+        responseError: function(response){
+            if(response.status == 400) {
+                var encodedURL = encodeURIComponent($location.absUrl());
+                window.location = "#/signin?goTo=" + encodedURL;
+            }
+        }
+    };
+}]);
+
 
 /**
  * Factory used in creating and accessing User details

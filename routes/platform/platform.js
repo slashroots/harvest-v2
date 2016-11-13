@@ -12,11 +12,14 @@ var setup = require('../../setup');
  * @param next
  */
 exports.getInfo = function(req, res, next) {
-    Role.findOne(setup.DEFAULT_ROLE, function(err, result) {
+    Role.findOne(setup.DEFAULT_APP_ROLE, function(err, result) {
         if(err) {
             next(err);
         } else {
-            res.send(result);
+            res.send({
+                default_user_role: setup.DEFAULT_USER_ROLE,
+                default_app_role: result
+            });
         }
     })
 };

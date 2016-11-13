@@ -189,9 +189,11 @@ exports.getCurrentUser = function(req, res, next) {
  */
 exports.createUser = function(req, res, next) {
     var user = new User(req.body);
+    console.log(req.body);
     user.us_activation_token = common.getRandomToken();
     //TODO: must ensure the state is set to pending
     user.save(function(err) {
+        console.log(err);
         if(err) {
             next(err);
         } else {
@@ -211,9 +213,9 @@ exports.createUser = function(req, res, next) {
                         next(error);
                     } else {
                         //removing the token and password from the response (security)
-                        logging.accessLogger(user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "A new user account was created and the activation email was sent.",true, user);
                         user.us_activation_token = undefined;
                         user.us_password = undefined;
+                        logging.accessLogger(user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "A new user account was created and the activation email was sent.",true, user);
                         res.send(user);
                     }
                 });
