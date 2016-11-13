@@ -4,8 +4,8 @@
 
 angular.module('harvestv2')
     .controller("UserCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'RolesFactory',
-        'PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory) {
+        'PlatformFactory', 'CurrentUserFactory',
+        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory) {
 
             /**
              * Registration Page defaults
@@ -15,15 +15,17 @@ angular.module('harvestv2')
             $scope.passwordConfirm = "";
             $scope.agreeChecked = false;
             $scope.confirmation = false;
+            $scope.default_user_role = "";
 
             /**
              * First step is to get the default platform role
              * and assign it to the user during registration
              */
             PlatformFactory.show(function(info) {
-                $scope.user.us_user_role = info._id;
+                console.log(info);
+                $scope.default_user_role = info.default_user_role;
             }, function(error) {
-                    console.log(error);
+                console.log(error);
             });
 
             /**
@@ -34,6 +36,23 @@ angular.module('harvestv2')
             };
 
             /**
+             * Intended for users that are already registered.  Queries for
+             * currently logged in user.
+             */
+            CurrentUserFactory.query($routeParams, function(currentuser) {
+                if(currentuser) {
+                    $routeParams.id = currentuser._id;
+                    UserFactory.show($routeParams, function (user) {
+                        $scope.current_user = user;
+                    }, function (error) {
+                        console.log(error);
+                    });
+                }
+            }, function(error) {
+                console.log(error);
+            });
+
+            /**
              * Function creates user if all checks have passed
              * Also hashes the password for transmission.
              */
@@ -41,7 +60,7 @@ angular.module('harvestv2')
                 if (!$scope.signupForm.$invalid &&
                     $scope.validatePasswordMatch($scope.user.us_password, $scope.passwordConfirm) &&
                     $scope.agreeChecked) {
-
+                    $scope.user.us_user_role = $scope.default_user_role;
                     $scope.user.us_password = CryptoJS.SHA1($scope.user.us_password).toString(CryptoJS.enc.Hex);
 
                     UserFactory.create($scope.user, function(user) {
@@ -87,18 +106,18 @@ angular.module('harvestv2')
                     $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
                 });
             };
+
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','AppDisableFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, AppDisableFactory, PlatformFactory) {
-
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
             $scope.app = {};
-
+            $scope.user = {};
             $scope.searchText = "";
 
-            /*
-             Gets the current user so we can pass the id to get all their apps - we could also have grabbed their id from the req.user.id instead of doing this but the endpoint was already created to expect an ID being passed to it
-             */
+            /**
+             * Gets the current user so we can pass the id to get all their apps - we could also have grabbed their id from the req.user.id instead of doing this but the endpoint was already created to expect an ID being passed to it
+             **/
             CurrentUserFactory.query($routeParams, function(user) {
                 $routeParams.id = user._id;
                 UserAppsFactory.query($routeParams, function(apps) {//gets all applications for this specific user
@@ -107,13 +126,14 @@ angular.module('harvestv2')
                 }, function(error) {
                     console.log(error);
                 });
+
             }, function(error) {
                 console.log(error);
             });
 
             $scope.createApp = function () {
                 PlatformFactory.show(function(info) {
-                    $scope.app.ap_app_role = info._id;//acquires the default role for the app before creating it
+                    $scope.app.ap_app_role = info.default_app_role._id;//acquires the default role for the app before creating it
                     AppFactory.create($scope.app, function(app) {
                         $scope.apps.push(app);
                         $scope.app = {};
@@ -125,14 +145,22 @@ angular.module('harvestv2')
                 });
             };
 
+            /**
+             * Is Application Active?
+             * @param app_status
+             * @returns {boolean}
+             */
             $scope.isAppActive = function (app_status) {
                 return app_status == 'active';
-            }
+            };
 
-            $scope.setAppState = function (index, state) {//index is the index of the app in $scope.apps;
-                $routeParams.app_status = state;
-                $routeParams.id = $scope.apps[index]._id;//set the app id for the request to be the one associated with the app we are toggling.
-                AppDisableFactory.setState($routeParams, {id:$routeParams.id, app_status:$routeParams.app_status}, function(app) {
+            /**
+             * enable or disable the app - index is the index of the app in $scope.apps;
+             * @param index
+             */
+            $scope.setAppState = function (index, state) {
+                AppFactory.update({id: $scope.apps[index]._id},
+                    {ap_app_status: state}, function(app) {
                     $scope.apps[index].ap_app_status = app.ap_app_status;
                 }, function(error) {
                     console.log(error);
@@ -140,17 +168,25 @@ angular.module('harvestv2')
             };
         }
     ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
-        'AuthenticationFactory', 'CurrentUserFactory',
-        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory) {
+        'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory, UserLogoutFactory) {
 
             $scope.userLoggedIn = false;
 
-            CurrentUserFactory.query($routeParams, function(user) {
-                $scope.user = user;
-                if ($scope.user._id !== undefined) {
-                    $scope.userLoggedIn = true;
+            $scope.logout = function() {
+                UserLogoutFactory.logout(function(response) {
+                    $location.url('/');
+                }, function(error) {
+                });
+            };
+
+            CurrentUserFactory.query(function(user) {
+                if(user) {
+                    $scope.current_user = user;
+                    if ($scope.current_user._id !== undefined) {
+                        $scope.userLoggedIn = true;
+                    }
                 }
-                console.log(user);
             }, function(error) {
                 console.log(error);
             });

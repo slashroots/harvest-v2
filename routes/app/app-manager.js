@@ -6,6 +6,8 @@ var model = require('../../models/db'),
     Common = require('../../util/common-util');
 var App = model.App
 
+var logging = require('../../util/logging-util');
+
 /**
  * Find all applications on the platform, should be accessible by only
  * platform administrators
@@ -22,7 +24,7 @@ exports.getApplications = function(req, res, next) {
             } else {
                 res.send(docs);
             }
-    });
+        });
 };
 
 /**
@@ -37,11 +39,12 @@ exports.createApplication = function(req, res, next) {
     app.ap_app_token = Common.getRandomToken();
     app.ap_app_status = Common.APP_ACTIVE;
     app.us_app_user = req.user._id;
-    console.log(app);
     app.save(function(err) {
         if(err) {
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "The application could not be saved.",false, app);
             next(err);
         } else {
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "An application was successfully created.",true, null, app);
             res.send(app);
         }
     });
@@ -67,28 +70,19 @@ exports.getAppByID = function(req, res, next) {
 };
 
 /**
- * Modify an app
+ * Modify an application
+ * TODO:  Need to implement rules based on application status
  */
 exports.modifyApp = function(req, res, next) {
-    if (req.query.app_status != undefined) {
-        App.findById(req.params.id)
-            .exec(function(err, app) {
-                if(err) {
-                    next(err);
-                } else {
-                    if (req.query.app_status == Common.APP_ACTIVE || req.query.app_status == Common.APP_DISABLED) {//if the state can be set by a user
-                        if (app.us_app_user == req.user._id) res.send(setState(app, req.query.app_status));//check if the app belongs to the currently signed in user before setting it
-                    }
-                }
-            });
-    }
+    App.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, function(err, doc) {
+        if(err) {
+            next(err);
+        } else {
+            res.send(doc);
+        }
+    });
 };
 
-function setState (app, state) {
-    app.ap_app_status = state;
-    app.save();
-    return app;
-}
 
 /**
  * Get applications owned by the authenticated user.
@@ -98,7 +92,7 @@ function setState (app, state) {
 exports.getAppsByUserID = function(req, res) {
     App.find({us_app_user: req.params.id}).exec(function(err, docs) {
         if(err) {
-           next(err);
+            next(err);
         } else {
             res.send(docs);
         }
