@@ -39,7 +39,6 @@ exports.createApplication = function(req, res, next) {
     app.ap_app_token = Common.getRandomToken();
     app.ap_app_status = 'active';
     app.us_app_user = req.user._id;
-    console.log(app);
     app.save(function(err) {
         if(err) {
             logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "The application could not be saved.",false, app);
