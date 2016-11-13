@@ -9,7 +9,7 @@
 	<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom CSS -->
-	<link href="/stylesheets/style.css" rel="stylesheet">
+	<!--<link href="/stylesheets/style.css" rel="stylesheet">-->
 	<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
 
 
@@ -23,7 +23,9 @@
 	<base href="/">
 
   </head>
-	<body ng-app="harvestv2" layout="column" layout-fill>
+
+  <div ng-include src="'/partials/common/navigation.html'"></div>
+  <body ng-app="harvestv2" layout="column" layout-fill>
 
 		<div ng-include id="dev-nav" src="'/partials/common/navigation.html'"></div>
 
