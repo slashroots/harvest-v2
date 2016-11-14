@@ -8,7 +8,7 @@ var Fakeblock = require('fakeblock');
 var Sequelize = require('sequelize');
 
 /**
- * Retrieves all farmers.  TODO: Pagination necessary
+ * Retrieves all farmers.
  * @param req
  * @param res
  * @param next
