@@ -1,20 +1,15 @@
 
-
-<body id="admin-dashboard">
-
-<div ng-include src="'../partials/common/navigation.html'"></div>
-
-    <!-- navbar-header -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">Harvest API</a>
-    </div>
-    <!-- /.navbar-header -->
+<!-- navbar-header -->
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="index.html">Harvest API</a>
+</div>
+<!-- /.navbar-header -->
 
 <div ng-include src="'../partials/common/admin-sidebar.html'"></div>
 
@@ -29,7 +24,7 @@
                     <div class="col-lg-12">
                         <ul class="breadcrumb">
                             <li><a href="/#/admin/">Dashboard</a></li>
-                            <li class="active">Apps</li>
+                            <li class="active">{{entity | titleCase}} Activities</li>
                         </ul>
                     </div>
                 </div>
@@ -38,73 +33,98 @@
 
             <!-- Right Panel Content -->
             <div class="right-panel-content">
-                <h4 class="title text-uppercase"><strong>Developer Apps</strong></h4>
+                <h4 class="title text-uppercase"><strong>{{entity | titleCase}} Activities</strong></h4>
                 <div class="row">
                     <div class="col-md-12">
+
                         <!-- panel -->
                         <div class="panel panel-default">
 
-                            <!-- /.panel-heading -->
+                            <!-- panel-heading -->
                             <div class="panel-heading">
-                                <h5>Developer Apps</h5>
+                                <h5>{{entity | titleCase}} Activity Log</h5>
                             </div>
                             <!-- /.panel-heading -->
 
-                            <!-- /.panel-body -->
-                            <div class="panel-body">
-                                <p>Search : <input ng-change="filterAppsByName()" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
-                                <table width="100%" class="table table-striped table-responsive table-bordered table-hover"  at-table at-paginated at-list="appsSearch" at-config="config">
+                            <!-- panel-body -->
+                            <div ng-if="entity=='user'" class="panel-body">
+                                <!-- table-responsive -->
+                                <p>Search : <input ng-change="filterUserLogs()" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
+                                <table width="100%" class="table table-striped table-responsive table-bordered table-hover"  at-table at-paginated at-list="{{entity}}LogsSearch" at-config="config">
                                     <thead>
                                     <tr>
-                                        <th>App Name</th>
-                                        <th>Description</th>
-                                        <th style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">API Key</th>
-                                        <th>Role</th>
-                                        <th>Owner</th>
-                                        <th><span style="visibility: hidden">Actions</span></th>
+                                        <th>Log Description</th>
+                                        <th>Log Time</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <!--<th>Role</th>-->
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td at-title="App Name" at-implicit at-attribute="ap_app_name" width="300"></td>
-                                        <td at-title="Description" at-implicit at-attribute="ap_app_desc" width="300"></td>
-                                        <td at-title="API Key" at-attribute="ap_app_token" width="300"><p style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">{{ item.ap_app_token }}</p></td>
-                                        <td at-title="Role" at-attribute="app.ap_app_role.ro_role_name" width="300">{{ item.ap_app_role.ro_role_name }}</td>
-                                        <td at-title="Owner" at-attribute="app.us_app_user.us_user_first_name + app.us_app_user.us_user_last_name" width="300">{{item.us_app_user.us_user_first_name + ' ' + item.us_app_user.us_user_last_name}}</td>
+                                        <td at-title="Log Description" at-implicit at-attribute="lo_log_description" width="300"></td>
+                                        <td at-title="Name" at-attribute="lo_log_user.us_user_first_name + item.lo_log_user.us_user_last_name" width="300"><p style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">{{ item.lo_log_user.us_user_first_name + ' ' + item.lo_log_user.us_user_last_name}}</p></td>
+                                        <td at-title="Username" at-attribute="us_username" width="300"><p style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">{{ item.lo_log_user.us_username}}</p></td>
+                                        <td at-title="Email" at-attribute="lo_log_user.us_email_address" width="300">{{ item.lo_log_user.us_email_address  }}</td>
+                                        <td at-title="Log Time" at-implicit at-attribute="lo_log_date" width="300"></td>
+                                        <!--<td at-title="Role" at-attribute="app.us_app_user.us_user_first_name + app.us_app_user.us_user_last_name" width="300">{{item.us_app_user.us_user_first_name + ' ' + item.us_app_user.us_user_last_name}}</td>-->
                                     </tr>
                                     </tbody>
                                 </table>
                                 <!-- /.table-responsive -->
-                                <at-pagination at-list="appsSearch" at-config="config"></at-pagination>
+                                <at-pagination at-list="userLogsSearch" at-config="config"></at-pagination>
 
+                                <!-- /.table-responsive -->
+                            </div>
+                            <div ng-if="entity=='app'" class="panel-body">
+                                <!-- table-responsive -->
+                                <p>Search : <input ng-change="filterAppLogs()" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
+                                <table width="100%" class="table table-striped table-responsive table-bordered table-hover"  at-table at-paginated at-list="appLogsSearch" at-config="config">
+                                    <thead>
+                                    <tr>
+                                        <th>Log Description</th>
+                                        <th>Log Time</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <!--<th>Role</th>-->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                                <!-- /.table-responsive -->
+                                <at-pagination at-list="appLogsSearch" at-config="config"></at-pagination>
+
+                                <!-- /.table-responsive -->
                             </div>
                             <!-- /.panel-body -->
-
                         </div>
                         <!-- /.panel -->
                     </div>
                 </div>
             </div>
+            <!-- ./Right Panel Content -->
 
-            <!-- Disable App Modal -->
+            <!-- Delete App Modal -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="modal fade" id="disableAppModal" role="dialog">
+                        <div class="modal fade" id="disableUserModal" role="dialog">
                             <div class="modal-dialog">
 
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times; <span>Close</span></button>
-                                        <h4 class="modal-title">Disable [APP'S NAME]?</h4>
+                                        <h4 class="modal-title">Disable [USER'S NAME]?</h4>
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="">
 
-                                                    <p>Disabling <strong>[APP'S NAME]</strong> will:</p>
+                                                    <p>Disabling <strong>[USER'S NAME]</strong> will:</p>
                                                     <ul id="admin-delete-user-txt">
                                                         <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales libero ut tempor vehicula. Mauris malesuada, lorem nec congue pharetra.</li>
                                                         <br/>
@@ -129,7 +149,9 @@
                     </div>
                 </div>
             </div>
-            <!-- /.Disable App Modal -->
+            <!-- /.Delete App Modal -->
+
+
 
             <!-- Footer -->
             <footer>
@@ -159,5 +181,3 @@
     </div>
 </div>
 <!-- ./Page Content -->
-
-</body>

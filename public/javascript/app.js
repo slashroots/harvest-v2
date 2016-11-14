@@ -10,12 +10,10 @@ angular.module('harvestv2', ["ngRoute", "harvestv2.services", "angular-table"]).
     $routeProvider.when('/dashboard', {templateUrl: '../partials/dashboard.html', controller: 'UserDashboardCtrl'});
     $routeProvider.when('/profile', {templateUrl: '../partials/profile.html', controller: 'UserCtrl'});
     $routeProvider.when('/activate/:token', {templateUrl: '../partials/signin.html', controller: 'UserLoginCtrl'});
-    $routeProvider.when('/admin', {templateUrl: '../partials/admin-dashboard.html', controller: 'AdminDashboardCtrl'});
-    $routeProvider.when('/admin/apps', {templateUrl: '../partials/admin-dashboard-apps.html', controller: 'AdminDashboardCtrl'});
-    $routeProvider.when('/admin/users', {templateUrl: '../partials/admin-dashboard-user-accounts.html', controller: 'AdminDashboardCtrl'});
-    $routeProvider.when('/admin/userlogs', {templateUrl: '../partials/admin-dashboard-user-activities.html', controller: 'AdminDashboardCtrl'});
-    $routeProvider.when('/admin/applogs', {templateUrl: '../partials/admin-dashboard-app-activities.html', controller: 'AdminDashboardCtrl'});
-    $routeProvider.when('/admin/roles', {templateUrl: '../partials/admin-dashboard-roles.html', controller: 'AdminDashboardCtrl'});
+    $routeProvider.when('/admin', {templateUrl: '../partials/admin/dashboard.html', controller: 'AdminDashboardCtrl'});
+    $routeProvider.when('/admin/:entity', {templateUrl: '../partials/admin/dashboard-entity.html', controller: 'AdminDashboardCtrl'});
+    $routeProvider.when('/admin/:entity/logs', {templateUrl: '../partials/admin/dashboard-entity-logs.html', controller: 'AdminActivityCtrl'});
+    $routeProvider.when('/admin/:entity/roles', {templateUrl: '../partials/admin/dashboard-roles.html', controller: 'AdminRoleCtrl'});
     $routeProvider.otherwise({redirectTo: '/'});
 }]).config(['$httpProvider',function($httpProvider) {
     $httpProvider.interceptors.push('HTTPInterceptor');

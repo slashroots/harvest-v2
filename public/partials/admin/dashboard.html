@@ -1,9 +1,4 @@
 
-
-<body id="admin-dashboard">
-
-<div ng-include src="'/partials/common/navigation.html'"></div>
-
     <!-- navbar-header -->
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -58,10 +53,10 @@
                                     <thead>
                                     <tr>
                                         <th>Log Description</th>
-                                        <th>Log Time</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <!--<th>Role</th>-->
+                                        <th>Log Time</th>
+                                        <th>Role</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -70,7 +65,7 @@
                                         <td at-title="Name" at-attribute="lo_log_user.us_user_first_name + item.lo_log_user.us_user_last_name" width="300"><p style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">{{ item.lo_log_user.us_user_first_name + ' ' + item.lo_log_user.us_user_last_name}}</p></td>
                                         <td at-title="Email" at-attribute="lo_log_user.us_email_address" width="300">{{ item.lo_log_user.us_email_address  }}</td>
                                         <td at-title="Log Time" at-implicit at-attribute="lo_log_date" width="300"></td>
-                                        <!--<td at-title="Role" at-attribute="app.us_app_user.us_user_first_name + app.us_app_user.us_user_last_name" width="300">{{item.us_app_user.us_user_first_name + ' ' + item.us_app_user.us_user_last_name}}</td>-->
+                                        <td at-title="Role" at-attribute="app.lo_log_user.us_user_role" width="300">{{item.lo_log_user.us_user_role}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -180,5 +175,3 @@
     </div>
 </div>
 <!-- ./Page Content -->
-
-</body>

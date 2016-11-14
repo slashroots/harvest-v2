@@ -106,7 +106,7 @@ services.factory('UserActivationFactory', function($resource) {
     });
 });
 
-/*
+/**
  * Gets current logged in user
  */
 services.factory('CurrentUserFactory', function($resource) {
@@ -129,7 +129,6 @@ services.factory('LogsFactory', function($resource) {
 
 /**
  * Terminate user's session
->>>>>>> develop
  */
 services.factory('UserLogoutFactory', function($resource) {
     return $resource('/logout', {}, {

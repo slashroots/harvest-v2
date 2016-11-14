@@ -97,6 +97,10 @@ angular.module('harvestv2')
                 });
             }
 
+            /**
+             * If the detected user is an administrator then direct them to the admin dashboard otherwise
+             * the regular dashboard
+             */
             $scope.login = function() {
                 $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);
                 AuthenticationFactory.login($scope.credentials, function(response) {
