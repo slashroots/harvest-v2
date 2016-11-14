@@ -4,6 +4,7 @@
 
 var express = require('express'),
     User = require('./user'),
+    Common = require('../common/auth-rules')
     App = require('../app/app-manager'),
     passport = require('passport'),
     router = express.Router();
@@ -11,15 +12,15 @@ var express = require('express'),
 /**
  * End Points relevant to Application Management
  */
-router.get('/user/:id', User.getUser);
-router.get('/users', User.getAllUsers);
+router.get('/user/:id', Common.isAuthenticated, User.getUser);
+router.get('/users', Common.isAdmin, User.getAllUsers);
 router.post('/user', User.createUser);
 router.get('/user', User.getCurrentUser);
 
-router.get('/user/:id/apps', App.getAppsByUserID);
+router.get('/user/:id/apps', Common.isAuthenticated, App.getAppsByUserID);
 
-router.post('/role', User.createRole);
-router.get('/roles', User.getRoles);
+router.post('/role', Common.isAdmin, User.createRole);
+router.get('/roles',Common.isAdmin, User.getRoles);
 
 router.get('/activate/:token', User.activateUser);
 

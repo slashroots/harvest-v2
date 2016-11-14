@@ -42,7 +42,7 @@ var UserSchema = new Schema({
     us_address: {type: String, required: true},
     us_company: {type: String, required: false},
     us_intended_use: {type: String, required: false},
-    us_user_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"},
+    us_user_role: {type: String, required: true},
     us_activation_token: {type: String, required: true}
 });
 
