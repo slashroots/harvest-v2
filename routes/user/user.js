@@ -62,10 +62,9 @@ passport.use(new TokenStrategy(
 passport.use(new LocalStrategy({passReqToCallback:true},
     function(req, username, password, done) {
         User.findOne({ us_username: username }, 'us_username ' +
-            'us_user_first_name us_user_last_name us_email_address us_contact' +
+            'us_user_first_name us_user_last_name us_email_address us_contact ' +
             'us_user_role us_state us_password' ,
             function (err, user) {
-                console.log(err, user);
                 if (err) {
                     logging.accessLogger(null,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "A database error occurred while authenticating.",false);
                     return done(err);

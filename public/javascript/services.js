@@ -115,33 +115,15 @@ services.factory('CurrentUserFactory', function($resource) {
     });
 });
 
-/**
- * Get all user activities
- */
-services.factory('UserLogsFactory', function($resource) {
-    return $resource('/logs', {}, {
-        query: { method: 'GET', isArray: true, params: {lo_log_level: 'user_activity'}}
-    });
-});
 
 /**
- * Get all application activities
+ * Get all activities, specify the activity in order to differentiate the user
+ * activities from application activities.  Accepts query parameters in order to
+ * get this task done.
  */
-services.factory('ApplicationLogsFactory', function($resource) {
+services.factory('LogsFactory', function($resource) {
     return $resource('/logs', {}, {
-        query: {method: 'GET', isArray: true, params: {lo_log_level: 'app_activity'}}
-    });
-});
-
-/**
-<<<<<<< HEAD
- * Terminate user session
-=======
- * Get user's app activities
- */
-services.factory('UserLogsFactory', function($resource) {
-    return $resource('/user/:id/logs', {}, {
-        query: {method: 'GET', params: {lo_log_level: 'app_activity'}}
+        query: {method: 'GET', isArray: true}
     });
 });
 
