@@ -4,7 +4,23 @@
 
 var services = angular.module('harvestv2.services', ['ngResource']);
 
-//creates a user
+/**
+ *
+ * Factory to be used intercept all 401 error messages
+ * and direct user to login page.
+ *
+ **/
+services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
+    return {
+        responseError: function(response){
+            if(response.status == 400) {
+                var encodedURL = encodeURIComponent($location.absUrl());
+                window.location = "#/signin?goTo=" + encodedURL;
+            }
+        }
+    };
+}]);
+
 
 /**
  * Factory used in creating and accessing User details
@@ -71,13 +87,15 @@ services.factory('UserAppsFactory', function($resource) {
 });
 
 /**
- * Create an application
+ * Create/Modify an application
  */
 services.factory('AppFactory', function($resource) {
-    return $resource('/app', {}, {
-        create: { method: 'POST'}
+    return $resource('/app/:id', {}, {
+        create: { method: 'POST'},
+        update: { method: 'PUT', params: {id: '@id'}}
     });
 });
+
 
 /**
  * Activates a user account via the token
@@ -116,7 +134,20 @@ services.factory('ApplicationLogsFactory', function($resource) {
 });
 
 /**
+<<<<<<< HEAD
  * Terminate user session
+=======
+ * Get user's app activities
+ */
+services.factory('UserLogsFactory', function($resource) {
+    return $resource('/user/:id/logs', {}, {
+        query: {method: 'GET', params: {lo_log_level: 'app_activity'}}
+    });
+});
+
+/**
+ * Terminate user's session
+>>>>>>> develop
  */
 services.factory('UserLogoutFactory', function($resource) {
     return $resource('/logout', {}, {

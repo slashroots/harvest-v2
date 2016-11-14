@@ -31,13 +31,9 @@
 </head>
 
 <body ng-app="harvestv2" layout="column" layout-fill>
-
-<ng-view>
-
-
-
-
-</ng-view>
+<div ng-include src="'/partials/common/navigation.html'"></div>
+<ng-view></ng-view>
+<ng-include src="'/partials/common/footer.html'"></ng-include>
 
 <!-- jQuery Version 1.11.1 -->
 <script src="/bower_components/jquery/dist/jquery.js"></script>
