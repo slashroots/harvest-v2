@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 
 mongoose.connect(process.env.MONGOLAB_URI);
 
+
 /**
  * Intended to be used for the Application Manager.  Tokens are not given to the users
  * but are instead assigned to an application that is created by the user.
@@ -42,7 +43,7 @@ var UserSchema = new Schema({
     us_address: {type: String, required: true},
     us_company: {type: String, required: false},
     us_intended_use: {type: String, required: false},
-    us_user_role: {type: Schema.Types.ObjectId, required: true, ref: "Role"},
+    us_user_role: {type: String, required: true},
     us_activation_token: {type: String, required: true}
 });
 
