@@ -16,7 +16,9 @@ services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
             if(response.status == 400) {
                 var encodedURL = encodeURIComponent($location.absUrl());
                 window.location = "#/signin?goTo=" + encodedURL;
+                return;
             }
+            return $q.reject(response);
         }
     };
 }]);
