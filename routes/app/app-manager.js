@@ -6,6 +6,8 @@ var model = require('../../models/db'),
     Common = require('../../util/common-util');
 var App = model.App
 
+var logging = require('../../util/logging-util');
+
 /**
  * Find all applications on the platform, should be accessible by only
  * platform administrators
@@ -16,13 +18,14 @@ var App = model.App
 exports.getApplications = function(req, res, next) {
     App.find()
         .where('us_app_user', req.user._id)
+        .populate('us_app_user ap_app_role')
         .exec(function(err, docs) {
             if(err) {
                 next(err);
             } else {
                 res.send(docs);
             }
-    });
+        });
 };
 
 /**
@@ -35,13 +38,14 @@ exports.getApplications = function(req, res, next) {
 exports.createApplication = function(req, res, next) {
     var app = new App(req.body);
     app.ap_app_token = Common.getRandomToken();
-    app.ap_app_status = 'active';
+    app.ap_app_status = Common.APP_ACTIVE;
     app.us_app_user = req.user._id;
-    console.log(app);
     app.save(function(err) {
         if(err) {
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "The application could not be saved.",false, app);
             next(err);
         } else {
+            logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "An application was successfully created.",true, null, app);
             res.send(app);
         }
     });
@@ -66,6 +70,20 @@ exports.getAppByID = function(req, res, next) {
         });
 };
 
+/**
+ * Modify an application
+ * TODO:  Need to implement rules based on application status
+ */
+exports.modifyApp = function(req, res, next) {
+    App.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, function(err, doc) {
+        if(err) {
+            next(err);
+        } else {
+            res.send(doc);
+        }
+    });
+};
+
 
 /**
  * Get applications owned by the authenticated user.
@@ -75,7 +93,7 @@ exports.getAppByID = function(req, res, next) {
 exports.getAppsByUserID = function(req, res) {
     App.find({us_app_user: req.params.id}).exec(function(err, docs) {
         if(err) {
-           next(err);
+            next(err);
         } else {
             res.send(docs);
         }

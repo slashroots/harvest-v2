@@ -13,22 +13,25 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
+                <li class="active">
+                    <a href="/#/dashboard">Dashboard</a>
+                </li>
                 <li>
-                    <a href="">ABIS Home Page <i class="fa fa-external-link fa-fw"></i></a>
+                    <a href="docs">Documentation</a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.abisjamaica.com.jm/">ABIS Home Page <i class="fa fa-external-link fa-fw"></i></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="">Documentation</a>
-                </li>
                 <li ng-if="userLoggedIn" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                        <i class="fa fa-user fa-fw"></i> <strong>{{user.us_user_first_name}} {{user.us_user_last_name}}</strong> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> <strong>{{current_user.us_user_first_name}} {{current_user.us_user_last_name}}</strong> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/#/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="/#/profile">Account Settings</a>
                         </li>
-                        <li><a href="/#/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a ng-click="logout()" href=""><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

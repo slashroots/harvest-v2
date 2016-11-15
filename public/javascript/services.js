@@ -4,7 +4,23 @@
 
 var services = angular.module('harvestv2.services', ['ngResource']);
 
-//creates a user
+/**
+ *
+ * Factory to be used intercept all 401 error messages
+ * and direct user to login page.
+ *
+ **/
+services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
+    return {
+        responseError: function(response){
+            if(response.status == 400) {
+                var encodedURL = encodeURIComponent($location.absUrl());
+                window.location = "#/signin?goTo=" + encodedURL;
+            }
+        }
+    };
+}]);
+
 
 /**
  * Factory used in creating and accessing User details
@@ -14,6 +30,12 @@ services.factory('UserFactory', function($resource) {
         create: { method: 'POST'},
         show: {method: 'GET',params: {id: '@id'}}
     });
+});
+
+services.factory('UsersFactory', function($resource) {
+   return $resource('/users', {}, {
+       query: { method: 'GET', isArray: true},
+   });
 });
 
 /**
@@ -65,13 +87,15 @@ services.factory('UserAppsFactory', function($resource) {
 });
 
 /**
- * Create an application
+ * Create/Modify an application
  */
 services.factory('AppFactory', function($resource) {
-    return $resource('/app', {}, {
-        create: { method: 'POST'}
+    return $resource('/app/:id', {}, {
+        create: { method: 'POST'},
+        update: { method: 'PUT', params: {id: '@id'}}
     });
 });
+
 
 /**
  * Activates a user account via the token
@@ -82,11 +106,32 @@ services.factory('UserActivationFactory', function($resource) {
     });
 });
 
-/*
+/**
  * Gets current logged in user
  */
 services.factory('CurrentUserFactory', function($resource) {
     return $resource('/user', {}, {
         query: { method: 'GET'}
+    });
+});
+
+
+/**
+ * Get all activities, specify the activity in order to differentiate the user
+ * activities from application activities.  Accepts query parameters in order to
+ * get this task done.
+ */
+services.factory('LogsFactory', function($resource) {
+    return $resource('/logs', {}, {
+        query: {method: 'GET', isArray: true}
+    });
+});
+
+/**
+ * Terminate user's session
+ */
+services.factory('UserLogoutFactory', function($resource) {
+    return $resource('/logout', {}, {
+        logout: { method: 'GET'}
     });
 });

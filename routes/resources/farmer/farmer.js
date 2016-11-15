@@ -6,6 +6,7 @@ var sql = require('mssql');
 var farmersAcl = require('../../../acl/farmers.acl.js');
 var Fakeblock = require('fakeblock');
 var Sequelize = require('sequelize');
+var logging = require('../../../util/logging-util');
 
 /**
  * Retrieves all farmers.
@@ -121,14 +122,19 @@ exports.getAllFarmers = function(req, res, next) {
     delete req.query.limit;
     delete req.query.offset;
 
+    var rowCounter = 0;//this will count the rows returned for logging purposes
+
     Farmer.findAll({
         where: req.query,
         offset: parseInt(offset),
         limit: parseInt(limit)
     }).then(function(farmers) {
-            for (var i = 0;i<farmers.length;i++) farmers[i] = fakeblock.applyAcl(farmers[i], 'get');
+            for (var i = 0;i<farmers.length;i++) {
+                farmers[i] = fakeblock.applyAcl(farmers[i], 'get');
+                rowCounter++;
+            }
+            req.log_id = logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_APP_ACTIVITY,rowCounter + " farmer records were returned for this request.",true);
             res.send(farmers);
-
     });
 };
 
