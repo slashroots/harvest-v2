@@ -83,8 +83,9 @@ angular.module('harvestv2')
         }
     ]
 ).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
-        'AuthenticationFactory', 'PlatformFactory',
-        function($scope, $location, $routeParams, UserFactory, UserActivationFactory, AuthenticationFactory, PlatformFactory) {
+        'AuthenticationFactory', 'SharedState',
+        function($scope, $location, $routeParams, UserFactory, UserActivationFactory,
+                 AuthenticationFactory, SharedState) {
             var credentials = {};
 
             if($routeParams.token){
@@ -97,10 +98,19 @@ angular.module('harvestv2')
                 });
             }
 
+            /**
+             * If the detected user is an administrator then direct them to the admin dashboard otherwise
+             * the regular dashboard
+             */
             $scope.login = function() {
                 $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);
                 AuthenticationFactory.login($scope.credentials, function(response) {
-                    $location.url('/dashboard');
+                    SharedState.setCurrentUser(response);
+                    if(response.us_user_role) {
+                        $location.url('/admin');
+                    } else {
+                        $location.url('/dashboard');
+                    }
                 }, function(error) {
                     $scope.success = false;
                     $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
@@ -109,8 +119,10 @@ angular.module('harvestv2')
 
         }
     ]
-).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory', 'UserAppsFactory', 'AppFactory','PlatformFactory',
-        function($scope, $location, $routeParams, CurrentUserFactory, UserAppsFactory, AppFactory, PlatformFactory) {
+).controller("UserDashboardCtrl", ['$scope', '$location', '$routeParams', 'CurrentUserFactory',
+        'UserAppsFactory', 'AppFactory','PlatformFactory',
+        function($scope, $location, $routeParams, CurrentUserFactory,
+                 UserAppsFactory, AppFactory, PlatformFactory) {
             $scope.app = {};
             $scope.user = {};
             $scope.searchText = "";
@@ -161,38 +173,57 @@ angular.module('harvestv2')
             $scope.setAppState = function (index, state) {
                 AppFactory.update({id: $scope.apps[index]._id},
                     {ap_app_status: state}, function(app) {
-                    $scope.apps[index].ap_app_status = app.ap_app_status;
-                }, function(error) {
-                    console.log(error);
-                });
+                        $scope.apps[index].ap_app_status = app.ap_app_status;
+                    }, function(error) {
+                        console.log(error);
+                    });
             };
         }
     ]).controller("NavigationCtrl", ['$scope', '$location', '$routeParams',
-        'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory',
-        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory, UserLogoutFactory) {
+        'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory', 'SharedState',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory, UserLogoutFactory,
+                 SharedState) {
+            $scope.current_user = "";
 
             $scope.userLoggedIn = false;
 
             $scope.logout = function() {
                 UserLogoutFactory.logout(function(response) {
                     $location.url('/');
+                    SharedState.setCurrentUser({});
+                    $scope.userLoggedIn=false;
                 }, function(error) {
                 });
             };
 
-            CurrentUserFactory.query(function(user) {
-                if(user) {
-                    $scope.current_user = user;
-                    if ($scope.current_user._id !== undefined) {
-                        $scope.userLoggedIn = true;
-                    }
+            /**
+             * Monitor changes to the user object within the sharedState.
+             */
+            $scope.$watch(function () { return SharedState.getCurrentUser();}, function (value) {
+                $scope.current_user = value;
+                if ($scope.current_user._id !== undefined) {
+                    $scope.userLoggedIn = true;
+                } else {
+                    $scope.userLoggedIn = false;
                 }
-            }, function(error) {
-                console.log(error);
             });
-
-
         }
     ]
-);
-
+)
+/**
+ * This is used to share the user object of the currently logged in user.
+ * Must setCurrentUser upon login and logout.
+ */
+    .factory("SharedState", function () {
+        var user = {};
+        function getCurrentUser() {
+            return user;
+        }
+        function setCurrentUser(new_user) {
+            user = new_user;
+        }
+        return {
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser
+        }
+    });

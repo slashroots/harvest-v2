@@ -18,6 +18,7 @@ var logging = require('../../util/logging-util');
 exports.getApplications = function(req, res, next) {
     App.find()
         .where('us_app_user', req.user._id)
+        .populate('us_app_user ap_app_role')
         .exec(function(err, docs) {
             if(err) {
                 next(err);

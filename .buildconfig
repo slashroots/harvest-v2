@@ -1,9 +1,0 @@
-[default]
-name=Default
-device=local
-runtime=host
-config-opts=
-prefix=/home/thinkking/.cache/gnome-builder/install/harvest-v2/host
-default=true
-
-[default.environment]
