@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 
 mongoose.connect(process.env.MONGOLAB_URI);
 
+
 /**
  * Intended to be used for the Application Manager.  Tokens are not given to the users
  * but are instead assigned to an application that is created by the user.

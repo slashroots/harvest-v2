@@ -28,11 +28,13 @@ exports.isAuthenticated = function (req, res, next) {
  * @param next
  */
 exports.isAdmin = function(req, res, next) {
-    if (req.user.role == 'admin') {
-        return next();
-    } else {
-        var error = new Error("Authorization Necessary - Protected Resource");
-        error.status = 401;
-        return next(error);
+    if(req.isAuthenticated()) {
+        if (req.user.us_user_role == 'admin') {
+            return next();
+        } else {
+            var error = new Error("Authorization Necessary - Protected Resource");
+            error.status = 401;
+            return next(error);
+        }
     }
 };

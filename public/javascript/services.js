@@ -32,6 +32,12 @@ services.factory('UserFactory', function($resource) {
     });
 });
 
+services.factory('UsersFactory', function($resource) {
+   return $resource('/users', {}, {
+       query: { method: 'GET', isArray: true},
+   });
+});
+
 /**
  * Factory used to get the Platform defaults
  */
@@ -100,7 +106,7 @@ services.factory('UserActivationFactory', function($resource) {
     });
 });
 
-/*
+/**
  * Gets current logged in user
  */
 services.factory('CurrentUserFactory', function($resource) {
@@ -109,40 +115,15 @@ services.factory('CurrentUserFactory', function($resource) {
     });
 });
 
-/*
-<<<<<<< HEAD
- * Get all user activities
- */
-services.factory('UserLogsFactory', function($resource) {
-    return $resource('/logs', {}, {
-        query: { method: 'GET', params: {lo_log_level: 'user_activity'}}
-    });
-});
-
-/*
- * Get all application activities
- */
-services.factory('ApplicationLogsFactory', function($resource) {
-    return $resource('/logs', {}, {
-        query: { method: 'GET', params: {lo_log_level: 'app_activity'}}
-    });
-});
-
-/*
- * Get user's activities
- */
-services.factory('UserLogsFactory', function($resource) {
-    return $resource('/user/:id/logs', {}, {
-        query: { method: 'GET', params: {lo_log_level: 'user_activity'}}
-    });
-});
 
 /**
- * Get user's app activities
+ * Get all activities, specify the activity in order to differentiate the user
+ * activities from application activities.  Accepts query parameters in order to
+ * get this task done.
  */
-services.factory('UserLogsFactory', function($resource) {
-    return $resource('/user/:id/logs', {}, {
-        query: {method: 'GET', params: {lo_log_level: 'app_activity'}}
+services.factory('LogsFactory', function($resource) {
+    return $resource('/logs', {}, {
+        query: {method: 'GET', isArray: true}
     });
 });
 
