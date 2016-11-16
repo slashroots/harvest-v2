@@ -106,7 +106,7 @@ angular.module('harvestv2')
                 $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);
                 AuthenticationFactory.login($scope.credentials, function(response) {
                     SharedState.setCurrentUser(response);
-                    if(response.us_user_role) {
+                    if(response.us_user_role == 'admin') {
                         $location.url('/admin');
                     } else {
                         $location.url('/dashboard');
@@ -186,12 +186,14 @@ angular.module('harvestv2')
             $scope.current_user = "";
 
             $scope.userLoggedIn = false;
+            $scope.isAdmin = false;
 
             $scope.logout = function() {
                 UserLogoutFactory.logout(function(response) {
                     $location.url('/');
                     SharedState.setCurrentUser({});
                     $scope.userLoggedIn=false;
+                    $scope.isAdmin = false;
                 }, function(error) {
                 });
             };
@@ -206,6 +208,11 @@ angular.module('harvestv2')
                 $scope.current_user = user;
                 if ($scope.current_user._id !== undefined) {
                     $scope.userLoggedIn = true;
+                    if($scope.current_user.us_user_role == 'admin') {
+                        $scope.isAdmin = true;
+                    } else {
+                        $scope.isAdmin = false;
+                    }
                 } else {
                     $scope.userLoggedIn = false;
                 }
