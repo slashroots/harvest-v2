@@ -10,6 +10,8 @@ var session = require('express-session');
 var passport = require('passport');
 var routes = require('./routes/index');
 
+var logging = require('./util/logging-util');
+
 var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer'),
@@ -22,6 +24,7 @@ var model = require('./models/db');
 
 var User = model.User,
     App = model.App,
+    Log = model.Log,
     Role = model.Role;//these are used in the new ACL middleware I have defined in this file to be used before API endpoints
 
 /**
@@ -52,6 +55,7 @@ app.use(passport.session());
 
 var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
+    log = require('./routes/log/router-log'),
     farmer = require('./routes/resources/farmer/router-farmer');
 
 
@@ -63,6 +67,7 @@ app.use('/api', passport.authenticate('token', { session: false }),
 
 app.use('/', routes);
 app.use('/', app_manager);
+app.use('/', log);
 app.use('/', user);
 app.use('/', platform);
 app.use('/api', farmer);
@@ -70,9 +75,9 @@ app.use('/', docs);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -80,23 +85,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send({
-      message: err.message,
-      error: err
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.send({
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.send({
-    message: err.message,
-    error: {}
-  });
+    res.status(err.status || 500);
+    res.send({
+        message: err.message,
+        error: {}
+    });
 });
 
 
