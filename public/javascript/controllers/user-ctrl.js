@@ -197,6 +197,21 @@ angular.module('harvestv2')
             };
 
             /**
+             * In the event that the screen refreshes
+             * we can query the backend to give back
+             * the user details.
+             */
+            CurrentUserFactory.query(function(user) {
+                SharedState.setCurrentUser(user);
+                $scope.current_user = user;
+                if ($scope.current_user._id !== undefined) {
+                    $scope.userLoggedIn = true;
+                } else {
+                    $scope.userLoggedIn = false;
+                }
+            });
+
+            /**
              * Monitor changes to the user object within the sharedState.
              */
             $scope.$watch(function () { return SharedState.getCurrentUser();}, function (value) {
