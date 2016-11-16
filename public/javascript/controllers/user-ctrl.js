@@ -203,31 +203,29 @@ angular.module('harvestv2')
              * we can query the backend to give back
              * the user details.
              */
-            CurrentUserFactory.query(function(user) {
-                SharedState.setCurrentUser(user);
-                $scope.current_user = user;
-                if ($scope.current_user._id !== undefined) {
-                    $scope.userLoggedIn = true;
-                    if($scope.current_user.us_user_role == 'admin') {
-                        $scope.isAdmin = true;
+            var configureUI = function () {
+                CurrentUserFactory.query(function (user) {
+                    SharedState.setCurrentUser(user);
+                    $scope.current_user = user;
+                    if ($scope.current_user._id !== undefined) {
+                        $scope.userLoggedIn = true;
+                        if ($scope.current_user.us_user_role == 'admin') {
+                            $scope.isAdmin = true;
+                        } else {
+                            $scope.isAdmin = false;
+                        }
                     } else {
-                        $scope.isAdmin = false;
+                        $scope.userLoggedIn = false;
                     }
-                } else {
-                    $scope.userLoggedIn = false;
-                }
-            });
+                });
+            };
+            configureUI();
 
             /**
              * Monitor changes to the user object within the sharedState.
              */
             $scope.$watch(function () { return SharedState.getCurrentUser();}, function (value) {
-                $scope.current_user = value;
-                if ($scope.current_user._id !== undefined) {
-                    $scope.userLoggedIn = true;
-                } else {
-                    $scope.userLoggedIn = false;
-                }
+                configureUI();
             });
         }
     ]
