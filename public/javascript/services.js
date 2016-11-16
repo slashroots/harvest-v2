@@ -13,7 +13,7 @@ var services = angular.module('harvestv2.services', ['ngResource']);
 services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
     return {
         responseError: function(response){
-            if(response.status == 400) {
+            if(response.status == 401) {
                 var encodedURL = encodeURIComponent($location.absUrl());
                 window.location = "#/signin?goTo=" + encodedURL;
                 return;
