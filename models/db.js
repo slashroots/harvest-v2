@@ -6,7 +6,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/mongodb");
+mongoose.connect(process.env.MONGOLAB_URI);
 
 
 /**
