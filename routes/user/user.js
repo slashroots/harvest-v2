@@ -15,7 +15,6 @@ var User = model.User,
     Log = model.Log,
     App = model.App;
 
-
 /**
  * Function used to send the user details back the application
  * only after successfully authenticating.  This is intended
