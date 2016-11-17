@@ -31,6 +31,11 @@ angular.module('harvestv2')
                 }
             };
 
+            $scope.config = {//pagination configuration
+                itemsPerPage: 10,
+                fillLastPage: true
+            }
+
             /**
              * TODO: requires restrictions on the amount of logs retrieved
              */
@@ -75,6 +80,12 @@ angular.module('harvestv2')
                     if ($scope.userLogs[i].lo_log_description.includes(searchText) || $scope.userLogs[i].lo_log_user.us_user_first_name.includes(searchText) || $scope.userLogs[i].lo_log_user.us_username.includes(searchText)) $scope.userLogsSearch.push($scope.userLogs[i]);
                 }
             }
+
+            $scope.config = {//pagination configuration
+                itemsPerPage: 10,
+                fillLastPage: true
+            }
+
 
         }
     ]
