@@ -48,7 +48,7 @@
                             <!-- panel-body -->
                             <div ng-if="entity=='users'" class="panel-body">
                                 <!-- table-responsive -->
-                                <p class="col-md-4 col-md-offset-8">Search : <input ng-change="filterByName()" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
+                                <p class="col-md-4 col-md-offset-8">Search : <input ng-change="filterUsersByName(searchText)" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
                                 <table width="100%" class="table table-striped table-responsive table-bordered table-hover"  at-table at-paginated at-list="{{entity}}Search" at-config="config">
                                     <thead>
                                     <tr>
@@ -76,7 +76,7 @@
                                 <!-- /.table-responsive -->
                             </div>
                             <div ng-if="entity=='apps'" class="panel-body">
-                                <p>Search : <input ng-change="filterByName()" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
+                                <p>Search : <input ng-change="filterAppsByName(searchText)" ng-model="searchText" class="form-control" type="text" id="searchText"/></p>
                                 <table width="100%" class="table table-striped table-responsive table-bordered table-hover"  at-table at-paginated at-list="appsSearch" at-config="config">
                                     <thead>
                                     <tr>

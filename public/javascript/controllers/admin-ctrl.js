@@ -14,9 +14,22 @@ angular.module('harvestv2')
             if($routeParams.entity == 'users') {
                 $scope.users = $scope.usersSearch = UsersFactory.query();
             } else {
-                $scope.appsSearch = AppsFactory.query();
+                $scope.apps = $scope.appsSearch = AppsFactory.query();
             }
 
+            $scope.filterUsersByName = function (searchText) {
+                $scope.usersSearch = [];
+                for (var i = 0; i < $scope.users.length; i++) {
+                    if ($scope.users[i].us_user_first_name.includes(searchText) || $scope.users[i].us_user_last_name.includes(searchText) || $scope.users[i].us_username.includes(searchText)) $scope.usersSearch.push($scope.users[i]);
+                }
+            };
+
+            $scope.filterAppsByName = function (searchText) {
+                $scope.appsSearch = [];
+                for (var i = 0; i < $scope.apps.length; i++) {
+                    if ($scope.apps[i].ap_app_name.includes(searchText)) $scope.appsSearch.push($scope.apps[i]);
+                }
+            };
 
             /**
              * TODO: requires restrictions on the amount of logs retrieved
