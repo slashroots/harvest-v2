@@ -41,12 +41,27 @@ angular.module('harvestv2')
              * Based on entity search logs.  TODO: This should be restricted
              */
             if($routeParams.entity == 'user') {
-                $scope.userLogsSearch = LogsFactory.query({lo_log_level: 'user_activity'});
+                $scope.userLogsSearch = $scope.userLogs = LogsFactory.query({lo_log_level: 'user_activity'});
             } else {
-                $scope.appLogsSearch = LogsFactory.query({lo_log_level: 'app_activity'});
+                $scope.appLogsSearch  = $scope.appLogs = LogsFactory.query({lo_log_level: 'app_activity'});
             }
 
+            $scope.filterAppLogs = function (searchText) {
+                $scope.appLogsSearch = [];
+                for (var i = 0; i < $scope.appLogs.length; i++) {
+                    if ($scope.appLogs[i].lo_log_user !== null) {
+                        if ($scope.appLogs[i].lo_log_description.includes(searchText) || $scope.appLogs[i].lo_log_user.ap_app_name.includes(searchText) || $scope.appLogs[i].lo_log_user.ap_app_desc.includes(searchText) || $scope.appLogs[i].lo_log_requested.includes(searchText)) $scope.appLogsSearch.push($scope.appLogs[i]);
+                    }
+                    else if ($scope.appLogs[i].lo_log_description.includes(searchText) || $scope.appLogs[i].lo_log_requested.includes(searchText)) $scope.appLogsSearch.push($scope.appLogs[i]);
+                }
+            };
 
+            $scope.filterUserLogs = function (searchText) {
+                $scope.userLogsSearch = [];
+                for (var i = 0; i < $scope.userLogs.length; i++) {
+                    if ($scope.userLogs[i].lo_log_description.includes(searchText) || $scope.userLogs[i].lo_log_user.us_user_first_name.includes(searchText) || $scope.userLogs[i].lo_log_user.us_username.includes(searchText)) $scope.userLogsSearch.push($scope.userLogs[i]);
+                }
+            }
 
         }
     ]
