@@ -70,21 +70,6 @@ angular.module('harvestv2')
                     })
                 }
             };
-            $scope.chpass = function () {
-                if (!$scope.chpassForm.$invalid &&
-                    $scope.validatePasswordMatch($scope.user.us_password, $scope.passwordConfirm) &&
-                    $scope.agreeChecked) {
-
-                    $scope.user.us_password = CryptoJS.SHA1($scope.user.us_password).toString(CryptoJS.enc.Hex);
-
-                    UserFactory.create($scope.user, function(user) {
-                        $scope.confirmation = true;
-                    }, function(error) {
-                        console.log(error);
-                    })
-                }
-            };
-
             /**
              * TODO: Change this from a JQuery library to an angular implemented function
              */
