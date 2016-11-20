@@ -1,4 +1,6 @@
 #Harvest 2.0
+[![Stories in Ready](https://badge.waffle.io/slashroots/harvest-v2.svg?label=ready&title=Ready)](http://waffle.io/slashroots/harvest-v2)
+
 
 Developed using Node.js and the Express Framework
 
