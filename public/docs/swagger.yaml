@@ -1,19 +1,46 @@
 # this is documentation represented in YAML for Harvest API
 swagger: '2.0'
 info:
-  title: HarvestAPI
-  description: Open Data + Agriculture 
+  title: Harvest API
   version: "0.0.0"
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  description: |
+    # About HarvestAPI
+    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+    ## What is HarvestAPI?
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    ### What is an API?
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    ### Open Source Project
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    ## ABIS & Relationship with RADA
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    # What data does the API use?
+    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+    ## Data Resources
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    ## Personal vs Aggregate
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    ## Throttling Requests
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    # How to use the API
+    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+    ## API Registration
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+    ### API Keys
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+      - API Key
+    <!-- ReDoc-Inject: <security-definitions> -->
+
 # the domain of the service
-host: localhost:3000
+host: localhost
 # array of all schemes that your API supports
 schemes:
   - https
 # will be prefixed to all paths
-basePath: /api/
+basePath: /api
 tags:
   - name: Crop
     description: Crop information
@@ -44,6 +71,7 @@ paths:
           examples:
             'application/json':
               message: 'imagine getCropByID x 50!'
+    x-swagger-router-controller: hello_world
   /crop/{id}:
     get:
       summary: Get Crop By ID
@@ -152,262 +180,49 @@ paths:
       produces:
         - application/json
       responses:
-        default:
-          description: Bad request
         200:
-          description: Successful response
+          description: Successful
           schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getFarmerByID x 50!'
-  /farmers/{id}:
-    get:
-      summary: Get Farmer By ID
-      description: |
-       Retrieve information on a farmer, provided an ID
-      operationId: getFarmerByID
-      tags:
-        - Farmer
-      produces:
-        - application/json
+            type: array
+            items:
+              $ref: '#/definitions/Farmers'
+        400:
+          description: Bad Request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal Server Error
+      security:
+        - api_key: []
+        #- petstore_auth:
+          #- write_pets
+          #- read_pets
       parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
+        - name: limit
+          in: query
+          description: This is the number of results that will be returned from this query (defaults to 100).
+          required: false
+          type: number
+          default: 100
           schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-                IDX_StakeHolder:
-                    type: array
-                    message: [952520,952520]
-                StakeHolder_Num:
-                    type: string
-                    message: '081117655'
-                Stakeholder_Type_Code:
-                    type: integer
-                    message: 1
-                Company_Name:
-                    type: string
-                    message:
-                First_Name:
-                    type: string
-                    message: 'ERROL'
-                Middle_Name:
-                    type: string
-                    message: 'CHARLES'
-                Last_Name:
-                    type: string
-                    message: 'LENNOX'
-                Alias:
-                    type: string
-                    message:
-                DOB:
-                    type: string
-                    message: '1975-11-30T00:00:00.000Z'
-                Gender:
-                    type: integer
-                    message: 1
-                Jas_Receipt:
-                    type: string
-                    message: '0'
-                Res_Street_Address:
-                    type: string
-                    message: 'MERTON PEN'
-                Res_District_Name:
-                    type: string
-                    message: 'GRANGE HILL'
-                Res_Post_Office:
-                    type: string
-                    message: 'Grange Hill P.A.'
-                Res_Parish_Code:
-                    type: integer
-                    message: 4
-                Res_Tele_Num:
-                    type: string
-                    message: '457-8027'
-                Bus_Street_Address:
-                    type: string
-                    message:
-                Bus_District_Name:
-                    type: string
-                    message: 'GRANGE HILL'
-                Bus_Post_Office:
-                    type: string
-                    message:
-                Bus_Parish_Code:
-                    type: integer
-                    message: 4
-                Bus_Tele_Num:
-                    type: integer
-                    message:
-                Cell_Num:
-                    type: string
-                    message:
-                Email_Address:
-                    type: string
-                    message:
-                Fax_Num:
-                    type: string
-                    message:
-                Identification_Num:
-                    type: string
-                    message: '106699920'
-                ID_Type_Code:
-                    type: integer
-                    message: 3
-                TRN:
-                    type: string
-                    message: '106699920'
-                Interviewer:
-                    type: string
-                    message: null
-                Stakeholder_Status_Code:
-                    type: integer
-                    message: 1
-                Verified_Status:
-                    type: integer
-                    message: 1
-                Verified_Date:
-                    type: string
-                    message: '2009-01-09T00:00:00.000Z'
-                Registration_Date:
-                    type: string
-                    message: '2008-10-17T00:00:00.000Z'
-                Have_Photo_YN:
-                    type: integer
-                    message: 0
-                Want_Photo_ID_YN:
-                    type: integer
-                    message: 1
-                Photo_Path:
-                    type: string
-                    message: '081117655.jpg'
-                Photo_ID_Upload_Date:
-                    type: string
-                    message: null
-                Photo_Found_YN:
-                    type: string
-                    message: null
-                IDX_EOJ_Photo_Batch:
-                    type: string
-                    message: null
-                Photo_Status:
-                    type: integer
-                    message: 1
-                Old_Photo_ID_Printed_YN:
-                    type: string
-                    message: null
-                Old_Photo_Path:
-                    type: string
-                    message: null
-                Old_Photo_Print_Date:
-                    type: string
-                    message: null
-                Old_Have_Photo_YN:
-                    type: string
-                    message: null
-                Create_Date:
-                    type: array
-                    message: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
-                Update_Date:
-                    type: array
-                    message: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
-                ReVerified_Date:
-                    type: string
-                    message: null
-                ReVerified_Status:
-                    type: string
-                    message: null
-                tracker_farmer_yn:
-                    type: integer
-                    message: 0
-                Title:
-                    type: string
-                    message: null
-                Stakeholder_Status_Date:
-                    type: string
-                    message: null
-                primary_parish:
-                    type: integer
-                    message: 4
-                primary_extension_area:
-                    type: integer
-                    message: 9
-                primary_district:
-                    type: integer
-                    message: 994
-                Update_By:
-                    type: integer
-                    message: null
-                tracker_group:
-                    type: string
-                    message: null
-                tracker_start_date:
-                    type: string
-                    message: null
-                IDX_Farmer_Profile:
-                    type: integer
-                    message: 523402
-                Respondent_Code:
-                    type: integer
-                    message: 1
-                Manager_Code:
-                    type: integer
-                    message: 1
-                Live_On_Farm_YN:
-                    type: integer
-                    message: 1
-                Income_Source_Code:
-                    type: integer
-                    message: 1
-                Education_Level_Code:
-                    type: integer
-                    message: 5
-                Occupation_Code:
-                    type: integer
-                    message: 7
-                Agri_Training_YN:
-                    type: integer
-                    message: 2
-                Farmer_Type_Code:
-                    type: integer
-                    message: 1
-                Training_Method_Code:
-                    type: integer
-                    message: null
-                Agri_Institution_Code:
-                    type: integer
-                    message: null
-                Qualification_Code:
-                    type: integer
-                    message: 3
-                Holding_Start:
-                    type: string
-                    message: '1994'
-                Main_Agri_Activity_Code:
-                    type: integer
-                    message: 2
-                Nearest_Police_Station:
-                    type: string
-                    message: 'Manchioneal'
-                Farmer_Profile_Remarks:
-                    type: string
-                    message: null
-                Jas_Farmer_Group:
-                    type: string
-                    message:
-                House_Hold_No:
-                    type: string
-                    message: null
+            type: array
+            items:
+              $ref: '#/definitions/Farmers'
+        - name: offset
+          in: query
+          description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+          required: false
+          type: number
+          default: 0
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Farmers'
+        - name: field
+          in: query
+          description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+          required: false
+          type: string
   /livestock:
     get:
       summary: Get All Livestock
@@ -678,6 +493,18 @@ paths:
                 irrigation_access_yn:
                   type: string
                   message: null
+securityDefinitions:              #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH TOKEN
+  api_key:
+    type: apiKey
+    name: access_token
+    in: header
+  #petstore_auth:
+    #type: oauth2
+    #authorizationUrl: harvest-api-staging.herokuapp.com/api
+    #flow: implicit
+    #scopes:       #ASK NICK WHAT SCOPES WE ARE USING
+      #write_pets: modify pets in your account
+      #read_pets: read your pets
 definitions:
   Message:
     required:
@@ -686,3 +513,228 @@ definitions:
       message:
         type: string
         default: 'Hello, Adam!'
+  Farmers:
+    type: object
+    properties:
+      IDX_StakeHolder:
+        type: string
+        description: "to be updated"
+      StakeHolder_Num:
+        type: string
+        description: 'example: 081117655'
+      Stakeholder_Type_Code:
+        type: integer
+        description: "to be updated"
+      Company_Name:
+        type: string
+        description: "to be updated"
+      First_Name:
+        type: string
+        description: 'example: ERROL'
+      Middle_Name:
+        type: string
+        description: 'example: CHARLES'
+      Last_Name:
+        type: string
+        description: 'example: LENNOX'
+      Alias:
+        type: string
+        description: "to be updated"
+      DOB:
+        type: string
+        description: 'example: 1975-11-30T00:00:00.000Z'
+      Gender:
+        type: integer
+        description: "to be updated"
+      Jas_Receipt:
+        type: string
+        description: 'example: 0'
+      Res_Street_Address:
+        type: string
+        description: 'example: MERTON PEN'
+      Res_District_Name:
+        type: string
+        description: 'example: GRANGE HILL'
+      Res_Post_Office:
+        type: string
+        description: 'example: Grange Hill P.A.'
+      Res_Parish_Code:
+        type: integer
+        description: "to be updated"
+      Res_Tele_Num:
+        type: string
+        description: 'example: 457-8027'
+      Bus_Street_Address:
+        type: string
+        description:  "to be updated"
+      Bus_District_Name:
+        type: string
+        description: 'example: GRANGE HILL'
+      Bus_Post_Office:
+        type: string
+        description:  "to be updated"
+      Bus_Parish_Code:
+        type: integer
+        description:  "to be updated"
+      Bus_Tele_Num:
+        type: integer
+        description:  "to be updated"
+      Cell_Num:
+        type: string
+        description:  "to be updated"
+      Email_Address:
+        type: string
+        description:  "to be updated"
+      Fax_Num:
+        type: string
+        description:  "to be updated"
+      Identification_Num:
+        type: string
+        description: 'example: 106699920'
+      ID_Type_Code:
+        type: integer
+        description:  "to be updated"
+      TRN:
+        type: string
+        description: 'example" 106699920'
+      Interviewer:
+        type: string
+        description:  "to be updated"
+      Stakeholder_Status_Code:
+        type: integer
+        description:  "to be updated"
+      Verified_Status:
+        type: integer
+        description:  "to be updated"
+      Verified_Date:
+        type: string
+        description: 'example: 2009-01-09T00:00:00.000Z'
+      Registration_Date:
+        type: string
+        description: 'example: 2008-10-17T00:00:00.000Z'
+      Have_Photo_YN:
+        type: integer
+        description:  "to be updated"
+      Want_Photo_ID_YN:
+        type: integer
+        description:  "to be updated"
+      Photo_Path:
+        type: string
+        description:  "to be updated"
+      Photo_ID_Upload_Date:
+        type: string
+        description:  "to be updated"
+      Photo_Found_YN:
+        type: string
+        description:  "to be updated"
+      IDX_EOJ_Photo_Batch:
+        type: string
+        description:  "to be updated"
+      Photo_Status:
+        type: integer
+        description:  "to be updated"
+      Old_Photo_ID_Printed_YN:
+        type: string
+        description:  "to be updated"
+      Old_Photo_Path:
+        type: string
+        description:  "to be updated"
+      Old_Photo_Print_Date:
+        type: string
+        description:  "to be updated"
+      Old_Have_Photo_YN:
+        type: string
+        description:  "to be updated"
+      Create_Date:
+        type: string
+        description:  "to be updated"
+      Update_Date:
+        type: string
+        description:  "to be updated"
+      ReVerified_Date:
+        type: string
+        description:  "to be updated"
+      ReVerified_Status:
+        type: string
+        description:  "to be updated"
+      tracker_farmer_yn:
+        type: integer
+        description: "to be updated"
+      Title:
+        type: string
+        description:  "to be updated"
+      Stakeholder_Status_Date:
+        type: string
+        description: "to be updated"
+      primary_parish:
+        type: integer
+        description: The parish the farmer operates in
+      primary_extension_area:
+        type: integer
+        description: The extension area the farmer belongs.
+      primary_district:
+        type: integer
+        description: The main district the farmer operates in
+      Update_By:
+        type: integer
+        description: Which entity last updated the farmer record
+      tracker_group:
+        type: string
+        description: The group monitoring the farmer
+      tracker_start_date:
+        type: string
+        description: The date the farmer's activity begun undergoing tracking.
+      IDX_Farmer_Profile:
+        type: integer
+        description: Code to represent the farmer's ID profile
+      Respondent_Code:
+        type: integer
+        description: Code to represent the farmer's respondent
+      Manager_Code:
+        type: integer
+        description: Code to represent the farmer's manager
+      Live_On_Farm_YN:
+        type: integer
+        description: Code to represent whether the farmer lives on the farm and the number of years, if they do.
+      Income_Source_Code:
+        type: integer
+        description: Code to represent the farmer's main source of income
+      Education_Level_Code:
+        type: integer
+        description: Code to represent the farmer's education level
+      Occupation_Code:
+        type: integer
+        description: Code to represent the farmer's main occupation
+      Agri_Training_YN:
+        type: integer
+        description: Amount of years the farmer has been trained
+      Farmer_Type_Code:
+        type: integer
+        description: code for the farmer's type (of main produce)
+      Training_Method_Code:
+        type: integer
+        description: number to represent training methods the farmer has undergone
+      Agri_Institution_Code:
+        type: integer
+        description: Agriultural institution the farmer belongs to
+      Qualification_Code:
+        type: integer
+        description: qualification code for the farmer's level of certification
+      Holding_Start:
+        type: string
+        description: '1994'
+      Main_Agri_Activity_Code:
+        type: integer
+        description: Code for the main agriculture activity
+      Nearest_Police_Station:
+        type: string
+        description: 'Manchioneal'
+      Farmer_Profile_Remarks:
+        type: string
+        description: Comments about the farmer
+      Jas_Farmer_Group:
+        type: string
+        description: The farmer group this farmer is a member of
+      House_Hold_No:
+        type: string
+        description: Contact for house phone.
