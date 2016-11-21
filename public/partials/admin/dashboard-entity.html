@@ -47,7 +47,7 @@
                                     <h5 class="col-md-7">{{entity | titleCase}}</h5>
                                     <div class="col-md-5 table-search-bar form-inline">
                                         <span>Search:</span>
-                                        <input ng-change="filterByName()" ng-model="searchText" class="form-control" type="text" id="searchText"/>
+                                        <input ng-change="filterUsersByName(searchText)" ng-model="searchText" class="form-control" type="text" id="searchText"/>
                                     </div>
                                 </div>
                                 <!-- /.panel-heading -->
@@ -85,7 +85,7 @@
                                     <h5 class="col-md-7">{{entity | titleCase}}</h5>
                                     <div class="col-md-5 table-search-bar form-inline">
                                         <span>Search:</span>
-                                        <input ng-change="filterByName()" ng-model="searchText" class="form-control" type="text" id="searchText"/>                                    </div>
+                                        <input ng-change="filterAppsByName(searchText)" ng-model="searchText" class="form-control" type="text" id="searchText"/>                                    </div>
                                 </div>
                                 <!-- /.panel-heading -->
 

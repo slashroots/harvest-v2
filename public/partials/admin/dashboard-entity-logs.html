@@ -55,7 +55,7 @@
                                     <h5 class="col-md-7">{{entity | titleCase}} Activity Log</h5>
                                     <div class="col-md-5 table-search-bar form-inline">
                                         <span>Search:</span>
-                                        <input ng-change="filterUserLogs()" ng-model="searchText" class="form-control" type="text" id="searchText"/>
+                                        <input ng-change="filterUserLogs(searchText)" ng-model="searchText" class="form-control" type="text" id=""/>
                                     </div>
                                 </div>
                                 <!-- /.panel-heading -->
@@ -94,7 +94,7 @@
                                     <h5 class="col-md-7">{{entity | titleCase}} Activity Log</h5>
                                     <div class="col-md-5 table-search-bar form-inline">
                                         <span>Search:</span>
-                                        <input ng-change="filterAppLogs()" ng-model="searchText" class="form-control" type="text" id="searchText"/>
+                                        <input ng-change="filterAppLogs(searchText)" ng-model="searchText" class="form-control" type="text" id="searchText"/>
                                     </div>
                                 </div>
                                 <!-- /.panel-heading -->

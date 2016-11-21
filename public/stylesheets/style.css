@@ -289,9 +289,33 @@ h2.section-heading{
 }
 
 .app-header{
-    padding: 25px 25px 10px 25px;
+    padding: 25px 35px 10px 40px;
     border-bottom: 1px solid rgba(204, 204, 204, 0.3);
 }
+
+.app-header h4{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.app-header h4:hover{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space:initial;
+    overflow: visible;
+    display: block;
+    word-break:break-word;
+
+}
+
 
 .app-description{
     padding: 25px 25px 10px 25px;
@@ -1500,13 +1524,13 @@ footer{
 span.dropdown{
     position: absolute;
     bottom: 16px;
-    right: 160px;
+    right: 30px;
     text-align: center;
 }
 
 span .dropdown-menu{
     left: initial !important;
-    right: -6px !important;
+    right: -12px !important;
     margin: 12px 0;
     text-align: center;
 }
