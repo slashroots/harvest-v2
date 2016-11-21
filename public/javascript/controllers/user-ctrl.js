@@ -70,7 +70,6 @@ angular.module('harvestv2')
                     })
                 }
             };
-
             /**
              * TODO: Change this from a JQuery library to an angular implemented function
              */
