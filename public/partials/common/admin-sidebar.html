@@ -3,10 +3,24 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a href="/#/admin/" class="active">Home</a>
+                <p>
+                    Admin Dashboard
+                </p>
             </li>
             <li>
-                <a data-toggle="collapse" data-target="#Users">Users <span class="fa arrow pull-right"></span></a>
+
+                <a href="/#/admin/" class="active">
+                    <span class="link-icon"><i class="menu-fa active fa fa-fw fa-clock-o"></i></span>
+                    <span class="link-label">Recent Activities</span>
+                </a>
+
+            </li>
+            <li>
+                <a data-toggle="collapse" data-target="#Users" class="collapsed">
+                    <span class="link-icon"><i class="menu-fa fa fa-fw fa-user"></i></span>
+                    <span class="link-label">Users</span>
+                    <span class="fa fa-chevron-right" style="top: 22px;position: relative;right:20px ;float: right"></span>
+                </a>
                 <div id="Users" class="panel-collapse collapse">
                     <ul class=" nav nav-second-level">
                         <li>
@@ -19,8 +33,12 @@
                 </div>
             </li>
             <li>
-                <a data-toggle="collapse" data-target="#Apps">Apps <span class="fa arrow pull-right"></span></a>
-                <div id="Apps" class="panel-collapse collapse">
+                <a data-toggle="collapse" data-target="#Apps" class="collapsed" aria-expanded="true">
+                    <span class="link-icon"> <i class="menu-fa fa fa-fw fa-th-large"></i></span>
+                    <span class="link-label">Apps</span>
+                    <span class="fa fa-chevron-right" style="top: 22px;position: relative;right:20px ;float: right;"></span>
+                </a>
+                <div id="Apps" class="panel-collapse collapse in" aria-expanded="true">
                     <ul class=" nav nav-second-level">
                         <li>
                             <a href="/#/admin/apps">Developer Apps</a>
@@ -32,7 +50,10 @@
                 </div>
             </li>
             <li>
-                <a href="/#/admin/app/roles">Roles</a>
+                <a href="/#/admin/app/roles">
+                    <span class="link-icon"><i class="menu-fa fa fa-fw fa-users"></i></span>
+                    <span class="link-label">Roles</span>
+                </a>
             </li>
         </ul>
     </div>
