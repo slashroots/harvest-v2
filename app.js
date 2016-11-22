@@ -92,19 +92,24 @@ app.use(function(req, res, next) {
 // will print stacktrace
 
 app.use(function(err, req, res, next) {
+    function generalError(err, res) {
+        res.status(err.status || 500);
+        res.send({
+            message: err.message,
+            error: {}
+        });
+    }
     if(err.name) {
         if(err.name == 'ValidationError') {
             res.status(400);
             res.send({
                 message: err.errors
             });
+        } else {
+            generalError(err, res);
         }
     } else {
-        res.status(err.status || 500);
-        res.send({
-            message: err.message,
-            error: {}
-        });
+        generalError(err, res);
     }
 });
 
