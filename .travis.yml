@@ -11,3 +11,4 @@ deploy:
   app:
     master: harvest-api-staging
     production: harvest-api-prod
+    develop: harvest-api-dev
