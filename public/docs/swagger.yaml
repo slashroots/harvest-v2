@@ -1,740 +1,900 @@
 # this is documentation represented in YAML for Harvest API
 swagger: '2.0'
 info:
-  title: Harvest API
-  version: "0.0.0"
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-  description: |
-    # About HarvestAPI
-    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
-    ## What is HarvestAPI?
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    ### What is an API?
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    ### Open Source Project
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    ## ABIS & Relationship with RADA
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    # What data does the API use?
-    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
-    ## Data Resources
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    ## Personal vs Aggregate
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    ## Throttling Requests
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    # How to use the API
-    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
-    ## API Registration
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-    ### API Keys
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-      - API Key
-    <!-- ReDoc-Inject: <security-definitions> -->
+    title: Harvest API
+    version: "0.0.0"
+    license:
+        name: Apache 2.0
+        url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    description: |
+        # About HarvestAPI
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+        ## What is HarvestAPI?
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        ### What is an API?
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        ### Open Source Project
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        ## ABIS & Relationship with RADA
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        # What data does the API use?
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+        ## Data Resources
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        ## Personal vs Aggregate
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        ## Throttling Requests
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        # How to use the API
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+        ## API Registration
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        ### API Keys
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+          - API Key
+        <!-- ReDoc-Inject: <security-definitions> -->
 
 # the domain of the service
 host: localhost
 # array of all schemes that your API supports
 schemes:
-  - https
+    - https
 # will be prefixed to all paths
 basePath: /api
 tags:
-  - name: Crop
-    description: Crop information
-  - name: Farmer
-    description: Farmer information
-  - name: Livestock
-    description: Livestock information
-  - name: Property
-    description: Property information
+    - name: Crop
+      description: Crop information
+    - name: Farmer
+      description: Farmer information
+    - name: Livestock
+      description: Livestock information
+    - name: Property
+      description: Property information
 paths:
-  /crop:
-    get:
-      summary: Get All Crops
-      description: |
-       Retrieve information on all grops
-      operationId: getAllCrops
-      tags:
-        - Crop
-      produces:
-        - application/json
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getCropByID x 50!'
-    x-swagger-router-controller: hello_world
-  /crop/{id}:
-    get:
-      summary: Get Crop By ID
-      description: |
-       Retrieve information on a crop, provided an ID
-      operationId: getCropByID
-      tags:
-        - Crop
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              IDX_Crop:
-                  type: integer
-                  message: 2322356
-              IDX_Property:
-                  type: integer
-                  message: 1971349
-              Crop_Variety:
-                  type: string
-                  message: "Not Stated"
-              Crop_Name:
-                  type: string
-                  message: "Ackee"
-              Crop_Total_Area:
+    /crops:
+        get:
+            summary: Get All Crops
+            description: |
+                Retrieve information on all grops
+            operationId: getAllCrops
+            tags:
+                - Crop
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Crop'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: 0.61
-              Crop_Count:
-                  type: integer
-                  message: 0
-              Plant_Date:
-                  type: string
-                  message: "2004-08-11T00:00:00.000Z"
-              Major_Market_Percentage:
-                  type: integer
-                  message: 0
-              Minor_Market_Percentage:
-                  type: integer
-                  message: 0
-              Crop_Remarks:
-                  type: string
-                  message: ""
-              Create_Date:
-                  type: string
-                  message: "2008-11-04T12:44:55.846Z"
-              Update_Date:
-                  type: string
-                  message: "2008-11-04T12:44:55.846Z"
-              Code_Area_Unit:
-                  type: string
-                  message: "Hectare"
-              Major_Market:
-                  type: string
-                  message: null
-              Minor_Market:
-                  type: string
-                  message: null
-              IDX_StakeHolder:
-                  type: null
-                  message: 952790
-              Property_Address:
-                  type: string
-                  message: "inverness inverness p.o. st ann"
-              District:
-                  type: string
-                  message: "INVERNESS"
-              Parish:
-                  type: string
-                  message: "ST.ANN"
-              Parish_Extension_Name:
-                  type: string
-                  message: "ALEXANDRIA"
-              Crop_Variety_IDX:
-                  type: integer
-                  message: 87
-              Location_IDX:
-                  type: integer
-                  message: 2326
-              Crop_Total_Area_Ha:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Crop'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
                   type: number
-                  message: 0.61
-              Crop_Type_Code:
-                  type: integer
-                  message: 21
-  /farmers:
-    get:
-      summary: Get All Farmers
-      description: |
-       Retrieve information on all farmers
-      operationId: getAllFarmers
-      tags:
-        - Farmer
-      produces:
-        - application/json
-      responses:
-        200:
-          description: Successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Farmers'
-        400:
-          description: Bad Request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal Server Error
-      security:
-        - api_key: []
-        #- petstore_auth:
-          #- write_pets
-          #- read_pets
-      parameters:
-        - name: limit
-          in: query
-          description: This is the number of results that will be returned from this query (defaults to 100).
-          required: false
-          type: number
-          default: 100
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Farmers'
-        - name: offset
-          in: query
-          description: This allows for pagination in sets of whatever the limit is (defaults to 0).
-          required: false
-          type: number
-          default: 0
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Farmers'
-        - name: field
-          in: query
-          description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
-          required: false
-          type: string
-  /livestock:
-    get:
-      summary: Get All Livestock
-      description: |
-       Retrieve information on all livestock
-      operationId: getAllLivestock
-      tags:
-        - Livestock
-      produces:
-        - application/json
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getLivestockByID x 50!'
-  /livestock/{id}:
-    get:
-      summary: Get Livestock By ID
-      description: |
-       Retrieve information on a livestock, provided an ID
-      operationId: getLivestockByID
-      tags:
-        - Livestock
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              IDX_Livestock:
-                  type: integer
-                  message: 340798
-              Livestock_Type_Code:
-                  type: integer
-                  message: 3
-              IDX_Property:
-                  type: integer
-                  message: 1971353
-              Livestock_Stage_Code:
-                  type: integer
-                  message: 201000
-              Livestock_Count:
-                  type: integer
-                  message: 14
-              Livestock_Capacity:
-                  type: integer
-                  message: 20
-              Livestock_Remarks:
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Crop'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
                   type: string
-                  message: ""
-              Major_Market_Code:
-                  type: integer
-                  message: 2
-              Minor_Market_Code:
-                  type: integer
-                  message: 15
-              Major_Market_Percentage:
-                  type: integer
-                  message: 0
-              Minor_Market_Percentage:
-                  type: integer
-                  message: 0
-              Create_Date:
-                  type: string
-                  message: "2008-11-04T13:12:32.990Z"
-              Update_Date:
-                  type: string
-                  message: "2008-11-04T13:12:32.990Z"
-              Livestock_Name:
-                  type: string
-                  message: "Pig"
-              Major_Market:
-                  type: string
-                  message: "Hotel"
-              Minor_Market:
-                  type: string
-                  message: "Householder"
-              District:
-                  type: string
-                  message: "INVERNESS"
-              Parish_Extension_Name:
-                  type: string
-                  message: "ALEXANDRIA"
-              Parish:
-                  type: string
-                  message: "ST.ANN"
-              Property_Address:
-                  type: string
-                  message: "inverness inverness p.o. st. ann"
-              Location_Code:
-                  type: integer
-                  message: 2326
-              IDX_StakeHolder:
-                  type: integer
-                  message: 952798
-              Livestock_Stage:
-                  type: string
-                  message: "Not Stated"
-  /property:
-    get:
-      summary: Get All Property
-      description: |
-       Retrieve information on all properties
-      operationId: getAllProperties
-      tags:
-        - Property
-      produces:
-        - application/json
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getPropertyByID x 50!'
-  /property/{id}:
-    get:
-      summary: Get Property By ID
-      description: |
-       Retrieve information on a property, provided an ID
-      operationId: getPropertyByID
-      tags:
-        - Property
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-                IDX_Property:
-                  type: integer
-                  message: 1971350
-                IDX_StakeHolder:
-                  type: integer
-                  message: 952792
-                Location_Code:
-                  type: integer
-                  message: 4107
-                District:
-                  type: string
-                  message: 'GREENLAND'
-                Parish:
-                  type: string
-                  message: 'MANCHESTER'
-                Parish_Extension_Name:
-                  type: string
-                  message: 'MILE GULLY'
-                Extension_Officer:
-                  type: string
-                  message: '47'
-                Property_Address:
-                  type: string
-                  message: 'Greenland'
-                Property_Size:
+    /crop/{id}:
+        get:
+            summary: Get Crop By ID
+            description: |
+                Retrieve information on a crop, provided an ID
+            operationId: getCropByID
+            tags:
+                - Crop
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Crop'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+    /farmers:
+        get:
+            summary: Get All Farmers
+            description: |
+                Retrieve information on all farmers
+            operationId: getAllFarmers
+            tags:
+                - Farmer
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Farmer'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: 1.62
-                Property_Size_Unit_Code:
-                  type: integer
-                  message: 3
-                Property_Usage:
-                  type: float
-                  message: 0.01
-                Tenure_Code:
-                  type: integer
-                  message: 4
-                Property_Usage_Unit_Code:
-                  type: integer
-                  message: 3
-                Property_Remarks:
-                  type: string
-                  message: ''
-                Property_Status_Code:
-                  type: integer
-                  message: 1
-                Volume_Num:
-                  type: string
-                  message: ''
-                Folio_Num:
-                  type: string
-                  message: ''
-                Distance_From_Road:
-                  type: integer
-                  message: 0
-                Distance_From_Road_Unit_Code:
-                  type: string
-                  message: null
-                Primary_Property_YN:
-                  type: integer
-                  message: 2
-                Ownership_Code:
-                  type: string
-                  message: null
-                Latitude:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Farmer'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
                   type: number
-                  message: null
-                Longitude:
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Farmer'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
+                  type: string
+    /farmer/{id}:
+        get:
+            summary: Get Farmer By ID
+            description: |
+                Retrieve information on a Farmer, provided an ID
+            operationId: getFarmerByID
+            tags:
+                - Farmer
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Farmer'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+    /livestock:
+        get:
+            summary: Get All Livestock
+            description: |
+                Retrieve information on all livestock
+            operationId: getAllLivestock
+            tags:
+                - Livestock
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Livestock'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: null
-                Create_Date:
-                  type: string
-                  message: '2008-11-04T12:46:47.926Z'
-                Update_Date:
-                  type: string
-                  message: '2008-11-04T12:46:47.926Z'
-                Description:
-                  type: string
-                  message: 'Leased'
-                Property_Status:
-                  type: string
-                  message: 'Active'
-                Ownership:
-                  type: string
-                  message: null
-                Distance_Units:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Livestock'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
                   type: number
-                  message: null
-                Property_Usage_Units:
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Livestock'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
                   type: string
-                  message: 'Hectare'
-                Property_Size_Units:
+    /livestock/{id}:
+        get:
+            summary: Get Livestock By ID
+            description: |
+                Retrieve information on a livestock, provided an ID
+            operationId: getLivestockByID
+            tags:
+                - Livestock
+            produces:
+                - application/json
+            parameters:
+                - name: id
+                  in: path
+                  description: requests object
                   type: string
-                  message: 'Hectare'
-                Property_Size_Ha:
+                  required: true
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Livestock'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+    /properties:
+        get:
+            summary: Get All Property
+            description: |
+                Retrieve information on all properties
+            operationId: getAllProperties
+            tags:
+                - Property
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Property'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: 1.62
-                Parish_Extension_Code:
-                  type: integer
-                  message: 44
-                irrigation_source_code:
-                  type: integer
-                  message: null
-                Irrigation_Source:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Property'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Property'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
                   type: string
-                  message: null
-                irrigation_yn:
+    /property/{id}:
+        get:
+            summary: Get Property By ID
+            description: |
+                Retrieve information on a property, provided an ID
+            operationId: getPropertyByID
+            tags:
+                - Property
+            produces:
+                - application/json
+            parameters:
+                - name: id
+                  in: path
+                  description: requests object
                   type: string
-                  message: null
-                irrigation_access_yn:
-                  type: string
-                  message: null
+                  required: true
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Property'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                  #- write_pets
+                  #- read_pets
+
 securityDefinitions:              #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH TOKEN
-  api_key:
-    type: apiKey
-    name: access_token
-    in: header
-  #petstore_auth:
-    #type: oauth2
-    #authorizationUrl: harvest-api-staging.herokuapp.com/api
-    #flow: implicit
-    #scopes:       #ASK NICK WHAT SCOPES WE ARE USING
-      #write_pets: modify pets in your account
-      #read_pets: read your pets
+    api_key:
+        type: apiKey
+        name: access_token
+        in: header
+    #petstore_auth:
+        #type: oauth2
+        #authorizationUrl: harvest-api-staging.herokuapp.com/api
+        #flow: implicit
+        #scopes:       #ASK NICK WHAT SCOPES WE ARE USING
+            #write_pets: modify pets in your account
+            #read_pets: read your pets
 definitions:
-  Message:
-    required:
-      - message
-    properties:
-      message:
-        type: string
-        default: 'Hello, Adam!'
-  Farmers:
-    type: object
-    properties:
-      IDX_StakeHolder:
-        type: string
-        description: "to be updated"
-      StakeHolder_Num:
-        type: string
-        description: 'example: 081117655'
-      Stakeholder_Type_Code:
-        type: integer
-        description: "to be updated"
-      Company_Name:
-        type: string
-        description: "to be updated"
-      First_Name:
-        type: string
-        description: 'example: ERROL'
-      Middle_Name:
-        type: string
-        description: 'example: CHARLES'
-      Last_Name:
-        type: string
-        description: 'example: LENNOX'
-      Alias:
-        type: string
-        description: "to be updated"
-      DOB:
-        type: string
-        description: 'example: 1975-11-30T00:00:00.000Z'
-      Gender:
-        type: integer
-        description: "to be updated"
-      Jas_Receipt:
-        type: string
-        description: 'example: 0'
-      Res_Street_Address:
-        type: string
-        description: 'example: MERTON PEN'
-      Res_District_Name:
-        type: string
-        description: 'example: GRANGE HILL'
-      Res_Post_Office:
-        type: string
-        description: 'example: Grange Hill P.A.'
-      Res_Parish_Code:
-        type: integer
-        description: "to be updated"
-      Res_Tele_Num:
-        type: string
-        description: 'example: 457-8027'
-      Bus_Street_Address:
-        type: string
-        description:  "to be updated"
-      Bus_District_Name:
-        type: string
-        description: 'example: GRANGE HILL'
-      Bus_Post_Office:
-        type: string
-        description:  "to be updated"
-      Bus_Parish_Code:
-        type: integer
-        description:  "to be updated"
-      Bus_Tele_Num:
-        type: integer
-        description:  "to be updated"
-      Cell_Num:
-        type: string
-        description:  "to be updated"
-      Email_Address:
-        type: string
-        description:  "to be updated"
-      Fax_Num:
-        type: string
-        description:  "to be updated"
-      Identification_Num:
-        type: string
-        description: 'example: 106699920'
-      ID_Type_Code:
-        type: integer
-        description:  "to be updated"
-      TRN:
-        type: string
-        description: 'example" 106699920'
-      Interviewer:
-        type: string
-        description:  "to be updated"
-      Stakeholder_Status_Code:
-        type: integer
-        description:  "to be updated"
-      Verified_Status:
-        type: integer
-        description:  "to be updated"
-      Verified_Date:
-        type: string
-        description: 'example: 2009-01-09T00:00:00.000Z'
-      Registration_Date:
-        type: string
-        description: 'example: 2008-10-17T00:00:00.000Z'
-      Have_Photo_YN:
-        type: integer
-        description:  "to be updated"
-      Want_Photo_ID_YN:
-        type: integer
-        description:  "to be updated"
-      Photo_Path:
-        type: string
-        description:  "to be updated"
-      Photo_ID_Upload_Date:
-        type: string
-        description:  "to be updated"
-      Photo_Found_YN:
-        type: string
-        description:  "to be updated"
-      IDX_EOJ_Photo_Batch:
-        type: string
-        description:  "to be updated"
-      Photo_Status:
-        type: integer
-        description:  "to be updated"
-      Old_Photo_ID_Printed_YN:
-        type: string
-        description:  "to be updated"
-      Old_Photo_Path:
-        type: string
-        description:  "to be updated"
-      Old_Photo_Print_Date:
-        type: string
-        description:  "to be updated"
-      Old_Have_Photo_YN:
-        type: string
-        description:  "to be updated"
-      Create_Date:
-        type: string
-        description:  "to be updated"
-      Update_Date:
-        type: string
-        description:  "to be updated"
-      ReVerified_Date:
-        type: string
-        description:  "to be updated"
-      ReVerified_Status:
-        type: string
-        description:  "to be updated"
-      tracker_farmer_yn:
-        type: integer
-        description: "to be updated"
-      Title:
-        type: string
-        description:  "to be updated"
-      Stakeholder_Status_Date:
-        type: string
-        description: "to be updated"
-      primary_parish:
-        type: integer
-        description: The parish the farmer operates in
-      primary_extension_area:
-        type: integer
-        description: The extension area the farmer belongs.
-      primary_district:
-        type: integer
-        description: The main district the farmer operates in
-      Update_By:
-        type: integer
-        description: Which entity last updated the farmer record
-      tracker_group:
-        type: string
-        description: The group monitoring the farmer
-      tracker_start_date:
-        type: string
-        description: The date the farmer's activity begun undergoing tracking.
-      IDX_Farmer_Profile:
-        type: integer
-        description: Code to represent the farmer's ID profile
-      Respondent_Code:
-        type: integer
-        description: Code to represent the farmer's respondent
-      Manager_Code:
-        type: integer
-        description: Code to represent the farmer's manager
-      Live_On_Farm_YN:
-        type: integer
-        description: Code to represent whether the farmer lives on the farm and the number of years, if they do.
-      Income_Source_Code:
-        type: integer
-        description: Code to represent the farmer's main source of income
-      Education_Level_Code:
-        type: integer
-        description: Code to represent the farmer's education level
-      Occupation_Code:
-        type: integer
-        description: Code to represent the farmer's main occupation
-      Agri_Training_YN:
-        type: integer
-        description: Amount of years the farmer has been trained
-      Farmer_Type_Code:
-        type: integer
-        description: code for the farmer's type (of main produce)
-      Training_Method_Code:
-        type: integer
-        description: number to represent training methods the farmer has undergone
-      Agri_Institution_Code:
-        type: integer
-        description: Agriultural institution the farmer belongs to
-      Qualification_Code:
-        type: integer
-        description: qualification code for the farmer's level of certification
-      Holding_Start:
-        type: string
-        description: '1994'
-      Main_Agri_Activity_Code:
-        type: integer
-        description: Code for the main agriculture activity
-      Nearest_Police_Station:
-        type: string
-        description: 'Manchioneal'
-      Farmer_Profile_Remarks:
-        type: string
-        description: Comments about the farmer
-      Jas_Farmer_Group:
-        type: string
-        description: The farmer group this farmer is a member of
-      House_Hold_No:
-        type: string
-        description: Contact for house phone.
+    Message:
+        required:
+            - message
+        properties:
+            message:
+                type: string
+                default: 'Hello, Adam!'
+    Crop:
+        type: object
+        properties:
+            IDX_Crop:
+                type: integer
+                example: 2322356
+            IDX_Property:
+                type: integer
+                example: 1971349
+            Crop_Variety:
+                type: string
+                example: "Not Stated"
+            Crop_Name:
+                type: string
+                example: "Ackee"
+            Crop_Total_Area:
+                type: number
+                example: 0.61
+            Crop_Count:
+                type: integer
+                example: 0
+            Plant_Date:
+                type: string
+                example: "2004-08-11T00:00:00.000Z"
+            Major_Market_Percentage:
+                type: integer
+                example: 0
+            Minor_Market_Percentage:
+                type: integer
+                example: 0
+            Crop_Remarks:
+                type: string
+                example: ""
+            Create_Date:
+                type: string
+                example: "2008-11-04T12:44:55.846Z"
+            Update_Date:
+                type: string
+                example: "2008-11-04T12:44:55.846Z"
+            Code_Area_Unit:
+                type: string
+                example: "Hectare"
+            Major_Market:
+                type: string
+                example: null
+            Minor_Market:
+                type: string
+                example: null
+            IDX_StakeHolder:
+                type: number
+                example: 952790
+            Property_Address:
+                type: string
+                example: "inverness inverness p.o. st ann"
+            District:
+                type: string
+                example: "INVERNESS"
+            Parish:
+                type: string
+                example: "ST.ANN"
+            Parish_Extension_Name:
+                type: string
+                example: "ALEXANDRIA"
+            Crop_Variety_IDX:
+                type: integer
+                example: 87
+            Location_IDX:
+                type: integer
+                example: 2326
+            Crop_Total_Area_Ha:
+                type: number
+                example: 0.61
+            Crop_Type_Code:
+                type: integer
+                example: 21
+    Farmer:
+        type: object
+        properties:
+            IDX_StakeHolder:
+                type: string
+                description: "to be updated"
+            StakeHolder_Num:
+                type: string
+                description: 'example: 081117655'
+            Stakeholder_Type_Code:
+                type: integer
+                description: "to be updated"
+            Company_Name:
+                type: string
+                description: "to be updated"
+            First_Name:
+                type: string
+                description: 'example: ERROL'
+            Middle_Name:
+                type: string
+                description: 'example: CHARLES'
+            Last_Name:
+                type: string
+                description: 'example: LENNOX'
+            Alias:
+                type: string
+                description: "to be updated"
+            DOB:
+                type: string
+                description: 'example: 1975-11-30T00:00:00.000Z'
+            Gender:
+                type: integer
+                description: "to be updated"
+            Jas_Receipt:
+                type: string
+                description: 'example: 0'
+            Res_Street_Address:
+                type: string
+                description: 'example: MERTON PEN'
+            Res_District_Name:
+                type: string
+                description: 'example: GRANGE HILL'
+            Res_Post_Office:
+                type: string
+                description: 'example: Grange Hill P.A.'
+            Res_Parish_Code:
+                type: integer
+                description: "to be updated"
+            Res_Tele_Num:
+                type: string
+                description: 'example: 457-8027'
+            Bus_Street_Address:
+                type: string
+                description:  "to be updated"
+            Bus_District_Name:
+                type: string
+                description: 'example: GRANGE HILL'
+            Bus_Post_Office:
+                type: string
+                description:  "to be updated"
+            Bus_Parish_Code:
+                type: integer
+                description:  "to be updated"
+            Bus_Tele_Num:
+                type: integer
+                description:  "to be updated"
+            Cell_Num:
+                type: string
+                description:  "to be updated"
+            Email_Address:
+                type: string
+                description:  "to be updated"
+            Fax_Num:
+                type: string
+                description:  "to be updated"
+            Identification_Num:
+                type: string
+                description: 'example: 106699920'
+            ID_Type_Code:
+                type: integer
+                description:  "to be updated"
+            TRN:
+                type: string
+                description: 'example" 106699920'
+            Interviewer:
+                type: string
+                description:  "to be updated"
+            Stakeholder_Status_Code:
+                type: integer
+                description:  "to be updated"
+            Verified_Status:
+                type: integer
+                description:  "to be updated"
+            Verified_Date:
+                type: string
+                description: 'example: 2009-01-09T00:00:00.000Z'
+            Registration_Date:
+                type: string
+                description: 'example: 2008-10-17T00:00:00.000Z'
+            Have_Photo_YN:
+                type: integer
+                description:  "to be updated"
+            Want_Photo_ID_YN:
+                type: integer
+                description:  "to be updated"
+            Photo_Path:
+                type: string
+                description:  "to be updated"
+            Photo_ID_Upload_Date:
+                type: string
+                description:  "to be updated"
+            Photo_Found_YN:
+                type: string
+                description:  "to be updated"
+            IDX_EOJ_Photo_Batch:
+                type: string
+                description:  "to be updated"
+            Photo_Status:
+                type: integer
+                description:  "to be updated"
+            Old_Photo_ID_Printed_YN:
+                type: string
+                description:  "to be updated"
+            Old_Photo_Path:
+                type: string
+                description:  "to be updated"
+            Old_Photo_Print_Date:
+                type: string
+                description:  "to be updated"
+            Old_Have_Photo_YN:
+                type: string
+                description:  "to be updated"
+            Create_Date:
+                type: string
+                description:  "to be updated"
+            Update_Date:
+                type: string
+                description:  "to be updated"
+            ReVerified_Date:
+                type: string
+                description:  "to be updated"
+            ReVerified_Status:
+                type: string
+                description:  "to be updated"
+            tracker_farmer_yn:
+                type: integer
+                description: "to be updated"
+            Title:
+                type: string
+                description:  "to be updated"
+            Stakeholder_Status_Date:
+                type: string
+                description: "to be updated"
+            primary_parish:
+                type: integer
+                description: The parish the farmer operates in
+            primary_extension_area:
+                type: integer
+                description: The extension area the farmer belongs.
+            primary_district:
+                type: integer
+                description: The main district the farmer operates in
+            Update_By:
+                type: integer
+                description: Which entity last updated the farmer record
+            tracker_group:
+                type: string
+                description: The group monitoring the farmer
+            tracker_start_date:
+                type: string
+                description: The date the farmer's activity begun undergoing tracking.
+            IDX_Farmer_Profile:
+                type: integer
+                description: Code to represent the farmer's ID profile
+            Respondent_Code:
+                type: integer
+                description: Code to represent the farmer's respondent
+            Manager_Code:
+                type: integer
+                description: Code to represent the farmer's manager
+            Live_On_Farm_YN:
+                type: integer
+                description: Code to represent whether the farmer lives on the farm and the number of years, if they do.
+            Income_Source_Code:
+                type: integer
+                description: Code to represent the farmer's main source of income
+            Education_Level_Code:
+                type: integer
+                description: Code to represent the farmer's education level
+            Occupation_Code:
+                type: integer
+                description: Code to represent the farmer's main occupation
+            Agri_Training_YN:
+                type: integer
+                description: Amount of years the farmer has been trained
+            Farmer_Type_Code:
+                type: integer
+                description: code for the farmer's type (of main produce)
+            Training_Method_Code:
+                type: integer
+                description: number to represent training methods the farmer has undergone
+            Agri_Institution_Code:
+                type: integer
+                description: Agriultural institution the farmer belongs to
+            Qualification_Code:
+                type: integer
+                description: qualification code for the farmer's level of certification
+            Holding_Start:
+                type: string
+                description: '1994'
+            Main_Agri_Activity_Code:
+                type: integer
+                description: Code for the main agriculture activity
+            Nearest_Police_Station:
+                type: string
+                description: 'Manchioneal'
+            Farmer_Profile_Remarks:
+                type: string
+                description: Comments about the farmer
+            Jas_Farmer_Group:
+                type: string
+                description: The farmer group this farmer is a member of
+            House_Hold_No:
+                type: string
+                description: Contact for house phone.
+    Livestock:
+        type: object
+        properties:
+            IDX_Livestock:
+                type: integer
+                example: 340798
+            Livestock_Type_Code:
+                type: integer
+                example: 3
+            IDX_Property:
+                type: integer
+                example: 1971353
+            Livestock_Stage_Code:
+                type: integer
+                example: 201000
+            Livestock_Count:
+                type: integer
+                example: 14
+            Livestock_Capacity:
+                type: integer
+                example: 20
+            Livestock_Remarks:
+                type: string
+                example: ""
+            Major_Market_Code:
+                type: integer
+                example: 2
+            Minor_Market_Code:
+                type: integer
+                example: 15
+            Major_Market_Percentage:
+                type: integer
+                example: 0
+            Minor_Market_Percentage:
+                type: integer
+                example: 0
+            Create_Date:
+                type: string
+                example: "2008-11-04T13:12:32.990Z"
+            Update_Date:
+                type: string
+                example: "2008-11-04T13:12:32.990Z"
+            Livestock_Name:
+                type: string
+                example: "Pig"
+            Major_Market:
+                type: string
+                example: "Hotel"
+            Minor_Market:
+                type: string
+                example: "Householder"
+            District:
+                type: string
+                example: "INVERNESS"
+            Parish_Extension_Name:
+                type: string
+                example: "ALEXANDRIA"
+            Parish:
+                type: string
+                example: "ST.ANN"
+            Property_Address:
+                type: string
+                example: "inverness inverness p.o. st. ann"
+            Location_Code:
+                type: integer
+                example: 2326
+            IDX_StakeHolder:
+                type: integer
+                example: 952798
+            Livestock_Stage:
+                type: string
+                example: "Not Stated"
+    Property:
+        type: object
+        properties:
+            IDX_Property:
+              type: integer
+              example: 1971350
+            IDX_StakeHolder:
+              type: integer
+              example: 952792
+            Location_Code:
+              type: integer
+              example: 4107
+            District:
+              type: string
+              example: 'GREENLAND'
+            Parish:
+              type: string
+              example: 'MANCHESTER'
+            Parish_Extension_Name:
+              type: string
+              example: 'MILE GULLY'
+            Extension_Officer:
+              type: string
+              example: '47'
+            Property_Address:
+              type: string
+              example: 'Greenland'
+            Property_Size:
+              type: number
+              example: 1.62
+            Property_Size_Unit_Code:
+              type: integer
+              example: 3
+            Property_Usage:
+              type: number
+              example: 0.01
+            Tenure_Code:
+              type: integer
+              example: 4
+            Property_Usage_Unit_Code:
+              type: integer
+              example: 3
+            Property_Remarks:
+              type: string
+              example: ''
+            Property_Status_Code:
+              type: integer
+              example: 1
+            Volume_Num:
+              type: string
+              example: ''
+            Folio_Num:
+              type: string
+              example: ''
+            Distance_From_Road:
+              type: integer
+              example: 0
+            Distance_From_Road_Unit_Code:
+              type: string
+              example: null
+            Primary_Property_YN:
+              type: integer
+              example: 2
+            Ownership_Code:
+              type: string
+              example: null
+            Latitude:
+              type: number
+              example: null
+            Longitude:
+              type: number
+              example: null
+            Create_Date:
+              type: string
+              example: '2008-11-04T12:46:47.926Z'
+            Update_Date:
+              type: string
+              example: '2008-11-04T12:46:47.926Z'
+            Description:
+              type: string
+              example: 'Leased'
+            Property_Status:
+              type: string
+              example: 'Active'
+            Ownership:
+              type: string
+              example: null
+            Distance_Units:
+              type: number
+              example: null
+            Property_Usage_Units:
+              type: string
+              example: 'Hectare'
+            Property_Size_Units:
+              type: string
+              example: 'Hectare'
+            Property_Size_Ha:
+              type: number
+              example: 1.62
+            Parish_Extension_Code:
+              type: integer
+              example: 44
+            irrigation_source_code:
+              type: integer
+              example: null
+            Irrigation_Source:
+              type: string
+              example: null
+            irrigation_yn:
+              type: string
+              example: null
+            irrigation_access_yn:
+              type: string
+              example: null
