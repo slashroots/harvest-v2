@@ -384,3 +384,13 @@ span.path{
 redoc.loading:before {
     color: #cf441d !important;
 }
+
+footer{
+    text-align: right;
+    padding: 10px;
+    background-color: #333 !important;
+}
+
+footer a, footer a strong{
+    color: #fff !important;
+}
