@@ -66,7 +66,12 @@ angular.module('harvestv2')
                     UserFactory.create($scope.user, function(user) {
                         $scope.confirmation = true;
                     }, function(error) {
-                        console.log(error);
+                        /**
+                         * TODO: Proper error handling is necessary using an angular modal window
+                         */
+                        if(error.data.message.errmsg.startsWith('E11000')){
+                            alert(error.data.message.errmsg.split('"')[1]+ " has already been used!");
+                        }
                     })
                 }
             };
