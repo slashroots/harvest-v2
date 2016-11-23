@@ -22,7 +22,7 @@ info:
         ## Data Resources
         Data resources currently being offered are:
         * Crops
-        * Farmers
+        * Farmer
         * Livestock
         * Property
 
@@ -38,8 +38,6 @@ info:
         You MUST register on ther [Harvest API website]() before interfacing with the API for any development.
         ### API Keys
         An application programming interface key (API key) is a code passed in by computer programs calling an application programming interface (API) to identify the calling program, its developer, or its user to the Web site. Ths is done to ensure we know how the information being provided is being accessed. Remember, the api key MUST be passedin the header of the requested through the variable `access_token`.
-<!-- ReDoc-Inject: <security-definitions> -->
-
 # the domain of the service
 host: localhost
 # array of all schemes that your API supports
@@ -61,7 +59,7 @@ paths:
         get:
             summary: Get All Crops
             description: |
-                Retrieve information on all grops
+                Retrieve information on all crops
             operationId: getAllCrops
             tags:
                 - Crop
@@ -414,554 +412,468 @@ definitions:
     Crop:
         type: object
         properties:
-            IDX_Crop:
-                type: number
-                description: to be updated
-                example: 2322356
             IDX_Property:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 1971349
             Crop_Variety:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: "Not Stated"
             Crop_Name:
                 type: string
-                description: "to be updated"
+                description: The name of a crop
                 example: "Ackee"
             Crop_Total_Area:
                 type: number
-                description: "to be updated"
+                description: The total area of land the crop is grown on
                 example: 0.61
             Crop_Count:
                 type: number
-                description: "to be updated"
+                description: The Amount of crop produced
                 example: 0
             Plant_Date:
                 type: string
-                description: "to be updated"
+                description: They day the crop was planted
                 example: "2004-08-11T00:00:00.000Z"
             Major_Market_Percentage:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 0
             Minor_Market_Percentage:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 0
             Crop_Remarks:
                 type: string
-                description: "to be updated"
+                description: Remarks and comments about the crop
                 example: ""
             Create_Date:
                 type: string
-                description: "to be updated"
+                description: The date this entry was created
                 example: "2008-11-04T12:44:55.846Z"
             Update_Date:
                 type: string
-                description: "to be updated"
+                description: The date this entry was updated
                 example: "2008-11-04T12:44:55.846Z"
             Code_Area_Unit:
                 type: string
-                description: "to be updated"
+                description: The unit of measure for the crop's area (ha)
                 example: "Hectare"
             Major_Market:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             Minor_Market:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             IDX_StakeHolder:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 952790
             Property_Address:
                 type: string
-                description: "to be updated"
-                example: "inverness inverness p.o. st ann"
+                description: to be updated
+                example: The address of the property the crop is grown on
             District:
                 type: string
-                description: "to be updated"
+                description: The district of the address
                 example: "INVERNESS"
             Parish:
                 type: string
-                description: "to be updated"
+                description: The parish the district is in
                 example: "ST.ANN"
             Parish_Extension_Name:
                 type: string
-                description: "to be updated"
+                description: The extension the parish belongs.
                 example: "ALEXANDRIA"
             Crop_Variety_IDX:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 87
-            Location_IDX:
-                type: number
-                description: "to be updated"
-                example: 2326
             Crop_Total_Area_Ha:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 0.61
-
     Farmer:
         type: object
         properties:
             IDX_StakeHolder:
                 type: array
-                description: "to be updated"
+                description: to be updated
                 example: [952520,952520]
             StakeHolder_Num:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: '081117655'
-
             Company_Name:
                 type: string
-                description: "to be updated"
+                description: The legal name the farmer's farm is registered under.
                 example: n/a
             First_Name:
                 type: string
-                description: "to be updated"
+                description: Farmer's first name
                 example: 'ERROL'
             Middle_Name:
                 type: string
-                description: "to be updated"
+                description: Famrer's middle name
                 example: 'CHARLES'
             Last_Name:
                 type: string
-                description: "to be updated"
+                description: Farmer's surname
                 example: 'LENNOX'
             Alias:
                 type: string
-                description: "to be updated"
+                description: Farmer's nickname
                 example: n/a
             DOB:
                 type: string
-                description: "to be updated"
+                description: Farmer's date of birth
                 example: '1975-11-30T00:00:00.000Z'
             Gender:
                 type: number
-                description: "to be updated"
+                description: male or female
                 example: 1
             Jas_Receipt:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: '0'
             Res_Street_Address:
                 type: string
-                description: "to be updated"
+                description: Street address of the farmer
                 example: 'MERTON PEN'
             Res_District_Name:
                 type: string
-                description: "to be updated"
+                description: District of the farmer's address
                 example: 'GRANGE HILL'
             Res_Post_Office:
                 type: string
-                description: "to be updated"
+                description: The post office, if any, which the farmer'd box is located
                 example: 'Grange Hill P.A.'
-
+            Res_Parish:
+                type: string
+                description: The parish the farmer resides
+                example: 'St. Catherine'
             Res_Tele_Num:
                 type: string
-                description: "to be updated"
+                description: Farmer's landline they may be contacted by
                 example: '457-8027'
             Bus_Street_Address:
                 type: string
-                description: "to be updated"
+                description: The corporate address of the farmer (typically the farm's address)
                 example: n/a
             Bus_District_Name:
                 type: string
-                description: "to be updated"
+                description: The district of the corporate address
                 example: 'GRANGE HILL'
             Bus_Post_Office:
                 type: string
-                description: "to be updated"
+                description:  The post office of the corporate address
                 example: n/a
-
+            Bus_Parish:
+                type: string
+                description:  The parish the farmer operates
+                example: St. Catherine
             Bus_Tele_Num:
                 type: number
-                description: "to be updated"
+                description: Corporate contact number
                 example: 0
             Cell_Num:
-                description: "to be updated"
+                description: Mobile number
                 type: string
                 example: n/a
             Email_Address:
                 type: string
-                description: "to be updated"
+                description: email address of the farmer
                 example:
             Fax_Num:
                 type: string
-                description: "to be updated"
+                description: Fax number
                 example: n/a
             Identification_Num:
                 type: string
-                description: "to be updated"
+                description: Farmer's registered identification number
                 example: '106699920'
-
             TRN:
                 type: string
-                description: "to be updated"
+                description: Farmer's TRN
                 example: '106699920'
             Interviewer:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
-
-            Verified_Status:
-                type: number
-                description: "to be updated"
-                example: 1
             Verified_Date:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: '2009-01-09T00:00:00.000Z'
             Registration_Date:
                 type: string
-                description: "to be updated"
+                description: The parish the farmer operates
                 example: '2008-10-17T00:00:00.000Z'
             Have_Photo_YN:
-                type: number
-                description: "to be updated"
-                example: 0
-            Want_Photo_ID_YN:
-                type: number
-                description: "to be updated"
-                example: 1
+                type: string
+                description: Whether or not the farmer has a photo
+                example: yes
+            Want_Photo_YN:
+                type: string
+                description: Whether or not the farmer wants a photo
+                example: no
             Photo_Path:
                 type: string
-                description: "to be updated"
+                description: file path to farmer's photo
                 example: '081117655.jpg'
-            Photo_ID_Upload_Date:
-                type: string
-                description: "to be updated"
-                example: n/a
             Photo_Found_YN:
                 type: string
-                description: "to be updated"
+                description: Whether or not the farmer's photo has been found
                 example: n/a
             IDX_EOJ_Photo_Batch:
                 type: string
-                description: "to be updated"
-                example: n/a
-            Photo_Status:
-                type: number
-                description: "to be updated"
-                example: 1
-            Old_Photo_ID_Printed_YN:
-                type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             Old_Photo_Path:
                 type: string
-                description: "to be updated"
-                example: n/a
-            Old_Photo_Print_Date:
-                type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             Old_Have_Photo_YN:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             Create_Date:
                 type: array
-                description: "to be updated"
+                description: The date this entry was submitted
                 example: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
             Update_Date:
                 type: array
-                description: "to be updated"
+                description: to be updated
                 example: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
             ReVerified_Date:
                 type: string
-                description: "to be updated"
-                example: n/a
-            ReVerified_Status:
-                type: string
-                description: "to be updated"
-                example: n/a
-            tracker_farmer_yn:
-                type: number
-                description: "to be updated"
-                example: 0
-            Title:
-                type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             Stakeholder_Status_Date:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             primary_parish:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 4
-            primary_extension_area:
-                type: number
-                description: "to be updated"
-                example: 9
             primary_district:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 994
-            Update_By:
-                type: number
-                description: "to be updated"
-                example: 0
-            tracker_group:
-                type: string
-                description: "to be updated"
-                example: n/a
-            tracker_start_date:
-                type: string
-                description: "to be updated"
-                example: n/a
             IDX_Farmer_Profile:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 523402
-
-
             Live_On_Farm_YN:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 1
-
-
-
             Agri_Training_YN:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 2
-
-
-
-
             Holding_Start:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: '1994'
-
             Nearest_Police_Station:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: 'Manchioneal'
             Farmer_Profile_Remarks:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             Jas_Farmer_Group:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example:
-            House_Hold_No:
-                type: string
-                description: "to be updated"
-                example: n/a
     Livestock:
         type: object
         properties:
             IDX_Livestock:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 340798
-
             IDX_Property:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 1971353
-
             Livestock_Count:
                 type: number
-                description: "to be updated"
+                description: Amount of livestock being reared
                 example: 14
             Livestock_Capacity:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 20
             Livestock_Remarks:
                 type: string
-                description: "to be updated"
+                description: Remarks and comments about livestock
                 example: ""
-
-
             Major_Market_Percentage:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 0
             Minor_Market_Percentage:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 0
             Create_Date:
                 type: string
-                description: "to be updated"
+                description: The date this entry was created
                 example: "2008-11-04T13:12:32.990Z"
             Update_Date:
                 type: string
-                description: "to be updated"
+                description: The date this entry was updated
                 example: "2008-11-04T13:12:32.990Z"
             Livestock_Name:
                 type: string
-                description: "to be updated"
+                description: Name of Livestock
                 example: "Pig"
             Major_Market:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: "Hotel"
             Minor_Market:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: "Householder"
             District:
                 type: string
-                description: "to be updated"
+                description: District the livestock is being reared
                 example: "INVERNESS"
             Parish_Extension_Name:
                 type: string
-                description: "to be updated"
+                description: Extension the parish belongs to
                 example: "ALEXANDRIA"
             Parish:
                 type: string
-                description: "to be updated"
+                description: Parish the district is located in
                 example: "ST.ANN"
             Property_Address:
                 type: string
-                description: "to be updated"
+                description: Property address on which the lovestock is being reared
                 example: "inverness inverness p.o. st. ann"
-
             IDX_StakeHolder:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 952798
             Livestock_Stage:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: "Not Stated"
     Property:
         type: object
         properties:
             IDX_Property:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 1971350
             IDX_StakeHolder:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 952792
-
             District:
                 type: string
-                description: "to be updated"
+                description: The district the property is located
                 example: 'GREENLAND'
             Parish:
                 type: string
-                description: "to be updated"
+                description: The parish that district is located in
                 example: 'MANCHESTER'
             Parish_Extension_Name:
                 type: string
-                description: "to be updated"
+                description: The extension which the parish belongs
                 example: 'MILE GULLY'
             Extension_Officer:
                 type: string
-                description: "to be updated"
+                description: Exntension officer for the parish
                 example: '47'
             Property_Address:
                 type: string
-                description: "to be updated"
+                description: The address of the property
                 example: 'Greenland'
             Property_Size:
                 type: number
-                description: "to be updated"
+                description: The size of the property
                 example: 1.62
-
             Property_Usage:
                 type: number
-                description: "to be updated"
+                description:  The intended use of the property
                 example: 0.01
-
-
             Property_Remarks:
                 type: string
-                description: "to be updated"
+                description: Remarks or comments about the property
                 example: ''
-
             Volume_Num:
                 type: string
-                description: "to be updated"
+                description: volume of production
                 example: ''
             Folio_Num:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: ''
             Distance_From_Road:
                 type: number
-                description: "to be updated"
+                description: The distance of the property from a main road.
                 example: 0
-
             Primary_Property_YN:
                 type: number
-                description: "to be updated"
+                description: Whether or not this is the primary property of production
                 example: 2
-
             Latitude:
                 type: number
-                description: "to be updated"
+                description: Latitudinal location of property
                 example: 0
             Longitude:
                 type: number
-                description: "to be updated"
+                description: Longitudinal location of the property
                 example: 0
             Create_Date:
                 type: string
-                description: "to be updated"
+                description: The date this entry was created
                 example: '2008-11-04T12:46:47.926Z'
             Update_Date:
                 type: string
-                description: "to be updated"
+                description: The date this entry was updated
                 example: '2008-11-04T12:46:47.926Z'
             Description:
                 type: string
-                description: "to be updated"
+                description: Description of property
                 example: 'Leased'
             Property_Status:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: 'Active'
             Ownership:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             Distance_Units:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 0
             Property_Usage_Units:
                 type: string
-                description: "to be updated"
+                description: Units of measurement for the Distance_From_Road
                 example: 'Hectare'
             Property_Size_Units:
                 type: string
-                description: "to be updated"
+                description: The units of measurement for the property size (ha)
                 example: 'Hectare'
             Property_Size_Ha:
                 type: number
-                description: "to be updated"
+                description: to be updated
                 example: 1.62
-
-
             Irrigation_Source:
                 type: string
-                description: "to be updated"
-                example: n/a
-            irrigation_yn:
-                type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
             irrigation_access_yn:
                 type: string
-                description: "to be updated"
+                description: to be updated
                 example: n/a
