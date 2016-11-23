@@ -223,11 +223,11 @@ angular.module('harvestv2')
             /**
              * Monitor changes to the user object within the sharedState.
              */
-            $scope.$watch(function () { return SharedState.getCurrentUser();}, function (value) {
-                if(value != SharedState.getCurrentUser()) {
+            $scope.$watch(function () { return SharedState.getCurrentUser();}, function (newValue, oldValue) {
+                if(newValue.hasOwnProperty('us_user_role')) {
                     configureUI();
                 }
-            });
+            }, true);
         }
     ]
 )
