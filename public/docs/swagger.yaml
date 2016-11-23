@@ -506,10 +506,7 @@ definitions:
                 type: number
                 description: "to be updated"
                 example: 0.61
-            Crop_Type_Code:
-                type: number
-                description: "to be updated"
-                example: 21
+
     Farmer:
         type: object
         properties:
@@ -521,10 +518,7 @@ definitions:
                 type: string
                 description: "to be updated"
                 example: '081117655'
-            Stakeholder_Type_Code:
-                type: number
-                description: "to be updated"
-                example: 1
+
             Company_Name:
                 type: string
                 description: "to be updated"
@@ -569,10 +563,7 @@ definitions:
                 type: string
                 description: "to be updated"
                 example: 'Grange Hill P.A.'
-            Res_Parish_Code:
-                type: number
-                description: "to be updated"
-                example: 4
+
             Res_Tele_Num:
                 type: string
                 description: "to be updated"
@@ -589,10 +580,7 @@ definitions:
                 type: string
                 description: "to be updated"
                 example: n/a
-            Bus_Parish_Code:
-                type: number
-                description: "to be updated"
-                example: 4
+
             Bus_Tele_Num:
                 type: number
                 description: "to be updated"
@@ -613,10 +601,7 @@ definitions:
                 type: string
                 description: "to be updated"
                 example: '106699920'
-            ID_Type_Code:
-                type: number
-                description: "to be updated"
-                example: 3
+
             TRN:
                 type: string
                 description: "to be updated"
@@ -625,10 +610,7 @@ definitions:
                 type: string
                 description: "to be updated"
                 example: n/a
-            Stakeholder_Status_Code:
-                type: number
-                description: "to be updated"
-                example: 1
+
             Verified_Status:
                 type: number
                 description: "to be updated"
@@ -741,58 +723,28 @@ definitions:
                 type: number
                 description: "to be updated"
                 example: 523402
-            Respondent_Code:
-                type: number
-                description: "to be updated"
-                example: 1
-            Manager_Code:
-                type: number
-                description: "to be updated"
-                example: 1
+
+
             Live_On_Farm_YN:
                 type: number
                 description: "to be updated"
                 example: 1
-            Income_Source_Code:
-                type: number
-                description: "to be updated"
-                example: 1
-            Education_Level_Code:
-                type: number
-                description: "to be updated"
-                example: 5
-            Occupation_Code:
-                type: number
-                description: "to be updated"
-                example: 7
+
+
+
             Agri_Training_YN:
                 type: number
                 description: "to be updated"
                 example: 2
-            Farmer_Type_Code:
-                type: number
-                description: "to be updated"
-                example: 1
-            Training_Method_Code:
-                type: number
-                description: "to be updated"
-                example: 0
-            Agri_Institution_Code:
-                type: number
-                description: "to be updated"
-                example: 0
-            Qualification_Code:
-                type: number
-                description: "to be updated"
-                example: 3
+
+
+
+
             Holding_Start:
                 type: string
                 description: "to be updated"
                 example: '1994'
-            Main_Agri_Activity_Code:
-                type: number
-                description: "to be updated"
-                example: 2
+
             Nearest_Police_Station:
                 type: string
                 description: "to be updated"
@@ -816,18 +768,12 @@ definitions:
                 type: number
                 description: "to be updated"
                 example: 340798
-            Livestock_Type_Code:
-                type: number
-                description: "to be updated"
-                example: 3
+
             IDX_Property:
                 type: number
                 description: "to be updated"
                 example: 1971353
-            Livestock_Stage_Code:
-                type: number
-                description: "to be updated"
-                example: 201000
+
             Livestock_Count:
                 type: number
                 description: "to be updated"
@@ -840,14 +786,8 @@ definitions:
                 type: string
                 description: "to be updated"
                 example: ""
-            Major_Market_Code:
-                type: number
-                description: "to be updated"
-                example: 2
-            Minor_Market_Code:
-                type: number
-                description: "to be updated"
-                example: 15
+
+
             Major_Market_Percentage:
                 type: number
                 description: "to be updated"
@@ -892,10 +832,7 @@ definitions:
                 type: string
                 description: "to be updated"
                 example: "inverness inverness p.o. st. ann"
-            Location_Code:
-                type: number
-                description: "to be updated"
-                example: 2326
+
             IDX_StakeHolder:
                 type: number
                 description: "to be updated"
@@ -915,10 +852,7 @@ definitions:
                 type: number
                 description: "to be updated"
                 example: 952792
-            Location_Code:
-                type: number
-                description: "to be updated"
-                example: 4107
+
             District:
                 type: string
                 description: "to be updated"
@@ -943,30 +877,18 @@ definitions:
                 type: number
                 description: "to be updated"
                 example: 1.62
-            Property_Size_Unit_Code:
-                type: number
-                description: "to be updated"
-                example: 3
+
             Property_Usage:
                 type: number
                 description: "to be updated"
                 example: 0.01
-            Tenure_Code:
-                type: number
-                description: "to be updated"
-                example: 4
-            Property_Usage_Unit_Code:
-                type: number
-                description: "to be updated"
-                example: 3
+
+
             Property_Remarks:
                 type: string
                 description: "to be updated"
                 example: ''
-            Property_Status_Code:
-                type: number
-                description: "to be updated"
-                example: 1
+
             Volume_Num:
                 type: string
                 description: "to be updated"
@@ -979,18 +901,12 @@ definitions:
                 type: number
                 description: "to be updated"
                 example: 0
-            Distance_From_Road_Unit_Code:
-                type: string
-                description: "to be updated"
-                example: n/a
+
             Primary_Property_YN:
                 type: number
                 description: "to be updated"
                 example: 2
-            Ownership_Code:
-                type: string
-                description: "to be updated"
-                example: n/a
+
             Latitude:
                 type: number
                 description: "to be updated"
@@ -1035,14 +951,8 @@ definitions:
                 type: number
                 description: "to be updated"
                 example: 1.62
-            Parish_Extension_Code:
-                type: number
-                description: "to be updated"
-                example: 44
-            irrigation_source_code:
-                type: number
-                description: "to be updated"
-                example: n/a
+
+
             Irrigation_Source:
                 type: string
                 description: "to be updated"
