@@ -8,31 +8,37 @@ info:
         url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
     description: |
         # About HarvestAPI
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+
         ## What is HarvestAPI?
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        The Harvest API is an open data platform for the publishing and sharing of agricultural sector data across government and with the public. It was developed by the SlashRoots Foundation in collaboration with Jamaica’s Rural Agricultural Development Authority’s (RADA) and Ministry of Agriculture (MoA). Through HarvestAPI RADA and the MoA publish and manage the sharing of crop production and farmer and farm registry data from RADA’s ABIS database as well as market price information from the MoA’s JAMIS database.
         ### What is an API?
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        Simply put, an application programming interface (API) is a set of functions and procedures that allow the creation of applications which access the features or data of an operating system, application, or other service.
         ### Open Source Project
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        This is an open source project which means the original source code is made freely available and may be redistributed and modified. The source code may be found [here on github](https://github.com/slashroots/harvest-v2)
         ## ABIS & Relationship with RADA
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        ABIS is a web-based information programme developed by RADA, which provides information on crops, livestock, and agricultural production, markets and stakeholders, to support the business of agriculture.
         # What data does the API use?
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+        Harves API uses data from ABIS, but only  providing non personal data to developers and the public.
         ## Data Resources
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        Data resources currently being offered are:
+        * Crops
+        * Farmers
+        * Livestock
+        * Property
+
         ## Personal vs Aggregate
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        Aggregate data on a resource is accessed through a respective resource path, which has the resource pluralized. e.g `/api/crops` would return ALL the crops available. As you can imagine, this would return a large amount of data. So, we've allowed you to limit/[throttle](/docs/#throttling-requests) the aggregate requests.
+        Personal requests are those which retrieve a specific record from a resource. e.g. `/api/crop/[CROP_ID_HERE]` would return the specific crop record associated with the crop id passed in the path where `CROP_ID_HERE` is. Please note that for personal requests, the resource name is kept singular.
         ## Throttling Requests
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        `limit` - This is the number of results that will be returned from this query (defaults to 100).
+        `offset` - This allows for pagination in sets of whatever the limit is (defaults to 0).
         # How to use the API
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta s
+        This documentation provides all the resources offered and how they may be accessed, however, and API key/token must be passed as `access_token` within the header of the request.
         ## API Registration
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
+        You MUST register on ther [Harvest API website]() before interfacing with the API for any development.
         ### API Keys
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem reru
-          - API Key
-        <!-- ReDoc-Inject: <security-definitions> -->
+        An application programming interface key (API key) is a code passed in by computer programs calling an application programming interface (API) to identify the calling program, its developer, or its user to the Web site. Ths is done to ensure we know how the information being provided is being accessed. Remember, the api key MUST be passedin the header of the requested through the variable `access_token`.
+<!-- ReDoc-Inject: <security-definitions> -->
 
 # the domain of the service
 host: localhost
@@ -67,7 +73,7 @@ paths:
                     schema:
                         type: array
                         items:
-                          $ref: '#/definitions/Crop'
+                            $ref: '#/definitions/Crop'
                 400:
                     description: Bad Request
                 401:
@@ -131,8 +137,8 @@ paths:
             security:
                 - api_key: []
                 #- petstore_auth:
-                    #- write_pets
-                    #- read_pets
+                     #- write_pets
+                     #- read_pets
     /farmers:
         get:
             summary: Get All Farmers
@@ -159,8 +165,8 @@ paths:
             security:
                 - api_key: []
                 #- petstore_auth:
-                    #- write_pets
-                    #- read_pets
+                     #- write_pets
+                     #- read_pets
             parameters:
                 - name: limit
                   in: query
@@ -392,7 +398,7 @@ paths:
                   #- write_pets
                   #- read_pets
 
-securityDefinitions:              #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH TOKEN
+securityDefinitions:             #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH TOKEN
     api_key:
         type: apiKey
         name: access_token
@@ -401,500 +407,651 @@ securityDefinitions:              #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUT
         #type: oauth2
         #authorizationUrl: harvest-api-staging.herokuapp.com/api
         #flow: implicit
-        #scopes:       #ASK NICK WHAT SCOPES WE ARE USING
+        #scopes:      #ASK NICK WHAT SCOPES WE ARE USING
             #write_pets: modify pets in your account
             #read_pets: read your pets
 definitions:
-    Message:
-        required:
-            - message
-        properties:
-            message:
-                type: string
-                default: 'Hello, Adam!'
     Crop:
         type: object
         properties:
             IDX_Crop:
-                type: integer
+                type: number
+                description: to be updated
                 example: 2322356
             IDX_Property:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 1971349
             Crop_Variety:
                 type: string
+                description: "to be updated"
                 example: "Not Stated"
             Crop_Name:
                 type: string
+                description: "to be updated"
                 example: "Ackee"
             Crop_Total_Area:
                 type: number
+                description: "to be updated"
                 example: 0.61
             Crop_Count:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 0
             Plant_Date:
                 type: string
+                description: "to be updated"
                 example: "2004-08-11T00:00:00.000Z"
             Major_Market_Percentage:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 0
             Minor_Market_Percentage:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 0
             Crop_Remarks:
                 type: string
+                description: "to be updated"
                 example: ""
             Create_Date:
                 type: string
+                description: "to be updated"
                 example: "2008-11-04T12:44:55.846Z"
             Update_Date:
                 type: string
+                description: "to be updated"
                 example: "2008-11-04T12:44:55.846Z"
             Code_Area_Unit:
                 type: string
+                description: "to be updated"
                 example: "Hectare"
             Major_Market:
                 type: string
-                example: null
+                description: "to be updated"
+                example: n/a
             Minor_Market:
                 type: string
-                example: null
+                description: "to be updated"
+                example: n/a
             IDX_StakeHolder:
                 type: number
+                description: "to be updated"
                 example: 952790
             Property_Address:
                 type: string
+                description: "to be updated"
                 example: "inverness inverness p.o. st ann"
             District:
                 type: string
+                description: "to be updated"
                 example: "INVERNESS"
             Parish:
                 type: string
+                description: "to be updated"
                 example: "ST.ANN"
             Parish_Extension_Name:
                 type: string
+                description: "to be updated"
                 example: "ALEXANDRIA"
             Crop_Variety_IDX:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 87
             Location_IDX:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 2326
             Crop_Total_Area_Ha:
                 type: number
+                description: "to be updated"
                 example: 0.61
             Crop_Type_Code:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 21
     Farmer:
         type: object
         properties:
             IDX_StakeHolder:
-                type: string
+                type: array
                 description: "to be updated"
+                example: [952520,952520]
             StakeHolder_Num:
                 type: string
-                description: 'example: 081117655'
-            Stakeholder_Type_Code:
-                type: integer
                 description: "to be updated"
+                example: '081117655'
+            Stakeholder_Type_Code:
+                type: number
+                description: "to be updated"
+                example: 1
             Company_Name:
                 type: string
                 description: "to be updated"
+                example: n/a
             First_Name:
                 type: string
-                description: 'example: ERROL'
+                description: "to be updated"
+                example: 'ERROL'
             Middle_Name:
                 type: string
-                description: 'example: CHARLES'
+                description: "to be updated"
+                example: 'CHARLES'
             Last_Name:
                 type: string
-                description: 'example: LENNOX'
+                description: "to be updated"
+                example: 'LENNOX'
             Alias:
                 type: string
                 description: "to be updated"
+                example: n/a
             DOB:
                 type: string
-                description: 'example: 1975-11-30T00:00:00.000Z'
-            Gender:
-                type: integer
                 description: "to be updated"
+                example: '1975-11-30T00:00:00.000Z'
+            Gender:
+                type: number
+                description: "to be updated"
+                example: 1
             Jas_Receipt:
                 type: string
-                description: 'example: 0'
+                description: "to be updated"
+                example: '0'
             Res_Street_Address:
                 type: string
-                description: 'example: MERTON PEN'
+                description: "to be updated"
+                example: 'MERTON PEN'
             Res_District_Name:
                 type: string
-                description: 'example: GRANGE HILL'
+                description: "to be updated"
+                example: 'GRANGE HILL'
             Res_Post_Office:
                 type: string
-                description: 'example: Grange Hill P.A.'
-            Res_Parish_Code:
-                type: integer
                 description: "to be updated"
+                example: 'Grange Hill P.A.'
+            Res_Parish_Code:
+                type: number
+                description: "to be updated"
+                example: 4
             Res_Tele_Num:
                 type: string
-                description: 'example: 457-8027'
+                description: "to be updated"
+                example: '457-8027'
             Bus_Street_Address:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Bus_District_Name:
                 type: string
-                description: 'example: GRANGE HILL'
+                description: "to be updated"
+                example: 'GRANGE HILL'
             Bus_Post_Office:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Bus_Parish_Code:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 4
             Bus_Tele_Num:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 0
             Cell_Num:
+                description: "to be updated"
                 type: string
-                description:  "to be updated"
+                example: n/a
             Email_Address:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example:
             Fax_Num:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Identification_Num:
                 type: string
-                description: 'example: 106699920'
+                description: "to be updated"
+                example: '106699920'
             ID_Type_Code:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 3
             TRN:
                 type: string
-                description: 'example" 106699920'
+                description: "to be updated"
+                example: '106699920'
             Interviewer:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Stakeholder_Status_Code:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 1
             Verified_Status:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 1
             Verified_Date:
                 type: string
-                description: 'example: 2009-01-09T00:00:00.000Z'
+                description: "to be updated"
+                example: '2009-01-09T00:00:00.000Z'
             Registration_Date:
                 type: string
-                description: 'example: 2008-10-17T00:00:00.000Z'
+                description: "to be updated"
+                example: '2008-10-17T00:00:00.000Z'
             Have_Photo_YN:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 0
             Want_Photo_ID_YN:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 1
             Photo_Path:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: '081117655.jpg'
             Photo_ID_Upload_Date:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Photo_Found_YN:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             IDX_EOJ_Photo_Batch:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Photo_Status:
-                type: integer
-                description:  "to be updated"
+                type: number
+                description: "to be updated"
+                example: 1
             Old_Photo_ID_Printed_YN:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Old_Photo_Path:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Old_Photo_Print_Date:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Old_Have_Photo_YN:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Create_Date:
-                type: string
-                description:  "to be updated"
+                type: array
+                description: "to be updated"
+                example: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
             Update_Date:
-                type: string
-                description:  "to be updated"
+                type: array
+                description: "to be updated"
+                example: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
             ReVerified_Date:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             ReVerified_Status:
                 type: string
-                description:  "to be updated"
-            tracker_farmer_yn:
-                type: integer
                 description: "to be updated"
+                example: n/a
+            tracker_farmer_yn:
+                type: number
+                description: "to be updated"
+                example: 0
             Title:
                 type: string
-                description:  "to be updated"
+                description: "to be updated"
+                example: n/a
             Stakeholder_Status_Date:
                 type: string
                 description: "to be updated"
+                example: n/a
             primary_parish:
-                type: integer
-                description: The parish the farmer operates in
+                type: number
+                description: "to be updated"
+                example: 4
             primary_extension_area:
-                type: integer
-                description: The extension area the farmer belongs.
+                type: number
+                description: "to be updated"
+                example: 9
             primary_district:
-                type: integer
-                description: The main district the farmer operates in
+                type: number
+                description: "to be updated"
+                example: 994
             Update_By:
-                type: integer
-                description: Which entity last updated the farmer record
+                type: number
+                description: "to be updated"
+                example: 0
             tracker_group:
                 type: string
-                description: The group monitoring the farmer
+                description: "to be updated"
+                example: n/a
             tracker_start_date:
                 type: string
-                description: The date the farmer's activity begun undergoing tracking.
+                description: "to be updated"
+                example: n/a
             IDX_Farmer_Profile:
-                type: integer
-                description: Code to represent the farmer's ID profile
+                type: number
+                description: "to be updated"
+                example: 523402
             Respondent_Code:
-                type: integer
-                description: Code to represent the farmer's respondent
+                type: number
+                description: "to be updated"
+                example: 1
             Manager_Code:
-                type: integer
-                description: Code to represent the farmer's manager
+                type: number
+                description: "to be updated"
+                example: 1
             Live_On_Farm_YN:
-                type: integer
-                description: Code to represent whether the farmer lives on the farm and the number of years, if they do.
+                type: number
+                description: "to be updated"
+                example: 1
             Income_Source_Code:
-                type: integer
-                description: Code to represent the farmer's main source of income
+                type: number
+                description: "to be updated"
+                example: 1
             Education_Level_Code:
-                type: integer
-                description: Code to represent the farmer's education level
+                type: number
+                description: "to be updated"
+                example: 5
             Occupation_Code:
-                type: integer
-                description: Code to represent the farmer's main occupation
+                type: number
+                description: "to be updated"
+                example: 7
             Agri_Training_YN:
-                type: integer
-                description: Amount of years the farmer has been trained
+                type: number
+                description: "to be updated"
+                example: 2
             Farmer_Type_Code:
-                type: integer
-                description: code for the farmer's type (of main produce)
+                type: number
+                description: "to be updated"
+                example: 1
             Training_Method_Code:
-                type: integer
-                description: number to represent training methods the farmer has undergone
+                type: number
+                description: "to be updated"
+                example: 0
             Agri_Institution_Code:
-                type: integer
-                description: Agriultural institution the farmer belongs to
+                type: number
+                description: "to be updated"
+                example: 0
             Qualification_Code:
-                type: integer
-                description: qualification code for the farmer's level of certification
+                type: number
+                description: "to be updated"
+                example: 3
             Holding_Start:
                 type: string
-                description: '1994'
+                description: "to be updated"
+                example: '1994'
             Main_Agri_Activity_Code:
-                type: integer
-                description: Code for the main agriculture activity
+                type: number
+                description: "to be updated"
+                example: 2
             Nearest_Police_Station:
                 type: string
-                description: 'Manchioneal'
+                description: "to be updated"
+                example: 'Manchioneal'
             Farmer_Profile_Remarks:
                 type: string
-                description: Comments about the farmer
+                description: "to be updated"
+                example: n/a
             Jas_Farmer_Group:
                 type: string
-                description: The farmer group this farmer is a member of
+                description: "to be updated"
+                example:
             House_Hold_No:
                 type: string
-                description: Contact for house phone.
+                description: "to be updated"
+                example: n/a
     Livestock:
         type: object
         properties:
             IDX_Livestock:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 340798
             Livestock_Type_Code:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 3
             IDX_Property:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 1971353
             Livestock_Stage_Code:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 201000
             Livestock_Count:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 14
             Livestock_Capacity:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 20
             Livestock_Remarks:
                 type: string
+                description: "to be updated"
                 example: ""
             Major_Market_Code:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 2
             Minor_Market_Code:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 15
             Major_Market_Percentage:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 0
             Minor_Market_Percentage:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 0
             Create_Date:
                 type: string
+                description: "to be updated"
                 example: "2008-11-04T13:12:32.990Z"
             Update_Date:
                 type: string
+                description: "to be updated"
                 example: "2008-11-04T13:12:32.990Z"
             Livestock_Name:
                 type: string
+                description: "to be updated"
                 example: "Pig"
             Major_Market:
                 type: string
+                description: "to be updated"
                 example: "Hotel"
             Minor_Market:
                 type: string
+                description: "to be updated"
                 example: "Householder"
             District:
                 type: string
+                description: "to be updated"
                 example: "INVERNESS"
             Parish_Extension_Name:
                 type: string
+                description: "to be updated"
                 example: "ALEXANDRIA"
             Parish:
                 type: string
+                description: "to be updated"
                 example: "ST.ANN"
             Property_Address:
                 type: string
+                description: "to be updated"
                 example: "inverness inverness p.o. st. ann"
             Location_Code:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 2326
             IDX_StakeHolder:
-                type: integer
+                type: number
+                description: "to be updated"
                 example: 952798
             Livestock_Stage:
                 type: string
+                description: "to be updated"
                 example: "Not Stated"
     Property:
         type: object
         properties:
             IDX_Property:
-              type: integer
-              example: 1971350
+                type: number
+                description: "to be updated"
+                example: 1971350
             IDX_StakeHolder:
-              type: integer
-              example: 952792
+                type: number
+                description: "to be updated"
+                example: 952792
             Location_Code:
-              type: integer
-              example: 4107
+                type: number
+                description: "to be updated"
+                example: 4107
             District:
-              type: string
-              example: 'GREENLAND'
+                type: string
+                description: "to be updated"
+                example: 'GREENLAND'
             Parish:
-              type: string
-              example: 'MANCHESTER'
+                type: string
+                description: "to be updated"
+                example: 'MANCHESTER'
             Parish_Extension_Name:
-              type: string
-              example: 'MILE GULLY'
+                type: string
+                description: "to be updated"
+                example: 'MILE GULLY'
             Extension_Officer:
-              type: string
-              example: '47'
+                type: string
+                description: "to be updated"
+                example: '47'
             Property_Address:
-              type: string
-              example: 'Greenland'
+                type: string
+                description: "to be updated"
+                example: 'Greenland'
             Property_Size:
-              type: number
-              example: 1.62
+                type: number
+                description: "to be updated"
+                example: 1.62
             Property_Size_Unit_Code:
-              type: integer
-              example: 3
+                type: number
+                description: "to be updated"
+                example: 3
             Property_Usage:
-              type: number
-              example: 0.01
+                type: number
+                description: "to be updated"
+                example: 0.01
             Tenure_Code:
-              type: integer
-              example: 4
+                type: number
+                description: "to be updated"
+                example: 4
             Property_Usage_Unit_Code:
-              type: integer
-              example: 3
+                type: number
+                description: "to be updated"
+                example: 3
             Property_Remarks:
-              type: string
-              example: ''
+                type: string
+                description: "to be updated"
+                example: ''
             Property_Status_Code:
-              type: integer
-              example: 1
+                type: number
+                description: "to be updated"
+                example: 1
             Volume_Num:
-              type: string
-              example: ''
+                type: string
+                description: "to be updated"
+                example: ''
             Folio_Num:
-              type: string
-              example: ''
+                type: string
+                description: "to be updated"
+                example: ''
             Distance_From_Road:
-              type: integer
-              example: 0
+                type: number
+                description: "to be updated"
+                example: 0
             Distance_From_Road_Unit_Code:
-              type: string
-              example: null
+                type: string
+                description: "to be updated"
+                example: n/a
             Primary_Property_YN:
-              type: integer
-              example: 2
+                type: number
+                description: "to be updated"
+                example: 2
             Ownership_Code:
-              type: string
-              example: null
+                type: string
+                description: "to be updated"
+                example: n/a
             Latitude:
-              type: number
-              example: null
+                type: number
+                description: "to be updated"
+                example: 0
             Longitude:
-              type: number
-              example: null
+                type: number
+                description: "to be updated"
+                example: 0
             Create_Date:
-              type: string
-              example: '2008-11-04T12:46:47.926Z'
+                type: string
+                description: "to be updated"
+                example: '2008-11-04T12:46:47.926Z'
             Update_Date:
-              type: string
-              example: '2008-11-04T12:46:47.926Z'
+                type: string
+                description: "to be updated"
+                example: '2008-11-04T12:46:47.926Z'
             Description:
-              type: string
-              example: 'Leased'
+                type: string
+                description: "to be updated"
+                example: 'Leased'
             Property_Status:
-              type: string
-              example: 'Active'
+                type: string
+                description: "to be updated"
+                example: 'Active'
             Ownership:
-              type: string
-              example: null
+                type: string
+                description: "to be updated"
+                example: n/a
             Distance_Units:
-              type: number
-              example: null
+                type: number
+                description: "to be updated"
+                example: 0
             Property_Usage_Units:
-              type: string
-              example: 'Hectare'
+                type: string
+                description: "to be updated"
+                example: 'Hectare'
             Property_Size_Units:
-              type: string
-              example: 'Hectare'
+                type: string
+                description: "to be updated"
+                example: 'Hectare'
             Property_Size_Ha:
-              type: number
-              example: 1.62
+                type: number
+                description: "to be updated"
+                example: 1.62
             Parish_Extension_Code:
-              type: integer
-              example: 44
+                type: number
+                description: "to be updated"
+                example: 44
             irrigation_source_code:
-              type: integer
-              example: null
+                type: number
+                description: "to be updated"
+                example: n/a
             Irrigation_Source:
-              type: string
-              example: null
+                type: string
+                description: "to be updated"
+                example: n/a
             irrigation_yn:
-              type: string
-              example: null
+                type: string
+                description: "to be updated"
+                example: n/a
             irrigation_access_yn:
-              type: string
-              example: null
+                type: string
+                description: "to be updated"
+                example: n/a
