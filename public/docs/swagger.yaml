@@ -30,7 +30,8 @@ info:
         Aggregate data on a resource is accessed through a respective resource path, which has the resource pluralized. e.g `/api/crops` would return ALL the crops available. As you can imagine, this would return a large amount of data. So, we've allowed you to limit/[throttle](/docs/#throttling-requests) the aggregate requests.
         Personal requests are those which retrieve a specific record from a resource. e.g. `/api/crop/[CROP_ID_HERE]` would return the specific crop record associated with the crop id passed in the path where `CROP_ID_HERE` is. Please note that for personal requests, the resource name is kept singular.
         ## Throttling Requests
-        `to be filled`
+        `limit` - This is the number of results that will be returned from this query (defaults to 100).
+        `offset` - This allows for pagination in sets of whatever the limit is (defaults to 0).
         # How to use the API
         This documentation provides all the resources offered and how they may be accessed, however, and API key/token must be passed as `access_token` within the header of the request.
         ## API Registration
