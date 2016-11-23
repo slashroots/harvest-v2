@@ -2,15 +2,15 @@
 <html>
   <head>
 	<title><%= title %></title>
-	<link rel='stylesheet' href='/stylesheets/redoc/main.css' />
+	<!--<link rel='stylesheet' href='/stylesheets/redoc/main.css' />-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Bootstrap Core CSS -->
 	<!--<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom CSS -->
-	<!--<link href="/stylesheets/style.css" rel="stylesheet">-->
-	<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+	<!--<link href="/stylesheets/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">-->
 
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -24,25 +24,24 @@
 
   </head>
 
-  <div ng-include src="'/partials/common/navigation.html'"></div>
   <body ng-app="harvestv2" layout="column" layout-fill>
 
 		<div ng-include id="dev-nav" src="'/partials/common/navigation.html'"></div>
 
-        	<redoc scroll-y-offset="body > nav" spec-url='/docs/swagger.yaml'></redoc>
+        	<redoc spec-url='/docs/swagger.yaml'></redoc>
         	<script src="/bower_components/redoc/dist/redoc.js"> </script>
 		<!-- jQuery Version 1.11.1 -->
-		<script src="/bower_components/jquery/dist/jquery.js"></script>
+		<!--<script src="/bower_components/jquery/dist/jquery.js"></script>
 		<script src="/bower_components/bootstrap-validator/js/validator.js"></script>
 		<!-- Bootstrap Core JavaScript -->
-		<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!--<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="/bower_components/angular/angular.js"></script>
 		<script src="/bower_components/angular-route/angular-route.js"></script>
 		<script src="/bower_components/angular-resource/angular-resource.js"></script>
 		<script src="/javascript/app.js"></script>
 		<script src="/javascript/services.js"></script>
 		<script src="/javascript/controllers/user-ctrl.js"></script>
-		<script src="/bower_components/crypto-js/crypto-js.js"></script>
+		<script src="/bower_components/crypto-js/crypto-js.js"></script>-->
 	</body>
 </html>
 
