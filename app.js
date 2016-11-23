@@ -105,6 +105,11 @@ app.use(function(err, req, res, next) {
             res.send({
                 message: err.errors
             });
+        } else if(err.name == 'MongoError') {
+            res.status(400);
+            res.send({
+                message: err
+            });
         } else {
             generalError(err, res);
         }
