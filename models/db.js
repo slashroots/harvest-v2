@@ -36,7 +36,7 @@ var UserSchema = new Schema({
     us_user_last_name: {type: String, required: true},
     us_username: {type: String, unique: true, required: true},
     us_password: {type: String, required: true},
-    us_email_address: {type: String, required: true},
+    us_email_address: {type: String, unique:true, required: true},
     us_contact: {type: String, required: true},
     us_user_creation_date: {type: Date, default: Date.now()},
     us_state: {type: String, default: 'pending'},
