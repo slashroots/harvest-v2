@@ -1,688 +1,1057 @@
 # this is documentation represented in YAML for Harvest API
 swagger: '2.0'
 info:
-  title: HarvestAPI
-  description: Open Data + Agriculture 
-  version: "0.0.0"
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    title: Harvest API
+    version: "0.0.0"
+    license:
+        name: Apache 2.0
+        url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    description: |
+        # About HarvestAPI
+
+        ## What is HarvestAPI?
+        The Harvest API is an open data platform for the publishing and sharing of agricultural sector data across government and with the public. It was developed by the SlashRoots Foundation in collaboration with Jamaica’s Rural Agricultural Development Authority’s (RADA) and Ministry of Agriculture (MoA). Through HarvestAPI RADA and the MoA publish and manage the sharing of crop production and farmer and farm registry data from RADA’s ABIS database as well as market price information from the MoA’s JAMIS database.
+        ### What is an API?
+        Simply put, an application programming interface (API) is a set of functions and procedures that allow the creation of applications which access the features or data of an operating system, application, or other service.
+        ### Open Source Project
+        This is an open source project which means the original source code is made freely available and may be redistributed and modified. The source code may be found [here on github](https://github.com/slashroots/harvest-v2)
+        ## ABIS & Relationship with RADA
+        ABIS is a web-based information programme developed by RADA, which provides information on crops, livestock, and agricultural production, markets and stakeholders, to support the business of agriculture.
+        # What data does the API use?
+        Harves API uses data from ABIS, but only  providing non personal data to developers and the public.
+        ## Data Resources
+        Data resources currently being offered are:
+        * Crops
+        * Farmers
+        * Livestock
+        * Property
+
+        ## Personal vs Aggregate
+        Aggregate data on a resource is accessed through a respective resource path, which has the resource pluralized. e.g `/api/crops` would return ALL the crops available. As you can imagine, this would return a large amount of data. So, we've allowed you to limit/[throttle](/docs/#throttling-requests) the aggregate requests.
+        Personal requests are those which retrieve a specific record from a resource. e.g. `/api/crop/[CROP_ID_HERE]` would return the specific crop record associated with the crop id passed in the path where `CROP_ID_HERE` is. Please note that for personal requests, the resource name is kept singular.
+        ## Throttling Requests
+        `limit` - This is the number of results that will be returned from this query (defaults to 100).
+        `offset` - This allows for pagination in sets of whatever the limit is (defaults to 0).
+        # How to use the API
+        This documentation provides all the resources offered and how they may be accessed, however, and API key/token must be passed as `access_token` within the header of the request.
+        ## API Registration
+        You MUST register on ther [Harvest API website]() before interfacing with the API for any development.
+        ### API Keys
+        An application programming interface key (API key) is a code passed in by computer programs calling an application programming interface (API) to identify the calling program, its developer, or its user to the Web site. Ths is done to ensure we know how the information being provided is being accessed. Remember, the api key MUST be passedin the header of the requested through the variable `access_token`.
+<!-- ReDoc-Inject: <security-definitions> -->
+
 # the domain of the service
-host: localhost:3000
+host: localhost
 # array of all schemes that your API supports
 schemes:
-  - https
+    - https
 # will be prefixed to all paths
-basePath: /api/
+basePath: /api
 tags:
-  - name: Crop
-    description: Crop information
-  - name: Farmer
-    description: Farmer information
-  - name: Livestock
-    description: Livestock information
-  - name: Property
-    description: Property information
+    - name: Crop
+      description: Crop information
+    - name: Farmer
+      description: Farmer information
+    - name: Livestock
+      description: Livestock information
+    - name: Property
+      description: Property information
 paths:
-  /crop:
-    get:
-      summary: Get All Crops
-      description: |
-       Retrieve information on all grops
-      operationId: getAllCrops
-      tags:
-        - Crop
-      produces:
-        - application/json
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getCropByID x 50!'
-  /crop/{id}:
-    get:
-      summary: Get Crop By ID
-      description: |
-       Retrieve information on a crop, provided an ID
-      operationId: getCropByID
-      tags:
-        - Crop
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              IDX_Crop:
-                  type: integer
-                  message: 2322356
-              IDX_Property:
-                  type: integer
-                  message: 1971349
-              Crop_Variety:
-                  type: string
-                  message: "Not Stated"
-              Crop_Name:
-                  type: string
-                  message: "Ackee"
-              Crop_Total_Area:
+    /crops:
+        get:
+            summary: Get All Crops
+            description: |
+                Retrieve information on all grops
+            operationId: getAllCrops
+            tags:
+                - Crop
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Crop'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: 0.61
-              Crop_Count:
-                  type: integer
-                  message: 0
-              Plant_Date:
-                  type: string
-                  message: "2004-08-11T00:00:00.000Z"
-              Major_Market_Percentage:
-                  type: integer
-                  message: 0
-              Minor_Market_Percentage:
-                  type: integer
-                  message: 0
-              Crop_Remarks:
-                  type: string
-                  message: ""
-              Create_Date:
-                  type: string
-                  message: "2008-11-04T12:44:55.846Z"
-              Update_Date:
-                  type: string
-                  message: "2008-11-04T12:44:55.846Z"
-              Code_Area_Unit:
-                  type: string
-                  message: "Hectare"
-              Major_Market:
-                  type: string
-                  message: null
-              Minor_Market:
-                  type: string
-                  message: null
-              IDX_StakeHolder:
-                  type: null
-                  message: 952790
-              Property_Address:
-                  type: string
-                  message: "inverness inverness p.o. st ann"
-              District:
-                  type: string
-                  message: "INVERNESS"
-              Parish:
-                  type: string
-                  message: "ST.ANN"
-              Parish_Extension_Name:
-                  type: string
-                  message: "ALEXANDRIA"
-              Crop_Variety_IDX:
-                  type: integer
-                  message: 87
-              Location_IDX:
-                  type: integer
-                  message: 2326
-              Crop_Total_Area_Ha:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Crop'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
                   type: number
-                  message: 0.61
-              Crop_Type_Code:
-                  type: integer
-                  message: 21
-  /farmers:
-    get:
-      summary: Get All Farmers
-      description: |
-       Retrieve information on all farmers
-      operationId: getAllFarmers
-      tags:
-        - Farmer
-      produces:
-        - application/json
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getFarmerByID x 50!'
-  /farmers/{id}:
-    get:
-      summary: Get Farmer By ID
-      description: |
-       Retrieve information on a farmer, provided an ID
-      operationId: getFarmerByID
-      tags:
-        - Farmer
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-                IDX_StakeHolder:
-                    type: array
-                    message: [952520,952520]
-                StakeHolder_Num:
-                    type: string
-                    message: '081117655'
-                Stakeholder_Type_Code:
-                    type: integer
-                    message: 1
-                Company_Name:
-                    type: string
-                    message:
-                First_Name:
-                    type: string
-                    message: 'ERROL'
-                Middle_Name:
-                    type: string
-                    message: 'CHARLES'
-                Last_Name:
-                    type: string
-                    message: 'LENNOX'
-                Alias:
-                    type: string
-                    message:
-                DOB:
-                    type: string
-                    message: '1975-11-30T00:00:00.000Z'
-                Gender:
-                    type: integer
-                    message: 1
-                Jas_Receipt:
-                    type: string
-                    message: '0'
-                Res_Street_Address:
-                    type: string
-                    message: 'MERTON PEN'
-                Res_District_Name:
-                    type: string
-                    message: 'GRANGE HILL'
-                Res_Post_Office:
-                    type: string
-                    message: 'Grange Hill P.A.'
-                Res_Parish_Code:
-                    type: integer
-                    message: 4
-                Res_Tele_Num:
-                    type: string
-                    message: '457-8027'
-                Bus_Street_Address:
-                    type: string
-                    message:
-                Bus_District_Name:
-                    type: string
-                    message: 'GRANGE HILL'
-                Bus_Post_Office:
-                    type: string
-                    message:
-                Bus_Parish_Code:
-                    type: integer
-                    message: 4
-                Bus_Tele_Num:
-                    type: integer
-                    message:
-                Cell_Num:
-                    type: string
-                    message:
-                Email_Address:
-                    type: string
-                    message:
-                Fax_Num:
-                    type: string
-                    message:
-                Identification_Num:
-                    type: string
-                    message: '106699920'
-                ID_Type_Code:
-                    type: integer
-                    message: 3
-                TRN:
-                    type: string
-                    message: '106699920'
-                Interviewer:
-                    type: string
-                    message: null
-                Stakeholder_Status_Code:
-                    type: integer
-                    message: 1
-                Verified_Status:
-                    type: integer
-                    message: 1
-                Verified_Date:
-                    type: string
-                    message: '2009-01-09T00:00:00.000Z'
-                Registration_Date:
-                    type: string
-                    message: '2008-10-17T00:00:00.000Z'
-                Have_Photo_YN:
-                    type: integer
-                    message: 0
-                Want_Photo_ID_YN:
-                    type: integer
-                    message: 1
-                Photo_Path:
-                    type: string
-                    message: '081117655.jpg'
-                Photo_ID_Upload_Date:
-                    type: string
-                    message: null
-                Photo_Found_YN:
-                    type: string
-                    message: null
-                IDX_EOJ_Photo_Batch:
-                    type: string
-                    message: null
-                Photo_Status:
-                    type: integer
-                    message: 1
-                Old_Photo_ID_Printed_YN:
-                    type: string
-                    message: null
-                Old_Photo_Path:
-                    type: string
-                    message: null
-                Old_Photo_Print_Date:
-                    type: string
-                    message: null
-                Old_Have_Photo_YN:
-                    type: string
-                    message: null
-                Create_Date:
-                    type: array
-                    message: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
-                Update_Date:
-                    type: array
-                    message: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
-                ReVerified_Date:
-                    type: string
-                    message: null
-                ReVerified_Status:
-                    type: string
-                    message: null
-                tracker_farmer_yn:
-                    type: integer
-                    message: 0
-                Title:
-                    type: string
-                    message: null
-                Stakeholder_Status_Date:
-                    type: string
-                    message: null
-                primary_parish:
-                    type: integer
-                    message: 4
-                primary_extension_area:
-                    type: integer
-                    message: 9
-                primary_district:
-                    type: integer
-                    message: 994
-                Update_By:
-                    type: integer
-                    message: null
-                tracker_group:
-                    type: string
-                    message: null
-                tracker_start_date:
-                    type: string
-                    message: null
-                IDX_Farmer_Profile:
-                    type: integer
-                    message: 523402
-                Respondent_Code:
-                    type: integer
-                    message: 1
-                Manager_Code:
-                    type: integer
-                    message: 1
-                Live_On_Farm_YN:
-                    type: integer
-                    message: 1
-                Income_Source_Code:
-                    type: integer
-                    message: 1
-                Education_Level_Code:
-                    type: integer
-                    message: 5
-                Occupation_Code:
-                    type: integer
-                    message: 7
-                Agri_Training_YN:
-                    type: integer
-                    message: 2
-                Farmer_Type_Code:
-                    type: integer
-                    message: 1
-                Training_Method_Code:
-                    type: integer
-                    message: null
-                Agri_Institution_Code:
-                    type: integer
-                    message: null
-                Qualification_Code:
-                    type: integer
-                    message: 3
-                Holding_Start:
-                    type: string
-                    message: '1994'
-                Main_Agri_Activity_Code:
-                    type: integer
-                    message: 2
-                Nearest_Police_Station:
-                    type: string
-                    message: 'Manchioneal'
-                Farmer_Profile_Remarks:
-                    type: string
-                    message: null
-                Jas_Farmer_Group:
-                    type: string
-                    message:
-                House_Hold_No:
-                    type: string
-                    message: null
-  /livestock:
-    get:
-      summary: Get All Livestock
-      description: |
-       Retrieve information on all livestock
-      operationId: getAllLivestock
-      tags:
-        - Livestock
-      produces:
-        - application/json
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getLivestockByID x 50!'
-  /livestock/{id}:
-    get:
-      summary: Get Livestock By ID
-      description: |
-       Retrieve information on a livestock, provided an ID
-      operationId: getLivestockByID
-      tags:
-        - Livestock
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              IDX_Livestock:
-                  type: integer
-                  message: 340798
-              Livestock_Type_Code:
-                  type: integer
-                  message: 3
-              IDX_Property:
-                  type: integer
-                  message: 1971353
-              Livestock_Stage_Code:
-                  type: integer
-                  message: 201000
-              Livestock_Count:
-                  type: integer
-                  message: 14
-              Livestock_Capacity:
-                  type: integer
-                  message: 20
-              Livestock_Remarks:
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Crop'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
                   type: string
-                  message: ""
-              Major_Market_Code:
-                  type: integer
-                  message: 2
-              Minor_Market_Code:
-                  type: integer
-                  message: 15
-              Major_Market_Percentage:
-                  type: integer
-                  message: 0
-              Minor_Market_Percentage:
-                  type: integer
-                  message: 0
-              Create_Date:
-                  type: string
-                  message: "2008-11-04T13:12:32.990Z"
-              Update_Date:
-                  type: string
-                  message: "2008-11-04T13:12:32.990Z"
-              Livestock_Name:
-                  type: string
-                  message: "Pig"
-              Major_Market:
-                  type: string
-                  message: "Hotel"
-              Minor_Market:
-                  type: string
-                  message: "Householder"
-              District:
-                  type: string
-                  message: "INVERNESS"
-              Parish_Extension_Name:
-                  type: string
-                  message: "ALEXANDRIA"
-              Parish:
-                  type: string
-                  message: "ST.ANN"
-              Property_Address:
-                  type: string
-                  message: "inverness inverness p.o. st. ann"
-              Location_Code:
-                  type: integer
-                  message: 2326
-              IDX_StakeHolder:
-                  type: integer
-                  message: 952798
-              Livestock_Stage:
-                  type: string
-                  message: "Not Stated"
-  /property:
-    get:
-      summary: Get All Property
-      description: |
-       Retrieve information on all properties
-      operationId: getAllProperties
-      tags:
-        - Property
-      produces:
-        - application/json
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-              message: 'imagine getPropertyByID x 50!'
-  /property/{id}:
-    get:
-      summary: Get Property By ID
-      description: |
-       Retrieve information on a property, provided an ID
-      operationId: getPropertyByID
-      tags:
-        - Property
-      produces:
-        - application/json
-      parameters:
-        - name: id
-          in: path
-          description: requests object
-          type: string
-          required: true
-      responses:
-        default:
-          description: Bad request
-        200:
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Message'
-          examples:
-            'application/json':
-                IDX_Property:
-                  type: integer
-                  message: 1971350
-                IDX_StakeHolder:
-                  type: integer
-                  message: 952792
-                Location_Code:
-                  type: integer
-                  message: 4107
-                District:
-                  type: string
-                  message: 'GREENLAND'
-                Parish:
-                  type: string
-                  message: 'MANCHESTER'
-                Parish_Extension_Name:
-                  type: string
-                  message: 'MILE GULLY'
-                Extension_Officer:
-                  type: string
-                  message: '47'
-                Property_Address:
-                  type: string
-                  message: 'Greenland'
-                Property_Size:
+    /crop/{id}:
+        get:
+            summary: Get Crop By ID
+            description: |
+                Retrieve information on a crop, provided an ID
+            operationId: getCropByID
+            tags:
+                - Crop
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Crop'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                     #- write_pets
+                     #- read_pets
+    /farmers:
+        get:
+            summary: Get All Farmers
+            description: |
+                Retrieve information on all farmers
+            operationId: getAllFarmers
+            tags:
+                - Farmer
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Farmer'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                     #- write_pets
+                     #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: 1.62
-                Property_Size_Unit_Code:
-                  type: integer
-                  message: 3
-                Property_Usage:
-                  type: float
-                  message: 0.01
-                Tenure_Code:
-                  type: integer
-                  message: 4
-                Property_Usage_Unit_Code:
-                  type: integer
-                  message: 3
-                Property_Remarks:
-                  type: string
-                  message: ''
-                Property_Status_Code:
-                  type: integer
-                  message: 1
-                Volume_Num:
-                  type: string
-                  message: ''
-                Folio_Num:
-                  type: string
-                  message: ''
-                Distance_From_Road:
-                  type: integer
-                  message: 0
-                Distance_From_Road_Unit_Code:
-                  type: string
-                  message: null
-                Primary_Property_YN:
-                  type: integer
-                  message: 2
-                Ownership_Code:
-                  type: string
-                  message: null
-                Latitude:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Farmer'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
                   type: number
-                  message: null
-                Longitude:
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Farmer'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
+                  type: string
+    /farmer/{id}:
+        get:
+            summary: Get Farmer By ID
+            description: |
+                Retrieve information on a Farmer, provided an ID
+            operationId: getFarmerByID
+            tags:
+                - Farmer
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Farmer'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+    /livestock:
+        get:
+            summary: Get All Livestock
+            description: |
+                Retrieve information on all livestock
+            operationId: getAllLivestock
+            tags:
+                - Livestock
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Livestock'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: null
-                Create_Date:
-                  type: string
-                  message: '2008-11-04T12:46:47.926Z'
-                Update_Date:
-                  type: string
-                  message: '2008-11-04T12:46:47.926Z'
-                Description:
-                  type: string
-                  message: 'Leased'
-                Property_Status:
-                  type: string
-                  message: 'Active'
-                Ownership:
-                  type: string
-                  message: null
-                Distance_Units:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Livestock'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
                   type: number
-                  message: null
-                Property_Usage_Units:
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Livestock'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
                   type: string
-                  message: 'Hectare'
-                Property_Size_Units:
+    /livestock/{id}:
+        get:
+            summary: Get Livestock By ID
+            description: |
+                Retrieve information on a livestock, provided an ID
+            operationId: getLivestockByID
+            tags:
+                - Livestock
+            produces:
+                - application/json
+            parameters:
+                - name: id
+                  in: path
+                  description: requests object
                   type: string
-                  message: 'Hectare'
-                Property_Size_Ha:
+                  required: true
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Livestock'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+    /properties:
+        get:
+            summary: Get All Property
+            description: |
+                Retrieve information on all properties
+            operationId: getAllProperties
+            tags:
+                - Property
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Property'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                    #- write_pets
+                    #- read_pets
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
                   type: number
-                  message: 1.62
-                Parish_Extension_Code:
-                  type: integer
-                  message: 44
-                irrigation_source_code:
-                  type: integer
-                  message: null
-                Irrigation_Source:
+                  default: 100
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Property'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Property'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  required: false
                   type: string
-                  message: null
-                irrigation_yn:
+    /property/{id}:
+        get:
+            summary: Get Property By ID
+            description: |
+                Retrieve information on a property, provided an ID
+            operationId: getPropertyByID
+            tags:
+                - Property
+            produces:
+                - application/json
+            parameters:
+                - name: id
+                  in: path
+                  description: requests object
                   type: string
-                  message: null
-                irrigation_access_yn:
-                  type: string
-                  message: null
+                  required: true
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Property'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            security:
+                - api_key: []
+                #- petstore_auth:
+                  #- write_pets
+                  #- read_pets
+
+securityDefinitions:             #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH TOKEN
+    api_key:
+        type: apiKey
+        name: access_token
+        in: header
+    #petstore_auth:
+        #type: oauth2
+        #authorizationUrl: harvest-api-staging.herokuapp.com/api
+        #flow: implicit
+        #scopes:      #ASK NICK WHAT SCOPES WE ARE USING
+            #write_pets: modify pets in your account
+            #read_pets: read your pets
 definitions:
-  Message:
-    required:
-      - message
-    properties:
-      message:
-        type: string
-        default: 'Hello, Adam!'
+    Crop:
+        type: object
+        properties:
+            IDX_Crop:
+                type: number
+                description: to be updated
+                example: 2322356
+            IDX_Property:
+                type: number
+                description: "to be updated"
+                example: 1971349
+            Crop_Variety:
+                type: string
+                description: "to be updated"
+                example: "Not Stated"
+            Crop_Name:
+                type: string
+                description: "to be updated"
+                example: "Ackee"
+            Crop_Total_Area:
+                type: number
+                description: "to be updated"
+                example: 0.61
+            Crop_Count:
+                type: number
+                description: "to be updated"
+                example: 0
+            Plant_Date:
+                type: string
+                description: "to be updated"
+                example: "2004-08-11T00:00:00.000Z"
+            Major_Market_Percentage:
+                type: number
+                description: "to be updated"
+                example: 0
+            Minor_Market_Percentage:
+                type: number
+                description: "to be updated"
+                example: 0
+            Crop_Remarks:
+                type: string
+                description: "to be updated"
+                example: ""
+            Create_Date:
+                type: string
+                description: "to be updated"
+                example: "2008-11-04T12:44:55.846Z"
+            Update_Date:
+                type: string
+                description: "to be updated"
+                example: "2008-11-04T12:44:55.846Z"
+            Code_Area_Unit:
+                type: string
+                description: "to be updated"
+                example: "Hectare"
+            Major_Market:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Minor_Market:
+                type: string
+                description: "to be updated"
+                example: n/a
+            IDX_StakeHolder:
+                type: number
+                description: "to be updated"
+                example: 952790
+            Property_Address:
+                type: string
+                description: "to be updated"
+                example: "inverness inverness p.o. st ann"
+            District:
+                type: string
+                description: "to be updated"
+                example: "INVERNESS"
+            Parish:
+                type: string
+                description: "to be updated"
+                example: "ST.ANN"
+            Parish_Extension_Name:
+                type: string
+                description: "to be updated"
+                example: "ALEXANDRIA"
+            Crop_Variety_IDX:
+                type: number
+                description: "to be updated"
+                example: 87
+            Location_IDX:
+                type: number
+                description: "to be updated"
+                example: 2326
+            Crop_Total_Area_Ha:
+                type: number
+                description: "to be updated"
+                example: 0.61
+            Crop_Type_Code:
+                type: number
+                description: "to be updated"
+                example: 21
+    Farmer:
+        type: object
+        properties:
+            IDX_StakeHolder:
+                type: array
+                description: "to be updated"
+                example: [952520,952520]
+            StakeHolder_Num:
+                type: string
+                description: "to be updated"
+                example: '081117655'
+            Stakeholder_Type_Code:
+                type: number
+                description: "to be updated"
+                example: 1
+            Company_Name:
+                type: string
+                description: "to be updated"
+                example: n/a
+            First_Name:
+                type: string
+                description: "to be updated"
+                example: 'ERROL'
+            Middle_Name:
+                type: string
+                description: "to be updated"
+                example: 'CHARLES'
+            Last_Name:
+                type: string
+                description: "to be updated"
+                example: 'LENNOX'
+            Alias:
+                type: string
+                description: "to be updated"
+                example: n/a
+            DOB:
+                type: string
+                description: "to be updated"
+                example: '1975-11-30T00:00:00.000Z'
+            Gender:
+                type: number
+                description: "to be updated"
+                example: 1
+            Jas_Receipt:
+                type: string
+                description: "to be updated"
+                example: '0'
+            Res_Street_Address:
+                type: string
+                description: "to be updated"
+                example: 'MERTON PEN'
+            Res_District_Name:
+                type: string
+                description: "to be updated"
+                example: 'GRANGE HILL'
+            Res_Post_Office:
+                type: string
+                description: "to be updated"
+                example: 'Grange Hill P.A.'
+            Res_Parish_Code:
+                type: number
+                description: "to be updated"
+                example: 4
+            Res_Tele_Num:
+                type: string
+                description: "to be updated"
+                example: '457-8027'
+            Bus_Street_Address:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Bus_District_Name:
+                type: string
+                description: "to be updated"
+                example: 'GRANGE HILL'
+            Bus_Post_Office:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Bus_Parish_Code:
+                type: number
+                description: "to be updated"
+                example: 4
+            Bus_Tele_Num:
+                type: number
+                description: "to be updated"
+                example: 0
+            Cell_Num:
+                description: "to be updated"
+                type: string
+                example: n/a
+            Email_Address:
+                type: string
+                description: "to be updated"
+                example:
+            Fax_Num:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Identification_Num:
+                type: string
+                description: "to be updated"
+                example: '106699920'
+            ID_Type_Code:
+                type: number
+                description: "to be updated"
+                example: 3
+            TRN:
+                type: string
+                description: "to be updated"
+                example: '106699920'
+            Interviewer:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Stakeholder_Status_Code:
+                type: number
+                description: "to be updated"
+                example: 1
+            Verified_Status:
+                type: number
+                description: "to be updated"
+                example: 1
+            Verified_Date:
+                type: string
+                description: "to be updated"
+                example: '2009-01-09T00:00:00.000Z'
+            Registration_Date:
+                type: string
+                description: "to be updated"
+                example: '2008-10-17T00:00:00.000Z'
+            Have_Photo_YN:
+                type: number
+                description: "to be updated"
+                example: 0
+            Want_Photo_ID_YN:
+                type: number
+                description: "to be updated"
+                example: 1
+            Photo_Path:
+                type: string
+                description: "to be updated"
+                example: '081117655.jpg'
+            Photo_ID_Upload_Date:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Photo_Found_YN:
+                type: string
+                description: "to be updated"
+                example: n/a
+            IDX_EOJ_Photo_Batch:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Photo_Status:
+                type: number
+                description: "to be updated"
+                example: 1
+            Old_Photo_ID_Printed_YN:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Old_Photo_Path:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Old_Photo_Print_Date:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Old_Have_Photo_YN:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Create_Date:
+                type: array
+                description: "to be updated"
+                example: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
+            Update_Date:
+                type: array
+                description: "to be updated"
+                example: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
+            ReVerified_Date:
+                type: string
+                description: "to be updated"
+                example: n/a
+            ReVerified_Status:
+                type: string
+                description: "to be updated"
+                example: n/a
+            tracker_farmer_yn:
+                type: number
+                description: "to be updated"
+                example: 0
+            Title:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Stakeholder_Status_Date:
+                type: string
+                description: "to be updated"
+                example: n/a
+            primary_parish:
+                type: number
+                description: "to be updated"
+                example: 4
+            primary_extension_area:
+                type: number
+                description: "to be updated"
+                example: 9
+            primary_district:
+                type: number
+                description: "to be updated"
+                example: 994
+            Update_By:
+                type: number
+                description: "to be updated"
+                example: 0
+            tracker_group:
+                type: string
+                description: "to be updated"
+                example: n/a
+            tracker_start_date:
+                type: string
+                description: "to be updated"
+                example: n/a
+            IDX_Farmer_Profile:
+                type: number
+                description: "to be updated"
+                example: 523402
+            Respondent_Code:
+                type: number
+                description: "to be updated"
+                example: 1
+            Manager_Code:
+                type: number
+                description: "to be updated"
+                example: 1
+            Live_On_Farm_YN:
+                type: number
+                description: "to be updated"
+                example: 1
+            Income_Source_Code:
+                type: number
+                description: "to be updated"
+                example: 1
+            Education_Level_Code:
+                type: number
+                description: "to be updated"
+                example: 5
+            Occupation_Code:
+                type: number
+                description: "to be updated"
+                example: 7
+            Agri_Training_YN:
+                type: number
+                description: "to be updated"
+                example: 2
+            Farmer_Type_Code:
+                type: number
+                description: "to be updated"
+                example: 1
+            Training_Method_Code:
+                type: number
+                description: "to be updated"
+                example: 0
+            Agri_Institution_Code:
+                type: number
+                description: "to be updated"
+                example: 0
+            Qualification_Code:
+                type: number
+                description: "to be updated"
+                example: 3
+            Holding_Start:
+                type: string
+                description: "to be updated"
+                example: '1994'
+            Main_Agri_Activity_Code:
+                type: number
+                description: "to be updated"
+                example: 2
+            Nearest_Police_Station:
+                type: string
+                description: "to be updated"
+                example: 'Manchioneal'
+            Farmer_Profile_Remarks:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Jas_Farmer_Group:
+                type: string
+                description: "to be updated"
+                example:
+            House_Hold_No:
+                type: string
+                description: "to be updated"
+                example: n/a
+    Livestock:
+        type: object
+        properties:
+            IDX_Livestock:
+                type: number
+                description: "to be updated"
+                example: 340798
+            Livestock_Type_Code:
+                type: number
+                description: "to be updated"
+                example: 3
+            IDX_Property:
+                type: number
+                description: "to be updated"
+                example: 1971353
+            Livestock_Stage_Code:
+                type: number
+                description: "to be updated"
+                example: 201000
+            Livestock_Count:
+                type: number
+                description: "to be updated"
+                example: 14
+            Livestock_Capacity:
+                type: number
+                description: "to be updated"
+                example: 20
+            Livestock_Remarks:
+                type: string
+                description: "to be updated"
+                example: ""
+            Major_Market_Code:
+                type: number
+                description: "to be updated"
+                example: 2
+            Minor_Market_Code:
+                type: number
+                description: "to be updated"
+                example: 15
+            Major_Market_Percentage:
+                type: number
+                description: "to be updated"
+                example: 0
+            Minor_Market_Percentage:
+                type: number
+                description: "to be updated"
+                example: 0
+            Create_Date:
+                type: string
+                description: "to be updated"
+                example: "2008-11-04T13:12:32.990Z"
+            Update_Date:
+                type: string
+                description: "to be updated"
+                example: "2008-11-04T13:12:32.990Z"
+            Livestock_Name:
+                type: string
+                description: "to be updated"
+                example: "Pig"
+            Major_Market:
+                type: string
+                description: "to be updated"
+                example: "Hotel"
+            Minor_Market:
+                type: string
+                description: "to be updated"
+                example: "Householder"
+            District:
+                type: string
+                description: "to be updated"
+                example: "INVERNESS"
+            Parish_Extension_Name:
+                type: string
+                description: "to be updated"
+                example: "ALEXANDRIA"
+            Parish:
+                type: string
+                description: "to be updated"
+                example: "ST.ANN"
+            Property_Address:
+                type: string
+                description: "to be updated"
+                example: "inverness inverness p.o. st. ann"
+            Location_Code:
+                type: number
+                description: "to be updated"
+                example: 2326
+            IDX_StakeHolder:
+                type: number
+                description: "to be updated"
+                example: 952798
+            Livestock_Stage:
+                type: string
+                description: "to be updated"
+                example: "Not Stated"
+    Property:
+        type: object
+        properties:
+            IDX_Property:
+                type: number
+                description: "to be updated"
+                example: 1971350
+            IDX_StakeHolder:
+                type: number
+                description: "to be updated"
+                example: 952792
+            Location_Code:
+                type: number
+                description: "to be updated"
+                example: 4107
+            District:
+                type: string
+                description: "to be updated"
+                example: 'GREENLAND'
+            Parish:
+                type: string
+                description: "to be updated"
+                example: 'MANCHESTER'
+            Parish_Extension_Name:
+                type: string
+                description: "to be updated"
+                example: 'MILE GULLY'
+            Extension_Officer:
+                type: string
+                description: "to be updated"
+                example: '47'
+            Property_Address:
+                type: string
+                description: "to be updated"
+                example: 'Greenland'
+            Property_Size:
+                type: number
+                description: "to be updated"
+                example: 1.62
+            Property_Size_Unit_Code:
+                type: number
+                description: "to be updated"
+                example: 3
+            Property_Usage:
+                type: number
+                description: "to be updated"
+                example: 0.01
+            Tenure_Code:
+                type: number
+                description: "to be updated"
+                example: 4
+            Property_Usage_Unit_Code:
+                type: number
+                description: "to be updated"
+                example: 3
+            Property_Remarks:
+                type: string
+                description: "to be updated"
+                example: ''
+            Property_Status_Code:
+                type: number
+                description: "to be updated"
+                example: 1
+            Volume_Num:
+                type: string
+                description: "to be updated"
+                example: ''
+            Folio_Num:
+                type: string
+                description: "to be updated"
+                example: ''
+            Distance_From_Road:
+                type: number
+                description: "to be updated"
+                example: 0
+            Distance_From_Road_Unit_Code:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Primary_Property_YN:
+                type: number
+                description: "to be updated"
+                example: 2
+            Ownership_Code:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Latitude:
+                type: number
+                description: "to be updated"
+                example: 0
+            Longitude:
+                type: number
+                description: "to be updated"
+                example: 0
+            Create_Date:
+                type: string
+                description: "to be updated"
+                example: '2008-11-04T12:46:47.926Z'
+            Update_Date:
+                type: string
+                description: "to be updated"
+                example: '2008-11-04T12:46:47.926Z'
+            Description:
+                type: string
+                description: "to be updated"
+                example: 'Leased'
+            Property_Status:
+                type: string
+                description: "to be updated"
+                example: 'Active'
+            Ownership:
+                type: string
+                description: "to be updated"
+                example: n/a
+            Distance_Units:
+                type: number
+                description: "to be updated"
+                example: 0
+            Property_Usage_Units:
+                type: string
+                description: "to be updated"
+                example: 'Hectare'
+            Property_Size_Units:
+                type: string
+                description: "to be updated"
+                example: 'Hectare'
+            Property_Size_Ha:
+                type: number
+                description: "to be updated"
+                example: 1.62
+            Parish_Extension_Code:
+                type: number
+                description: "to be updated"
+                example: 44
+            irrigation_source_code:
+                type: number
+                description: "to be updated"
+                example: n/a
+            Irrigation_Source:
+                type: string
+                description: "to be updated"
+                example: n/a
+            irrigation_yn:
+                type: string
+                description: "to be updated"
+                example: n/a
+            irrigation_access_yn:
+                type: string
+                description: "to be updated"
+                example: n/a

@@ -15,6 +15,9 @@ var logging = require('./util/logging-util');
 var app_manager = require('./routes/app/router-app-manager'),
     user = require('./routes/user/router-user'),
     farmer = require('./routes/resources/farmer/router-farmer'),
+    property = require('./routes/resources/property/router-property'),
+    crop = require('./routes/resources/crop/router-crop'),
+    livestock = require('./routes/resources/livestock/router-livestock'),
     platform = require('./routes/platform/router-platform'),
     docs = require('./routes/docs/router-docs');
 
@@ -71,6 +74,9 @@ app.use('/', log);
 app.use('/', user);
 app.use('/', platform);
 app.use('/api', farmer);
+app.use('/api', property);
+app.use('/api', crop);
+app.use('/api', livestock);
 app.use('/', docs);
 
 // catch 404 and forward to error handler
@@ -84,25 +90,44 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+
+app.use(function(err, req, res, next) {
+    function generalError(err, res) {
         res.status(err.status || 500);
         res.send({
             message: err.message,
-            error: err
+            error: {}
         });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send({
-        message: err.message,
-        error: {}
-    });
+    }
+    if(err.name) {
+        if(err.name == 'ValidationError') {
+            res.status(400);
+            res.send({
+                message: err.errors
+            });
+        } else if(err.name == 'MongoError') {
+            res.status(400);
+            res.send({
+                message: err
+            });
+        } else {
+            generalError(err, res);
+        }
+    } else {
+        generalError(err, res);
+    }
 });
+
+//
+//// production error handler
+//// no stacktraces leaked to user
+//app.use(function(err, req, res, next) {
+//    res.status(err.status || 500);
+//    res.send({
+//        message: err.message,
+//        error: {}
+//    });
+//});
 
 
 module.exports = app;

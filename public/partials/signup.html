@@ -14,50 +14,51 @@
             <div class="col-md-5">
                 <div class="form-wrap">
                     <h2 class="form-head text-center">Create Your Harvest API Account</h2>
+                    <center><p><font color="#DB4947">These are required fields.<font></p></center>
                     <form id="signupForm" data-toggle="validator" role="form" name="signupForm" method="post" action="none" novalidate>
                         <div id="name-field" class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="input1">First Name</label>
+                                    <label for="input1"><font color="#DB4947">*</font> First Name</label>
                                     <input data-error="Please enter your first name!" ng-model="user.us_user_first_name" type="text" class="form-control" id="input1" placeholder="First Name" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="input2">Last Name</label>
+                                    <label for="input2"><font color="#DB4947">*</font> Last Name</label>
                                     <input data-error="Please enter your last name!" ng-model="user.us_user_last_name" type="text" class="form-control" id="input2" placeholder="Last Name" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input3">Username</label>
+                            <label for="input3"><font color="#DB4947">*</font> Username</label>
                             <input data-error="Please enter your username!" ng-model="user.us_username" type="text" class="form-control" id="username" placeholder="Username" required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="input3">Email Address</label>
+                            <label for="input3"><font color="#DB4947">*</font> Email Address</label>
                             <input data-error="Please enter a valid email address!" type="email" ng-model="user.us_email_address" type="text" class="form-control" id="input3" placeholder="Email Address" required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="passwordField">Password</label>
+                            <label for="passwordField"><font color="#DB4947">*</font> Password</label>
                             <input data-error="Please enter your chosen password!" ng-model="user.us_password" type="password" class="form-control" id="passwordField" placeholder="Password" required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="input5">Confirm Password</label>
+                            <label for="input5"><font color="#DB4947">*</font> Confirm Password</label>
                             <input data-match="#passwordField" data-error="Your passwords need to match!" ng-model="passwordConfirm" type="password" class="form-control" id="input5" placeholder="Confirm Password" required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="input6">Phone Number</label>
+                            <label for="input6"><font color="#DB4947">*</font> Phone Number</label>
                             <input data-error="Please enter your phone number!" ng-model="user.us_contact" type="text" class="form-control" id="input6" placeholder="Phone Number" required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <label for="input7">Address</label>
+                            <label for="input7"> Address</label>
                             <input data-error="Please enter your address!" ng-model="user.us_address" type="text" class="form-control" id="input7" placeholder="Address">
                             <div class="help-block with-errors"></div>
                         </div>
@@ -73,7 +74,7 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input ng-model="agreeChecked" required type="checkbox"> I agree to Harvest API’s <a href="#">Terms of Service</a> and
+                                <input ng-model="agreeChecked" required type="checkbox"><font color="#DB4947">*</font>  I agree to Harvest API’s <a href="#">Terms of Service</a> and
                                 <a href="#">Privacy Policy</a>.
                             </label>
                         </div>

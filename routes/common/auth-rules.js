@@ -16,7 +16,7 @@ exports.isAuthenticated = function (req, res, next) {
         return next();
     } else {
         var error = new Error("Authentication Necessary - Protected Resource");
-        error.status = 400;
+        error.status = 401;
         return next(error);
     }
 };
@@ -36,5 +36,9 @@ exports.isAdmin = function(req, res, next) {
             error.status = 401;
             return next(error);
         }
+    } else {
+        var error = new Error("Authentication Necessary - Protected Resource");
+        error.status = 401;
+        return next(error);
     }
 };

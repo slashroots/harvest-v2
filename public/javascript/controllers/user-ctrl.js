@@ -66,11 +66,15 @@ angular.module('harvestv2')
                     UserFactory.create($scope.user, function(user) {
                         $scope.confirmation = true;
                     }, function(error) {
-                        console.log(error);
+                        /**
+                         * TODO: Proper error handling is necessary using an angular modal window
+                         */
+                        if(error.data.message.errmsg.startsWith('E11000')){
+                            alert(error.data.message.errmsg.split('"')[1]+ " has already been used!");
+                        }
                     })
                 }
             };
-
             /**
              * TODO: Change this from a JQuery library to an angular implemented function
              */
@@ -106,7 +110,7 @@ angular.module('harvestv2')
                 $scope.credentials.password = CryptoJS.SHA1($scope.credentials.password).toString(CryptoJS.enc.Hex);
                 AuthenticationFactory.login($scope.credentials, function(response) {
                     SharedState.setCurrentUser(response);
-                    if(response.us_user_role) {
+                    if(response.us_user_role == 'admin') {
                         $location.url('/admin');
                     } else {
                         $location.url('/dashboard');
@@ -186,27 +190,49 @@ angular.module('harvestv2')
             $scope.current_user = "";
 
             $scope.userLoggedIn = false;
+            $scope.isAdmin = false;
 
             $scope.logout = function() {
                 UserLogoutFactory.logout(function(response) {
                     $location.url('/');
                     SharedState.setCurrentUser({});
                     $scope.userLoggedIn=false;
+                    $scope.isAdmin = false;
                 }, function(error) {
                 });
             };
 
             /**
+             * In the event that the screen refreshes
+             * we can query the backend to give back
+             * the user details.
+             */
+            var configureUI = function () {
+                CurrentUserFactory.query(function (user) {
+                    SharedState.setCurrentUser(user);
+                    $scope.current_user = user;
+                    if ($scope.current_user._id !== undefined) {
+                        $scope.userLoggedIn = true;
+                        if ($scope.current_user.us_user_role == 'admin') {
+                            $scope.isAdmin = true;
+                        } else {
+                            $scope.isAdmin = false;
+                        }
+                    } else {
+                        $scope.userLoggedIn = false;
+                    }
+                });
+            };
+            configureUI();
+
+            /**
              * Monitor changes to the user object within the sharedState.
              */
-            $scope.$watch(function () { return SharedState.getCurrentUser();}, function (value) {
-                $scope.current_user = value;
-                if ($scope.current_user._id !== undefined) {
-                    $scope.userLoggedIn = true;
-                } else {
-                    $scope.userLoggedIn = false;
+            $scope.$watch(function () { return SharedState.getCurrentUser();}, function (newValue, oldValue) {
+                if(newValue.hasOwnProperty('us_user_role')) {
+                    configureUI();
                 }
-            });
+            }, true);
         }
     ]
 )
