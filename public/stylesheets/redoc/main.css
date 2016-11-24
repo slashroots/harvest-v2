@@ -28,7 +28,7 @@ body {
     -webkit-border-image: -webkit-linear-gradient(to right, #E2E032 22%, #6DCC7F);
     /* border-image: linear-gradient(to right, #E2E032 22%, #6DCC7F); */
     /* border-image-slice: 1; */
-    border-top: 7px solid #0D3442;
+    /* border-top: 7px solid #0D3442; */
 }
 
 nav input, nav button  {
@@ -96,8 +96,8 @@ nav button:active {
 
 nav {
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    /* height: 50px; */
+    /* line-height: 50px; */
     text-align: center;
     background-color: white;
     border-bottom: 1px solid #ccc;
@@ -106,13 +106,55 @@ nav {
     z-index: 1;
     box-sizing: border-box;
 }
+.navbar-default {
+    background-color: #0D3442;
+    border-color: #e7e7e7;
+    margin-bottom: 0;
+    position: fixed;
+    box-shadow: 0 1px 1px rgba(0,0,0,.14);
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 0;
+    /* padding: 0; */
+    min-height: 40px;
+    border-top: 5px solid transparent;
+    -moz-border-image: -moz-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+    -webkit-border-image: -webkit-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+    border-image: linear-gradient(to right, #E2E032 22%, #6DCC7F);
+    border-image-slice: 1;
+}
 
 nav iframe {
     margin: 10px 0;
     position: absolute;
     right: 0;
     top: 0;
+
 }
+
+.navbar-default .navbar-nav>.active>a, .nav>li>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    padding: 27px 25px;
+    color: #fff !important;
+    background: transparent;
+}
+
+.navbar-fixed-top {
+    /*position: initial !important; */
+    /*right: 0; */
+    /*left: 0; */
+    /*z-index: 1030; */
+}
+
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 30px;
+    /* font-family: "Lato Black", Helvetica, Arial, sans-serif; */
+    color: #fff !important;
+    padding: 27px 25px 10px 15px!important;
+    height: 40px;
+}
+
 
 header a {
     color: inherit;
@@ -142,15 +184,85 @@ h1, h2, h3, h4, h5, p, a, .redoc-wrap, .param-name-content{
     color: #333 !important;
 }
 
-.api-info-header{
-    padding-top:30px
+h1{
+    font-size: 1.9em !important;
+    margin-bottom: 30px !important;
+    /* font-weight: 400; */
+    /* color: #cf441d !important; */
+    font-family: "Lato" !important;
+    font-weight: bold !important;
 }
+
+h2{
+    font-size: 1.6em !important;
+    font-weight: 300 !important;
+    margin-bottom: 15px !important;
+}
+
+h3{
+    font-size: 14px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+
+.api-info-header{
+    padding-top: 86px !important;
+    font-size: 0.85em !important;
+    color: #bfbfbf !important;
+    text-align: right !important;
+}
+
+/*#about-harvestapi{*/
+/*font-size: 1.9em !important;*/
+/*margin-bottom: 30px !important;*/
+/*/!* font-weight: 400; *!/*/
+/*/!* color: #cf441d !important; *!/*/
+/*font-family: "Lato" !important;*/
+/*font-weight: bold;*/
+/*}*/
+
+/*#what-is-harvestapi-{*/
+    /*font-size: 1.6em !important;*/
+    /*font-weight: 300 !important;*/
+    /*margin-bottom: 15px !important;*/
+/*}*/
+
+/*#what-is-an-api-{*/
+    /*font-size: 14px !important;*/
+    /*font-weight: bold !important;*/
+    /*text-transform: uppercase !important;*/
+/*}*/
+
+/*#open-source-project{*/
+    /*font-size: 14px !important;*/
+    /*font-weight: bold !important;*/
+    /*text-transform: uppercase !important;*/
+/*}*/
+
+/*#abis-relationship-with-rada{*/
+    /*font-size: 1.6em !important;*/
+    /*font-weight: 300 !important;*/
+    /*margin-bottom: 15px !important;*/
+/*}*/
+
+/*#what-data-does-the-api-use-{*/
+/*font-size: 1.35em !important;*/
+/*/!* color: #cf441d !important; *!/*/
+/*font-size: 1.9em !important;*/
+/*margin-bottom: 30px !important;*/
+/*/!* font-weight: 400; *!/*/
+/*/!* color: #cf441d !important; *!/*/
+/*font-family: "Lato" !important;*/
+/*font-weight: bold;*/
+/*}*/
 
 .menu-content{
     width: 250px !important;
     background-color: #F8FAFB !important;
     overflow-y: auto;
     overflow-x: hidden;
+    /* position: absolute !important; */
+    top: 80px !important;
 }
 
 .menu-cat-header {
@@ -228,6 +340,7 @@ api-info div{
     /* text-align: center !important; */
     /* border-bottom: 1px solid #ccc !important; */
     font-weight: 500 !important;
+    padding-top: 20px !important;
 }
 
 .method-endpoint{
@@ -393,4 +506,10 @@ footer{
 
 footer a, footer a strong{
     color: #fff !important;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1400px;
+    }
 }

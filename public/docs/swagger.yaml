@@ -26,17 +26,17 @@ info:
         * Livestock
         * Property
 
-        ## Personal vs Aggregate
+        ### Personal vs Aggregate
         Aggregate data on a resource is accessed through a respective resource path, which has the resource pluralized. e.g `/api/crops` would return ALL the crops available. As you can imagine, this would return a large amount of data. So, we've allowed you to limit/[throttle](/docs/#throttling-requests) the aggregate requests.
         Personal requests are those which retrieve a specific record from a resource. e.g. `/api/crop/[CROP_ID_HERE]` would return the specific crop record associated with the crop id passed in the path where `CROP_ID_HERE` is. Please note that for personal requests, the resource name is kept singular.
-        ## Throttling Requests
+        ### Throttling Requests
         `limit` - This is the number of results that will be returned from this query (defaults to 100).
         `offset` - This allows for pagination in sets of whatever the limit is (defaults to 0).
         # How to use the API
         This documentation provides all the resources offered and how they may be accessed, however, and API key/token must be passed as `access_token` within the header of the request.
         ## API Registration
         You MUST register on ther [Harvest API website]() before interfacing with the API for any development.
-        ### API Keys
+        ## API Keys
         An application programming interface key (API key) is a code passed in by computer programs calling an application programming interface (API) to identify the calling program, its developer, or its user to the Web site. Ths is done to ensure we know how the information being provided is being accessed. Remember, the api key MUST be passedin the header of the requested through the variable `access_token`.
 # the domain of the service
 host: localhost
