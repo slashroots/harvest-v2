@@ -35,7 +35,7 @@ info:
         # How to use the API
         This documentation provides all the resources offered and how they may be accessed, however, and API key/token must be passed as `access_token` within the header of the request.
         ## API Registration
-        You MUST register on ther [Harvest API website]() before interfacing with the API for any development.
+        You MUST register on the [Harvest API website]() before interfacing with the API for any development.
         ### API Keys
         An application programming interface key (API key) is a code passed in by computer programs calling an application programming interface (API) to identify the calling program, its developer, or its user to the Web site. Ths is done to ensure we know how the information being provided is being accessed. Remember, the api key MUST be passedin the header of the requested through the variable `access_token`.
 # the domain of the service
@@ -106,7 +106,7 @@ paths:
                           $ref: '#/definitions/Crop'
                 - name: field
                   in: query
-                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/crops?parish=Portland`
                   required: false
                   type: string
     /crop/{id}:
@@ -188,7 +188,7 @@ paths:
                           $ref: '#/definitions/Farmer'
                 - name: field
                   in: query
-                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/farmers?parish=Portland`
                   required: false
                   type: string
     /farmer/{id}:
@@ -270,7 +270,7 @@ paths:
                           $ref: '#/definitions/Livestock'
                 - name: field
                   in: query
-                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/livestock?parish=Portland`
                   required: false
                   type: string
     /livestock/{id}:
@@ -358,7 +358,7 @@ paths:
                           $ref: '#/definitions/Property'
                 - name: field
                   in: query
-                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland.
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/property?parish=Portland`
                   required: false
                   type: string
     /property/{id}:
