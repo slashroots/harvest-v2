@@ -222,27 +222,27 @@ h3{
 /*}*/
 
 /*#what-is-harvestapi-{*/
-    /*font-size: 1.6em !important;*/
-    /*font-weight: 300 !important;*/
-    /*margin-bottom: 15px !important;*/
+/*font-size: 1.6em !important;*/
+/*font-weight: 300 !important;*/
+/*margin-bottom: 15px !important;*/
 /*}*/
 
 /*#what-is-an-api-{*/
-    /*font-size: 14px !important;*/
-    /*font-weight: bold !important;*/
-    /*text-transform: uppercase !important;*/
+/*font-size: 14px !important;*/
+/*font-weight: bold !important;*/
+/*text-transform: uppercase !important;*/
 /*}*/
 
 /*#open-source-project{*/
-    /*font-size: 14px !important;*/
-    /*font-weight: bold !important;*/
-    /*text-transform: uppercase !important;*/
+/*font-size: 14px !important;*/
+/*font-weight: bold !important;*/
+/*text-transform: uppercase !important;*/
 /*}*/
 
 /*#abis-relationship-with-rada{*/
-    /*font-size: 1.6em !important;*/
-    /*font-weight: 300 !important;*/
-    /*margin-bottom: 15px !important;*/
+/*font-size: 1.6em !important;*/
+/*font-weight: 300 !important;*/
+/*margin-bottom: 15px !important;*/
 /*}*/
 
 /*#what-data-does-the-api-use-{*/
@@ -319,6 +319,13 @@ label.menu-cat-header.active{
     /* background: #333!important; */
 }
 
+.method-samples pre{
+    border: none
+}
+
+api-info div p{
+    display:none !important;
+}
 
 #api-content {
     margin-left: 250px !important;
@@ -444,10 +451,39 @@ responses-samples div.redoc-json{
     top: 0;
 }
 
-.tag-info {
-    border-top: 1px solid rgba(151, 151, 151, 0.15) !important;
-    padding: 50px 40px 30px 40px !important;
+api-info{
+    padding:40px 40px 0px 40px !important;
+}
 
+.tag-info {
+    /*     border-top: 1px solid rgba(151, 151, 151, 0.15) !important;
+        padding: 50px 40px 30px 40px !important; */
+    border-top:none !important;
+    padding: 40px !important;
+}
+
+/* .tag-info:first-child{
+    border-top:none !important;
+    padding: 20px 40px !important;
+} */
+
+div.tag:first-child div.tag-info:first-child,
+div.tag:nth-child(2) div.tag-info:first-child,
+div.tag:nth-child(3) div.tag-info:first-child{
+    padding-top:0 !important;
+    padding-bottom: 20px !important;
+}
+
+div.tag:nth-child(3) div.tag-info:first-child{;
+    padding-bottom: 70px !important;
+}
+
+div.tag:nth-child(4) div.tag-info:first-child,
+div.tag:nth-child(5) div.tag-info:first-child,
+div.tag:nth-child(6) div.tag-info:first-child,
+div.tag:nth-child(7) div.tag-info:first-child{
+    border-top: 1px solid rgba(151, 151, 151, 0.15) !important;
+    padding: 50px 40px 0px 40px !important;
 }
 
 a.openapi-button {
