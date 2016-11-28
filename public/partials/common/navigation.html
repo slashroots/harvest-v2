@@ -13,11 +13,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
-                <li class="active">
+                <li ng-class="{ active: isActive('/dashboard')}">
                     <a href="/#/dashboard" ng-if="userLoggedIn" >Dashboard</a>
                 </li>
-                <li>
-                    <a href="docs">Documentation</a>
+                <li ng-class="{ active: isActive('/docs/')}">
+                    <a href="/docs">Documentation</a>
                 </li>
                 <li>
                     <a target="_blank" href="http://www.abisjamaica.com.jm/">ABIS Home Page <i class="fa fa-external-link fa-fw"></i></a>

@@ -202,6 +202,13 @@ angular.module('harvestv2')
                 });
             };
 
+            $scope.isActive = function (linkPath) {
+            		console.log(window.location.pathname);
+            		console.log("linkpath: " + linkPath);
+        		return linkPath === $location.path();
+        		return linkPath === window.location.pathname;
+    		};
+
             /**
              * In the event that the screen refreshes
              * we can query the backend to give back
