@@ -121,15 +121,43 @@ exports.getAllCrops = function(req, res, next) {
      */
     var limit = req.query.limit || 100;
     var offset = req.query.offset || 0;
+    var countvar = null;
+
+    /*
+    Here, we remove variables from the query that will not be used in searching the database
+     */
     delete req.query.access_token;
     delete req.query.limit;
     delete req.query.offset;
 
-    Crop.findAll({
+    /*
+    We will use the 'count' GET parameter to determine whether the user wants to get a count on a particular field (such as Crop Count
+    in the case of a query on the /crops endpoint.
+     */
+    if (req.query.count !== null) {
+        countvar = req.query.count;
+        delete req.query.count;
+    }
+
+    /*
+    This is the default set of parameters for the findAll function below
+     */
+    var parameters = {
         where: req.query,
         offset: parseInt(offset),
         limit: parseInt(limit)
-    }).then(function(crops) {
+    };
+
+    /*
+    If we will be returning a count on a particular field we need to modify the attributes of the parameters passed to
+    'findAll' so that it will count the field specified by the user in the 'count' parameter of the query
+     */
+    if (countvar != null) {
+        parameters.attributes = [[sequelize.fn('SUM', sequelize.col(countvar)), 'sum']];
+        parameters.order = "'sum' DESC";
+    }
+
+    Crop.findAll(parameters).then(function(crops) {
         for (var i = 0;i<crops.length;i++) crops[i] = fakeblock.applyAcl(crops[i], 'get');
         res.send(crops);
 
