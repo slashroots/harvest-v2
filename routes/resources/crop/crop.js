@@ -6,7 +6,7 @@ var sql = require('mssql');
 var cropAcl = require('../../../acl/crop.acl.js');
 var Fakeblock = require('fakeblock');
 var Sequelize = require('sequelize');
-
+var logging = require('../../../util/logging-util');
 /**
  * Retrieves all crops.
  * @param req
@@ -107,7 +107,6 @@ var Crop = sequelize.define('std_reg_farmer_property_crop_table', {
     freezeTableName: true // Model tableName will be the same as the model name
 });
 
-
 exports.getAllCrops = function(req, res, next) {
     var fakeblock = new Fakeblock({
         acl: cropAcl,
@@ -194,10 +193,15 @@ exports.getAllCrops = function(req, res, next) {
         parameters.where[date_range] = date_query;
     }
 
-    Crop.findAll(parameters).then(function(crops) {
-        for (var i = 0;i<crops.length;i++) crops[i] = fakeblock.applyAcl(crops[i], 'get');
-        res.send(crops);
+    var rowCounter = 0;//this will count the rows returned for logging purposes
 
+    Crop.findAll(parameters).then(function(crops) {
+        for (var i = 0;i<crops.length;i++) {
+            crops[i] = fakeblock.applyAcl(crops[i], 'get');
+            rowCounter++;
+        }
+        req.log_id = logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_APP_ACTIVITY,rowCounter + " crop records were returned for this request.",true);
+        res.send(crops);
     });
 };
 
