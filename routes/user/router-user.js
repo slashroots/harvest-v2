@@ -13,6 +13,7 @@ var express = require('express'),
  * End Points relevant to Application Management
  */
 router.get('/user/:id', Common.isAuthenticated, User.getUser);
+router.put('/user/:id', Common.isAuthenticated, User.updateUser);
 router.get('/users', Common.isAdmin, User.getAllUsers);
 router.post('/user', User.createUser);
 router.get('/user', User.getCurrentUser);

@@ -30,7 +30,8 @@ services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
 services.factory('UserFactory', function($resource) {
     return $resource('/user/:id', {}, {
         create: { method: 'POST'},
-        show: {method: 'GET',params: {id: '@id'}}
+        show: {method: 'GET',params: {id: '@id'}},
+        update: {method: 'PUT',params: {id: '@id'}}
     });
 });
 

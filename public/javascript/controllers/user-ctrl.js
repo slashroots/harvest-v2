@@ -78,6 +78,23 @@ angular.module('harvestv2')
             /**
              * TODO: Change this from a JQuery library to an angular implemented function
              */
+            $scope.chpass = function () {
+                if (!$scope.chpassForm.$invalid &&
+                    $scope.validatePasswordMatch($scope.user.us_password, $scope.passwordConfirm)) {
+                    $scope.user.us_password = CryptoJS.SHA1($scope.current_user.us_password).toString(CryptoJS.enc.Hex);
+
+                    UserFactory.update($scope.user, function(user) {
+                        $scope.confirmation = true;
+                    }, function(error) {
+                        /**
+                         * TODO: Proper error handling is necessary using an angular modal window
+                         */
+                        if(error.data.message.errmsg.startsWith('E11000')){
+                            alert(error.data.message.errmsg.split('"')[1]+ " has already been used!");
+                        }
+                    })
+                }
+            };
             $scope.setupVisualValidationCues = function () {
                 jQuery('#signupForm').validator();
             };

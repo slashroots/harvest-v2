@@ -168,6 +168,24 @@ exports.getUser = function(req, res, next) {
         });
 };
 
+
+/**
+ * update specific user profile and password.  Only accessible by owner of the data or by platform
+ * administrator.
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.updateUser = function(req, res, next) {
+    User.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, function(err, doc) {
+        if(err) {
+            next(err);
+        } else {
+            res.send(doc);
+        }
+    });
+};
+
 /**
  * Get the current logged in user
  * @param req
