@@ -86,30 +86,6 @@ angular.module('harvestv2')
 
         }
     ]
-).controller("DocsCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'RolesFactory',
-        'PlatformFactory', 'CurrentUserFactory',
-        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory) {
-
-	$(window).load(function(){
-		$(document).scroll(function () {
-			var scrollTop = $(window).scrollTop();
-			var docHeight = $(document).height();
-			var winHeight = $(window).height();
-			var scrollPercent = scrollTop / (docHeight - winHeight);
-
-			var divHeight = $("div").height();
-			var divContentHeight = $('div')[0].scrollHeight;
-
-			var equation = scrollPercent * (divContentHeight-divHeight);
-
-			$('div').scrollTop(equation);
-
-	    	});
-
-	});
-
-        }
-    ]
 ).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
         'AuthenticationFactory', 'SharedState',
         function($scope, $location, $routeParams, UserFactory, UserActivationFactory,
@@ -226,6 +202,12 @@ angular.module('harvestv2')
                 });
             };
 
+            /**
+             * The below function checks the path loaded to see if
+             * it is a path specified in the link attribute of the navbar
+             * should it match then the active class is set on the
+             * appropriate link.
+             */
             $scope.isActive = function (linkPath) {
         		return linkPath === $location.path();
     		};
