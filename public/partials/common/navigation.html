@@ -13,8 +13,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
+                <li ng-class="{ active: isActive('/admin')}">
+                    <a href="/#/admin" ng-if="current_user.us_user_role == 'admin'" >Dashboard</a>
+                </li>
                 <li ng-class="{ active: isActive('/dashboard')}">
-                    <a href="/#/dashboard" ng-if="userLoggedIn" >Dashboard</a>
+                    <a href="/#/dashboard" ng-if="userLoggedIn" >My Apps</a>
                 </li>
                 <li ng-class="{ active: isActive('/docs')}">
                     <a href="/#/docs">Documentation</a>
