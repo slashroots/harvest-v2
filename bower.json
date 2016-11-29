@@ -37,7 +37,8 @@
     "datatables.net": "^1.10.12",
     "datatables.net-dt": "^1.10.12",
     "at-table": "1.0.7",
-    "ng-swagger-ui": "^0.0.4"
+    "ng-swagger-ui": "^0.0.4",
+    "angular-css": "^1.0.8"
   },
   "resolutions": {
     "angular": "1.5.8"
