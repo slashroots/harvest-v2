@@ -44,6 +44,7 @@ angular.module('harvestv2')
                     $routeParams.id = currentuser._id;
                     UserFactory.show($routeParams, function (user) {
                         $scope.current_user = user;
+                 	$scope.current_user.us_password = "";
                     }, function (error) {
                         console.log(error);
                     });
