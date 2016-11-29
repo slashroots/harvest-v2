@@ -29,6 +29,13 @@ body {
     /* border-image: linear-gradient(to right, #E2E032 22%, #6DCC7F); */
     /* border-image-slice: 1; */
     /* border-top: 7px solid #0D3442; */
+      scrollbar-3dlight-color: #000000;
+  scrollbar-arrow-color: #ffffff;
+  scrollbar-darkshadow-color: #000000;
+  scrollbar-face-color: #000000;
+  scrollbar-highlight-color: #ffffff;
+  scrollbar-shadow-color: #ffffff;
+  scrollbar-track-color: #000000;
 }
 
 nav input, nav button  {
@@ -262,7 +269,7 @@ h3{
     overflow-y: auto;
     overflow-x: hidden;
     /* position: absolute !important; */
-    top: 80px !important;
+    top: 0px !important;
 }
 
 .menu-cat-header {

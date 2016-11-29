@@ -86,6 +86,30 @@ angular.module('harvestv2')
 
         }
     ]
+).controller("DocsCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'RolesFactory',
+        'PlatformFactory', 'CurrentUserFactory',
+        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory) {
+
+	$(window).load(function(){
+		$(document).scroll(function () {
+			var scrollTop = $(window).scrollTop();
+			var docHeight = $(document).height();
+			var winHeight = $(window).height();
+			var scrollPercent = scrollTop / (docHeight - winHeight);
+
+			var divHeight = $("div").height();
+			var divContentHeight = $('div')[0].scrollHeight;
+
+			var equation = scrollPercent * (divContentHeight-divHeight);
+
+			$('div').scrollTop(equation);
+
+	    	});
+
+	});
+
+        }
+    ]
 ).controller("UserLoginCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'UserActivationFactory',
         'AuthenticationFactory', 'SharedState',
         function($scope, $location, $routeParams, UserFactory, UserActivationFactory,
@@ -203,10 +227,7 @@ angular.module('harvestv2')
             };
 
             $scope.isActive = function (linkPath) {
-            		console.log(window.location.pathname);
-            		console.log("linkpath: " + linkPath);
         		return linkPath === $location.path();
-        		return linkPath === window.location.pathname;
     		};
 
             /**
