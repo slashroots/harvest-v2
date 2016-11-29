@@ -80,10 +80,10 @@ angular.module('harvestv2')
              */
             $scope.chpass = function () {
                 if (!$scope.chpassForm.$invalid &&
-                    $scope.validatePasswordMatch($scope.user.us_password, $scope.passwordConfirm)) {
+                    $scope.validatePasswordMatch($scope.current_user.us_password, $scope.passwordConfirm)) {
                     $scope.user.us_password = CryptoJS.SHA1($scope.current_user.us_password).toString(CryptoJS.enc.Hex);
 
-                    UserFactory.update($scope.user, function(user) {
+                    UserFactory.update({id : $scope.current_user._id}, $scope.user, function(user) {
                         $scope.confirmation = true;
                     }, function(error) {
                         /**

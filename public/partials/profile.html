@@ -144,7 +144,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <a href="/#/profile"  ng-disabled="chpassForm.$invalid || !validatePasswordMatch(current_user.us_password, passwordConfirm)"  ng-click="chpass()" class="btn btn-default drk-grey-btn">Submit</a>
+                            <a data-dismiss="modal" href="/#/profile"  ng-disabled="chpassForm.$invalid || !validatePasswordMatch(current_user.us_password, passwordConfirm)"  ng-click="chpass()" class="btn btn-default drk-grey-btn">Submit</a>
                         </div>
                     </div>
                 </div>

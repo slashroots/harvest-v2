@@ -37,7 +37,7 @@ services.factory('UserFactory', function($resource) {
 
 services.factory('UsersFactory', function($resource) {
    return $resource('/users', {}, {
-       query: { method: 'GET', isArray: true},
+       query: { method: 'GET', isArray: true}
    });
 });
 

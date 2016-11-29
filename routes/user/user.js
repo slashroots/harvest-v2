@@ -177,7 +177,7 @@ exports.getUser = function(req, res, next) {
  * @param next
  */
 exports.updateUser = function(req, res, next) {
-    User.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, function(err, doc) {
+    User.findByIdAndUpdate({_id : req.params.id}, {$set: req.body}, function(err, doc) {
         if(err) {
             next(err);
         } else {
