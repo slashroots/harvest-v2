@@ -120,7 +120,7 @@ exports.getAllCrops = function(req, res, next) {
      */
     var limit = req.query.limit || 100;
     var offset = req.query.offset || 0;
-    var countvar = null;
+    var sum = null;
     var start_date = null;
     var end_date = null;
 
@@ -132,24 +132,15 @@ exports.getAllCrops = function(req, res, next) {
     delete req.query.offset;
 
     /*
-     This is the default set of parameters for the findAll function below
+     We will use the 'count' GET parameter to determine whether the user wants to get a count on a particular field (such as Crop Count
+     in the case of a query on the /crops endpoint.
      */
-    var parameters = {
-        where: req.query,
-        offset: parseInt(offset),
-        limit: parseInt(limit)
-    };
-
-    /*
-    We will use the 'count' GET parameter to determine whether the user wants to get a count on a particular field (such as Crop Count
-    in the case of a query on the /crops endpoint.
-     */
-    if (req.query.count !== null) {
-        countvar = req.query.count;
+    if (req.query.sum !== null) {
+        sum = req.query.sum;
         /*
          Here, we remove the variable from the query that will not be used in searching the database
          */
-        delete req.query.count;
+        delete req.query.sum;
     }
 
     /*
@@ -169,12 +160,21 @@ exports.getAllCrops = function(req, res, next) {
     }
 
     /*
+     This is the default set of parameters for the findAll function below
+     */
+    var parameters = {
+        where: req.query,
+        offset: parseInt(offset),
+        limit: parseInt(limit)
+    };
+
+    /*
     If we will be returning a count on a particular field we need to modify the attributes of the parameters passed to
     'findAll' so that it will count the field specified by the user in the 'count' parameter of the query
      */
-    if (countvar != null) {
-        parameters.attributes = [[sequelize.fn('SUM', sequelize.col(countvar)), countvar]];
-        parameters.order = "'" + countvar + "' DESC";
+    if (sum != null) {
+        parameters.attributes = [[sequelize.fn('SUM', sequelize.col(sum)), sum]];
+        parameters.order = "'" + sum + "' DESC";
     }
     /*
         If a 'date_range' parameter has been specified, this will be the field/column that is compare with the
