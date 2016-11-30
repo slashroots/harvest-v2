@@ -14,7 +14,7 @@ angular.module('harvestv2', ["ngRoute", "harvestv2.services", "angular-table", "
             css: '/stylesheets/style.css'});
         $routeProvider.when('/docs', {
             templateUrl: '../partials/docs.html',
-            controller: 'UserCtrl',
+            controller: 'DocsCtrl',
             css:'/stylesheets/redoc/main.css'});
         $routeProvider.when('/signin', {
             templateUrl: '../partials/signin.html',

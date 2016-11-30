@@ -245,6 +245,13 @@ angular.module('harvestv2')
             }, true);
         }
     ]
+).controller("DocsCtrl", ['$scope', '$location', '$routeParams',
+        'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory', 'SharedState',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory, UserLogoutFactory,
+                 SharedState) {
+            Redoc.init('/docs/swagger.yaml');
+        }
+    ]
 )
 /**
  * This is used to share the user object of the currently logged in user.
