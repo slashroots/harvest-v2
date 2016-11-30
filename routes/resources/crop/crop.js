@@ -168,6 +168,8 @@ exports.getAllCrops = function(req, res, next) {
         limit: parseInt(limit)
     };
 
+    if (isNaN(parameters.offset) || isNaN(parameters.limit)) res.send("Invalid limit or offset parameter specified. Please ensure they are numeric!");
+
     /*
     If we will be returning a count on a particular field we need to modify the attributes of the parameters passed to
     'findAll' so that it will count the field specified by the user in the 'count' parameter of the query

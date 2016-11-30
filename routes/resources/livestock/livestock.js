@@ -124,6 +124,8 @@ exports.getAllLivestock = function(req, res, next) {
         limit: parseInt(limit)
     };
 
+    if (isNaN(parameters.offset) || isNaN(parameters.limit)) res.send("Invalid limit or offset parameter specified. Please ensure they are numeric!");
+
     /*
      We will use the 'count' GET parameter to determine whether the user wants to get a count on a particular field (such as Crop Count
      in the case of a query on the /crops endpoint.
