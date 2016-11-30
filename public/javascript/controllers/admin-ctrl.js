@@ -31,6 +31,17 @@ angular.module('harvestv2')
                 }
             };
 
+            /*
+            Here we get all the users and store them in the appropriate scope variable. We also get the count of these users
+            to use in the card on the Dashboard.
+             */
+            UsersFactory.query($routeParams, function(users) {
+                $scope.users = users;
+                $scope.userCount = $scope.users.length;
+            }, function(error) {
+                console.log(error);
+            });
+
             $scope.config = {//pagination configuration
                 itemsPerPage: 10,
                 fillLastPage: true
@@ -64,6 +75,9 @@ angular.module('harvestv2')
                 $scope.appLogsSearch  = $scope.appLogs = LogsFactory.query({lo_log_level: 'app_activity'});
             }
 
+            /*
+            This function filters the table of application logs based on the text in the search box - which is passed in the searchText variable
+             */
             $scope.filterAppLogs = function (searchText) {
                 $scope.appLogsSearch = [];
                 for (var i = 0; i < $scope.appLogs.length; i++) {
@@ -74,6 +88,9 @@ angular.module('harvestv2')
                 }
             };
 
+            /*
+             This function filters the table of user logs based on the text in the search box - which is passed in the searchText variable
+             */
             $scope.filterUserLogs = function (searchText) {
                 $scope.userLogsSearch = [];
                 for (var i = 0; i < $scope.userLogs.length; i++) {
