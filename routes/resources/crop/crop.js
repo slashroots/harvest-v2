@@ -171,8 +171,8 @@ exports.getAllCrops = function(req, res, next) {
     if (isNaN(parameters.offset) || isNaN(parameters.limit)) res.send("Invalid limit or offset parameter specified. Please ensure they are numeric!");
 
     /*
-    If we will be returning a count on a particular field we need to modify the attributes of the parameters passed to
-    'findAll' so that it will count the field specified by the user in the 'count' parameter of the query
+    If we will be returning a sum on a particular field we need to modify the attributes of the parameters passed to
+    'findAll' so that it will add up the field specified by the user in the 'sum' parameter of the query
      */
     if (sum != null) {
         parameters.attributes = [[sequelize.fn('SUM', sequelize.col(sum)), sum]];
@@ -191,8 +191,10 @@ exports.getAllCrops = function(req, res, next) {
         if (end_date != null) date_query.$lte = new Date(end_date);
         /*
         And here we add that date query object to the main 'parameters' object that we will pass to the findAll function
+        ONLY IF either a start or end date or both has been specified
          */
-        parameters.where[date_range] = date_query;
+        if (start_date != null || end_date != null) parameters.where[date_range] = date_query;
+        else res.send("You need to specify a start or end date (or both) to query based on a date range!");
     }
 
     var rowCounter = 0;//this will count the rows returned for logging purposes
