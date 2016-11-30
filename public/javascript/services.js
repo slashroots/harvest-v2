@@ -23,6 +23,15 @@ services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
     };
 }]);
 
+/**
+ * Factory used in changing a user's password
+ */
+services.factory('UserPasswordFactory', function($resource) {
+    return $resource('/user/:id/password', {}, {
+        change: {method: 'PUT', params: {id: '@id'}}
+    });
+});
+
 
 /**
  * Factory used in creating and accessing User details

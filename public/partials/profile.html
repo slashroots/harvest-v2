@@ -127,11 +127,11 @@
                                         <form id="chpassForm" name="chpassForm">
                                             <div class="form-group">
                                                 <label for="inputOldPassword">Old Password</label>
-                                                <input type="password" class="form-control" id="inputOldPassword"   placeholder="Please type your current password" >
+                                                <input type="password" class="form-control" id="inputOldPassword" ng-model="current_user.old_password"  placeholder="Please type your current password" >
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputNewPassword">New Password</label>
-                                                <input data-error="Please enter your chosen password!"  ng-model="current_user.us_password" type="password" class="form-control" id="inputNewPassword"  placeholder="Please type your new password" required>
+                                                <input data-error="Please enter your chosen password!"  ng-model="current_user.new_password" type="password" class="form-control" id="inputNewPassword"  placeholder="Please type your new password" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputConfirmPassword">Confirm New Password</label>
@@ -144,7 +144,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <a data-dismiss="modal" href="/#/profile"  ng-disabled="chpassForm.$invalid || !validatePasswordMatch(current_user.us_password, passwordConfirm)"  ng-click="chpass()" class="btn btn-default drk-grey-btn">Submit</a>
+                            <a data-dismiss="modal" href="/#/profile"  ng-disabled="chpassForm.$invalid || !validatePasswordMatch(current_user.new_password, passwordConfirm)"  ng-click="chpass()" class="btn btn-default drk-grey-btn">Submit</a>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
 
 var express = require('express'),
     User = require('./user'),
-    Common = require('../common/auth-rules')
+    Common = require('../common/auth-rules'),
     App = require('../app/app-manager'),
     passport = require('passport'),
     router = express.Router();
@@ -17,6 +17,12 @@ router.put('/user/:id', Common.isAuthenticated, User.updateUser);
 router.get('/users', Common.isAdmin, User.getAllUsers);
 router.post('/user', User.createUser);
 router.get('/user', User.getCurrentUser);
+
+/**
+ * secured endpoint is not necessary as it requires
+ * user id and password in order for this to work
+ */
+router.put('/user/:id/password', User.changePassword);
 
 router.get('/user/:id/apps', Common.isAuthenticated, App.getAppsByUserID);
 
