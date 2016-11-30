@@ -3,6 +3,41 @@ swagger: '2.0'
 info:
     title: Harvest API
     version: "0.0.0"
+    license:
+        name: Apache 2.0
+        url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    description: |
+        # About HarvestAPI
+        ## What is HarvestAPI?
+        The Harvest API is an open data platform for the publishing and sharing of agricultural sector data across government and with the public. It was developed by the SlashRoots Foundation in collaboration with Jamaica’s Rural Agricultural Development Authority’s (RADA) and Ministry of Agriculture (MoA). Through HarvestAPI RADA and the MoA publish and manage the sharing of crop production and farmer and farm registry data from RADA’s ABIS database as well as market price information from the MoA’s JAMIS database.
+        ### What is an API?
+        Simply put, an application programming interface (API) is a set of functions and procedures that allow the creation of applications which access the features or data of an operating system, application, or other service.
+        ### Open Source Project
+        This is an open source project which means the original source code is made freely available and may be redistributed and modified. The source code may be found [here on github](https://github.com/slashroots/harvest-v2)
+        ## ABIS & Relationship with RADA
+        ABIS is a web-based information programme developed by RADA, which provides information on crops, livestock, and agricultural production, markets and stakeholders, to support the business of agriculture.
+        # What data does the API use?
+        Harves API uses data from ABIS, but only  providing non personal data to developers and the public.
+        ## Data Resources
+        Data resources currently being offered are:
+            * Crops
+            * Farmer
+            * Livestock
+            * Property
+        ## Personal vs Aggregate
+        Aggregate data on a resource is accessed through a respective resource path, which has the resource pluralized. e.g `/api/crops` would return ALL the crops available. As you can imagine, this would return a large amount of data. So, we've allowed you to limit/[throttle](/docs/#throttling-requests) the aggregate requests.
+        Personal requests are those which retrieve a specific record from a resource. e.g. `/api/crop/[CROP_ID_HERE]` would return the specific crop record associated with the crop id passed in the path where `CROP_ID_HERE` is. Please note that for personal requests, the resource name is kept singular.
+        ## Throttling Requests
+        `limit` - This is the number of results that will be returned from this query (defaults to 100).
+        `offset` - This allows for pagination in sets of whatever the limit is (defaults to 0).
+        # How to use the API
+        This documentation provides all the resources offered and how they may be accessed, however, and API key/token must be passed as `access_token` within the header of the request.
+        ## API Registration
+        You MUST register on ther [Harvest API website]() before interfacing with the API for any development.
+        ### API Keys
+        An application programming interface key (API key) is a code passed in by computer programs calling an application programming interface (API) to identify the calling program, its developer, or its user to the Web site. Ths is done to ensure we know how the information being provided is being accessed. Remember, the api key MUST be passedin the header of the requested through the variable `access_token`.
+        <!-- ReDoc-Inject: <security-definitions> -->
+# the domain of the service
 host: localhost
 # array of all schemes that your API supports
 schemes:
@@ -10,41 +45,6 @@ schemes:
 # will be prefixed to all paths
 basePath: /api
 tags:
-    - name: About HarvestAPI
-      description: |
-                           ## What is HarvestAPI?
-                           The Harvest API is an open data platform for the publishing and sharing of agricultural sector data across government and with the public. It was developed by the SlashRoots Foundation in collaboration with Jamaica’s Rural Agricultural Development Authority’s (RADA) and Ministry of Agriculture (MoA). Through HarvestAPI RADA and the MoA publish and manage the sharing of crop production and farmer and farm registry data from RADA’s ABIS database as well as market price information from the MoA’s JAMIS database.
-                           ### What is an API?
-                           Simply put, an application programming interface (API) is a set of functions and procedures that allow the creation of applications which access the features or data of an operating system, application, or other service.
-                           ### Open Source Project
-                           This is an open source project which means the original source code is made freely available and may be redistributed and modified. The source code may be found [here on github](https://github.com/slashroots/harvest-v2)
-                           ## ABIS & Relationship with RADA
-                           ABIS is a web-based information programme developed by RADA, which provides information on crops, livestock, and agricultural production, markets and stakeholders, to support the business of agriculture.
-
-    - name: What data does the API use?
-      description: |
-                           Harvest API uses data from ABIS, but only  providing non personal data to developers and the public.
-                           ## Data Resources
-                           Data resources currently being offered are:
-                           - Crops
-                           - Farmer
-                           - Livestock
-                           - Property
-
-                           ### Personal vs Aggregate
-                           Aggregate data on a resource is accessed through a respective resource path, which has the resource pluralized. e.g `/api/crops` would return ALL the crops available. As you can imagine, this would return a large amount of data. So, we've allowed you to limit/[throttle](/docs/#throttling-requests) the aggregate requests.
-                           Personal requests are those which retrieve a specific record from a resource. e.g. `/api/crop/[CROP_ID_HERE]` would return the specific crop record associated with the crop id passed in the path where `CROP_ID_HERE` is. Please note that for personal requests, the resource name is kept singular.
-                           ### Throttling Requests
-                           `limit` - This is the number of results that will be returned from this query (defaults to 100).
-                           `offset` - This allows for pagination in sets of whatever the limit is (defaults to 0).
-    - name: How to use the API
-      description: |
-                           This documentation provides all the resources offered and how they may be accessed, however, and API key/token must be passed as `access_token` within the header of the request.
-                           ## API Registration
-                           You MUST register on ther [Harvest API website]() before interfacing with the API for any development.
-                           ## API Keys
-                           An application programming interface key (API key) is a code passed in by computer programs calling an application programming interface (API) to identify the calling program, its developer, or its user to the Web site. Ths is done to ensure we know how the information being provided is being accessed. Remember, the api key MUST be passedin the header of the requested through the variable `access_token`.
-
     - name: Crop
       description: Crop information
     - name: Farmer
@@ -78,8 +78,8 @@ paths:
                 500:
                     description: Internal Server Error
             security:
-                - api_key: []
-                #- petstore_auth:
+                    - access_token: []
+               #- access_key:
                     #- write_pets
                     #- read_pets
             parameters:
@@ -133,7 +133,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                      #- write_pets
                      #- read_pets
     /farmers:
@@ -161,7 +161,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                      #- write_pets
                      #- read_pets
             parameters:
@@ -215,7 +215,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
     /livestock:
@@ -243,7 +243,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
             parameters:
@@ -303,7 +303,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
     /properties:
@@ -331,7 +331,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
             parameters:
@@ -391,7 +391,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                   #- write_pets
                   #- read_pets
 
@@ -400,7 +400,7 @@ securityDefinitions:             #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH
         type: apiKey
         name: access_token
         in: header
-    #petstore_auth:
+    #access_key:
         #type: oauth2
         #authorizationUrl: harvest-api-staging.herokuapp.com/api
         #flow: implicit
@@ -876,3 +876,4 @@ definitions:
                 type: string
                 description: to be updated
                 example: n/a
+

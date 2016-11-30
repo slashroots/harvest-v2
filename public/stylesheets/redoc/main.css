@@ -342,6 +342,12 @@ api-info div p{
     margin-bottom: 3em !important;
 }
 
+/*changes by Lee*/
+body > ng-view > redoc > div > div.api-content{
+    background: #FFF !important;
+    top: 88px !important;
+}
+/*changes by Lee*/
 
 api-info div{
     width: 57% !important;
@@ -531,7 +537,7 @@ span.path{
 /*pre:hover{*/
 /*max-height: 100% !important;*/
 /*text-overflow: inherit !important;*/
-/*display: block !important;*/
+/*display: block !im	portant;*/
 /*overflow: visible !important;*/
 /*}*/
 
@@ -548,11 +554,10 @@ footer{
 
 footer a, footer a strong{
     color: #fff !important;
-==== BASE ====
 }
 
 @media (min-width: 1200px) {
     .container {
-        width: 1400px;
+        width: 100%;
     }
 }
