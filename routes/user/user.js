@@ -140,6 +140,7 @@ exports.getRoles = function(req, res, next) {
  */
 exports.getAllUsers = function(req, res, next) {
     User.find()
+        .select('-us_password -us_activation_token') //removing the password and token fields from all retrieved docs
         .exec(function(err, docs) {
             if(err) {
                 next(err);
@@ -159,6 +160,7 @@ exports.getAllUsers = function(req, res, next) {
  */
 exports.getUser = function(req, res, next) {
     User.findById(req.params.id)
+        .select('-us_password -us_activation_token') //removing the password and token fields from all retrieved docs
         .exec(function(err, docs) {
             if(err) {
                 next(err);
@@ -166,6 +168,70 @@ exports.getUser = function(req, res, next) {
                 res.send(docs);
             }
         });
+};
+
+/**
+ * Update user credentials.
+ * This should be accessible by only platform administrator or data owner.
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.updateUser = function(req, res, next) {
+    req.body.us_activation_token = undefined; //prevent token changes from this route.
+    req.body.us_password = undefined; //prevent password changes from this function
+    console.log(req.body);
+    User.findByIdAndUpdate({_id : req.params.id}, {$set: req.body}, function(err, doc) {
+        if(err) {
+            next(err);
+        } else {
+            //remove confidential fields
+            user.us_activation_token = undefined;
+            user.us_password = undefined;
+            res.send(doc);
+        }
+    });
+};
+
+/**
+ * Change the password for a given user.
+ * The user must send old_password and a new_password within the request payload
+ *
+ * TODO: Must log all activity for this feature
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.changePassword = function(req, res, next) {
+    //first find the user object and compare the old password with the new one
+    User.findById(req.params.id)
+        .exec(function(err, user) {
+            if(err) {
+                next(err);
+            } else {
+                if(user.us_password == req.body.old_password) {
+                    User.findByIdAndUpdate({_id: req.params.id}, {$set:{us_password: req.body.new_password}},
+                        function(err, docs) {
+                            if(err) {
+                                next(err);
+                            } else {
+                                //remove confidential fields
+                                user.us_activation_token = undefined;
+                                user.us_password = undefined;
+                                //send user object
+                                res.send(docs);
+                            }
+                        }
+                    )
+                } else {
+                    //password match failure error
+                    var err = new Error('Invalid Password Given');
+                    err.status = 400;
+                    next(err);
+                }
+            }
+        });
+
 };
 
 /**

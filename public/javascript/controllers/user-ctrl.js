@@ -4,8 +4,9 @@
 
 angular.module('harvestv2')
     .controller("UserCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'RolesFactory',
-        'PlatformFactory', 'CurrentUserFactory',
-        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory) {
+        'PlatformFactory', 'CurrentUserFactory', 'UserPasswordFactory',
+        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory,
+                 UserPasswordFactory) {
 
             /**
              * Registration Page defaults
@@ -44,6 +45,7 @@ angular.module('harvestv2')
                     $routeParams.id = currentuser._id;
                     UserFactory.show($routeParams, function (user) {
                         $scope.current_user = user;
+                 	$scope.current_user.us_password = "";
                     }, function (error) {
                         console.log(error);
                     });
@@ -75,9 +77,34 @@ angular.module('harvestv2')
                     })
                 }
             };
+
             /**
              * TODO: Change this from a JQuery library to an angular implemented function
              */
+            $scope.chpass = function () {
+                if (!$scope.chpassForm.$invalid &&
+                    $scope.validatePasswordMatch($scope.current_user.new_password, $scope.passwordConfirm)) {
+                    $scope.user.new_password = CryptoJS.SHA1($scope.current_user.new_password).toString(CryptoJS.enc.Hex);
+                    $scope.user.old_password = CryptoJS.SHA1($scope.current_user.old_password).toString(CryptoJS.enc.Hex);
+
+                    UserPasswordFactory.change({id : $scope.current_user._id}, $scope.user,
+                        function(user) {
+                            $scope.confirmation = true;
+                		//var elem = document.getElementById("feedbackmsg");
+                		//elem.style.color = "green";
+                		$scope.alertType = "success";
+                		$scope.alertMsg = "Your password has been changed.";
+                        }, function(error) {
+                		//var elem = document.getElementById("feedbackmsg");
+                		//elem.style.color = "red";
+                		$scope.alertType = "danger";
+                		$scope.alertMsg = "Incorrect password provided. Your password was not changed.";
+                        });
+                        $scope.current_user.old_password = "";
+                        $scope.current_user.new_password = "";
+                        $scope.passwordConfirm = "";
+                }
+            };
             $scope.setupVisualValidationCues = function () {
                 jQuery('#signupForm').validator();
             };
