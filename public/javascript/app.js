@@ -8,10 +8,11 @@
  */
 angular.module('harvestv2', ["ngRoute", "harvestv2.services", "angular-table", "angularCSS"])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-        $routeProvider.when('/', {
+        /*$routeProvider.when('/', {
             templateUrl: '../partials/home.html',
             controller: 'UserCtrl',
-            css: '/stylesheets/style.css'});
+            css: '/stylesheets/style.css'});*/
+        $routeProvider.when('/', {redirectTo: '/docs'});
         $routeProvider.when('/docs', {
             templateUrl: '../partials/docs.html',
             controller: 'DocsCtrl',
