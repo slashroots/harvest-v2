@@ -90,13 +90,15 @@ angular.module('harvestv2')
                     UserPasswordFactory.change({id : $scope.current_user._id}, $scope.user,
                         function(user) {
                             $scope.confirmation = true;
-                		var elem = document.getElementById("feedbackmsg");
-                		elem.style.color = "green";
-                		$scope.feedbackmsg = "SUCCESS: Your password has been changed."
+                		//var elem = document.getElementById("feedbackmsg");
+                		//elem.style.color = "green";
+                		$scope.alertType = "success";
+                		$scope.alertMsg = "Your password has been changed.";
                         }, function(error) {
-                		var elem = document.getElementById("feedbackmsg");
-                		elem.style.color = "red";
-                		$scope.feedbackmsg = "ERROR: Incorrect password provided. Your password was not changed."
+                		//var elem = document.getElementById("feedbackmsg");
+                		//elem.style.color = "red";
+                		$scope.alertType = "danger";
+                		$scope.alertMsg = "Incorrect password provided. Your password was not changed.";
                         });
                         $scope.current_user.old_password = "";
                         $scope.current_user.new_password = "";
