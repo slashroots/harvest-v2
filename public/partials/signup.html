@@ -78,6 +78,7 @@
                                 <a href="#">Privacy Policy</a>.
                             </label>
                         </div>
+                        <div ng-show="signupErrorMessage != ''" ng-bind="signupErrorMessage" class="alert alert-danger"></div>
                         <!--<button type="submit" class="btn btn-default btn-lg drk-grey-btn">Submit</button>-->
                         <a href="" ng-disabled="signupForm.$invalid || !validatePasswordMatch(user.us_password, passwordConfirm) || !agreeChecked" ng-click="createUser()" class="btn btn-default btn-lg drk-grey-btn">Submit</a>
                     </form>

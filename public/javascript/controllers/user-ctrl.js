@@ -17,6 +17,7 @@ angular.module('harvestv2')
             $scope.agreeChecked = false;
             $scope.confirmation = false;
             $scope.default_user_role = "";
+            $scope.signupErrorMessage = '';
 
             /**
              * First step is to get the default platform role
@@ -69,10 +70,11 @@ angular.module('harvestv2')
                         $scope.confirmation = true;
                     }, function(error) {
                         /**
-                         * TODO: Proper error handling is necessary using an angular modal window
+                         * A bootstrap alert has been implemented so this should be fine now from a UI standpoint
+                         * TODO: Implement this better --> error.data.message.errmsg.startsWith('E11000')
                          */
                         if(error.data.message.errmsg.startsWith('E11000')){
-                            alert(error.data.message.errmsg.split('"')[1]+ " has already been used!");
+                            $scope.signupErrorMessage = error.data.message.errmsg.split('"')[1]+ " has already been used!";
                         }
                     })
                 }
