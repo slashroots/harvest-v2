@@ -329,6 +329,11 @@ label.menu-cat-header.active{
     border: none
 }
 
+body > ng-view > redoc > div > div.api-content > methods-list > div > div {
+	    border-top: 1px solid rgba(127, 127, 127, 0.25);
+	    padding-top: 70px;
+}
+
 api-info div p{
     display:none !important;
 }
@@ -342,12 +347,13 @@ api-info div p{
     margin-bottom: 3em !important;
 }
 
-/*changes by Lee*/
+body > ng-view > redoc > div > div.api-content:before{
+    background: #E1E6E9 !important;
+}
+
 body > ng-view > redoc > div > div.api-content{
-    background: #FFF !important;
     top: 88px !important;
 }
-/*changes by Lee*/
 
 api-info div{
     width: 57% !important;
@@ -496,6 +502,10 @@ div.tag:nth-child(6) div.tag-info:first-child,
 div.tag:nth-child(7) div.tag-info:first-child{
     border-top: 1px solid rgba(151, 151, 151, 0.15) !important;
     padding: 50px 40px 0px 40px !important;
+}
+
+body > ng-view > redoc > div > div.api-content > methods-list > div > div:nth-child(4){
+	border-top: none;
 }
 
 a.openapi-button {
