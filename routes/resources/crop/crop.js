@@ -120,7 +120,8 @@ exports.getAllCrops = function(req, res, next) {
      */
     var limit = req.query.limit || 100;
     var offset = req.query.offset || 0;
-    var sum = null;
+    var aggregate_function = null;
+    var field = null;
     var start_date = null;
     var end_date = null;
 
@@ -132,15 +133,45 @@ exports.getAllCrops = function(req, res, next) {
     delete req.query.offset;
 
     /*
-     We will use the 'count' GET parameter to determine whether the user wants to get a count on a particular field (such as Crop Count
-     in the case of a query on the /crops endpoint.
+     We will use the 'aggregate_function' GET parameter to determine which of the supported aggregate_functions the user wants to carry out
+     These are defined in common-util.js in case we need to add new ones later and so we can ensure validity
      */
-    if (req.query.sum !== null) {
-        sum = req.query.sum;
+    if (req.query.aggregate_function) {
+        /*
+        If an aggregate_function has been specified, we check here to see if it is one of those that we support and - if so -
+        we assign it to our aggregate_function variable for use in the query.
+         */
+        switch (req.query.aggregate_function) {
+            case Common.SUM_FUNCTION :
+            case Common.AVG_FUNCTION :
+            case Common.MAX_FUNCTION :
+            case Common.MIN_FUNCTION :
+            case Common.VAR_FUNCTION :
+            case Common.STDEV_FUNCTION :
+                aggregate_function = req.query.aggregate_function;
+                break;
+            /*
+            If it isn't, we throw an appropriate error.
+             */
+            default :
+                var err = new Error('Invalid function code specified! Please refer to the documentation!');
+                err.status = 400;
+                next(err);
+        }
+        /*
+        We check if a target field has been specified and throw an appropriate error if one hasn't been specified
+         */
+        if (req.query.field) field = req.query.field;
+        else {
+            var err = new Error('You must also specify a target field when using an aggregate function! Please refer to the documentation!');
+            err.status = 400;
+            next(err);
+        }
         /*
          Here, we remove the variable from the query that will not be used in searching the database
          */
-        delete req.query.sum;
+        delete req.query.aggregate_function;
+        delete req.query.field;
     }
 
     /*
@@ -168,15 +199,19 @@ exports.getAllCrops = function(req, res, next) {
         limit: parseInt(limit)
     };
 
-    if (isNaN(parameters.offset) || isNaN(parameters.limit)) res.send("Invalid limit or offset parameter specified. Please ensure they are numeric!");
+    if (isNaN(parameters.offset) || isNaN(parameters.limit)) {
+        var err = new Error('Invalid limit or offset parameter specified. Please ensure they are numeric!');
+        err.status = 400;
+        next(err);
+    }
 
     /*
-    If we will be returning a sum on a particular field we need to modify the attributes of the parameters passed to
-    'findAll' so that it will add up the field specified by the user in the 'sum' parameter of the query
+    If we will be carrying out an aggregate_function on a particular field we need to modify the attributes of the parameters passed to
+    'findAll' so that it will carry out the aggregate_function on the field specified
      */
-    if (sum != null) {
-        parameters.attributes = [[sequelize.fn('SUM', sequelize.col(sum)), sum]];
-        parameters.order = "'" + sum + "' DESC";
+    if (aggregate_function != null) {
+        parameters.attributes = [[sequelize.fn(aggregate_function, sequelize.col(field)), aggregate_function]];
+        parameters.order = "'" + aggregate_function + "' DESC";
     }
     /*
         If a 'date_range' parameter has been specified, this will be the field/column that is compare with the

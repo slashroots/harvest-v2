@@ -59,3 +59,5 @@ exports.sendEmail = function(to_email, subject, email_body, callback){
 };
 
 exports.APP_ACTIVE = "active", exports.APP_DISABLED="disabled";
+
+exports.SUM_FUNCTION = "sum", exports.AVG_FUNCTION = "avg", exports.MAX_FUNCTION = "max", exports.MIN_FUNCTION = "min", exports.VAR_FUNCTION = "var", exports.STDEV_FUNCTION = "stdev";
