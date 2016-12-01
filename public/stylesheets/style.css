@@ -1849,3 +1849,118 @@ thead{
 .app-wrap:nth-child(2n) {
     margin-left: 4%;
 }
+
+
+.app-wrap {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 991px){
+    .app-wrap{
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0,0,0,.2);
+        /* margin-top: 30px; */
+        padding: 0px;
+        /* margin: 15px auto; */
+        /* margin-left: 3%; */
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .app-wrap:nth-child(2n){
+        margin-left:0;
+    }
+
+    .app-key {
+        background: rgba(13,52,66,0.03) url(http://i.imgur.com/55d24SO.png) 525px 10px no-repeat;
+    }
+
+    .nav>li>a{
+        padding: 20px 10px;
+    }
+
+    .navbar-brand {
+        padding: 27px 57px 10px 25px!important;
+    }
+
+    .dashboard-head {
+        margin-top: 0;
+    }
+
+    .dashboard-head:before {
+        top: 131px;
+    }
+
+    .sidebar {
+        top: 77px;
+    }
+}
+
+@media (min-width: 768px){
+    .admin-nav .navbar-brand {
+        padding: 27px 56px 10px 25px!important;
+    }
+    .nav>li>a {
+        padding: 20px 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        border-top:none;
+    }
+
+    .navbar-default {
+        min-height: 80px;
+    }
+
+    .navbar-collapse {
+         -webkit-box-shadow: none;
+         box-shadow: none;
+    }
+    .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+        border-bottom: none;
+        color: #E88011 !important;
+        font-weight: bolder;
+    }
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #fff;
+    }
+    .dropdown-menu:before {
+        content: initial;
+        position: absolute;
+        right: 11px;
+        top: -10px;
+        width: 0;
+        height: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        z-index: 9999;
+    }
+
+    .dropdown-menu:after {
+        content: initial;
+        position: absolute;
+        right: 10px;
+        top: -11px;
+        width: 0;
+        height: 0;
+        border: none;
+        z-index: 9998;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a{
+        color: rgba(255,255,255,0.5);
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover{
+        color: #fff;
+    }
+    .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+        max-height: 365px;
+    }
+
+
+}
+
