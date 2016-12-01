@@ -104,11 +104,30 @@ paths:
                       type: array
                       items:
                           $ref: '#/definitions/Crop'
+                - name: date_range
+                  in: query
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Crop'
+                  description: "A 'date_range' parameter that allows the user to specify a field to be compared with a date range by also specifying either a `start_date`, an `end_date`, or both. If only one is specified,
+                            it will return all the results with a date after the start date or before the end date accordingly. Example query; `http://localhost:3000/api/crops?end_date=2012-08-31&start_date=2012-08-01&date_range=Plant_Date&District=Ticky%20Ticky` -
+                  	    This will return all the crops planted in August of 2008 in the Ticky Ticky District."
                 - name: field
                   in: query
                   description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/crops?parish=Portland`
                   required: false
                   type: string
+                - name: sum
+                  in: query
+                  required: false
+                  type: string
+                  description: |
+                            A 'sum' parameter can be included with an API call and - when specified - will cause the API to return the accumulated total of all the values in that field/column.
+                            Example query; `http://localhost:3000/api/crops?sum=Crop_Count&Crop_Name=Yam&District=Ticky%20Ticky` - This will return the combined Crop Count for Yams growing in Ticky Ticky district.
     /crop/{id}:
         get:
             summary: Get Crop By ID
@@ -186,11 +205,30 @@ paths:
                       type: array
                       items:
                           $ref: '#/definitions/Farmer'
+                - name: date_range
+                  in: query
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Farmer'
+                  description: "A 'date_range' parameter that allows the user to specify a field to be compared with a date range by also specifying either a `start_date`, an `end_date`, or both. If only one is specified,
+                            it will return all the results with a date after the start date or before the end date accordingly. Example query; `http://localhost:3000/api/farmers?end_date=2012-08-31&start_date=2012-08-01&date_range=Registration_Date&District=Ticky%20Ticky` -
+                  	    This will return all the farmers registered in August of 2008 in the Ticky Ticky District."
                 - name: field
                   in: query
                   description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/farmers?parish=Portland`
                   required: false
                   type: string
+                - name: sum
+                  in: query
+                  required: false
+                  type: string
+                  description: |
+                            A 'sum' parameter can be included with an API call and - when specified - will cause the API to return the accumulated total of all the values in that field/column.
+                            Example query; `http://localhost:3000/api/farmers?sum=Ticky_Farmers_Count&District=Ticky%20Ticky` - This will return the combined farmer count, in a field named Ticky_Farmers_Count for farmers in Ticky Ticky district.
     /farmer/{id}:
         get:
             summary: Get Farmer By ID
@@ -268,11 +306,30 @@ paths:
                       type: array
                       items:
                           $ref: '#/definitions/Livestock'
+                - name: date_range
+                  in: query
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Livestock'
+                  description: "A 'date_range' parameter that allows the user to specify a field to be compared with a date range by also specifying either a `start_date`, an `end_date`, or both. If only one is specified,
+                            it will return all the results with a date after the start date or before the end date accordingly. Example query; `http://localhost:3000/api/livestock?end_date=2012-08-31&start_date=2012-08-01&date_range=Update_Date&District=Ticky%20Ticky` -
+                  	    This will return all the livestock records updated in August of 2008 in the Ticky Ticky District."
                 - name: field
                   in: query
                   description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/livestock?parish=Portland`
                   required: false
                   type: string
+                - name: sum
+                  in: query
+                  required: false
+                  type: string
+                  description: |
+                            A 'sum' parameter can be included with an API call and - when specified - will cause the API to return the accumulated total of all the values in that field/column.
+                            Example query; `http://localhost:3000/api/livestock?sum=StAnnLivestock&Parish=St.Ann` - This will return the combined livestock count, in a field named StAnnLivestock for livestock in the parish of St. Ann.
     /livestock/{id}:
         get:
             summary: Get Livestock By ID
@@ -356,11 +413,30 @@ paths:
                       type: array
                       items:
                           $ref: '#/definitions/Property'
+                - name: date_range
+                  in: query
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Property'
+                  description: "A 'date_range' parameter that allows the user to specify a field to be compared with a date range by also specifying either a `start_date`, an `end_date`, or both. If only one is specified,
+                            it will return all the results with a date after the start date or before the end date accordingly. Example query; `http://localhost:3000/api/properties?end_date=2012-08-31&start_date=2012-08-01&date_range=Update_Date&District=Ticky%20Ticky` -
+                  	    This will return all the property records updated in August of 2008 in the Ticky Ticky District."
                 - name: field
                   in: query
                   description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/property?parish=Portland`
                   required: false
                   type: string
+                - name: sum
+                  in: query
+                  required: false
+                  type: string
+                  description: |
+                            A 'sum' parameter can be included with an API call and - when specified - will cause the API to return the accumulated total of all the values in that field/column.
+                            Example query; `http://localhost:3000/api/properties?sum=StAnnProperties&Parish=St.Ann` - This will return the combined property count, in a field named StAnnProperties for properties in the parish of St. Ann.
     /property/{id}:
         get:
             summary: Get Property By ID
