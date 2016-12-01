@@ -232,6 +232,16 @@ angular.module('harvestv2')
             };
 
             /**
+             * The below function checks the path loaded to see if
+             * it is a path specified in the link attribute of the navbar
+             * should it match then the active class is set on the
+             * appropriate link.
+             */
+            $scope.isActive = function (linkPath) {
+        		return linkPath === $location.path();
+    		};
+
+            /**
              * In the event that the screen refreshes
              * we can query the backend to give back
              * the user details.
@@ -262,6 +272,13 @@ angular.module('harvestv2')
                     configureUI();
                 }
             }, true);
+        }
+    ]
+).controller("DocsCtrl", ['$scope', '$location', '$routeParams',
+        'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory', 'SharedState',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory, UserLogoutFactory,
+                 SharedState) {
+            Redoc.init('/docs/swagger.yaml');
         }
     ]
 )

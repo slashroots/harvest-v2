@@ -78,8 +78,8 @@ paths:
                 500:
                     description: Internal Server Error
             security:
-                - api_key: []
-                #- petstore_auth:
+                    - access_token: []
+               #- access_key:
                     #- write_pets
                     #- read_pets
             parameters:
@@ -133,7 +133,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                      #- write_pets
                      #- read_pets
     /farmers:
@@ -161,7 +161,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                      #- write_pets
                      #- read_pets
             parameters:
@@ -215,7 +215,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
     /livestock:
@@ -243,7 +243,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
             parameters:
@@ -303,7 +303,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
     /properties:
@@ -331,7 +331,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                     #- write_pets
                     #- read_pets
             parameters:
@@ -391,7 +391,7 @@ paths:
                     description: Internal Server Error
             security:
                 - api_key: []
-                #- petstore_auth:
+                #- access_key:
                   #- write_pets
                   #- read_pets
 
@@ -400,7 +400,7 @@ securityDefinitions:             #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH
         type: apiKey
         name: access_token
         in: header
-    #petstore_auth:
+    #access_key:
         #type: oauth2
         #authorizationUrl: harvest-api-staging.herokuapp.com/api
         #flow: implicit
@@ -876,3 +876,4 @@ definitions:
                 type: string
                 description: to be updated
                 example: n/a
+

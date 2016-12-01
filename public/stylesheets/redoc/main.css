@@ -138,6 +138,12 @@ nav iframe {
     background: transparent;
 }
 
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: transparent;
+    border-bottom: 5px solid #E88011;
+}
+
 .navbar-fixed-top {
     /*position: initial !important; */
     /*right: 0; */
@@ -323,6 +329,11 @@ label.menu-cat-header.active{
     border: none
 }
 
+body > ng-view > redoc > div > div.api-content > methods-list > div > div {
+	    border-top: 1px solid rgba(127, 127, 127, 0.25);
+	    padding-top: 70px;
+}
+
 api-info div p{
     display:none !important;
 }
@@ -336,6 +347,13 @@ api-info div p{
     margin-bottom: 3em !important;
 }
 
+body > ng-view > redoc > div > div.api-content:before{
+    background: #E1E6E9 !important;
+}
+
+body > ng-view > redoc > div > div.api-content{
+    top: 88px !important;
+}
 
 api-info div{
     width: 57% !important;
@@ -486,6 +504,10 @@ div.tag:nth-child(7) div.tag-info:first-child{
     padding: 50px 40px 0px 40px !important;
 }
 
+body > ng-view > redoc > div > div.api-content > methods-list > div > div:nth-child(4){
+	border-top: none;
+}
+
 a.openapi-button {
     padding: 3px 8px 4px 8px !important;
     margin-left: 0.5em;
@@ -525,7 +547,7 @@ span.path{
 /*pre:hover{*/
 /*max-height: 100% !important;*/
 /*text-overflow: inherit !important;*/
-/*display: block !important;*/
+/*display: block !im	portant;*/
 /*overflow: visible !important;*/
 /*}*/
 
@@ -546,6 +568,6 @@ footer a, footer a strong{
 
 @media (min-width: 1200px) {
     .container {
-        width: 1400px;
+        width: 100%;
     }
 }
