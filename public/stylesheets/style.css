@@ -1901,9 +1901,9 @@ thead{
     .admin-nav .navbar-brand {
         padding: 27px 56px 10px 25px!important;
     }
-    .nav>li>a {
-        padding: 20px 5px;
-    }
+    /*.nav>li>a {*/
+        /*padding: 20px 5px;*/
+    /*}*/
 }
 
 @media (max-width: 767px) {
