@@ -1790,7 +1790,7 @@ div.pagination{
 .table>thead>tr>th {
     padding: 12px 25px 20px 25px;
     line-height: 1.42857143;
-    word-break: break-all;
+    word-break: initial;
     vertical-align: top;
     border-top: 1px solid #ddd;
     /* font-size: 13px; */
@@ -1902,7 +1902,7 @@ thead{
         padding: 27px 56px 10px 25px!important;
     }
     /*.nav>li>a {*/
-        /*padding: 20px 5px;*/
+    /*padding: 20px 5px;*/
     /*}*/
 }
 
@@ -1916,8 +1916,8 @@ thead{
     }
 
     .navbar-collapse {
-         -webkit-box-shadow: none;
-         box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
     .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
         border-bottom: none;
@@ -1963,4 +1963,3 @@ thead{
 
 
 }
-
