@@ -269,6 +269,7 @@ h3{
     overflow-x: hidden;
     /* position: absolute !important; */
     top: 80px !important;
+    bottom: 0 !important;
 }
 
 .menu-cat-header {
@@ -319,6 +320,10 @@ label.menu-cat-header.active{
     /* background: #333 !important; */
 }
 
+div.methods method{
+    border-bottom:0;
+}
+
 .method-samples {
     background: #e1e6e9 !important;
     color: #666 !important
@@ -330,8 +335,8 @@ label.menu-cat-header.active{
 }
 
 body > ng-view > redoc > div > div.api-content > methods-list > div > div {
-	    border-top: 1px solid rgba(127, 127, 127, 0.25);
-	    padding-top: 70px;
+    /* border-top: 1px solid rgba(127, 127, 127, 0.25); */
+    padding-top: 70px;
 }
 
 api-info div p{
@@ -505,7 +510,7 @@ div.tag:nth-child(7) div.tag-info:first-child{
 }
 
 body > ng-view > redoc > div > div.api-content > methods-list > div > div:nth-child(4){
-	border-top: none;
+    border-top: none;
 }
 
 a.openapi-button {
@@ -547,7 +552,7 @@ span.path{
 /*pre:hover{*/
 /*max-height: 100% !important;*/
 /*text-overflow: inherit !important;*/
-/*display: block !im	portant;*/
+/*display: block !im   portant;*/
 /*overflow: visible !important;*/
 /*}*/
 
@@ -568,6 +573,126 @@ footer a, footer a strong{
 
 @media (min-width: 1200px) {
     .container {
-        width: 100%;
+        width: 1024px;
+        /*width: 100%;*/
     }
+}
+
+footer{
+    margin-top: 0 !important;
+    padding:30px;
+}
+
+.footer-links li {
+    display: inline;
+    padding: 0 10px;
+    border-right: 1px solid #ccc;
+    list-style: none;
+}
+
+.footer-links li:last-child {
+    border-right: none;
+}
+
+.footer-links li a{
+    color: #fff;
+    font-weight:400;
+}
+
+.footer-links li span{
+    color:#bbb;
+}
+
+.powered-by-badge{
+    display: none;
+}
+.link-btn {
+    border: 1px solid #979797;
+    border-radius: 5px;
+    padding: 10px 25px !important;
+    margin: 15px 0;
+}
+
+.api-info-wrapper h1{
+    margin: 0;
+    font-size: 12px !important;
+    text-align: right;
+    color: #ccc !important;
+}
+
+.api-info-wrapper span.redoc-markdown-block h1{
+    padding-top: 0!important;
+    font-size: 1.9em !important;
+    text-align: initial !important;
+    color: #263238 !important;
+}
+
+.security-definition h2{
+    padding-top: 10px !important;
+}
+
+span.dropdown{
+    position: absolute;
+    bottom: 16px;
+    right: 30px;
+    text-align: center;
+}
+
+span .dropdown-menu{
+    left: initial !important;
+    right: -12px !important;
+    margin: 12px 0;
+    text-align: center;
+}
+
+nav .dropdown-menu{
+    min-width: 182px !important;
+    right: 25px !important;
+    top: 85%;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
+.dropdown-menu:before{
+    content:"";
+    position: absolute;
+    right: 11px;
+    top: -10px;
+    width: 0;
+    height: 0;
+    /*border-style: solid;
+    border-width: 0 7px 10px 7px;
+    border-color: transparent transparent #fff transparent;*/
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid white;
+    z-index:9999;
+
+}
+
+.dropdown-menu:after{
+    content:"";
+    position: absolute;
+    right: 10px;
+    top: -11px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 11px 8px;
+    border-color: transparent transparent #ccc transparent;
+    z-index:9998;
+}
+
+.dropdown-menu>li>a {
+    display: block;
+    padding: 7px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    background-color: transparent;
 }
