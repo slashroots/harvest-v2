@@ -4,8 +4,9 @@
 
 angular.module('harvestv2')
     .controller("UserCtrl", ['$scope', '$location', '$routeParams', 'UserFactory', 'RolesFactory',
-        'PlatformFactory', 'CurrentUserFactory',
-        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory) {
+        'PlatformFactory', 'CurrentUserFactory', 'UserPasswordFactory',
+        function($scope, $location, $routeParams, UserFactory, RolesFactory, PlatformFactory, CurrentUserFactory,
+                 UserPasswordFactory) {
 
             /**
              * Registration Page defaults
@@ -16,6 +17,7 @@ angular.module('harvestv2')
             $scope.agreeChecked = false;
             $scope.confirmation = false;
             $scope.default_user_role = "";
+            $scope.signupErrorMessage = '';
 
             /**
              * First step is to get the default platform role
@@ -44,6 +46,7 @@ angular.module('harvestv2')
                     $routeParams.id = currentuser._id;
                     UserFactory.show($routeParams, function (user) {
                         $scope.current_user = user;
+                 	$scope.current_user.us_password = "";
                     }, function (error) {
                         console.log(error);
                     });
@@ -67,17 +70,43 @@ angular.module('harvestv2')
                         $scope.confirmation = true;
                     }, function(error) {
                         /**
-                         * TODO: Proper error handling is necessary using an angular modal window
+                         * A bootstrap alert has been implemented so this should be fine now from a UI standpoint
+                         * TODO: Implement this better --> error.data.message.errmsg.startsWith('E11000')
                          */
                         if(error.data.message.errmsg.startsWith('E11000')){
-                            alert(error.data.message.errmsg.split('"')[1]+ " has already been used!");
+                            $scope.signupErrorMessage = error.data.message.errmsg.split('"')[1]+ " has already been used!";
                         }
                     })
                 }
             };
+
             /**
              * TODO: Change this from a JQuery library to an angular implemented function
              */
+            $scope.chpass = function () {
+                if (!$scope.chpassForm.$invalid &&
+                    $scope.validatePasswordMatch($scope.current_user.new_password, $scope.passwordConfirm)) {
+                    $scope.user.new_password = CryptoJS.SHA1($scope.current_user.new_password).toString(CryptoJS.enc.Hex);
+                    $scope.user.old_password = CryptoJS.SHA1($scope.current_user.old_password).toString(CryptoJS.enc.Hex);
+
+                    UserPasswordFactory.change({id : $scope.current_user._id}, $scope.user,
+                        function(user) {
+                            $scope.confirmation = true;
+                		//var elem = document.getElementById("feedbackmsg");
+                		//elem.style.color = "green";
+                		$scope.alertType = "success";
+                		$scope.alertMsg = "Your password has been changed.";
+                        }, function(error) {
+                		//var elem = document.getElementById("feedbackmsg");
+                		//elem.style.color = "red";
+                		$scope.alertType = "danger";
+                		$scope.alertMsg = "Incorrect password provided. Your password was not changed.";
+                        });
+                        $scope.current_user.old_password = "";
+                        $scope.current_user.new_password = "";
+                        $scope.passwordConfirm = "";
+                }
+            };
             $scope.setupVisualValidationCues = function () {
                 jQuery('#signupForm').validator();
             };
@@ -203,6 +232,16 @@ angular.module('harvestv2')
             };
 
             /**
+             * The below function checks the path loaded to see if
+             * it is a path specified in the link attribute of the navbar
+             * should it match then the active class is set on the
+             * appropriate link.
+             */
+            $scope.isActive = function (linkPath) {
+        		return linkPath === $location.path();
+    		};
+
+            /**
              * In the event that the screen refreshes
              * we can query the backend to give back
              * the user details.
@@ -233,6 +272,13 @@ angular.module('harvestv2')
                     configureUI();
                 }
             }, true);
+        }
+    ]
+).controller("DocsCtrl", ['$scope', '$location', '$routeParams',
+        'AuthenticationFactory', 'CurrentUserFactory', 'UserLogoutFactory', 'SharedState',
+        function($scope, $location, $routeParams, AuthenticationFactory, CurrentUserFactory, UserLogoutFactory,
+                 SharedState) {
+            Redoc.init('/docs/swagger.yaml');
         }
     ]
 )

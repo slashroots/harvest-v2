@@ -111,30 +111,17 @@ exports.getAllFarmers = function(req, res, next) {
         userRole: req.user.ap_app_role.ro_role_name
     });
 
-    /*
-    Here, we retrieve the offset and limit parameters from the query if they exist and then remove them (as well as
-    the access_token in case the user opted to specify it in the url directly) so that the remaining fields can be used
-    for searching.
-     */
-    var limit = req.query.limit || 100;
-    var offset = req.query.offset || 0;
-    delete req.query.access_token;
-    delete req.query.limit;
-    delete req.query.offset;
+    var parameters = Common.getParameters(req.query, sequelize, next);
 
     var rowCounter = 0;//this will count the rows returned for logging purposes
 
-    Farmer.findAll({
-        where: req.query,
-        offset: parseInt(offset),
-        limit: parseInt(limit)
-    }).then(function(farmers) {
-            for (var i = 0;i<farmers.length;i++) {
-                farmers[i] = fakeblock.applyAcl(farmers[i], 'get');
-                rowCounter++;
-            }
-            req.log_id = logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_APP_ACTIVITY,rowCounter + " farmer records were returned for this request.",true);
-            res.send(farmers);
+    Farmer.findAll(parameters).then(function(farmers) {
+        for (var i = 0;i<farmers.length;i++) {
+            farmers[i] = fakeblock.applyAcl(farmers[i], 'get');
+            rowCounter++;
+        }
+        req.log_id = logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_APP_ACTIVITY,rowCounter + " farmer records were returned for this request.",true);
+        res.send(farmers);
     });
 };
 
