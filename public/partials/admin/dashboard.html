@@ -41,14 +41,15 @@
                         <!-- panel -->
                         <div class="panel panel-default">
 
-                            <!-- panel-heading -->
-                            <div class="panel-heading">
-                                <h5>Recent User Activity</h5>
-                            </div>
-                            <!-- /.panel-heading -->
-
                             <!-- panel-body -->
                             <div class="panel-body">
+
+                                <!-- panel-heading -->
+                                <div class="panel-heading">
+                                    <h5>Recent User Activity</h5>
+                                </div>
+                                <!-- /.panel-heading -->
+
                                 <!-- table-responsive -->
                                 <table width="100%" class="table table-striped table-responsive table-bordered table-hover" at-table at-paginated at-list="userLogsSearch" at-config="config">
                                     <thead>
@@ -95,7 +96,7 @@
                                 <div class="triangle-topright"></div>
                                 <img class="app-img" src="http://i.imgur.com/wcEy2ya.png">
                             </div>
-                            <div class="count">{{ userCount }}</div>
+                            <div ng-bind="userCount" class="count"></div>
                             <h3>Users</h3>
                             <p>Lorem ipsum psdea itgum rixt.</p>
                         </div>

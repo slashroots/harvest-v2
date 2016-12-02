@@ -6,7 +6,7 @@ var sql = require('mssql');
 var livestockAcl = require('../../../acl/livestock.acl.js');
 var Fakeblock = require('fakeblock');
 var Sequelize = require('sequelize');
-
+var logging = require('../../../util/logging-util');
 /**
  * Retrieves all livestock.
  * @param req
@@ -91,31 +91,23 @@ var Livestock = sequelize.define('std_reg_farmer_property_livestock_table', {
     freezeTableName: true // Model tableName will be the same as the model name
 });
 
-
 exports.getAllLivestock = function(req, res, next) {
     var fakeblock = new Fakeblock({
         acl: livestockAcl,
         userRole: req.user.ap_app_role.ro_role_name
     });
 
-    /*
-     Here, we retrieve the offset and limit parameters from the query if they exist and then remove them (as well as
-     the access_token in case the user opted to specify it in the url directly) so that the remaining fields can be used
-     for searching.
-     */
-    var limit = req.query.limit || 100;
-    var offset = req.query.offset || 0;
-    delete req.query.access_token;
-    delete req.query.limit;
-    delete req.query.offset;
+    var parameters = Common.getParameters(req.query, sequelize, next);
 
-    Livestock.findAll({
-        where: req.query,
-        offset: parseInt(offset),
-        limit: parseInt(limit)
-    }).then(function(farmers) {
-        for (var i = 0;i<farmers.length;i++) farmers[i] = fakeblock.applyAcl(farmers[i], 'get');
-        res.send(farmers);
+    var rowCounter = 0;//this will count the rows returned for logging purposes
+
+    Livestock.findAll(parameters).then(function(livestock) {
+        for (var i = 0;i<livestock.length;i++) {
+            livestock[i] = fakeblock.applyAcl(livestock[i], 'get');
+            rowCounter++;
+        }
+        req.log_id = logging.accessLogger(req.user,req.url,logging.LOG_LEVEL_APP_ACTIVITY,rowCounter + " livestock records were returned for this request.",true);
+        res.send(livestock);
 
     });
 };
