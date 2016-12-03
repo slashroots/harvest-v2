@@ -388,8 +388,16 @@ h2.section-heading{
 .form-head{
     font-size: 18px;
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     font-weight: bold;
+}
+
+.sign-in.form-wrap .form-head{
+    margin-bottom:10px;
+}
+
+.sign-in.form-wrap center p{
+    margin-bottom:25px;
 }
 
 label{
@@ -1902,7 +1910,7 @@ thead{
         padding: 27px 56px 10px 25px!important;
     }
     /*.nav>li>a {*/
-        /*padding: 20px 5px;*/
+    /*padding: 20px 5px;*/
     /*}*/
 }
 
@@ -1916,8 +1924,8 @@ thead{
     }
 
     .navbar-collapse {
-         -webkit-box-shadow: none;
-         box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
     .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
         border-bottom: none;
