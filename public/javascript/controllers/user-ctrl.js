@@ -146,7 +146,7 @@ angular.module('harvestv2')
                     }
                 }, function(error) {
                     $scope.success = false;
-                    $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials!";
+                    $scope.loginScreenNotification = "We were unable to log you in! Please check your credentials and ensure that you have activated your account!";
                 });
             };
 
