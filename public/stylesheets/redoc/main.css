@@ -31,6 +31,10 @@ body {
     /* border-top: 7px solid #0D3442; */
 }
 
+.background-actual{
+    background: #e1e6e9  !important;
+}
+
 nav input, nav button  {
     font-size: 16px;
     height: 28px;
