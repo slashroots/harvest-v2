@@ -40,7 +40,7 @@ var UserSchema = new Schema({
     us_contact: {type: String, required: true},
     us_user_creation_date: {type: Date, default: Date.now()},
     us_state: {type: String, default: 'pending'},
-    us_address: {type: String, required: true},
+    us_address: {type: String, required: false},
     us_company: {type: String, required: false},
     us_intended_use: {type: String, required: false},
     us_user_role: {type: String, required: true},

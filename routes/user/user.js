@@ -274,7 +274,10 @@ exports.createUser = function(req, res, next) {
                         user.us_activation_token = undefined;
                         user.us_password = undefined;
                         logging.accessLogger(user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "A new user account was created but an error occurred when trying to send the activation email.",true, user);
-                        next(error);
+                        user.remove();
+                        var err = new Error('An error occurred when trying to send the activation email. Your account has not been created. Please try again later.');
+                        err.status = 500;
+                        next(err);
                     } else {
                         //removing the token and password from the response (security)
                         user.us_activation_token = undefined;
@@ -283,7 +286,6 @@ exports.createUser = function(req, res, next) {
                         res.send(user);
                     }
                 });
-
         }
     });
 };
