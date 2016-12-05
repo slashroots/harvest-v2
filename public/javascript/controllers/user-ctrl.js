@@ -69,11 +69,18 @@ angular.module('harvestv2')
                     UserFactory.create($scope.user, function(user) {
                         $scope.confirmation = true;
                     }, function(error) {
+                        /*
+                        This will check for 500 server errors and set an appropriate message as passed by the error
+                        object. For now this includes when the activation email cannot be sent.
+                         */
+                        if (error.status == 500){
+                            $scope.signupErrorMessage = error.data.message;
+                        }
                         /**
                          * A bootstrap alert has been implemented so this should be fine now from a UI standpoint
                          * TODO: Implement this better --> error.data.message.errmsg.startsWith('E11000')
                          */
-                        if(error.data.message.errmsg.startsWith('E11000')){
+                        else if(error.data.message.errmsg.startsWith('E11000')){
                             $scope.signupErrorMessage = error.data.message.errmsg.split('"')[1]+ " has already been used!";
                         }
                     })
