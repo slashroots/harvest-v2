@@ -32,8 +32,8 @@ exports.authenticate = function(req, res, next) {
  * This will be used during web-service calls to any RADA
  * specific resources.
  */
-passport.use(new TokenStrategy(
-    function(token, done) {
+passport.use(new TokenStrategy({passReqToCallback:true},
+    function(req, token, done) {
         App.findOne({ ap_app_token: token, ap_app_status: "active" })
             .populate('ap_app_role')
             .exec(function (err, app) {
