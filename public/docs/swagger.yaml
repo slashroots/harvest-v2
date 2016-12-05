@@ -383,11 +383,6 @@ paths:
                     description: Unauthorized
                 500:
                     description: Internal Server Error
-securityDefinitions:             #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH TOKEN
-    api_key:
-        type: apiKey
-        name: access_token
-        in: header
 definitions:
     Crop:
         type: object
