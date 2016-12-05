@@ -383,18 +383,6 @@ paths:
                     description: Unauthorized
                 500:
                     description: Internal Server Error
-securityDefinitions:             #ASK NICK HOW WE'D ACCESS/PASS API KEY AND AUTH TOKEN
-    api_key:
-        type: apiKey
-        name: access_token
-        in: header
-    #access_key:
-        #type: oauth2
-        #authorizationUrl: harvest-api-staging.herokuapp.com/api
-        #flow: implicit
-        #scopes:      #ASK NICK WHAT SCOPES WE ARE USING
-            #write_pets: modify pets in your account
-            #read_pets: read your pets
 definitions:
     Crop:
         type: object
