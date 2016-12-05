@@ -30,7 +30,6 @@ tags:
                            - Livestock
                            - Property
 
-                           Resource fields will have a `+` stating it is open and a `-` stating it is closed, in the field description. Closed fields require elevated access rights.
                            ## Personal vs Aggregate
                            Aggregate data on a resource is accessed through a respective resource path, which has the resource pluralized. e.g `/api/crops` would return ALL the crops available. As you can imagine, this would return a large amount of data. So, we've allowed you to limit/[throttle](/docs/#throttling-requests) the aggregate requests.
                            Personal requests are those which retrieve a specific record from a resource. e.g. `/api/crop/[CROP_ID_HERE]` would return the specific crop record associated with the crop id passed in the path where `CROP_ID_HERE` is. Please note that for personal requests, the resource name is kept singular.
@@ -389,11 +388,11 @@ definitions:
         properties:
             IDX_Property:
                 type: number
-                description: "`-` to be updated"
+                description:  to be updated
                 example: 1971349
             Crop_Variety:
                 type: string
-                description: "`+` to be updated"
+                description: to be updated
                 example: "Not Stated"
             Crop_Name:
                 type: string
