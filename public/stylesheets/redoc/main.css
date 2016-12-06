@@ -513,6 +513,10 @@ div.tag:nth-child(7) div.tag-info:first-child{
     padding: 50px 40px 0px 40px !important;
 }
 
+body > ng-view > redoc > div > div.api-content > methods-list > div > div > method > div > div.method-content, div.tag:nth-child(n) div.tag-info:first-child{
+    padding-top:100px !important;
+}
+
 body > ng-view > redoc > div > div.api-content > methods-list > div > div:nth-child(4){
     border-top: none;
 }
