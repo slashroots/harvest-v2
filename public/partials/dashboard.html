@@ -101,10 +101,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="">
-                                        <form>
+                                        <form id="appForm" data-toggle="validator" role="form" name="appForm" method="post" action="none" novalidate>
                                             <div class="form-group">
                                                 <label for="inputAppName">App Name</label>
-                                                <input ng-model="app.ap_app_name" type="text" class="form-control" id="inputAppName">
+                                                <input ng-model="app.ap_app_name" type="text" class="form-control" id="inputAppName" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Brief Description</label>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" ng-click="createApp()" class="btn btn-default drk-grey-btn" data-dismiss="modal">Submit</button>
+                            <button type="button" ng-click="createApp()" ng-disabled="appForm.$invalid" class="btn btn-success drk-grey-btn" data-dismiss="modal">Submit</button>
                         </div>
                     </div>
 

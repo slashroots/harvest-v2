@@ -13,7 +13,11 @@ var services = angular.module('harvestv2.services', ['ngResource']);
 services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
     return {
         responseError: function(response){
-            if(response.status == 401) {
+            /*
+             I have disabled the HTTP interceptor for 401 errors resulting from the 'signin' page because it breaks the error messages I had implemented.
+             It was intended to redirect unauthenticated users from pages they should not be accessing to the signin page and it will continue to do that.
+             */
+            if(response.status == 401 && $location.path() !== '/signin') {
                 var encodedURL = encodeURIComponent($location.absUrl());
                 window.location = "#/signin?goTo=" + encodedURL;
                 return;
@@ -23,6 +27,15 @@ services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
     };
 }]);
 
+/**
+ * Factory used in changing a user's password
+ */
+services.factory('UserPasswordFactory', function($resource) {
+    return $resource('/user/:id/password', {}, {
+        change: {method: 'PUT', params: {id: '@id'}}
+    });
+});
+
 
 /**
  * Factory used in creating and accessing User details
@@ -30,13 +43,14 @@ services.factory('HTTPInterceptor', ['$q','$location', function($q,$location){
 services.factory('UserFactory', function($resource) {
     return $resource('/user/:id', {}, {
         create: { method: 'POST'},
-        show: {method: 'GET',params: {id: '@id'}}
+        show: {method: 'GET',params: {id: '@id'}},
+        update: {method: 'PUT',params: {id: '@id'}}
     });
 });
 
 services.factory('UsersFactory', function($resource) {
    return $resource('/users', {}, {
-       query: { method: 'GET', isArray: true},
+       query: { method: 'GET', isArray: true}
    });
 });
 

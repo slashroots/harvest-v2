@@ -28,7 +28,11 @@ body {
     -webkit-border-image: -webkit-linear-gradient(to right, #E2E032 22%, #6DCC7F);
     /* border-image: linear-gradient(to right, #E2E032 22%, #6DCC7F); */
     /* border-image-slice: 1; */
-    border-top: 7px solid #0D3442;
+    /* border-top: 7px solid #0D3442; */
+}
+
+.background-actual{
+    background: #e1e6e9  !important;
 }
 
 nav input, nav button  {
@@ -96,8 +100,8 @@ nav button:active {
 
 nav {
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    /* height: 50px; */
+    /* line-height: 50px; */
     text-align: center;
     background-color: white;
     border-bottom: 1px solid #ccc;
@@ -106,13 +110,61 @@ nav {
     z-index: 1;
     box-sizing: border-box;
 }
+.navbar-default {
+    background-color: #0D3442;
+    border-color: #e7e7e7;
+    margin-bottom: 0;
+    position: fixed;
+    box-shadow: 0 1px 1px rgba(0,0,0,.14);
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 0;
+    /* padding: 0; */
+    min-height: 40px;
+    border-top: 5px solid transparent;
+    -moz-border-image: -moz-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+    -webkit-border-image: -webkit-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+    border-image: linear-gradient(to right, #E2E032 22%, #6DCC7F);
+    border-image-slice: 1;
+}
 
 nav iframe {
     margin: 10px 0;
     position: absolute;
     right: 0;
     top: 0;
+
 }
+
+.navbar-default .navbar-nav>.active>a, .nav>li>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    padding: 27px 25px;
+    color: #fff !important;
+    background: transparent;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: transparent;
+    border-bottom: 5px solid #E88011;
+}
+
+.navbar-fixed-top {
+    /*position: initial !important; */
+    /*right: 0; */
+    /*left: 0; */
+    /*z-index: 1030; */
+}
+
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 30px;
+    /* font-family: "Lato Black", Helvetica, Arial, sans-serif; */
+    color: #fff !important;
+    padding: 27px 25px 10px 15px!important;
+    height: 40px;
+}
+
 
 header a {
     color: inherit;
@@ -142,15 +194,86 @@ h1, h2, h3, h4, h5, p, a, .redoc-wrap, .param-name-content{
     color: #333 !important;
 }
 
-.api-info-header{
-    padding-top:30px
+h1{
+    font-size: 1.9em !important;
+    margin-bottom: 30px !important;
+    /* font-weight: 400; */
+    /* color: #cf441d !important; */
+    font-family: "Lato" !important;
+    font-weight: bold !important;
 }
+
+h2{
+    font-size: 1.6em !important;
+    font-weight: 300 !important;
+    margin-bottom: 15px !important;
+}
+
+h3{
+    font-size: 14px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+
+.api-info-header{
+    padding-top: 86px !important;
+    font-size: 0.85em !important;
+    color: #bfbfbf !important;
+    text-align: right !important;
+}
+
+/*#about-harvestapi{*/
+/*font-size: 1.9em !important;*/
+/*margin-bottom: 30px !important;*/
+/*/!* font-weight: 400; *!/*/
+/*/!* color: #cf441d !important; *!/*/
+/*font-family: "Lato" !important;*/
+/*font-weight: bold;*/
+/*}*/
+
+/*#what-is-harvestapi-{*/
+/*font-size: 1.6em !important;*/
+/*font-weight: 300 !important;*/
+/*margin-bottom: 15px !important;*/
+/*}*/
+
+/*#what-is-an-api-{*/
+/*font-size: 14px !important;*/
+/*font-weight: bold !important;*/
+/*text-transform: uppercase !important;*/
+/*}*/
+
+/*#open-source-project{*/
+/*font-size: 14px !important;*/
+/*font-weight: bold !important;*/
+/*text-transform: uppercase !important;*/
+/*}*/
+
+/*#abis-relationship-with-rada{*/
+/*font-size: 1.6em !important;*/
+/*font-weight: 300 !important;*/
+/*margin-bottom: 15px !important;*/
+/*}*/
+
+/*#what-data-does-the-api-use-{*/
+/*font-size: 1.35em !important;*/
+/*/!* color: #cf441d !important; *!/*/
+/*font-size: 1.9em !important;*/
+/*margin-bottom: 30px !important;*/
+/*/!* font-weight: 400; *!/*/
+/*/!* color: #cf441d !important; *!/*/
+/*font-family: "Lato" !important;*/
+/*font-weight: bold;*/
+/*}*/
 
 .menu-content{
     width: 250px !important;
     background-color: #F8FAFB !important;
     overflow-y: auto;
     overflow-x: hidden;
+    /* position: absolute !important; */
+    top: 80px !important;
+    bottom: 0 !important;
 }
 
 .menu-cat-header {
@@ -201,12 +324,28 @@ label.menu-cat-header.active{
     /* background: #333 !important; */
 }
 
+div.methods method{
+    border-bottom:0;
+}
+
 .method-samples {
     background: #e1e6e9 !important;
     color: #666 !important
     /* background: #333!important; */
 }
 
+.method-samples pre{
+    border: none
+}
+
+body > ng-view > redoc > div > div.api-content > methods-list > div > div {
+    /* border-top: 1px solid rgba(127, 127, 127, 0.25); */
+    padding-top: 70px;
+}
+
+api-info div p{
+    display:none !important;
+}
 
 #api-content {
     margin-left: 250px !important;
@@ -217,6 +356,13 @@ label.menu-cat-header.active{
     margin-bottom: 3em !important;
 }
 
+body > ng-view > redoc > div > div.api-content:before{
+    background: #E1E6E9 !important;
+}
+
+body > ng-view > redoc > div > div.api-content{
+    top: 88px !important;
+}
 
 api-info div{
     width: 57% !important;
@@ -228,6 +374,7 @@ api-info div{
     /* text-align: center !important; */
     /* border-bottom: 1px solid #ccc !important; */
     font-weight: 500 !important;
+    padding-top: 20px !important;
 }
 
 .method-endpoint{
@@ -331,10 +478,43 @@ responses-samples div.redoc-json{
     top: 0;
 }
 
-.tag-info {
-    border-top: 1px solid rgba(151, 151, 151, 0.15) !important;
-    padding: 50px 40px 30px 40px !important;
+api-info{
+    padding:40px 40px 0px 40px !important;
+}
 
+.tag-info {
+    /*     border-top: 1px solid rgba(151, 151, 151, 0.15) !important;
+        padding: 50px 40px 30px 40px !important; */
+    border-top:none !important;
+    padding: 40px !important;
+}
+
+/* .tag-info:first-child{
+    border-top:none !important;
+    padding: 20px 40px !important;
+} */
+
+div.tag:first-child div.tag-info:first-child,
+div.tag:nth-child(2) div.tag-info:first-child,
+div.tag:nth-child(3) div.tag-info:first-child{
+    padding-top:0 !important;
+    padding-bottom: 20px !important;
+}
+
+div.tag:nth-child(3) div.tag-info:first-child{;
+    padding-bottom: 70px !important;
+}
+
+div.tag:nth-child(4) div.tag-info:first-child,
+div.tag:nth-child(5) div.tag-info:first-child,
+div.tag:nth-child(6) div.tag-info:first-child,
+div.tag:nth-child(7) div.tag-info:first-child{
+    border-top: 1px solid rgba(151, 151, 151, 0.15) !important;
+    padding: 50px 40px 0px 40px !important;
+}
+
+body > ng-view > redoc > div > div.api-content > methods-list > div > div:nth-child(4){
+    border-top: none;
 }
 
 a.openapi-button {
@@ -376,7 +556,7 @@ span.path{
 /*pre:hover{*/
 /*max-height: 100% !important;*/
 /*text-overflow: inherit !important;*/
-/*display: block !important;*/
+/*display: block !im   portant;*/
 /*overflow: visible !important;*/
 /*}*/
 
@@ -393,4 +573,130 @@ footer{
 
 footer a, footer a strong{
     color: #fff !important;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1024px;
+        /*width: 100%;*/
+    }
+}
+
+footer{
+    margin-top: 0 !important;
+    padding:30px;
+}
+
+.footer-links li {
+    display: inline;
+    padding: 0 10px;
+    border-right: 1px solid #ccc;
+    list-style: none;
+}
+
+.footer-links li:last-child {
+    border-right: none;
+}
+
+.footer-links li a{
+    color: #fff;
+    font-weight:400;
+}
+
+.footer-links li span{
+    color:#bbb;
+}
+
+.powered-by-badge{
+    display: none;
+}
+.link-btn {
+    border: 1px solid #979797;
+    border-radius: 5px;
+    padding: 10px 25px !important;
+    margin: 15px 0;
+}
+
+.api-info-wrapper h1{
+    margin: 0;
+    font-size: 12px !important;
+    text-align: right;
+    color: #ccc !important;
+}
+
+.api-info-wrapper span.redoc-markdown-block h1{
+    padding-top: 0!important;
+    font-size: 1.9em !important;
+    text-align: initial !important;
+    color: #263238 !important;
+}
+
+.security-definition h2{
+    padding-top: 10px !important;
+}
+
+span.dropdown{
+    position: absolute;
+    bottom: 16px;
+    right: 30px;
+    text-align: center;
+}
+
+span .dropdown-menu{
+    left: initial !important;
+    right: -12px !important;
+    margin: 12px 0;
+    text-align: center;
+}
+
+nav .dropdown-menu{
+    min-width: 182px !important;
+    right: 25px !important;
+    top: 85%;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
+.dropdown-menu:before{
+    content:"";
+    position: absolute;
+    right: 11px;
+    top: -10px;
+    width: 0;
+    height: 0;
+    /*border-style: solid;
+    border-width: 0 7px 10px 7px;
+    border-color: transparent transparent #fff transparent;*/
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid white;
+    z-index:9999;
+
+}
+
+.dropdown-menu:after{
+    content:"";
+    position: absolute;
+    right: 10px;
+    top: -11px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 11px 8px;
+    border-color: transparent transparent #ccc transparent;
+    z-index:9998;
+}
+
+.dropdown-menu>li>a {
+    display: block;
+    padding: 7px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    background-color: transparent;
 }
