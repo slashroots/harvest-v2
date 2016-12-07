@@ -388,11 +388,15 @@ definitions:
         properties:
             IDX_Property:
                 type: number
-                description:  to be updated
+                description:  Link to Property table
                 example: 1971349
+            IDX_Crop:
+                type: number
+                description:  Index key
+                example:
             Crop_Variety:
                 type: string
-                description: to be updated
+                description: The variety name of crop
                 example: "Not Stated"
             Crop_Name:
                 type: string
@@ -404,19 +408,19 @@ definitions:
                 example: 0.61
             Crop_Count:
                 type: number
-                description: The Amount of crop produced
+                description: The amount of crop produced
                 example: 0
             Plant_Date:
                 type: string
-                description: They day the crop was planted
+                description: They dtey the crop was planted
                 example: "2004-08-11T00:00:00.000Z"
             Major_Market_Percentage:
                 type: number
-                description: to be updated
+                description: The Major Market proportion
                 example: 0
             Minor_Market_Percentage:
                 type: number
-                description: to be updated
+                description: The Minor Market proportion
                 example: 0
             Crop_Remarks:
                 type: string
@@ -436,275 +440,153 @@ definitions:
                 example: "Hectare"
             Major_Market:
                 type: string
-                description: to be updated
+                description: The customer that demands the crop mostly
                 example: n/a
             Minor_Market:
                 type: string
-                description: to be updated
+                description: The customer that demands the crop the least
                 example: n/a
             IDX_StakeHolder:
                 type: number
-                description: to be updated
+                description: Link to Stakeholder table
                 example: 952790
             Property_Address:
                 type: string
-                description: to be updated
-                example: The address of the property the crop is grown on
+                description: The address of the property where the crop is grown
+                example: "Somewhere"
             District:
                 type: string
-                description: The district of the address
+                description: The district in which the property is located
                 example: "INVERNESS"
             Parish:
                 type: string
-                description: The parish the district is in
+                description: The parish in which the district is located
                 example: "ST.ANN"
             Parish_Extension_Name:
                 type: string
-                description: The extension the parish belongs.
+                description: The extension within the parish
                 example: "ALEXANDRIA"
-            Crop_Variety_IDX:
-                type: number
-                description: to be updated
-                example: 87
-            Crop_Total_Area_Ha:
-                type: number
-                description: to be updated
-                example: 0.61
     Farmer:
         type: object
         properties:
+            IDX_Farmer_Profile:
+                type: number
+                description: Index key
+                example: 523402
             IDX_StakeHolder:
                 type: array
-                description: to be updated
+                description: Link to Stakeholder table
                 example: [952520,952520]
-            StakeHolder_Num:
-                type: string
-                description: to be updated
-                example: '081117655'
-            Company_Name:
-                type: string
-                description: The legal name the farmer's farm is registered under.
-                example: n/a
-            First_Name:
-                type: string
-                example: 'ERROL'
-                description: Farmer's first name
-            Middle_Name:
-                type: string
-                example: 'CHARLES'
-                description: Famrer's middle name
-            Last_Name:
-                type: string
-                example: 'LENNOX'
-                description: |
-                    access- `closed`
-                    Farmer's surname
-            Alias:
-                type: string
-                description: Farmer's nickname
-                example: n/a
-            DOB:
-                type: string
-                description: Farmer's date of birth
-                example: '1975-11-30T00:00:00.000Z'
-            Gender:
-                type: number
-                description: male or female
-                example: 1
-            Jas_Receipt:
-                type: string
-                description: to be updated
-                example: '0'
-            Res_Street_Address:
-                type: string
-                description: Street address of the farmer
-                example: 'MERTON PEN'
-            Res_District_Name:
-                type: string
-                description: District of the farmer's address
-                example: 'GRANGE HILL'
-            Res_Post_Office:
-                type: string
-                description: The post office, if any, which the farmer'd box is located
-                example: 'Grange Hill P.A.'
-            Res_Parish:
-                type: string
-                description: The parish the farmer resides
-                example: 'St. Catherine'
-            Res_Tele_Num:
-                type: string
-                description: Farmer's landline they may be contacted by
-                example: '457-8027'
-            Bus_Street_Address:
-                type: string
-                description: The corporate address of the farmer (typically the farm's address)
-                example: n/a
-            Bus_District_Name:
-                type: string
-                description: The district of the corporate address
-                example: 'GRANGE HILL'
-            Bus_Post_Office:
-                type: string
-                description:  The post office of the corporate address
-                example: n/a
-            Bus_Parish:
-                type: string
-                description:  The parish the farmer operates
-                example: St. Catherine
-            Bus_Tele_Num:
-                type: number
-                description: Corporate contact number
-                example: 0
-            Cell_Num:
-                description: Mobile number
-                type: string
-                example: n/a
-            Email_Address:
-                type: string
-                description: email address of the farmer
-                example:
-            Fax_Num:
-                type: string
-                description: Fax number
-                example: n/a
-            Identification_Num:
-                type: string
-                description: Farmer's registered identification number
-                example: '106699920'
-            TRN:
-                type: string
-                description: Farmer's TRN
-                example: '106699920'
-            Interviewer:
-                type: string
-                description: to be updated
-                example: n/a
-            Verified_Date:
-                type: string
-                description: to be updated
-                example: '2009-01-09T00:00:00.000Z'
-            Registration_Date:
-                type: string
-                description: The parish the farmer operates
-                example: '2008-10-17T00:00:00.000Z'
-            Have_Photo_YN:
-                type: string
-                description: Whether or not the farmer has a photo
-                example: yes
-            Want_Photo_YN:
-                type: string
-                description: Whether or not the farmer wants a photo
-                example: no
-            Photo_Path:
-                type: string
-                description: file path to farmer's photo
-                example: '081117655.jpg'
-            Photo_Found_YN:
-                type: string
-                description: Whether or not the farmer's photo has been found
-                example: n/a
-            IDX_EOJ_Photo_Batch:
-                type: string
-                description: to be updated
-                example: n/a
-            Old_Photo_Path:
-                type: string
-                description: to be updated
-                example: n/a
-            Old_Have_Photo_YN:
-                type: string
-                description: to be updated
-                example: n/a
             Create_Date:
                 type: array
-                description: The date this entry was submitted
+                description: The date this record was created
                 example: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
             Update_Date:
                 type: array
-                description: to be updated
+                description: tThe last time this record was updated.
                 example: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
-            ReVerified_Date:
-                type: string
-                description: to be updated
-                example: n/a
-            Stakeholder_Status_Date:
-                type: string
-                description: to be updated
-                example: n/a
-            primary_parish:
-                type: number
-                description: to be updated
-                example: 4
-            primary_district:
-                type: number
-                description: to be updated
-                example: 994
-            IDX_Farmer_Profile:
-                type: number
-                description: to be updated
-                example: 523402
-            Live_On_Farm_YN:
-                type: number
-                description: to be updated
-                example: 1
-            Agri_Training_YN:
-                type: number
-                description: to be updated
-                example: 2
             Holding_Start:
                 type: string
-                description: to be updated
+                description: Year farm became operational
                 example: '1994'
             Nearest_Police_Station:
                 type: string
-                description: to be updated
+                description: Closest Police Station to the farm
                 example: 'Manchioneal'
             Farmer_Profile_Remarks:
                 type: string
-                description: to be updated
-                example: n/a
+                description: Remarks and comments about the farmer
+                example: "N/A"
             Jas_Farmer_Group:
                 type: string
-                description: to be updated
-                example:
+                description: The JAS farmer group to which the farmer belongs
+                example: "N/A"
+            Respondent:
+                type: string
+                description: The person registering the farm
+                example: "John Doe"
+            Manager:
+                type: string
+                description: The person hired to manage the farm
+                example: "Michael King"
+            Income_Source:
+                type: string
+                description: Farmer's main source of income
+                example: "Contracted Electrician"
+            Education_Level:
+                type: number
+                description: The education level of the farmer
+                example: 2
+            Occupation:
+                type: string
+                description: The farmer's main occupation
+                example: "Electrician"
+            Farmer_Type:
+                type: string
+                description: "The type of farmer (Regular, Organic, Greenhouse, Mixed)"
+                example: Mixed
+            Training_Method:
+                type: string
+                description: "The method of training the famrer has undergone"
+                example: "N/A"
+            Agri_Institution:
+                type: string
+                description: "The agricultural institution to which the farmer has been associated with"
+                example: "N/A"
+            Main_Agri_Activity:
+                type: string
+                description: "The specified area of farming"
+                example: "N/A"
+            Agri_Training:
+                type: string
+                description: "Agricultural training the farmer has completed"
+                example: "N/A"
+            Qualification:
+                type: string
+                description: "The qualification the farmer has attained"
+                example: "N/A"
+            Live_On_Farm:
+                type: string
+                description: "Whether or not the farmer lives on the farm"
+                example: "No"
     Livestock:
         type: object
         properties:
             IDX_Livestock:
                 type: number
-                description: to be updated
+                description: Index key
                 example: 340798
             IDX_Property:
                 type: number
-                description: to be updated
+                description: Link to Property table
                 example: 1971353
             Livestock_Count:
                 type: number
-                description: Amount of livestock being reared
+                description: The actual amount of livestock being reared
                 example: 14
             Livestock_Capacity:
                 type: number
-                description: to be updated
+                description: The maximum amount of livestock that can be accommodated
                 example: 20
             Livestock_Remarks:
                 type: string
-                description: Remarks and comments about livestock
+                description: Remarks and comments about the livestock
                 example: ""
             Major_Market_Percentage:
                 type: number
-                description: to be updated
+                description: The Major Market proportion
                 example: 0
             Minor_Market_Percentage:
                 type: number
-                description: to be updated
+                description: The Minor Market proportion
                 example: 0
             Create_Date:
                 type: string
-                description: The date this entry was created
+                description: The date this record was created
                 example: "2008-11-04T13:12:32.990Z"
             Update_Date:
                 type: string
-                description: The date this entry was updated
+                description: The date this record was last updated
                 example: "2008-11-04T13:12:32.990Z"
             Livestock_Name:
                 type: string
@@ -712,11 +594,11 @@ definitions:
                 example: "Pig"
             Major_Market:
                 type: string
-                description: to be updated
+                description: The customer that demands the livestock the mostly
                 example: "Hotel"
             Minor_Market:
                 type: string
-                description: to be updated
+                description: The customer that demands the livestock the least
                 example: "Householder"
             District:
                 type: string
@@ -736,42 +618,42 @@ definitions:
                 example: "inverness inverness p.o. st. ann"
             IDX_StakeHolder:
                 type: number
-                description: to be updated
+                description: Link to Stakeholder table
                 example: 952798
             Livestock_Stage:
                 type: string
-                description: to be updated
+                description: The stage of life at which the livestock is
                 example: "Not Stated"
     Property:
         type: object
         properties:
             IDX_Property:
                 type: number
-                description: to be updated
+                description: Index Key
                 example: 1971350
             IDX_StakeHolder:
                 type: number
-                description: to be updated
+                description: Link to Stakeholder table
                 example: 952792
             District:
                 type: string
-                description: The district the property is located
+                description: The district in which the property is located
                 example: 'GREENLAND'
             Parish:
                 type: string
-                description: The parish that district is located in
+                description: The parish in which the property is located
                 example: 'MANCHESTER'
             Parish_Extension_Name:
                 type: string
-                description: The extension which the parish belongs
+                description: The extension within the parish where the property is located
                 example: 'MILE GULLY'
             Extension_Officer:
                 type: string
-                description: Exntension officer for the parish
+                description: The name of the Extension Officer assigned to the extension area where the property is located
                 example: '47'
             Property_Address:
                 type: string
-                description: The address of the property
+                description: The address of the property size
                 example: 'Greenland'
             Property_Size:
                 type: number
@@ -779,7 +661,7 @@ definitions:
                 example: 1.62
             Property_Usage:
                 type: number
-                description:  The intended use of the property
+                description:  How much of the property is being used to farm
                 example: 0.01
             Property_Remarks:
                 type: string
@@ -787,15 +669,15 @@ definitions:
                 example: ''
             Volume_Num:
                 type: string
-                description: volume of production
+                description: The volume of production
                 example: ''
             Folio_Num:
                 type: string
-                description: to be updated
+                description: A number used to identify the property
                 example: ''
             Distance_From_Road:
                 type: number
-                description: The distance of the property from a main road.
+                description: Units of measurement for the Distance_From_Road
                 example: 0
             Primary_Property_YN:
                 type: number
@@ -809,48 +691,36 @@ definitions:
                 type: number
                 description: Longitudinal location of the property
                 example: 0
-            Create_Date:
-                type: string
-                description: The date this entry was created
-                example: '2008-11-04T12:46:47.926Z'
-            Update_Date:
-                type: string
-                description: The date this entry was updated
-                example: '2008-11-04T12:46:47.926Z'
-            Description:
+            Description_:
                 type: string
                 description: Description of property
                 example: 'Leased'
             Property_Status:
                 type: string
-                description: to be updated
+                description: Whether or not production on the property is active or inactive
                 example: 'Active'
             Ownership:
                 type: string
-                description: to be updated
+                description: Who owns the property, whether its an individual or an entity
                 example: n/a
             Distance_Units:
                 type: number
-                description: to be updated
+                description: Units of measurement for the Distance_From_Road
                 example: 0
             Property_Usage_Units:
                 type: string
-                description: Units of measurement for the Distance_From_Road
+                description: The units of measurement for the property usage
                 example: 'Hectare'
             Property_Size_Units:
                 type: string
-                description: The units of measurement for the property size (ha)
+                description: The units of measurement for the property size
                 example: 'Hectare'
-            Property_Size_Ha:
-                type: number
-                description: to be updated
-                example: 1.62
             Irrigation_Source:
                 type: string
-                description: to be updated
+                description: The source from which the property is irrigated
                 example: n/a
             irrigation_access_yn:
                 type: string
-                description: to be updated
+                description: Whether or not the property has access to irrigation
                 example: n/a
 
