@@ -60,7 +60,7 @@ exports.getParameters = function (q, sequelize, next) {
      */
     var limit = q.limit || 100;
     var offset = q.offset || 0;
-    var aggregate_function = null;
+    var operation = null;
     var field = null;
     var start_date = null;
     var end_date = null;
@@ -73,22 +73,22 @@ exports.getParameters = function (q, sequelize, next) {
     delete q.offset;
 
     /*
-     We will use the 'aggregate_function' GET parameter to determine which of the supported aggregate_functions the user wants to carry out
+     We will use the 'operation' GET parameter to determine which of the supported operations the user wants to carry out
      These are defined in common-util.js in case we need to add new ones later and so we can ensure validity
      */
-    if (q.aggregate_function) {
+    if (q.operation) {
         /*
-         If an aggregate_function has been specified, we check here to see if it is one of those that we support and - if so -
-         we assign it to our aggregate_function variable for use in the query.
+         If an operation has been specified, we check here to see if it is one of those that we support and - if so -
+         we assign it to our operation variable for use in the query.
          */
-        switch (q.aggregate_function) {
+        switch (q.operation) {
             case this.SUM_FUNCTION :
             case this.AVG_FUNCTION :
             case this.MAX_FUNCTION :
             case this.MIN_FUNCTION :
             case this.VAR_FUNCTION :
             case this.STDEV_FUNCTION :
-                aggregate_function = q.aggregate_function;
+                operation = q.operation;
                 break;
             /*
              If it isn't, we throw an appropriate error.
@@ -110,7 +110,7 @@ exports.getParameters = function (q, sequelize, next) {
         /*
          Here, we remove the variable from the query that will not be used in searching the database
          */
-        delete q.aggregate_function;
+        delete q.operation;
         delete q.field;
     }
 
@@ -146,12 +146,12 @@ exports.getParameters = function (q, sequelize, next) {
     }
 
     /*
-     If we will be carrying out an aggregate_function on a particular field we need to modify the attributes of the parameters passed to
-     'findAll' so that it will carry out the aggregate_function on the field specified
+     If we will be carrying out an operation on a particular field we need to modify the attributes of the parameters passed to
+     'findAll' so that it will carry out the operation on the field specified
      */
-    if (aggregate_function != null) {
-        parameters.attributes = [[sequelize.fn(aggregate_function, sequelize.col(field)), aggregate_function]];
-        parameters.order = "'" + aggregate_function + "' DESC";
+    if (operation != null) {
+        parameters.attributes = [[sequelize.fn(operation, sequelize.col(field)), operation]];
+        parameters.order = "'" + operation + "' DESC";
     }
     /*
      If a 'date_range' parameter has been specified, this will be the field/column that is compare with the
