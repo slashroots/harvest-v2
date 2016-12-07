@@ -474,15 +474,15 @@ definitions:
                 description: Index key
                 example: 523402
             IDX_StakeHolder:
-                type: array
+                type: number
                 description: Link to Stakeholder table
                 example: [952520,952520]
             Create_Date:
-                type: array
+                type: string
                 description: The date this record was created
                 example: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
             Update_Date:
-                type: array
+                type: string
                 description: tThe last time this record was updated.
                 example: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
             Holding_Start:
