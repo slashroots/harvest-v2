@@ -14,6 +14,7 @@ var Log = model.Log;
  */
 exports.searchAccessLogs = function(req, res, next) {
     Log.find(req.query)
+        .sort({lo_log_date: 'desc'})
         .exec(function(err, logs) {
             if(err) {
                 next(err);
