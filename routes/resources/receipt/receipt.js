@@ -47,11 +47,11 @@ var Receipt = sequelize.define('JAS_Books', {
         field: 'Update_Date'
     },
     range1: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         field: 'range1'
     },
     range2: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         field: 'range2'
     },
     investigationyn: {
@@ -91,13 +91,14 @@ exports.getAllReceipts = function(req, res, next) {
     });
 };
 
-exports.getReceiptByID = function(req, res, next) {
+exports.getReceiptByID = function(req, res, next) {//we will return the receipt book that this receipt id/number came from
     var fakeblock = new Fakeblock({
         acl: receiptAcl,
         userRole: req.user.ap_app_role.ro_role_name
     });
 
-    Receipt.findOne({ where: {IDX_Receipt: req.params.id} }).then(function(receipts) {
+    //we check the range for the receipt books to find the one that this receipt was taken from
+    Receipt.findOne({ where: {range1: {$lte : req.params.id}, range2: {$gte : req.params.id} }}).then(function(receipts) {
         res.send(fakeblock.applyAcl(receipts, 'get'));
 
     });
