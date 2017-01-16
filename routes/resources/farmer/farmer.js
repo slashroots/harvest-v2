@@ -249,8 +249,6 @@ var FarmerPersonal = sequelize.define('std_reg_farmer_personal_table', {
 
 Farmer.hasOne(FarmerPersonal, {foreignKey : 'IDX_Stakeholder', targetKey: 'IDX_Stakeholder', as : 'Farmer_Personal_Info'});
 
-//FarmerPersonal.belongsTo(Farmer, {foreignKey : 'IDX_Stakeholder'});
-
 exports.getAllFarmers = function(req, res, next) {
     var fakeblock = new Fakeblock({
         acl: farmersAcl,
@@ -258,10 +256,8 @@ exports.getAllFarmers = function(req, res, next) {
     });
 
     var parameters = Common.getParameters(req.query, sequelize, next);
-
-    var rowCounter = 0;//this will count the rows returned for logging purposes
-
     parameters.include = [{ model: FarmerPersonal, as:'Farmer_Personal_Info'}];
+    var rowCounter = 0;//this will count the rows returned for logging purposes
 
     Farmer.findAll(parameters).then(function(farmers) {
         for (var i = 0;i<farmers.length;i++) {
