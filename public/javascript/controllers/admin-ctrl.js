@@ -1,6 +1,19 @@
 angular.module('harvestv2')
-    .controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory', 'LogsFactory',
-        function($scope, $location, $routeParams, UsersFactory, AppsFactory, LogsFactory) {
+    .controller("AdminDashboardCtrl", ['$scope', '$location', '$routeParams', 'UsersFactory', 'AppsFactory', 'LogsFactory', 'AppFactory',
+        function($scope, $location, $routeParams, UsersFactory, AppsFactory, LogsFactory, AppFactory) {
+
+            $scope.isAppActive = function (app_status) {
+                return app_status == 'active';
+            };
+
+            $scope.setAppState = function (id, state) {
+                AppFactory.update({id: id},
+                    {ap_app_status: state}, function(app) {
+                        $scope.apps = $scope.appsSearch = AppsFactory.query();
+                    }, function(error) {
+                        console.log(error);
+                    });
+            };
 
             /**
              * Init Variables
