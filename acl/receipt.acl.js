@@ -2,7 +2,7 @@ module.exports = {
     get: {
         access: ['aggregate_user'],
         fields: {
-            restricted: {
+            allowed: {
                 aggregate_user: []
             }
         }
