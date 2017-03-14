@@ -469,6 +469,137 @@ definitions:
     Farmer:
         type: object
         properties:
+            Farmer_Personal_Info:
+              type: object
+              properties:
+                IDX_Stakeholder:
+                  type: number
+                  description: Link to Stakeholder table
+                  example: 952520
+                Stakeholder_Num:
+                  type: number
+                  description: Link to Stakeholder_Num field in the receipt table
+                  example: 081119321
+                Company_Name:
+                  type: string
+                  description: Company Name
+                  example: MJD Agriculture
+                First_Name:
+                  type: string
+                  description: First Name
+                  example: Harold
+                Middle_Name:
+                  type: string
+                  description: Middle Name
+                  example: Antoine
+                Last_Name:
+                  type: string
+                  description: Last Name
+                  example: Robertson
+                Alias:
+                  type: string
+                  description: Alias
+                  example: Beenie Man
+                DOB:
+                  type: string
+                  description: Date of Birth
+                  example: 1975-11-30T00:00:00.000Z
+                Gender:
+                  type: string
+                  description: Gender of the farmer
+                  example: Male
+                Res_Street_Address:
+                  type: string
+                  description: Residential street address of the farmer
+                  example: 212 Sunny Lane
+                Res_District_Name:
+                  type: string
+                  description: Residential district name
+                  example: Columbia
+                Res_Post_Office:
+                  type: string
+                  description: Residential post office
+                  example: Half Way Tree
+                Res_Tele_Num:
+                  type: string
+                  description: Residential Telephone Number
+                  example: 8769782123
+                Bus_Street_Address:
+                  type: string
+                  description: Business Street Address
+                  example: 212 Sunny Lane
+                Bus_District_Name:
+                  type: string
+                  description: Business District Name
+                  example: Columbia
+                Bus_Post_Office:
+                  type: string
+                  description: Business Post Office
+                  example: Half Way Tree
+                Bus_Tele_Num:
+                  type: string
+                  description: Business Telephone Number
+                  example: 8769782123
+                Cell_Num:
+                  type: string
+                  description: Cell Number
+                  example: 8763782123
+                Fax_Num:
+                  type: string
+                  description: Fax Number
+                  example: 8769782123
+                Email_Address:
+                  type: string
+                  description: Email Address
+                  example: nick@slashroots.org
+                Identification_Num:
+                  type: string
+                  description: ID #
+                  example: 122-132-526
+                Photo_Path:
+                  type: string
+                  description: Path to JPG Photo
+                  example: nick.jpg
+                Interviewer:
+                  type: string
+                  description: Interviewer Name
+                  example:
+                VerifiedYN:
+                  type: string
+                  description: Verification Status of the Farmer
+                  example: Y
+                Stakeholder_Status:
+                  type: string
+                  description: Status of the Stakeholder
+                  example:
+                Res_Parish:
+                  type: string
+                  description: Residential Parish
+                  example: Portland
+                Bus_Parish:
+                  type: string
+                  description: Business Parish
+                  example: St. Andrew
+                Stakeholder_Type:
+                  type: string
+                  description: Stakeholder Type
+                  example: Farmer
+                Update_Date:
+                  type: string
+                  description: Last Updated Date
+                  example: '2008-11-03T08:50:30.900Z'
+                Create_Date:
+                  type: string
+                  description: Record Creation Date
+                  example: '2008-11-03T08:50:30.900Z'
+                Registration_Date:
+                  type: string
+                  description: Registration Date
+                  example: '2008-11-03T08:50:30.900Z'
+                Verified_Date:
+                  type: string
+                  description: Verification Date
+                  example: '2008-11-03T08:50:30.900Z'
             IDX_Farmer_Profile:
                 type: number
                 description: Index key
@@ -476,15 +607,15 @@ definitions:
             IDX_StakeHolder:
                 type: number
                 description: Link to Stakeholder table
-                example: [952520,952520]
+                example: 952520
             Create_Date:
                 type: string
                 description: The date this record was created
-                example: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
+                example: '2008-11-03T08:50:30.900Z'
             Update_Date:
                 type: string
-                description: tThe last time this record was updated.
-                example: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
+                description: The last time this record was updated.
+                example: '2008-11-03T08:51:59.590Z'
             Holding_Start:
                 type: string
                 description: Year farm became operational
