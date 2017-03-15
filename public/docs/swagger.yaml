@@ -81,6 +81,8 @@ tags:
       description: Livestock information
     - name: Property
       description: Property information
+    - name: Receipt
+      description: Receipt information
 paths:
     /crops:
         get:
@@ -382,6 +384,84 @@ paths:
                     description: Unauthorized
                 500:
                     description: Internal Server Error
+    /receipts:
+        get:
+            summary: Get All Receipts
+            description: |
+                Retrieve information on all receipts
+            operationId: getAllReceipts
+            tags:
+                - Receipt
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Receipt'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
+                  type: number
+                  default: 100
+                  schema:
+                       type: array
+                       items:
+                              $ref: '#/definitions/Receipt'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Receipt'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/property?parish=Portland`
+                  required: false
+                  type: string
+    /receipt/{id}:
+            get:
+                summary: Get Receipt By ID
+                description: |
+                    Retrieve information on a receipt, provided an ID
+                operationId: getReceiptByID
+                tags:
+                    - Receipt
+                produces:
+                    - application/json
+                parameters:
+                    - name: id
+                      in: path
+                      description: requests object
+                      type: string
+                      required: true
+                responses:
+                    200:
+                        description: Successful
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/definitions/Receipt'
+                    400:
+                        description: Bad Request
+                    401:
+                        description: Unauthorized
+                    500:
+                        description: Internal Server Error
 definitions:
     Crop:
         type: object
@@ -854,4 +934,59 @@ definitions:
                 type: string
                 description: Whether or not the property has access to irrigation
                 example: n/a
+    Receipt:
+            type: object
+            properties:
+                IDX_JAS_Books:
+                    type: number
+                    description: Index Key
+                    example: 1971350
+                IDX_StakeHolder:
+                    type: number
+                    description: Link to Stakeholder table
+                    example: 952792
+                Book_Sequence_No:
+                    type: string
+                    description: Book sequence number
+                    example: '151560'
+                Receipt_No:
+                    type: string
+                    description: The number on the receipt
+                    example: '1970'
+                Date_Purchased:
+                    type: string
+                    description: The date on which the receipt book was purchased
+                    example: '22-08-1991'
+                Extension_Officer:
+                    type: string
+                    description: The name of the Extension Officer assigned to the extension area where the property is located
+                    example: '47'
+                range1:
+                    type: number
+                    description: The first receipt number in the receipt book
+                    example: '901'
+                range2:
+                    type: number
+                    description: The last receipt number in the receipt book
+                    example: '1000'
+                investigationyn:
+                    type: string
+                    description:  Y or N - is the owner of this receipt under investigation?
+                    example: 0.01
+                remarks:
+                    type: string
+                    description: Remarks or comments about the receipt
+                    example: ''
+                parish_code:
+                    type: string
+                    description: The parish in which the receipt was issued
+                    example: ''
+                Create_Date:
+                    type: string
+                    description: The date on which this record was created
+                    example: ''
+                Update_Date:
+                    type: number
+                    description: The date on which this record was last updated
+                    example: 0
 
