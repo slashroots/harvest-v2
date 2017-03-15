@@ -61,7 +61,7 @@
                                         <th style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">API Key</th>
                                         <th>Role</th>
                                         <th>Owner</th>
-                                        <th><span style="visibility: hidden">Actions</span></th>
+                                        <th><span>Actions</span></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -71,6 +71,7 @@
                                         <td at-title="Username" at-implicit at-attribute="us_username" width="300"></td>
                                         <td at-title="Status" at-implicit at-attribute="us_state" width="300"></td>
                                         <td at-title="Phone #" at-implicit="" at-attribute="us_contact" width="300"></td>
+                                        <td></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -98,7 +99,7 @@
                                         <th style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">API Key</th>
                                         <th>Role</th>
                                         <th>Owner</th>
-                                        <th><span style="visibility: hidden">Actions</span></th>
+                                        <th><span style="">Actions</span></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -108,6 +109,10 @@
                                         <td at-title="API Key" at-attribute="ap_app_token" width="300"><p style="width:200px;word-wrap:break-word;overflow-wrap: break-word;">{{ item.ap_app_token }}</p></td>
                                         <td at-title="Role" at-attribute="app.ap_app_role.ro_role_name" width="300">{{ item.ap_app_role.ro_role_name }}</td>
                                         <td at-title="Owner" at-attribute="app.us_app_user.us_user_first_name + app.us_app_user.us_user_last_name" width="300">{{item.us_app_user.us_user_first_name + ' ' + item.us_app_user.us_user_last_name}}</td>
+                                        <td>
+                                            <a ng-show="!isAppActive(item.ap_app_status)" ng-click="setAppState(item._id, 'active')" href="">Enable</a>
+                                            <a ng-show="isAppActive(item.ap_app_status)" ng-click="setAppState(item._id, 'disabled')" href="">Disable</a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
