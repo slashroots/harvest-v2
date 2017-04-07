@@ -17,6 +17,7 @@ var app_manager = require('./routes/app/router-app-manager'),
     farmer = require('./routes/resources/farmer/router-farmer'),
     property = require('./routes/resources/property/router-property'),
     crop = require('./routes/resources/crop/router-crop'),
+    receipt = require('./routes/resources/receipt/router-receipt'),
     livestock = require('./routes/resources/livestock/router-livestock'),
     platform = require('./routes/platform/router-platform'),
     docs = require('./routes/docs/router-docs');
@@ -76,6 +77,7 @@ app.use('/', platform);
 app.use('/api', farmer);
 app.use('/api', property);
 app.use('/api', crop);
+app.use('/api', receipt);
 app.use('/api', livestock);
 app.use('/', docs);
 

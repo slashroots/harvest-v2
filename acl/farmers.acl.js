@@ -3,7 +3,7 @@ module.exports = {
         access: ['aggregate_user'],
         fields: {
             restricted: {
-                aggregate_user: []
+                aggregate_user: ['IDX_Farmer_Profile', 'IDX_Stakeholder', 'Respondent', 'Manager', 'Farmer_Personal_Info']
             }
         }
     }
