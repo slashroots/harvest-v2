@@ -81,6 +81,8 @@ tags:
       description: Livestock information
     - name: Property
       description: Property information
+    - name: Receipt
+      description: Receipt information
 paths:
     /crops:
         get:
@@ -382,6 +384,84 @@ paths:
                     description: Unauthorized
                 500:
                     description: Internal Server Error
+    /receipts:
+        get:
+            summary: Get All Receipts
+            description: |
+                Retrieve information on all receipts
+            operationId: getAllReceipts
+            tags:
+                - Receipt
+            produces:
+                - application/json
+            responses:
+                200:
+                    description: Successful
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Receipt'
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorized
+                500:
+                    description: Internal Server Error
+            parameters:
+                - name: limit
+                  in: query
+                  description: This is the number of results that will be returned from this query (defaults to 100).
+                  required: false
+                  type: number
+                  default: 100
+                  schema:
+                       type: array
+                       items:
+                              $ref: '#/definitions/Receipt'
+                - name: offset
+                  in: query
+                  description: This allows for pagination in sets of whatever the limit is (defaults to 0).
+                  required: false
+                  type: number
+                  default: 0
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/definitions/Receipt'
+                - name: field
+                  in: query
+                  description: This allows for filtering results accordingly - for example you could get all the properties in the parish of Portland. So, using URL encoding the request might be `/property?parish=Portland`
+                  required: false
+                  type: string
+    /receipt/{id}:
+            get:
+                summary: Get Receipt By ID
+                description: |
+                    Retrieve information on a receipt, provided an ID
+                operationId: getReceiptByID
+                tags:
+                    - Receipt
+                produces:
+                    - application/json
+                parameters:
+                    - name: id
+                      in: path
+                      description: requests object
+                      type: string
+                      required: true
+                responses:
+                    200:
+                        description: Successful
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/definitions/Receipt'
+                    400:
+                        description: Bad Request
+                    401:
+                        description: Unauthorized
+                    500:
+                        description: Internal Server Error
 definitions:
     Crop:
         type: object
@@ -469,6 +549,137 @@ definitions:
     Farmer:
         type: object
         properties:
+            Farmer_Personal_Info:
+              type: object
+              properties:
+                IDX_Stakeholder:
+                  type: number
+                  description: Link to Stakeholder table
+                  example: 952520
+                Stakeholder_Num:
+                  type: number
+                  description: Link to Stakeholder_Num field in the receipt table
+                  example: 081119321
+                Company_Name:
+                  type: string
+                  description: Company Name
+                  example: MJD Agriculture
+                First_Name:
+                  type: string
+                  description: First Name
+                  example: Harold
+                Middle_Name:
+                  type: string
+                  description: Middle Name
+                  example: Antoine
+                Last_Name:
+                  type: string
+                  description: Last Name
+                  example: Robertson
+                Alias:
+                  type: string
+                  description: Alias
+                  example: Beenie Man
+                DOB:
+                  type: string
+                  description: Date of Birth
+                  example: 1975-11-30T00:00:00.000Z
+                Gender:
+                  type: string
+                  description: Gender of the farmer
+                  example: Male
+                Res_Street_Address:
+                  type: string
+                  description: Residential street address of the farmer
+                  example: 212 Sunny Lane
+                Res_District_Name:
+                  type: string
+                  description: Residential district name
+                  example: Columbia
+                Res_Post_Office:
+                  type: string
+                  description: Residential post office
+                  example: Half Way Tree
+                Res_Tele_Num:
+                  type: string
+                  description: Residential Telephone Number
+                  example: 8769782123
+                Bus_Street_Address:
+                  type: string
+                  description: Business Street Address
+                  example: 212 Sunny Lane
+                Bus_District_Name:
+                  type: string
+                  description: Business District Name
+                  example: Columbia
+                Bus_Post_Office:
+                  type: string
+                  description: Business Post Office
+                  example: Half Way Tree
+                Bus_Tele_Num:
+                  type: string
+                  description: Business Telephone Number
+                  example: 8769782123
+                Cell_Num:
+                  type: string
+                  description: Cell Number
+                  example: 8763782123
+                Fax_Num:
+                  type: string
+                  description: Fax Number
+                  example: 8769782123
+                Email_Address:
+                  type: string
+                  description: Email Address
+                  example: nick@slashroots.org
+                Identification_Num:
+                  type: string
+                  description: ID #
+                  example: 122-132-526
+                Photo_Path:
+                  type: string
+                  description: Path to JPG Photo
+                  example: nick.jpg
+                Interviewer:
+                  type: string
+                  description: Interviewer Name
+                  example:
+                VerifiedYN:
+                  type: string
+                  description: Verification Status of the Farmer
+                  example: Y
+                Stakeholder_Status:
+                  type: string
+                  description: Status of the Stakeholder
+                  example:
+                Res_Parish:
+                  type: string
+                  description: Residential Parish
+                  example: Portland
+                Bus_Parish:
+                  type: string
+                  description: Business Parish
+                  example: St. Andrew
+                Stakeholder_Type:
+                  type: string
+                  description: Stakeholder Type
+                  example: Farmer
+                Update_Date:
+                  type: string
+                  description: Last Updated Date
+                  example: '2008-11-03T08:50:30.900Z'
+                Create_Date:
+                  type: string
+                  description: Record Creation Date
+                  example: '2008-11-03T08:50:30.900Z'
+                Registration_Date:
+                  type: string
+                  description: Registration Date
+                  example: '2008-11-03T08:50:30.900Z'
+                Verified_Date:
+                  type: string
+                  description: Verification Date
+                  example: '2008-11-03T08:50:30.900Z'
             IDX_Farmer_Profile:
                 type: number
                 description: Index key
@@ -476,15 +687,15 @@ definitions:
             IDX_StakeHolder:
                 type: number
                 description: Link to Stakeholder table
-                example: [952520,952520]
+                example: 952520
             Create_Date:
                 type: string
                 description: The date this record was created
-                example: ['2008-11-03T08:50:30.900Z','2008-11-03T08:51:59.590Z']
+                example: '2008-11-03T08:50:30.900Z'
             Update_Date:
                 type: string
-                description: tThe last time this record was updated.
-                example: ['2009-01-09T00:00:00.000Z','2008-11-03T08:51:59.590Z']
+                description: The last time this record was updated.
+                example: '2008-11-03T08:51:59.590Z'
             Holding_Start:
                 type: string
                 description: Year farm became operational
@@ -723,4 +934,59 @@ definitions:
                 type: string
                 description: Whether or not the property has access to irrigation
                 example: n/a
+    Receipt:
+            type: object
+            properties:
+                IDX_JAS_Books:
+                    type: number
+                    description: Index Key
+                    example: 1971350
+                IDX_StakeHolder:
+                    type: number
+                    description: Link to Stakeholder table
+                    example: 952792
+                Book_Sequence_No:
+                    type: string
+                    description: Book sequence number
+                    example: '151560'
+                Receipt_No:
+                    type: string
+                    description: The number on the receipt
+                    example: '1970'
+                Date_Purchased:
+                    type: string
+                    description: The date on which the receipt book was purchased
+                    example: '22-08-1991'
+                Extension_Officer:
+                    type: string
+                    description: The name of the Extension Officer assigned to the extension area where the property is located
+                    example: '47'
+                range1:
+                    type: number
+                    description: The first receipt number in the receipt book
+                    example: '901'
+                range2:
+                    type: number
+                    description: The last receipt number in the receipt book
+                    example: '1000'
+                investigationyn:
+                    type: string
+                    description:  Y or N - is the owner of this receipt under investigation?
+                    example: 0.01
+                remarks:
+                    type: string
+                    description: Remarks or comments about the receipt
+                    example: ''
+                parish_code:
+                    type: string
+                    description: The parish in which the receipt was issued
+                    example: ''
+                Create_Date:
+                    type: string
+                    description: The date on which this record was created
+                    example: ''
+                Update_Date:
+                    type: number
+                    description: The date on which this record was last updated
+                    example: 0
 

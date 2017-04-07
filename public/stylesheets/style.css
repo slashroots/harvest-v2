@@ -1798,7 +1798,7 @@ div.pagination{
 .table>thead>tr>th {
     padding: 12px 25px 20px 25px;
     line-height: 1.42857143;
-    word-break: break-all;
+    word-break: initial;
     vertical-align: top;
     border-top: 1px solid #ddd;
     /* font-size: 13px; */
@@ -1971,4 +1971,3 @@ thead{
 
 
 }
-

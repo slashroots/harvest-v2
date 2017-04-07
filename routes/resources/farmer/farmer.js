@@ -19,11 +19,11 @@ var sequelize = new Sequelize('mssql://' + process.env.MSSQL_USER + ':' + proces
 
 var Farmer = sequelize.define('std_reg_farmer_profile_table', {
     IDX_Farmer_Profile: {
-        primaryKey: true,
         type: Sequelize.STRING,
         field: 'IDX_Farmer_Profile'
     },
     IDX_Stakeholder: {
+        primaryKey: true,
         type: Sequelize.STRING,
         field: 'IDX_Stakeholder'
     },
@@ -104,6 +104,150 @@ var Farmer = sequelize.define('std_reg_farmer_profile_table', {
     freezeTableName: true // Model tableName will be the same as the model name
 });
 
+var FarmerPersonal = sequelize.define('std_reg_farmer_personal_table', {
+    IDX_Stakeholder: {
+        primaryKey: true,
+        type: Sequelize.STRING,
+        field: 'IDX_Stakeholder'
+    },
+    Stakeholder_Num: {
+        type: Sequelize.STRING,
+        field: 'Stakeholder_Num'
+    },
+    Stakeholder_Type_Code: {
+        type: Sequelize.STRING,
+        field: 'Stakeholder_Type_Code'
+    },
+    Company_Name: {
+        type: Sequelize.STRING,
+        field: 'Company_Name'
+    },
+    First_Name: {
+        type: Sequelize.STRING,
+        field: 'First_Name'
+    },
+    Middle_Name: {
+        type: Sequelize.STRING,
+        field: 'Middle_Name'
+    },
+    Last_Name: {
+        type: Sequelize.STRING,
+        field: 'Last_Name'
+    },
+    Alias: {
+        type: Sequelize.STRING,
+        field: 'Alias'
+    },
+    DOB: {
+        type: Sequelize.STRING,
+        field: 'DOB'
+    },
+    Gender: {
+        type: Sequelize.STRING,
+        field: 'Gender'
+    },
+    Jas_Receipt: {
+        type: Sequelize.STRING,
+        field: 'JAS_Receipt'
+    },
+    Res_Street_Address: {
+        type: Sequelize.STRING,
+        field: 'Res_Street_Address'
+    },
+    Res_District_Name: {
+        type: Sequelize.STRING,
+        field: 'Res_District_Name'
+    },
+    Res_Post_Office: {
+        type: Sequelize.STRING,
+        field: 'Res_Post_Office'
+    },
+    Res_Tele_Num: {
+        type: Sequelize.STRING,
+        field: 'Res_Tele_Num'
+    },
+    Bus_Street_Address: {
+        type: Sequelize.STRING,
+        field: 'Bus_Street_Address'
+    },
+    Bus_District_Name: {
+        type: Sequelize.STRING,
+        field: 'Bus_District_Name'
+    },
+    Bus_Post_Office: {
+        type: Sequelize.STRING,
+        field: 'Bus_Post_Office'
+    },
+    Bus_Tele_Num: {
+        type: Sequelize.STRING,
+        field: 'Bus_Tele_Num'
+    },
+    Cell_Num: {
+        type: Sequelize.STRING,
+        field: 'Cell_Num'
+    },
+    Fax_Num: {
+        type: Sequelize.STRING,
+        field: 'Fax_Num'
+    },
+    Email_Address: {
+        type: Sequelize.STRING,
+        field: 'Email_Address'
+    },
+    Identification_Num: {
+        type: Sequelize.STRING,
+        field: 'Identification_Num'
+    },
+    Photo_Path: {
+        type: Sequelize.STRING,
+        field: 'Photo_Path'
+    },
+    Interviewer: {
+        type: Sequelize.STRING,
+        field: 'Interviewer'
+    },
+    VerifiedYN: {
+        type: Sequelize.STRING,
+        field: 'VerifiedYN'
+    },
+    Stakeholder_Status: {
+        type: Sequelize.STRING,
+        field: 'Stakeholder_Status'
+    },
+    Res_Parish: {
+        type: Sequelize.STRING,
+        field: 'Res_Parish'
+    },
+    Bus_Parish: {
+        type: Sequelize.STRING,
+        field: 'Bus_Parish'
+    },
+    Stakeholder_Type: {
+        type: Sequelize.STRING,
+        field: 'Stakeholder_Type'
+    },
+    Update_Date: {
+        type: Sequelize.STRING,
+        field: 'Update_Date'
+    },
+    Create_Date: {
+        type: Sequelize.STRING,
+        field: 'Create_Date'
+    },
+    Registration_Date: {
+        type: Sequelize.STRING,
+        field: 'Registration_Date'
+    },
+    Verified_Date: {
+        type: Sequelize.STRING,
+        field: 'Verified_Date'
+    }
+}, {
+    timestamps: false,
+    freezeTableName: true // Model tableName will be the same as the model name
+});
+
+Farmer.hasOne(FarmerPersonal, {foreignKey : 'IDX_Stakeholder', targetKey: 'IDX_Stakeholder', as : 'Farmer_Personal_Info'});
 
 exports.getAllFarmers = function(req, res, next) {
     var fakeblock = new Fakeblock({
@@ -112,7 +256,7 @@ exports.getAllFarmers = function(req, res, next) {
     });
 
     var parameters = Common.getParameters(req.query, sequelize, next);
-
+    parameters.include = [{ model: FarmerPersonal, as:'Farmer_Personal_Info'}];
     var rowCounter = 0;//this will count the rows returned for logging purposes
 
     Farmer.findAll(parameters).then(function(farmers) {
@@ -131,8 +275,7 @@ exports.getFarmerByID = function(req, res, next) {
         userRole: req.user.ap_app_role.ro_role_name
     });
 
-    Farmer.findOne({ where: {IDX_Stakeholder: req.params.id} }).then(function(farmers) {
+    Farmer.findOne({ where: {IDX_Stakeholder: req.params.id}, include: { model: FarmerPersonal, as:'Farmer_Personal_Info'} }).then(function(farmers) {
         res.send(fakeblock.applyAcl(farmers, 'get'));
-
     });
 };

@@ -14,8 +14,9 @@ Role and Permission Management - Access Control List (ACL)
     *   MSSQL_PASS
     *   MSSQL_SERVER
     *   MSSQL_DB
-    *   SENDGRID_USERNAME
-    *   SENDGRID_PASSWORD
-    *   SENDGRID_API_KEY
     *   REPLY_TO
     *   SESSION_SECRET
+    *   SMTP_SERVER
+    *   SMTP_USER
+    *   SMTP_PASSWORD
+    *   SMTP_PORT
