@@ -10,5 +10,5 @@ deploy:
     all_branches: false
   app:
     master: harvest-api-staging
-    production: harvest-api-prod
+    production: harvest-api-production
     develop: harvest-api-dev
