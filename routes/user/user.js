@@ -286,7 +286,7 @@ exports.createUser = function(req, res, next) {
                         res.send(user);
                     }
                 });
-            common.sendEmail("harvestapi@rada.gov.jm", "New HarvestAPI User", "A new user with email address " + user.us_email_address + " has signed up to use the API.", function (error, info) {
+            common.sendEmail(process.env.RADA_HARVEST_EMAIL_ADDRESS, "New HarvestAPI User", "A new user with email address " + user.us_email_address + " has signed up to use the API.", function (error, info) {
                 if (error) {
                     logging.accessLogger(user,req.url,logging.LOG_LEVEL_USER_ACTIVITY, "An email was not sent to RADA when this account was created!",true, user);
                 }
