@@ -20,3 +20,4 @@ Role and Permission Management - Access Control List (ACL)
     *   SMTP_USER
     *   SMTP_PASSWORD
     *   SMTP_PORT
+    *   RADA_HARVEST_EMAIL_ADDRESS
